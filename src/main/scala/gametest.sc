@@ -1,6 +1,6 @@
 import io.StdIn
 
-object Player {
+/*object Player {
 
   val playername = io.StdIn.readLine()
   println(playername)
@@ -17,6 +17,7 @@ object Level {
 
 case class Field(column : Int, row: Int, value : Int) {
   def isBroken:Boolean = value == 0
+  def isSet:Boolean = column != null && row != null
 }
 
 var field1 = Field(2, 3, 0)
@@ -46,5 +47,5 @@ print((tupel._1) * 5)
 
 val tier = List("Hund", "Katze", "Maus", "Elefant")
 
-tier.foreach(println)
+tier.foreach(println)*/
 
