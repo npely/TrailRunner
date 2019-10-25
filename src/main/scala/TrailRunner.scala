@@ -1,6 +1,7 @@
 object YourGame {
-  def main(args: Array[String]): Unit = {
-    val student = Player("Your Name")
-    println("Hello, " + student.name)
-  }
+    val game = "TrailRunner"
+    val version = 1.0
+    def setPlayerName(playername:String): Player = {
+        Player.apply(playername)
+    }
 }

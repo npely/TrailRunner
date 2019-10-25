@@ -5,16 +5,19 @@ class FieldSpec extends WordSpec with Matchers {
     "not set to any value_1" should {
       val brokenField = Field(1, 1, 0)
       "have value 0_1" in {
-        brokenField.value should be (0)
+        brokenField.value should be(0)
       }
       "have row 1_1" in {
-        brokenField.row should be (1)
+        brokenField.row should be(1)
       }
       "have column 1_1" in {
-        brokenField.column should be (1)
+        brokenField.column should be(1)
       }
       "be set_1" in {
         brokenField.isSet should be(true)
+      }
+      "not be null" in {
+        brokenField != null should be(true)
       }
       "be broken_1" in {
         brokenField.isBroken should be(true)

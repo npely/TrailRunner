@@ -1,9 +1,6 @@
 
 import org.scalatest.{Matchers, WordSpec}
-import org.scalatestplus.junit.JUnitRunner
-import org.junit.runner.RunWith
 
-@RunWith(classOf[JUnitRunner])
 class PlayerSpec extends WordSpec with Matchers {
   "A Player" when {
     "new" should {
@@ -15,6 +12,4 @@ class PlayerSpec extends WordSpec with Matchers {
       player.toString should be("Niklas")
     }
   }}
-
-
 }
