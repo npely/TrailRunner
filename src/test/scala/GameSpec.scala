@@ -3,7 +3,7 @@ import org.scalatest.Matchers
 
 class GameSpec extends WordSpec with Matchers {
   "A Game" should {
-      val newGame = YourGame
+      val newGame = TrailRunner
       "not be null"  in {
         newGame != null should be(true)
       }
