@@ -1,6 +1,6 @@
 import io.StdIn
 
-/*object Player {
+/*object model.map.Player {
 
   val playername = io.StdIn.readLine()
   println(playername)

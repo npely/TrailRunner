@@ -1,3 +1,5 @@
+import model.Player
+
 object TrailRunner {
     val game = "TrailRunner"
     val version = 1.0

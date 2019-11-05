@@ -1,3 +1,4 @@
+import model.Player
 import org.scalatest.WordSpec
 import org.scalatest.Matchers
 
