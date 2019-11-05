@@ -1,8 +1,10 @@
 package model
 
-case class Field(column : Int, row: Int, value : Int) {
+case class Field(value : Int, up : Field, down : Field, left : Field, right : Field) {
+
   def isBroken:Boolean = value == 0
-  def isSet:Boolean = column <= 0 && row <= 0
+
+  def isSet:Boolean = value > 0
 }
 
 
