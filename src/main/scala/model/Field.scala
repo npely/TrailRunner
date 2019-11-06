@@ -1,6 +1,6 @@
 package model
 
-case class Field(value : Int, up : Field, down : Field, left : Field, right : Field) {
+case class Field(value : Int) {
 
   def isBroken:Boolean = value == 0
 

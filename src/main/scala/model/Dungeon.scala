@@ -1,5 +1,6 @@
 package model
 
-case class Dungeon() {
-  
+case class Dungeon(startValue: Int) {
+
+  val startField = Field(startValue)
 }

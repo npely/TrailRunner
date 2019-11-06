@@ -4,15 +4,9 @@ import model.Field
 class FieldSpec extends WordSpec with Matchers {
   "A Field" when {
     "not set to any value_1" should {
-      val brokenField = Field(1, 1, 0)
+      val brokenField = Field(1)
       "have value 0_1" in {
         brokenField.value should be(0)
-      }
-      "have row 1_1" in {
-        brokenField.row should be(1)
-      }
-      "have column 1_1" in {
-        brokenField.column should be(1)
       }
       "be set_1" in {
         brokenField.isSet should be(true)
@@ -26,7 +20,7 @@ class FieldSpec extends WordSpec with Matchers {
     }
 
     "not set to any value_2" should {
-      val brokenNonExistingField = Field(0, 0, 0)
+      val brokenNonExistingField = Field(0)
       "have value 0_2" in {
         brokenNonExistingField.value should be(0)
       }
@@ -39,7 +33,7 @@ class FieldSpec extends WordSpec with Matchers {
     }
 
     "set to a specific value_1" should {
-      val nonExistingField = Field(0, 0, 3)
+      val nonExistingField = Field(0)
       "return that value_1" in {
         nonExistingField.value should be(3)
       }
@@ -52,7 +46,7 @@ class FieldSpec extends WordSpec with Matchers {
     }
 
     "set to a specific value_2" should {
-      val existingField = Field(2, 3, 2)
+      val existingField = Field(2)
       "return that value_2" in {
         existingField.value should be(2)
       }
