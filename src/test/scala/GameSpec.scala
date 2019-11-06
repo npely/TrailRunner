@@ -1,4 +1,4 @@
-import model.Player
+/*import model.Player
 import org.scalatest.WordSpec
 import org.scalatest.Matchers
 
@@ -18,4 +18,4 @@ class GameSpec extends WordSpec with Matchers {
        newGame.setPlayerName("Niklas") should be(Player("Niklas"))
      }
     }
-}
+}*/
