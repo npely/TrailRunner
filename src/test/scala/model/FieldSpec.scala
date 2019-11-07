@@ -3,58 +3,48 @@ import model.Field
 
 class FieldSpec extends WordSpec with Matchers {
   "A Field" when {
-    "not set to any value_1" should {
-      val brokenField = Field(1)
-      "have value 0_1" in {
-        brokenField.value should be(0)
+    "set to any value" should {
+      val field = Field(1)
+      "have value 1" in {
+        field.value should be(1)
       }
-      "be set_1" in {
-        brokenField.isSet should be(true)
+      "be set" in {
+        field.isSet should be(true)
       }
       "not be null" in {
-        brokenField != null should be(true)
+        field != null should be(true)
       }
-      "be broken_1" in {
+      "not be broken" in {
+        field.isBroken should be(false)
+      }
+      "should have a nice String representation" in {
+        field.toString should be(" |1| ")
+      }
+    }
+
+    "not set to any value" should {
+      val brokenField = Field(0)
+      "have value 0" in {
+        brokenField.value should be(0)
+      }
+      "be set" in {
+        brokenField.isSet should be(true)
+      }
+      "be broken" in {
         brokenField.isBroken should be(true)
       }
     }
 
-    "not set to any value_2" should {
-      val brokenNonExistingField = Field(0)
-      "have value 0_2" in {
-        brokenNonExistingField.value should be(0)
+    "not existing" should {
+      val nonExistingField = Field(-1)
+      "have value -1" in {
+        nonExistingField.value should be(-1)
       }
-      "not be set_1" in {
-        brokenNonExistingField.isSet should be(false)
-      }
-      "be broken_2" in {
-        brokenNonExistingField.isBroken should be(true)
-      }
-    }
-
-    "set to a specific value_1" should {
-      val nonExistingField = Field(0)
-      "return that value_1" in {
-        nonExistingField.value should be(3)
-      }
-      "not be set_2" in {
+      "not be set" in {
         nonExistingField.isSet should be(false)
       }
-      "not be broken_1" in {
+      "not be broken" in {
         nonExistingField.isBroken should be(false)
-      }
-    }
-
-    "set to a specific value_2" should {
-      val existingField = Field(2)
-      "return that value_2" in {
-        existingField.value should be(2)
-      }
-      "be set_2" in {
-        existingField.isSet should be(true)
-      }
-      "not be broken_2" in {
-        existingField.isBroken should be(false)
       }
     }
   }

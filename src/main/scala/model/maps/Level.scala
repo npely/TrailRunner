@@ -3,11 +3,9 @@ package model.maps
 import model.{Dungeon, Field, Player}
 
 case class Level(name: String) {
-
 }
 
 object Level1 extends Level("Level1") {
-
 
   var level: Array[Array[Field]] = Array.ofDim[Field](5, 5)
 
@@ -85,18 +83,8 @@ object Level1 extends Level("Level1") {
   level(4)(3) = field54
   level(4)(4) = field55
 
-  override def toString: String = {
-    level.map(_.mkString).mkString("\n")
-  }
-
-  var Levelmap: String = level.map(_.mkString).mkString("\n")
-
-  def main(args: Array[String]): Unit = {
-    print(Levelmap)
-  }
-
 }
-object Level2 extends Level("Level2") {
+/*object Level2 extends Level("Level2") {
 
   var level: Array[Array[Field]] = Array.ofDim[Field](5, 5)
 
@@ -169,4 +157,4 @@ object Level2 extends Level("Level2") {
   level(4)(3) = field54
   level(4)(4) = field55
 
-}
+}*/
