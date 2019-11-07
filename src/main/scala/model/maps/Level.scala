@@ -1,13 +1,22 @@
 package model.maps
 
-import model.{Dungeon, Field}
+import model.{Dungeon, Field, Player}
 
-case class Level(name: String)
+case class Level(name: String) {
+
+}
+
 object Level1 extends Level("Level1") {
+
 
   var level: Array[Array[Field]] = Array.ofDim[Field](5, 5)
 
   var Dungeon1 = Dungeon(1)
+
+  var player = new Player("Niklas")
+
+  player.yPos = 4
+  player.xPos = 0
 
   // Startfeld
   var startField: Field = Dungeon1.startField
@@ -75,6 +84,17 @@ object Level1 extends Level("Level1") {
   level(4)(2) = field53
   level(4)(3) = field54
   level(4)(4) = field55
+
+  override def toString: String = {
+    level.map(_.mkString).mkString("\n")
+  }
+
+  var Levelmap: String = level.map(_.mkString).mkString("\n")
+
+  def main(args: Array[String]): Unit = {
+    print(Levelmap)
+  }
+
 }
 object Level2 extends Level("Level2") {
 
@@ -148,10 +168,5 @@ object Level2 extends Level("Level2") {
   level(4)(2) = field53
   level(4)(3) = field54
   level(4)(4) = field55
+
 }
-//def main(args: Array[String]): Unit = {
-//    var player1 = new Player("Niklas")
-//    println(level(player1.yPos)(player1.xPos).value)
-//    player1.xPos += 1
-//    println(level(player1.xPos)(player1.yPos).value)
-//  }
