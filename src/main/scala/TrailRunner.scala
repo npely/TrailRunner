@@ -1,6 +1,5 @@
 import main.scala.aview.TUI
 import model._
-
 import scala.io.StdIn.readLine
 
 object TrailRunner {
@@ -9,7 +8,7 @@ object TrailRunner {
     def main(args: Array[String]): Unit = {
         var input: String = ""
 
-        System.out.println("Welcome to TrailRunner! To choose a level type 'level'")
+        System.out.println("Welcome to TrailRunner!\nTo see the available commands press 'c'")
         do {
             input = readLine()
             tui.processInputLine(input)
