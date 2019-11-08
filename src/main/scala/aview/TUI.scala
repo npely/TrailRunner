@@ -151,6 +151,7 @@ class TUI {
       }
     }
     else if (tuiMode == TUIMODE_RUNNING) {
+      Level1.level(Level1.player.yPos)(Level1.player.xPos).PlayerStandsOnField
       output = Level1.level.map(_.mkString).mkString("\n") + "\n" + "You are here:" + "[ x: " + (Level1.player.xPos + 1) + " | y: " + (Level1.player.yPos + 1) + " ]" + "\n"
     }
     output
