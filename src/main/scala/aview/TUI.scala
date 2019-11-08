@@ -3,6 +3,7 @@ package main.scala.aview
 import java.io.FileNotFoundException
 
 import model.{AllLevels, Player, maps}
+import model.maps.Level
 import model.maps.Level1
 
 import scala.io.{BufferedSource, Source}
@@ -12,7 +13,6 @@ class TUI {
 
   val greetings: String = "Welcome to TrailRunner!"
   val mainMenu: List[String] = List("Begin a new game!", "End game!")
-  val levelSelection: List[String] = List("Level 1", "Level 2")
   val banner = getTitleBanner()
 
   val TUIMODE_QUIT: Int = -1
@@ -144,8 +144,8 @@ class TUI {
       else if (tuiMode == TUIMODE_SELECTION) {
         output = "Level Selection" + "\n"
         var index = 1
-        for (x <- levelSelection) {
-          output = output + index.toString + ": " + x + "\n"
+        for (x <- AllLevels.implementedLevels) {
+          output = output + index.toString + ": " + AllLevels.showLevel(x) + "\n"
           index += 1
         }
       }
