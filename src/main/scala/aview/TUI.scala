@@ -14,6 +14,7 @@ class TUI {
   val greetings: String = "Welcome to TrailRunner!"
   val mainMenu: List[String] = List("Begin a new game!", "End game!")
   val banner = getTitleBanner()
+  //val chosenLevel: List[]
 
   val TUIMODE_QUIT: Int = -1
   val TUIMODE_MAINMENU: Int = 1
@@ -114,7 +115,7 @@ class TUI {
       case e: NumberFormatException => INVALID_INPUT
     }
     if(input == 1) {
-      var chosenLevel = Level1.level
+      var chosenLevel = Level1.level1
       tuiMode = TUIMODE_RUNNING
       tuiMode
     }
@@ -151,8 +152,15 @@ class TUI {
       }
     }
     else if (tuiMode == TUIMODE_RUNNING) {
-      Level1.level(Level1.player.yPos)(Level1.player.xPos).PlayerStandsOnField
-      output = Level1.level.map(_.mkString).mkString("\n") + "\n" + "You are here:" + "[ x: " + (Level1.player.xPos + 1) + " | y: " + (Level1.player.yPos + 1) + " ]" + "\n"
+      try {
+        Level1.level1(Level1.player.yPos)(Level1.player.xPos).PlayerStandsOnField
+        output = Level1.level1.map(_.mkString).mkString("\n") + "\n" + "You are here:" + "[ x: " + (Level1.player.xPos + 1) + " | y: " + (Level1.player.yPos + 1) + " ]" + "\n"
+      } catch {
+        case aoe: ArrayIndexOutOfBoundsException => {
+          println("Restart to begin a new game!")
+          System.exit(0)
+        }
+      }
     }
     output
   }

@@ -14,14 +14,14 @@ case class Player(name: String) {
 
   def moveRight(): Unit = {
     xPos += 1
-    if (xPos > Level1.level.length - 1 || Level1.level(yPos)(xPos).value == 0) {
+    if (xPos > Level1.level1.length - 1 || Level1.level1(yPos)(xPos).value == 0) {
       System.out.println("You died!")
       endGame = false
     }
   }
   def moveLeft(): Unit = {
     xPos -= 1
-    if (xPos < 0 || Level1.level(yPos)(xPos).value == 0) {
+    if (xPos < 0 || Level1.level1(yPos)(xPos).value == 0) {
       System.out.println("You died!")
       endGame = false
     }
@@ -29,14 +29,14 @@ case class Player(name: String) {
 
   def moveUp(): Unit = {
     yPos -= 1
-    if (yPos < 0 || Level1.level(yPos)(xPos).value == 0) {
+    if (yPos < 0 || Level1.level1(yPos)(xPos).value == 0) {
       System.out.println("You died!")
       endGame = false
     }
   }
   def moveDown(): Unit = {
     yPos += 1
-    if (yPos > Level1.level.length - 1 || Level1.level(yPos)(xPos).value == 0) {
+    if (yPos > Level1.level1.length - 1 || Level1.level1(yPos)(xPos).value == 0) {
       System.out.println("You died!")
       endGame = false
     }

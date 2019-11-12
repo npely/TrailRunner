@@ -6,7 +6,7 @@ class LevelSpec extends WordSpec with Matchers {
 
   "Level 1" when {
     "new" should {
-      var level1 = Level1.level
+      var level1 = Level1.level1
       "have startvalue 1" in {
         level1(4)(0).value == 1 should be(true)
       }
