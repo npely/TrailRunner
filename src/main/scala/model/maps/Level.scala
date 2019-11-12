@@ -2,18 +2,17 @@ package model.maps
 
 import model.{Field, Player}
 
-case class Level(name: String, rows: Int, columns: Int, startValue: Int, endValue: Int) {
+case class Level(name: String, playername: String, rows: Int, columns: Int, startValue: Int, endValue: Int) {
 
   var matrix: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
   var startField = Field(startValue)
   var endField = Field(endValue)
+  var player = new Player(playername)
 }
 
-object Level1 extends Level("Level1", 5, 5, 1, 1){
+object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
 
   var level1 = Level1.matrix
-
-  var player = new Player("Niklas")
 
   player.yPos = 4
   player.xPos = 0
