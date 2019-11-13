@@ -44,46 +44,6 @@ class TUI {
     }
   }
 
-  def evaluateRunning(input: String): Int = {
-
-    input match {
-      case "d" =>
-        if (Level1.player.endGame == true) {
-          Level1.player.moveRight
-        }
-        else {
-          tuiMode = TUIMODE_MAINMENU
-          return tuiMode
-        }
-      case "w" =>
-        if (Level1.player.endGame == true) {
-          Level1.player.moveUp
-        }
-        else {
-          tuiMode = TUIMODE_MAINMENU
-          return tuiMode
-        }
-      case "s" =>
-        if (Level1.player.endGame == true) {
-          Level1.player.moveDown
-        }
-        else {
-          tuiMode = TUIMODE_MAINMENU
-          return tuiMode
-        }
-      case "a" =>
-        if (Level1.player.endGame == true) {
-          Level1.player.moveLeft
-        }
-        else {
-          tuiMode = TUIMODE_MAINMENU
-          return tuiMode
-        }
-    }
-    tuiMode = TUIMODE_RUNNING
-    tuiMode
-  }
-
   def evaluateMainMenu(inputStr: String): Int = {
     var input = 0
 
@@ -103,6 +63,8 @@ class TUI {
       INVALID_INPUT
   }
 
+  var chosenLevel: Level = null
+
   def evaluateSelection(inputStr: String): Int = {
 
     var input = 0
@@ -114,12 +76,12 @@ class TUI {
       case e: NumberFormatException => INVALID_INPUT
     }
     if(input == 1) {
-      var chosenLevel = Level1.level1
+      chosenLevel = Level1
       tuiMode = TUIMODE_RUNNING
-      tuiMode
+      return tuiMode
     }
     else if(input == 2) {
-      var chosenLevel = Level2.level2
+      chosenLevel = Level2
       tuiMode = TUIMODE_RUNNING
       tuiMode
     }
@@ -127,6 +89,46 @@ class TUI {
       tuiMode = TUIMODE_MAINMENU
       tuiMode
     }
+  }
+
+  def evaluateRunning(input: String): Int = {
+
+    input match {
+      case "d" =>
+        if (chosenLevel.player.endGame == true) {
+          chosenLevel.player.moveRight
+        }
+        else {
+          tuiMode = TUIMODE_MAINMENU
+          return tuiMode
+        }
+      case "w" =>
+        if (chosenLevel.player.endGame == true) {
+          chosenLevel.player.moveUp
+        }
+        else {
+          tuiMode = TUIMODE_MAINMENU
+          return tuiMode
+        }
+      case "s" =>
+        if (chosenLevel.player.endGame == true) {
+          chosenLevel.player.moveDown
+        }
+        else {
+          tuiMode = TUIMODE_MAINMENU
+          return tuiMode
+        }
+      case "a" =>
+        if (chosenLevel.player.endGame == true) {
+          chosenLevel.player.moveLeft
+        }
+        else {
+          tuiMode = TUIMODE_MAINMENU
+          return tuiMode
+        }
+    }
+    tuiMode = TUIMODE_RUNNING
+    tuiMode
   }
 
   override def toString: String = {
@@ -154,8 +156,8 @@ class TUI {
     }
     else if (tuiMode == TUIMODE_RUNNING) {
       try {
-        Level1.level1(Level1.player.yPos)(Level1.player.xPos).PlayerStandsOnField
-        output = Level1.level1.map(_.mkString).mkString("\n") + "\n" + "You are here:" + "[ x: " + (Level1.player.xPos + 1) + " | y: " + (Level1.player.yPos + 1) + " ]" + "\n"
+        chosenLevel.level(chosenLevel.player.yPos)(chosenLevel.player.xPos).PlayerStandsOnField
+        output = chosenLevel.level.map(_.mkString).mkString("\n") + "\n" + "You are here:" + "[ x: " + (chosenLevel.player.xPos + 1) + " | y: " + (chosenLevel.player.yPos + 1) + " ]" + "\n"
       } catch {
         case aoe: ArrayIndexOutOfBoundsException => {
           println("Restart to begin a new game!")

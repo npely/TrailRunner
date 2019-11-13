@@ -4,17 +4,17 @@ import model.{Field, Player}
 
 case class Level(name: String, playername: String, rows: Int, columns: Int, startValue: Int, endValue: Int) {
 
-  var matrix: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
+  var level: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
   var startField = Field(startValue)
   var endField = Field(endValue)
-  var player = new Player(playername, matrix)
+  var player = new Player(playername, level)
 }
 
 object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
 
-  var level1 = Level1.matrix
+  var level1 = Level1.level
 
-  var player1 = new Player(playername, level1)
+  var player1 = new Player(playername, level)
 
   player.yPos = 4
   player.xPos = 0
@@ -52,44 +52,44 @@ object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
   var field54 = Field(1)
   var field55 = Field(1)
 
-  level1(0)(0) = field11
-  level1(0)(1) = field12
-  level1(0)(2) = field13
-  level1(0)(3) = field14
-  level1(0)(4) = Level1.endField
+  level(0)(0) = field11
+  level(0)(1) = field12
+  level(0)(2) = field13
+  level(0)(3) = field14
+  level(0)(4) = Level1.endField
 
-  level1(1)(0) = field21
-  level1(1)(1) = field22
-  level1(1)(2) = field23
-  level1(1)(3) = field24
-  level1(1)(4) = field25
+  level(1)(0) = field21
+  level(1)(1) = field22
+  level(1)(2) = field23
+  level(1)(3) = field24
+  level(1)(4) = field25
 
-  level1(2)(0) = field31
-  level1(2)(1) = field32
-  level1(2)(2) = field33
-  level1(2)(3) = field34
-  level1(2)(4) = field35
+  level(2)(0) = field31
+  level(2)(1) = field32
+  level(2)(2) = field33
+  level(2)(3) = field34
+  level(2)(4) = field35
 
-  level1(3)(0) = field41
-  level1(3)(1) = field42
-  level1(3)(2) = field43
-  level1(3)(3) = field44
-  level1(3)(4) = field45
+  level(3)(0) = field41
+  level(3)(1) = field42
+  level(3)(2) = field43
+  level(3)(3) = field44
+  level(3)(4) = field45
 
-  level1(4)(0) = Level1.startField
-  level1(4)(1) = field52
-  level1(4)(2) = field53
-  level1(4)(3) = field54
-  level1(4)(4) = field55
+  level(4)(0) = Level1.startField
+  level(4)(1) = field52
+  level(4)(2) = field53
+  level(4)(3) = field54
+  level(4)(4) = field55
 
   //level.toList.transpose.map(_.sum)
 
 }
 object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1) {
 
-  var level2 = Level2.matrix
+  val level2 = Level2.level
 
-  var player2 = new Player(playername, level2)
+  var player2 = new Player(playername, level)
 
   player.xPos = 0
   player.yPos = 1
@@ -103,10 +103,10 @@ object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1) {
   var field22 = Field(1)
 
 
-  level2(0)(0) = field11
-  level2(0)(1) = field12
+  level(0)(0) = field11
+  level(0)(1) = field12
 
-  level2(1)(0) = field21
-  level2(1)(1) = field22
+  level(1)(0) = field21
+  level(1)(1) = field22
 
 }
