@@ -3,8 +3,7 @@ package main.scala.aview
 import java.io.FileNotFoundException
 
 import model.{AllLevels, Player, maps}
-import model.maps.Level
-import model.maps.Level1
+import model.maps.{Level, Level1, Level2}
 
 import scala.io.{BufferedSource, Source}
 import scala.io.StdIn.readLine
@@ -120,7 +119,9 @@ class TUI {
       tuiMode
     }
     else if(input == 2) {
-      return 0
+      var chosenLevel = Level2.level2
+      tuiMode = TUIMODE_RUNNING
+      tuiMode
     }
     else {
       tuiMode = TUIMODE_MAINMENU

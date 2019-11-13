@@ -7,12 +7,14 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
   var matrix: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
   var startField = Field(startValue)
   var endField = Field(endValue)
-  var player = new Player(playername)
+  var player = new Player(playername, matrix)
 }
 
 object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
 
   var level1 = Level1.matrix
+
+  var player1 = new Player(playername, level1)
 
   player.yPos = 4
   player.xPos = 0
@@ -83,34 +85,28 @@ object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
   //level.toList.transpose.map(_.sum)
 
 }
-/*object Level2 extends Level("Level2") {
+object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1) {
 
-  var level: Array[Array[Field]] = Array.ofDim[Field](2, 2)
+  var level2 = Level2.matrix
 
-  var Dungeon2 = Dungeon(2, 1)
-
-  var player = new Player("Peter")
+  var player2 = new Player(playername, level2)
 
   player.xPos = 0
   player.yPos = 1
 
-  // Startfeld
-  var startField: Field = Dungeon2.startField
-  var endField: Field = Dungeon2.endField
-
   // Zeile 1 der Matrix
-  var field11 = endField
+  var field11 = Level2.endField
   var field12 = Field(1)
 
   // Zeile 2 der Matrix
-  var field21 = startField
+  var field21 = Level2.startField
   var field22 = Field(1)
 
 
-  level(0)(0) = field11
-  level(0)(1) = field12
+  level2(0)(0) = field11
+  level2(0)(1) = field12
 
-  level(1)(0) = field21
-  level(1)(1) = field22
+  level2(1)(0) = field21
+  level2(1)(1) = field22
 
-}*/
+}
