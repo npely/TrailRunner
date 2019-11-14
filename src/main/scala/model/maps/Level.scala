@@ -2,7 +2,7 @@ package model.maps
 
 import model.{Field, Player}
 
-case class Level(name: String, playername: String, rows: Int, columns: Int, startValue: Int, endValue: Int) {
+case class Level(name: String, playername: String, rows: Int, columns: Int, startValue: Int, endValue: Int, winX: Int, winY: Int) {
 
   var level: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
   var startField = Field(startValue)
@@ -20,7 +20,7 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
   }
 }
 
-object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
+object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1, 4, 0){
 
   var player1 = new Player(playername, level)
 
@@ -91,7 +91,7 @@ object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
   level(4)(4) = field55
 
 }
-object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1) {
+object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1, 1, 0) {
 
   var player2 = new Player(playername, level)
 
@@ -99,8 +99,8 @@ object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1) {
   player.yPos = 1
 
   // Zeile 1 der Matrix
-  var field11 = Level2.endField
-  var field12 = Field(1)
+  var field11 = Field(1)
+  var field12 = Level2.endField
 
   // Zeile 2 der Matrix
   var field21 = Level2.startField
