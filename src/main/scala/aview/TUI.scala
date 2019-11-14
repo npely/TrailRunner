@@ -157,7 +157,7 @@ class TUI {
     else if (tuiMode == TUIMODE_RUNNING) {
       try {
         chosenLevel.level(chosenLevel.player.yPos)(chosenLevel.player.xPos).PlayerStandsOnField
-        output = chosenLevel.level.map(_.mkString).mkString("\n") + "\n" + "You are here:" + "[ x: " + (chosenLevel.player.xPos + 1) + " | y: " + (chosenLevel.player.yPos + 1) + " ]" + "\n"
+        output = chosenLevel.level.map(_.mkString).mkString("\n") + "\n" + "You are here:" + "[ x: " + (chosenLevel.player.xPos + 1) + " | y: " + (chosenLevel.player.yPos + 1) + " ]" + "\n" + chosenLevel.sum() + "\n"
       } catch {
         case aoe: ArrayIndexOutOfBoundsException => {
           println("Restart to begin a new game!")

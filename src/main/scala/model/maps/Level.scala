@@ -8,11 +8,19 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
   var startField = Field(startValue)
   var endField = Field(endValue)
   var player = new Player(playername, level)
+
+  def sum() : Int = {
+
+    var sum = 0
+
+    for (i <- 0 to rows - 1; j <- 0 to columns - 1) {
+      sum += level(i)(j).value
+    }
+    sum
+  }
 }
 
 object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
-
-  var level1 = Level1.level
 
   var player1 = new Player(playername, level)
 
@@ -82,12 +90,8 @@ object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1){
   level(4)(3) = field54
   level(4)(4) = field55
 
-  //level.toList.transpose.map(_.sum)
-
 }
 object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1) {
-
-  val level2 = Level2.level
 
   var player2 = new Player(playername, level)
 
