@@ -9,7 +9,15 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
   var endField = Field(endValue)
   var player = new Player(playername)
 
-  //var endGame: Boolean = false
+  def sum() : Int = {
+
+    var sum = 0
+
+    for (i <- 0 to rows - 1; j <- 0 to columns - 1) {
+      sum += level(i)(j).value
+    }
+    sum
+  }
 
   def lose(): Boolean = {
 
@@ -20,15 +28,13 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
     false
   }
 
-  def sum() : Int = {
-
-    var sum = 0
-
-    for (i <- 0 to rows - 1; j <- 0 to columns - 1) {
-      sum += level(i)(j).value
+  def win(): Boolean = {
+    if (player.xPos == winX && player.yPos == winY && this.sum() == 1) {
+      return true
     }
-    sum
+    false
   }
+
 }
 
 object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1, 4, 0){
