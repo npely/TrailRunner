@@ -27,11 +27,11 @@ class PlayerSpec extends WordSpec with Matchers {
         player.moveDown
         player.yPos == 1 should be(true)
       }
-      "have xPos Value -1" in {
+      "not have xPos Value -1" in {
         player.moveLeft
         player.xPos == -1 should be(false)
       }
-      "have yPos Value -1" in {
+      "not have yPos Value -1" in {
         player.moveUp
         player.yPos == -1 should be(false)
       }

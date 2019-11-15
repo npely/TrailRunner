@@ -94,12 +94,11 @@ class TUI {
     }
   }
 
-
   def evaluateRunning(input: String): Int = {
 
     input match {
       case "d" =>
-        if (chosenLevel.player.endGame == true) {
+        if (chosenLevel.player.endGame == false) {
           chosenLevel.player.moveRight
           tuiMode = TUIMODE_RUNNING
           if (chosenLevel.player.xPos == chosenLevel.winX && chosenLevel.player.yPos == chosenLevel.winY && chosenLevel.sum() == 1) {
@@ -111,7 +110,7 @@ class TUI {
           return tuiMode
         }
       case "w" =>
-        if (chosenLevel.player.endGame == true) {
+        if (chosenLevel.player.endGame == false) {
           chosenLevel.player.moveUp
           tuiMode = TUIMODE_RUNNING
           if (chosenLevel.player.xPos == chosenLevel.winX && chosenLevel.player.yPos == chosenLevel.winY && chosenLevel.sum() == 1) {
@@ -123,7 +122,7 @@ class TUI {
           return tuiMode
         }
       case "s" =>
-        if (chosenLevel.player.endGame == true) {
+        if (chosenLevel.player.endGame == false) {
           chosenLevel.player.moveDown
           tuiMode = TUIMODE_RUNNING
           if (chosenLevel.player.xPos == chosenLevel.winX && chosenLevel.player.yPos == chosenLevel.winY && chosenLevel.sum() == 1) {
@@ -135,7 +134,7 @@ class TUI {
           return tuiMode
         }
       case "a" =>
-        if (chosenLevel.player.endGame == true) {
+        if (chosenLevel.player.endGame == false) {
           chosenLevel.player.moveLeft
           tuiMode = TUIMODE_RUNNING
           if (chosenLevel.player.xPos == chosenLevel.winX && chosenLevel.player.yPos == chosenLevel.winY && chosenLevel.sum() == 1) {
@@ -206,9 +205,9 @@ class TUI {
       }
     }
     else if (tuiMode == TUIMODE_WIN) {
-      output = "You win!\n"
       chosenLevel.level(chosenLevel.winY)(chosenLevel.winX).value -= 1
       output += chosenLevel.level.map(_.mkString).mkString("\n") + "\n"
+      output += "You win!\n"
       var index = 2
       for (x <- winMenu) {
         output = output + index.toString + ": " + x + "\n"
