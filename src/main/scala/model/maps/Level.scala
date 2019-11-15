@@ -13,7 +13,7 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
 
   def lose(): Boolean = {
 
-    if (player.xPos > level.length - 1 || player.xPos < 0 || player.yPos < 0 || player.yPos > level.length - 1 || level(player.yPos)(player.xPos).value == 0) {
+    if (player.xPos > level.length - 1 || player.xPos < 0 || player.yPos < 0 || player.yPos > level.length - 1 || level(player.yPos)(player.xPos).value == -1) {
       System.out.println("You died!")
       return true
     }

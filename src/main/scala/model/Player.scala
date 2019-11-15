@@ -9,7 +9,7 @@ case class Player(name: String) {
 
   var xPos: Int = 0
   var yPos: Int = 0
-  var endGame: Boolean = false
+  //var endGame: Boolean = false
 
 
   def moveRight(): Unit = {

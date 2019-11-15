@@ -98,7 +98,7 @@ class TUI {
 
     input match {
       case "d" =>
-        if (chosenLevel.player.endGame == false) {
+        if (chosenLevel.lose() == false) {
           chosenLevel.player.moveRight
           tuiMode = TUIMODE_RUNNING
           if (chosenLevel.player.xPos == chosenLevel.winX && chosenLevel.player.yPos == chosenLevel.winY && chosenLevel.sum() == 1) {
@@ -110,7 +110,7 @@ class TUI {
           return tuiMode
         }
       case "w" =>
-        if (chosenLevel.player.endGame == false) {
+        if (chosenLevel.lose() == false) {
           chosenLevel.player.moveUp
           tuiMode = TUIMODE_RUNNING
           if (chosenLevel.player.xPos == chosenLevel.winX && chosenLevel.player.yPos == chosenLevel.winY && chosenLevel.sum() == 1) {
@@ -122,7 +122,7 @@ class TUI {
           return tuiMode
         }
       case "s" =>
-        if (chosenLevel.player.endGame == false) {
+        if (chosenLevel.lose() == false) {
           chosenLevel.player.moveDown
           tuiMode = TUIMODE_RUNNING
           if (chosenLevel.player.xPos == chosenLevel.winX && chosenLevel.player.yPos == chosenLevel.winY && chosenLevel.sum() == 1) {
@@ -134,7 +134,7 @@ class TUI {
           return tuiMode
         }
       case "a" =>
-        if (chosenLevel.player.endGame == false) {
+        if (chosenLevel.lose() == false) {
           chosenLevel.player.moveLeft
           tuiMode = TUIMODE_RUNNING
           if (chosenLevel.player.xPos == chosenLevel.winX && chosenLevel.player.yPos == chosenLevel.winY && chosenLevel.sum() == 1) {
