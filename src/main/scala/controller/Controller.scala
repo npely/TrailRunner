@@ -1,9 +1,11 @@
 package controller
 
-import model.Player
+import model.{Field, Player}
+import model.maps.{Level, Level1}
 import util.Observable
 
-class Controller(player: Player) extends Observable {
+class Controller(player: Player, field: Field) extends Observable {
+
 
   def playerToString: String = player.toString
 
@@ -28,4 +30,18 @@ class Controller(player: Player) extends Observable {
     player.moveLeft()
     notifyObservers
   }
+
+  def fieldIsBroken:Boolean = {
+    notifyObservers
+    field.value == 0
+  }
+
+  def fieldIsSet:Boolean = field.value >= 0
+
+  def PlayerStandsOnField:Unit = {
+    field.value = field.value - 1
+    notifyObservers
+  }
+
+  def fieldToString: String = " |" + field.value.toString + "| "
 }
