@@ -7,7 +7,18 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
   var level: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
   var startField = Field(startValue)
   var endField = Field(endValue)
-  var player = new Player(playername, level)
+  var player = new Player(playername)
+
+  //var endGame: Boolean = false
+
+  def lose(): Boolean = {
+
+    if (player.xPos > level.length - 1 || player.xPos < 0 || player.yPos < 0 || player.yPos > level.length - 1 || level(player.yPos)(player.xPos).value == 0) {
+      System.out.println("You died!")
+      return true
+    }
+    false
+  }
 
   def sum() : Int = {
 
@@ -22,7 +33,7 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
 
 object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1, 4, 0){
 
-  var player1 = new Player(playername, level)
+  var player1 = new Player(playername)
 
   player.yPos = 4
   player.xPos = 0
@@ -93,7 +104,7 @@ object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1, 4, 0){
 }
 object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1, 1, 0) {
 
-  var player2 = new Player(playername, level)
+  var player2 = new Player(playername)
 
   player.xPos = 0
   player.yPos = 1

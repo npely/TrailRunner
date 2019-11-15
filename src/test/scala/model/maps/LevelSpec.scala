@@ -11,7 +11,7 @@ class LevelSpec extends WordSpec with Matchers {
         level1(4)(0).value == 1 should be(true)
       }
       "not be null" in {
-        level1(2)(1).value != null should be(true)
+        level1(2)(1).value != 0 should be(true)
       }
       "player should be on startfield" in {
         Level1.player.xPos == 0 should be(true)

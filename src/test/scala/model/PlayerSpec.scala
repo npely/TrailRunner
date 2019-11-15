@@ -1,12 +1,12 @@
 
-import model.Player
+import model.{Field, Player}
 import model.maps.Level
 import org.scalatest.{Matchers, WordSpec}
 
 class PlayerSpec extends WordSpec with Matchers {
   "A Player" when {
     "new" should {
-      val player = Player("Niklas", Level.apply("test", "test1", 1, 1, 1, 1, 1, 1).level)
+      val player = Player("Niklas")
       "have a name" in {
         player.name should be("Niklas")
       }
