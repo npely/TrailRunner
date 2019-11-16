@@ -7,7 +7,7 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
   var level: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
   var startField = Field(startValue)
   var endField = Field(endValue)
-  var player = new Player(playername)
+  var player = Player(playername)
 
   def sum() : Int = {
 
