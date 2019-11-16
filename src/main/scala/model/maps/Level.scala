@@ -2,11 +2,9 @@ package model.maps
 
 import model.{Field, Player}
 
-case class Level(name: String, playername: String, rows: Int, columns: Int, startValue: Int, endValue: Int, winX: Int, winY: Int) {
+case class Level(name: String, playername: String, rows: Int, columns: Int, startX: Int, startY: Int, winX: Int, winY: Int) {
 
   var level: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
-  var startField = Field(startValue)
-  var endField = Field(endValue)
   var player = Player(playername)
 
   def sum() : Int = {
@@ -21,7 +19,7 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
 
   def lose(): Boolean = {
 
-    if (player.xPos > level.length - 1 || player.xPos < 0 || player.yPos < 0 || player.yPos > level.length - 1 || level(player.yPos)(player.xPos).value == -1) {
+    if (level(player.yPos)(player.xPos).value == -1) {
       System.out.println("You died!")
       return true
     }
@@ -37,18 +35,43 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
 
 }
 
-object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1, 4, 0){
+object Level1 extends Level("Level1", "Peter", 2, 2, 0, 1, 1, 0) {
 
   var player1 = new Player(playername)
 
-  player.yPos = 4
-  player.xPos = 0
+  player.xPos = startX
+  player.yPos = startY
+
+  // Zeile 1 der Matrix
+  var field11 = Field(1)
+  var field12 = Field(1)
+
+  // Zeile 2 der Matrix
+  var field21 = Field(2)
+  var field22 = Field(1)
+
+
+  level(0)(0) = field11
+  level(winY)(winX) = field12
+
+  level(startY)(startX) = field21
+  level(1)(1) = field22
+
+}
+
+object Level2 extends Level("Level2", "Niklas",5, 5, 0, 4, 4, 0){
+
+  var player2 = new Player(playername)
+
+  player.xPos = startX
+  player.yPos = startY
 
   // Zeile 1 der Matrix
   var field11 = Field(1)
   var field12 = Field(1)
   var field13 = Field(2)
   var field14 = Field(2)
+  var field15 = Field(1)
 
   // Zeile 2 der Matrix
   var field21 = Field(2)
@@ -72,6 +95,7 @@ object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1, 4, 0){
   var field45 = Field(1)
 
   // Zeile 5 der Matrix
+  var field51 = Field(1)
   var field52 = Field(1)
   var field53 = Field(2)
   var field54 = Field(1)
@@ -81,7 +105,7 @@ object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1, 4, 0){
   level(0)(1) = field12
   level(0)(2) = field13
   level(0)(3) = field14
-  level(0)(4) = Level1.endField
+  level(winY)(winX) = field15
 
   level(1)(0) = field21
   level(1)(1) = field22
@@ -101,33 +125,47 @@ object Level1 extends Level("Level1", "Niklas",5, 5, 1, 1, 4, 0){
   level(3)(3) = field44
   level(3)(4) = field45
 
-  level(4)(0) = Level1.startField
+  level(startY)(startX) = field51
   level(4)(1) = field52
   level(4)(2) = field53
   level(4)(3) = field54
   level(4)(4) = field55
 
 }
-object Level2 extends Level("Level2", "Peter", 2, 2, 2, 1, 1, 0) {
 
-  var player2 = new Player(playername)
+object Level3 extends Level("Level3", "Roland", 2, 5, 0, 1, 1, 1) {
 
-  player.xPos = 0
-  player.yPos = 1
+  var player3 = new Player(playername)
+
+  player.xPos = startX
+  player.yPos = startY
 
   // Zeile 1 der Matrix
   var field11 = Field(1)
-  var field12 = Level2.endField
+  var field12 = Field(2)
+  var field13 = Field(1)
+  var field14 = Field(3)
+  var field15 = Field(2)
 
   // Zeile 2 der Matrix
-  var field21 = Level2.startField
-  var field22 = Field(1)
-
+  var field21 = Field(1)
+  var field22 = Field(3)
+  var field23 = Field(2)
+  var field24 = Field(3)
+  var field25 = Field(2)
 
   level(0)(0) = field11
   level(0)(1) = field12
+  level(0)(2) = field13
+  level(0)(3) = field14
+  level(0)(4) = field15
 
-  level(1)(0) = field21
-  level(1)(1) = field22
+  level(startY)(startX) = field21
+  level(winY)(winX) = field22
+  level(1)(2) = field23
+  level(1)(3) = field24
+  level(1)(4) = field25
 
 }
+
+
