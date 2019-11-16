@@ -1,5 +1,4 @@
-import main.scala.aview.TUI
-import model._
+import aview.TUI
 import scala.io.StdIn.readLine
 
 object TrailRunner {

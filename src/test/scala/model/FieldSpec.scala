@@ -4,7 +4,7 @@ import model.Field
 class FieldSpec extends WordSpec with Matchers {
   "A Field" when {
     "set to any value" should {
-      val field = Field(1)
+      var field = Field(1)
       "have value 1" in {
         field.value should be(1)
       }
@@ -17,8 +17,12 @@ class FieldSpec extends WordSpec with Matchers {
       "not be broken" in {
         field.isBroken should be(false)
       }
+      "value 1 smaller than before" in {
+        field.PlayerStandsOnField
+        field.value should be(0)
+      }
       "should have a nice String representation" in {
-        field.toString should be(" |1| ")
+        field.toString should be(" |0| ")
       }
     }
 
