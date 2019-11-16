@@ -6,18 +6,18 @@ class LevelSpec extends WordSpec with Matchers {
 
   "Level 1" when {
     "new" should {
-      var level1 = Level1.level
+      var level2 = Level2.level
       "have startvalue 1" in {
-        level1(4)(0).value == 1 should be(true)
+        level2(4)(0).value == 1 should be(true)
       }
       "not be null" in {
-        level1(2)(1).value != 0 should be(true)
+        level2(2)(1).value != 0 should be(true)
       }
       "player should be on startfield" in {
-        Level1.player.xPos == 0 should be(true)
+        Level2.player.xPos == 0 should be(true)
       }
       "player should be on startfield: y" in {
-        Level1.player.yPos == 4 should be(true)
+        Level2.player.yPos == 4 should be(true)
       }
     }
 
