@@ -199,6 +199,7 @@ class TUI {
                                                             "\n" + "Ziel: [ x: " + (chosenLevel.winX + 1) + " | y: " + (chosenLevel.winY + 1) + "]" + "\n"
       } catch {
         case aoe: ArrayIndexOutOfBoundsException => {
+          println("You fell off the trail!")
           println("Restart to begin a new game!")
           System.exit(0)
         }
