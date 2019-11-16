@@ -101,7 +101,7 @@ class TUI {
         if (chosenLevel.lose() == false) {
           chosenLevel.player.moveRight
           tuiMode = TUIMODE_RUNNING
-          if (chosenLevel.win() == true && chosenLevel.sum() == 1) {
+          if (chosenLevel.win() == true) {
             tuiMode = TUIMODE_WIN
           }
         }
@@ -113,7 +113,7 @@ class TUI {
         if (chosenLevel.lose() == false) {
           chosenLevel.player.moveUp
           tuiMode = TUIMODE_RUNNING
-          if (chosenLevel.win() == true && chosenLevel.sum() == 1) {
+          if (chosenLevel.win() == true) {
             tuiMode = TUIMODE_WIN
           }
         }
@@ -125,7 +125,7 @@ class TUI {
         if (chosenLevel.lose() == false) {
           chosenLevel.player.moveDown
           tuiMode = TUIMODE_RUNNING
-          if (chosenLevel.win() == true && chosenLevel.sum() == 1) {
+          if (chosenLevel.win() == true) {
             tuiMode = TUIMODE_WIN
           }
         }
@@ -137,7 +137,7 @@ class TUI {
         if (chosenLevel.lose() == false) {
           chosenLevel.player.moveLeft
           tuiMode = TUIMODE_RUNNING
-          if (chosenLevel.win() == true && chosenLevel.sum() == 1) {
+          if (chosenLevel.win() == true) {
             tuiMode = TUIMODE_WIN
           }
         }
