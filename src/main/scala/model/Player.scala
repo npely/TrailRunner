@@ -1,5 +1,4 @@
 package model
-import model.maps.{Level, Level1}
 
 case class Player(name: String) {
 

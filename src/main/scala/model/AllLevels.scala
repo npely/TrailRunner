@@ -1,6 +1,6 @@
 package model
 
-import model.maps._
+import maps._
 
 package object AllLevels {
   val implementedLevels : List[Level] = List(Level1, Level2, Level3)

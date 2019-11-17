@@ -11,7 +11,7 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
 
     var sum = 0
 
-    for (i <- 0 to rows - 1; j <- 0 to columns - 1) {
+    for (i <- 0 until rows; j <- 0 until columns) {
       sum += level(i)(j).value
     }
     sum
@@ -37,7 +37,7 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
 
 object Level1 extends Level("Level1", "Peter", 2, 2, 0, 1, 1, 0) {
 
-  var player1 = new Player(playername)
+  var player1 = Player(playername)
 
   player.xPos = startX
   player.yPos = startY
@@ -61,7 +61,7 @@ object Level1 extends Level("Level1", "Peter", 2, 2, 0, 1, 1, 0) {
 
 object Level2 extends Level("Level2", "Niklas",5, 5, 0, 4, 4, 0){
 
-  var player2 = new Player(playername)
+  var player2 = Player(playername)
 
   player.xPos = startX
   player.yPos = startY
@@ -135,7 +135,7 @@ object Level2 extends Level("Level2", "Niklas",5, 5, 0, 4, 4, 0){
 
 object Level3 extends Level("Level3", "Roland", 2, 5, 0, 1, 1, 1) {
 
-  var player3 = new Player(playername)
+  var player3 = Player(playername)
 
   player.xPos = startX
   player.yPos = startY

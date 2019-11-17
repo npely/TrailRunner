@@ -6,7 +6,7 @@ case class Field(var value : Int) {
 
   def isSet:Boolean = value >= 0
 
-  def PlayerStandsOnField:Unit = {
+  def PlayerStandsOnField():Unit = {
     value = value - 1
   }
 

@@ -1,7 +1,6 @@
 package controller
 
 import model.{Field, Player}
-import model.maps.{Level, Level1}
 import util.Observable
 
 class Controller(player: Player, field: Field) extends Observable {
@@ -11,22 +10,22 @@ class Controller(player: Player, field: Field) extends Observable {
 
   def playerToGameString: String = player.toGameString
 
-  def playerMoveUp: Unit = {
+  def playerMoveUp(): Unit = {
     player.moveUp()
     notifyObservers
   }
 
-  def playerMoveDown: Unit = {
+  def playerMoveDown(): Unit = {
     player.moveDown()
     notifyObservers
   }
 
-  def playerMoveRight: Unit = {
+  def playerMoveRight(): Unit = {
     player.moveDown()
     notifyObservers
   }
 
-  def playerMoveLeft: Unit = {
+  def playerMoveLeft(): Unit = {
     player.moveLeft()
     notifyObservers
   }
@@ -38,7 +37,7 @@ class Controller(player: Player, field: Field) extends Observable {
 
   def fieldIsSet:Boolean = field.value >= 0
 
-  def PlayerStandsOnField:Unit = {
+  def PlayerStandsOnField():Unit = {
     field.value = field.value - 1
     notifyObservers
   }

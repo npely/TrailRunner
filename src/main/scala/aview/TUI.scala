@@ -1,10 +1,8 @@
 package aview
 
 import java.io.FileNotFoundException
-
 import model.AllLevels
 import model.maps.{Level, Level1, Level2, Level3}
-
 import scala.io.{BufferedSource, Source}
 
 class TUI {
@@ -12,7 +10,7 @@ class TUI {
   val greetings: String = "Welcome to TrailRunner!"
   val mainMenu: List[String] = List("Begin a new game!", "End game!")
   val winMenu: List[String] = List("End game!")
-  val banner: String = getTitleBanner()
+  val banner: String = getTitleBanner
   //val chosenLevel: List[]
 
   val TUIMODE_INVALID_ACTION: Int = -4
@@ -28,7 +26,7 @@ class TUI {
   var tuiMode: Int = TUIMODE_MAINMENU
   var oldtuiMode: Int = tuiMode
 
-  private def getTitleBanner(): String = {
+  private def getTitleBanner: String = {
     var bufferedSource: BufferedSource = null
     try {
       bufferedSource = Source.fromFile("src/TrailRunnerStart.txt")
@@ -57,16 +55,16 @@ class TUI {
 
   def evaluateMainMenu(inputStr: String): Int = {
     oldtuiMode = TUIMODE_MAINMENU
-    var input: Int = 0
+    var inputM: Int = 0
 
     try {
-      input = inputStr.toInt
+      inputM = inputStr.toInt
     } catch {
       case _: NumberFormatException => return INVALID_INPUT
     }
-    if (input == 1) {
+    if (inputM == 1) {
       tuiMode = TUIMODE_SELECTION
-    } else if (input == 2) {
+    } else if (inputM == 2) {
       tuiMode = TUIMODE_QUIT
     }
     else {
@@ -79,23 +77,23 @@ class TUI {
 
   def evaluateSelection(inputStr: String): Int = {
     oldtuiMode = TUIMODE_SELECTION
-    var input = 0
+    var inputS = 0
 
     try {
-      input = inputStr.toInt
+      inputS = inputStr.toInt
     }
     catch {
       case _: NumberFormatException => return INVALID_INPUT
     }
-    if(input == 1) {
+    if(inputS == 1) {
       chosenLevel = Level1
       tuiMode = TUIMODE_RUNNING
     }
-    else if(input == 2) {
+    else if(inputS == 2) {
       chosenLevel = Level2
       tuiMode = TUIMODE_RUNNING
     }
-    else if(input == 3) {
+    else if(inputS == 3) {
       chosenLevel = Level3
       tuiMode = TUIMODE_RUNNING
     }
@@ -164,16 +162,16 @@ class TUI {
 
   def evaluateWin(inputStr: String): Int = {
     oldtuiMode = TUIMODE_WIN
-    var input: Int = 0
+    var inputW: Int = 0
 
     try {
-      input = inputStr.toInt
+      inputW = inputStr.toInt
     } catch {
       case _: NumberFormatException => return INVALID_INPUT
     }
-    if (input == 1) {
+    if (inputW == 1) {
       tuiMode = TUIMODE_MAINMENU
-    } else if (input == 2) {
+    } else if (inputW == 2) {
       tuiMode = TUIMODE_QUIT
     }
     else {
@@ -184,16 +182,16 @@ class TUI {
 
   def evaluateLoose(inputStr: String): Int = {
     oldtuiMode = TUIMODE_LOOSE
-    var input: Int = 0
+    var inputL: Int = 0
 
     try {
-      input = inputStr.toInt
+      inputL = inputStr.toInt
     } catch {
       case _: NumberFormatException => return INVALID_INPUT
     }
-    if (input == 1) {
+    if (inputL == 1) {
 
-    } else if (input == 2) {
+    } else if (inputL == 2) {
 
     }
     else {
@@ -226,7 +224,7 @@ class TUI {
     }
     else if (tuiMode == TUIMODE_RUNNING) {
       try {
-        chosenLevel.level(chosenLevel.player.yPos)(chosenLevel.player.xPos).PlayerStandsOnField
+        chosenLevel.level(chosenLevel.player.yPos)(chosenLevel.player.xPos).PlayerStandsOnField()
         output = chosenLevel.level.map(_.mkString).mkString("\n") + "\n" + "Player:" + "[ x: " + (chosenLevel.player.xPos + 1) + " | y: " + (chosenLevel.player.yPos + 1) + " ]" +
                                                             "\n" + "Ziel: [ x: " + (chosenLevel.winX + 1) + " | y: " + (chosenLevel.winY + 1) + "]" + "\n"
       } catch {
@@ -242,7 +240,7 @@ class TUI {
       }
     }
     else if (tuiMode == TUIMODE_WIN) {
-      chosenLevel.level(chosenLevel.player.yPos)(chosenLevel.player.xPos).PlayerStandsOnField
+      chosenLevel.level(chosenLevel.player.yPos)(chosenLevel.player.xPos).PlayerStandsOnField()
       output = chosenLevel.level.map(_.mkString).mkString("\n") + "\nCongratulations, you've found your way out of the dungeon!\n"
       var index = 2
         for (x <- winMenu) {
