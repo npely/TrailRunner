@@ -1,11 +1,14 @@
 package aview
 
 import java.io.FileNotFoundException
-import model.AllLevels
-import model.maps.{Level, Level1, Level2, Level3}
+import model.maps.{Level1, Level2, Level3}
 import scala.io.{BufferedSource, Source}
+import util.Observer
+import controller.Controller
 
-class TUI {
+class TUI(controller: Controller) extends Observer {
+
+  controller.add(this)
 
   val greetings: String = "Welcome to TrailRunner!"
   val mainMenu: List[String] = List("Begin a new game!", "End game!")
@@ -14,7 +17,7 @@ class TUI {
   //val chosenLevel: List[]
 
   val TUIMODE_INVALID_ACTION: Int = -4
-  val TUIMODE_LOOSE: Int = -3
+  val TUIMODE_LOSE: Int = -3
   val TUIMODE_WIN: Int = -2
   val TUIMODE_QUIT: Int = -1
   val TUIMODE_RUNNING: Int = 0
@@ -46,7 +49,7 @@ class TUI {
       case TUIMODE_MAINMENU => evaluateMainMenu(input)
       case TUIMODE_SELECTION => evaluateSelection(input)
       case TUIMODE_WIN => evaluateWin(input)
-      case TUIMODE_LOOSE => evaluateLoose(input)
+      case TUIMODE_LOSE => evaluateLoose(input)
       case TUIMODE_INVALID_ACTION =>
         tuiMode = oldtuiMode
         evaluateInput(input)
@@ -73,7 +76,6 @@ class TUI {
     tuiMode
   }
 
-  var chosenLevel: Level = _
 
   def evaluateSelection(inputStr: String): Int = {
     oldtuiMode = TUIMODE_SELECTION
@@ -86,15 +88,18 @@ class TUI {
       case _: NumberFormatException => return INVALID_INPUT
     }
     if(inputS == 1) {
-      chosenLevel = Level1
+      controller.level = Level1
+      controller.player = Level1.player
       tuiMode = TUIMODE_RUNNING
     }
     else if(inputS == 2) {
-      chosenLevel = Level2
+      controller.level = Level2
+      controller.player = Level2.player
       tuiMode = TUIMODE_RUNNING
     }
     else if(inputS == 3) {
-      chosenLevel = Level3
+      controller.level = Level3
+      controller.player = Level3.player
       tuiMode = TUIMODE_RUNNING
     }
     else {
@@ -107,10 +112,10 @@ class TUI {
     oldtuiMode = TUIMODE_RUNNING
     input match {
       case "d" =>
-        if (!chosenLevel.lose()) {
-          chosenLevel.player.moveRight()
+        if (!controller.levelLose()) {
+          controller.playerMoveRight()
           tuiMode = TUIMODE_RUNNING
-          if (chosenLevel.win()) {
+          if (controller.levelWin()) {
             tuiMode = TUIMODE_WIN
             return tuiMode
           }
@@ -119,10 +124,10 @@ class TUI {
           tuiMode = TUIMODE_MAINMENU
         }
       case "w" =>
-        if (!chosenLevel.lose()) {
-          chosenLevel.player.moveUp()
+        if (!controller.levelLose()) {
+          controller.playerMoveUp()
           tuiMode = TUIMODE_RUNNING
-          if (chosenLevel.win()) {
+          if (controller.levelWin()) {
             tuiMode = TUIMODE_WIN
             return tuiMode
           }
@@ -131,10 +136,10 @@ class TUI {
           tuiMode = TUIMODE_MAINMENU
         }
       case "s" =>
-        if (!chosenLevel.lose()) {
-          chosenLevel.player.moveDown()
+        if (!controller.levelLose()) {
+          controller.playerMoveDown()
           tuiMode = TUIMODE_RUNNING
-          if (chosenLevel.win()) {
+          if (controller.levelWin()) {
             tuiMode = TUIMODE_WIN
             return tuiMode
           }
@@ -143,10 +148,10 @@ class TUI {
           tuiMode = TUIMODE_MAINMENU
         }
       case "a" =>
-        if (!chosenLevel.lose()) {
-          chosenLevel.player.moveLeft()
+        if (!controller.levelLose()) {
+          controller.playerMoveLeft()
           tuiMode = TUIMODE_RUNNING
-          if (chosenLevel.win()) {
+          if (controller.levelWin()) {
             tuiMode = TUIMODE_WIN
             return tuiMode
           }
@@ -181,7 +186,7 @@ class TUI {
   }
 
   def evaluateLoose(inputStr: String): Int = {
-    oldtuiMode = TUIMODE_LOOSE
+    oldtuiMode = TUIMODE_LOSE
     var inputL: Int = 0
 
     try {
@@ -216,17 +221,17 @@ class TUI {
       else if (tuiMode == TUIMODE_SELECTION) {
         output = "Level Selection" + "\n"
         var index = 1
-        for (x <- AllLevels.implementedLevels) {
-          output = output + "'" + index.toString + "': " + AllLevels.showLevel(x) + "\n"
+        for (x <- controller.getImplementedLevels) {
+          output = output + "'" + index.toString + "': " + controller.showLevel(x) + "\n"
           index += 1
         }
       }
     }
     else if (tuiMode == TUIMODE_RUNNING) {
       try {
-        chosenLevel.level(chosenLevel.player.yPos)(chosenLevel.player.xPos).PlayerStandsOnField()
-        output = chosenLevel.level.map(_.mkString).mkString("\n") + "\n" + "Player:" + "[ x: " + (chosenLevel.player.xPos + 1) + " | y: " + (chosenLevel.player.yPos + 1) + " ]" +
-                                                            "\n" + "Ziel: [ x: " + (chosenLevel.winX + 1) + " | y: " + (chosenLevel.winY + 1) + "]" + "\n"
+        controller.playerStandsOnField()
+        output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
+                                                            "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
       } catch {
         case _: ArrayIndexOutOfBoundsException =>
           println("You fell off the trail!")
@@ -240,8 +245,8 @@ class TUI {
       }
     }
     else if (tuiMode == TUIMODE_WIN) {
-      chosenLevel.level(chosenLevel.player.yPos)(chosenLevel.player.xPos).PlayerStandsOnField()
-      output = chosenLevel.level.map(_.mkString).mkString("\n") + "\nCongratulations, you've found your way out of the dungeon!\n"
+      controller.playerStandsOnField()
+      output = controller.levelToString + "\nCongratulations, you've found your way out of the dungeon!\n"
       var index = 2
         for (x <- winMenu) {
           output += "'" + index.toString + "': " + x + "\n"
@@ -250,6 +255,8 @@ class TUI {
     }
     output
   }
+
+  override def update(): Unit = printf("")
 }
 
 

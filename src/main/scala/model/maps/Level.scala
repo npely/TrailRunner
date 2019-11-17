@@ -2,24 +2,24 @@ package model.maps
 
 import model.{Field, Player}
 
-case class Level(name: String, playername: String, rows: Int, columns: Int, startX: Int, startY: Int, winX: Int, winY: Int) {
+case class Level(name: String, playerName: String, rows: Int, columns: Int, startX: Int, startY: Int, winX: Int, winY: Int) {
 
-  var level: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
-  var player = Player(playername)
+  var dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
+  var player = Player(playerName)
 
   def sum() : Int = {
 
     var sum = 0
 
     for (i <- 0 until rows; j <- 0 until columns) {
-      sum += level(i)(j).value
+      sum += dungeon(i)(j).value
     }
     sum
   }
 
   def lose(): Boolean = {
 
-    if (level(player.yPos)(player.xPos).value == -1) {
+    if (dungeon(player.yPos)(player.xPos).value == -1) {
       System.out.println("You died!")
       return true
     }
@@ -33,11 +33,13 @@ case class Level(name: String, playername: String, rows: Int, columns: Int, star
     false
   }
 
+  override def toString: String = dungeon.map(_.mkString).mkString("\n")
+
 }
 
-object Level1 extends Level("Level1", "Peter", 2, 2, 0, 1, 1, 0) {
+object Level1 extends Level("Level1", "Pete", 2, 2, 0, 1, 1, 0) {
 
-  var player1 = Player(playername)
+  //var player1 = Player(playerName)
 
   player.xPos = startX
   player.yPos = startY
@@ -51,17 +53,17 @@ object Level1 extends Level("Level1", "Peter", 2, 2, 0, 1, 1, 0) {
   var field22 = Field(1)
 
 
-  level(0)(0) = field11
-  level(winY)(winX) = field12
+  dungeon(0)(0) = field11
+  dungeon(winY)(winX) = field12
 
-  level(startY)(startX) = field21
-  level(1)(1) = field22
+  dungeon(startY)(startX) = field21
+  dungeon(1)(1) = field22
 
 }
 
 object Level2 extends Level("Level2", "Niklas",5, 5, 0, 4, 4, 0){
 
-  var player2 = Player(playername)
+  //var player2 = Player(playerName)
 
   player.xPos = startX
   player.yPos = startY
@@ -101,41 +103,41 @@ object Level2 extends Level("Level2", "Niklas",5, 5, 0, 4, 4, 0){
   var field54 = Field(1)
   var field55 = Field(1)
 
-  level(0)(0) = field11
-  level(0)(1) = field12
-  level(0)(2) = field13
-  level(0)(3) = field14
-  level(winY)(winX) = field15
+  dungeon(0)(0) = field11
+  dungeon(0)(1) = field12
+  dungeon(0)(2) = field13
+  dungeon(0)(3) = field14
+  dungeon(winY)(winX) = field15
 
-  level(1)(0) = field21
-  level(1)(1) = field22
-  level(1)(2) = field23
-  level(1)(3) = field24
-  level(1)(4) = field25
+  dungeon(1)(0) = field21
+  dungeon(1)(1) = field22
+  dungeon(1)(2) = field23
+  dungeon(1)(3) = field24
+  dungeon(1)(4) = field25
 
-  level(2)(0) = field31
-  level(2)(1) = field32
-  level(2)(2) = field33
-  level(2)(3) = field34
-  level(2)(4) = field35
+  dungeon(2)(0) = field31
+  dungeon(2)(1) = field32
+  dungeon(2)(2) = field33
+  dungeon(2)(3) = field34
+  dungeon(2)(4) = field35
 
-  level(3)(0) = field41
-  level(3)(1) = field42
-  level(3)(2) = field43
-  level(3)(3) = field44
-  level(3)(4) = field45
+  dungeon(3)(0) = field41
+  dungeon(3)(1) = field42
+  dungeon(3)(2) = field43
+  dungeon(3)(3) = field44
+  dungeon(3)(4) = field45
 
-  level(startY)(startX) = field51
-  level(4)(1) = field52
-  level(4)(2) = field53
-  level(4)(3) = field54
-  level(4)(4) = field55
+  dungeon(startY)(startX) = field51
+  dungeon(4)(1) = field52
+  dungeon(4)(2) = field53
+  dungeon(4)(3) = field54
+  dungeon(4)(4) = field55
 
 }
 
 object Level3 extends Level("Level3", "Roland", 2, 5, 0, 1, 1, 1) {
 
-  var player3 = Player(playername)
+  //var player3 = Player(playerName)
 
   player.xPos = startX
   player.yPos = startY
@@ -154,17 +156,17 @@ object Level3 extends Level("Level3", "Roland", 2, 5, 0, 1, 1, 1) {
   var field24 = Field(3)
   var field25 = Field(2)
 
-  level(0)(0) = field11
-  level(0)(1) = field12
-  level(0)(2) = field13
-  level(0)(3) = field14
-  level(0)(4) = field15
+  dungeon(0)(0) = field11
+  dungeon(0)(1) = field12
+  dungeon(0)(2) = field13
+  dungeon(0)(3) = field14
+  dungeon(0)(4) = field15
 
-  level(startY)(startX) = field21
-  level(winY)(winX) = field22
-  level(1)(2) = field23
-  level(1)(3) = field24
-  level(1)(4) = field25
+  dungeon(startY)(startX) = field21
+  dungeon(winY)(winX) = field22
+  dungeon(1)(2) = field23
+  dungeon(1)(3) = field24
+  dungeon(1)(4) = field25
 
 }
 

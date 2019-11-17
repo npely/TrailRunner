@@ -1,10 +1,12 @@
 package controller
 
-import model.{Field, Player}
+import model.{Field, Player, AllLevels}
+import model.maps.Level
 import util.Observable
 
-class Controller(player: Player, field: Field) extends Observable {
 
+
+class Controller(var player: Player, var field: Field, var level: Level) extends Observable {
 
   def playerToString: String = player.toString
 
@@ -12,35 +14,43 @@ class Controller(player: Player, field: Field) extends Observable {
 
   def playerMoveUp(): Unit = {
     player.moveUp()
-    notifyObservers
+    notifyObservers()
   }
 
   def playerMoveDown(): Unit = {
     player.moveDown()
-    notifyObservers
+    notifyObservers()
   }
 
   def playerMoveRight(): Unit = {
-    player.moveDown()
-    notifyObservers
+    player.moveRight()
+    notifyObservers()
   }
 
   def playerMoveLeft(): Unit = {
     player.moveLeft()
-    notifyObservers
+    notifyObservers()
   }
 
-  def fieldIsBroken:Boolean = {
-    notifyObservers
-    field.value == 0
+  def fieldIsBroken:Boolean = field.isBroken
+
+  def fieldIsSet:Boolean = field.isSet
+
+  def playerStandsOnField():Unit = {
+    field = level.dungeon(player.yPos)(player.xPos)
+    field.PlayerStandsOnField()
+    notifyObservers()
   }
 
-  def fieldIsSet:Boolean = field.value >= 0
+  def fieldToString: String = field.toString
 
-  def PlayerStandsOnField():Unit = {
-    field.value = field.value - 1
-    notifyObservers
-  }
+  def levelToString: String = level.toString
 
-  def fieldToString: String = " |" + field.value.toString + "| "
+  def levelWin():Boolean = level.win()
+
+  def levelLose():Boolean = level.lose()
+
+  def showLevel(level: Level): String = AllLevels.showLevel(level)
+
+  def getImplementedLevels: List[Level] = AllLevels.getImplementedList()
 }
