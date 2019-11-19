@@ -12,6 +12,8 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
 
   def playerToGameString: String = player.toGameString
 
+  var counter: Int = 0
+
   def playerMoveUp(): Unit = {
     player.moveUp()
     notifyObservers()
@@ -40,6 +42,12 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
     field = level.dungeon(player.yPos)(player.xPos)
     field.PlayerStandsOnField()
     notifyObservers()
+  }
+
+  def count: Int = {
+    counter += 1
+    notifyObservers()
+    counter
   }
 
   def fieldToString: String = field.toString

@@ -12,7 +12,7 @@ class TUI(controller: Controller) extends Observer {
 
   val greetings: String = "Welcome to TrailRunner!"
   val mainMenu: List[String] = List("Begin a new game!", "End game!")
-  val winMenu: List[String] = List("End game!")
+  val winMenu: List[String] = List("Begin a new game!", "End game!")
   val banner: String = getTitleBanner
   //val chosenLevel: List[]
 
@@ -59,7 +59,6 @@ class TUI(controller: Controller) extends Observer {
   def evaluateMainMenu(inputStr: String): Int = {
     oldtuiMode = TUIMODE_MAINMENU
     var inputM: Int = 0
-
     try {
       inputM = inputStr.toInt
     } catch {
@@ -231,7 +230,7 @@ class TUI(controller: Controller) extends Observer {
       try {
         controller.playerStandsOnField()
         output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
-                                                            "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
+                                            "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
       } catch {
         case _: ArrayIndexOutOfBoundsException =>
           println("You fell off the trail!")
@@ -247,7 +246,7 @@ class TUI(controller: Controller) extends Observer {
     else if (tuiMode == TUIMODE_WIN) {
       controller.playerStandsOnField()
       output = controller.levelToString + "\nCongratulations, you've found your way out of the dungeon!\n"
-      var index = 2
+      var index = 1
         for (x <- winMenu) {
           output += "'" + index.toString + "': " + x + "\n"
           index += 1
