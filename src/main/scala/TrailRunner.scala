@@ -14,8 +14,9 @@ object TrailRunner {
         var input: String = ""
 
         do {
-            printf(tui.toString)
             input = readLine()
         } while (tui.evaluateInput(input) != -1)
+
+        println("Bis zum nächsten Mal!")
     }
 }

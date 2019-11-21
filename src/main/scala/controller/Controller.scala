@@ -16,21 +16,25 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
 
   def playerMoveUp(): Unit = {
     player.moveUp()
+    playerStandsOnField
     notifyObservers()
   }
 
   def playerMoveDown(): Unit = {
     player.moveDown()
+    playerStandsOnField
     notifyObservers()
   }
 
   def playerMoveRight(): Unit = {
     player.moveRight()
+    playerStandsOnField
     notifyObservers()
   }
 
   def playerMoveLeft(): Unit = {
     player.moveLeft()
+    playerStandsOnField
     notifyObservers()
   }
 
@@ -41,7 +45,6 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
   def playerStandsOnField():Unit = {
     field = level.dungeon(player.yPos)(player.xPos)
     field.PlayerStandsOnField()
-    notifyObservers()
   }
 
   def count: Int = {

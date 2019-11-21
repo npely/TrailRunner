@@ -27,7 +27,7 @@ case class Level(name: String, playerName: String, rows: Int, columns: Int, star
   }
 
   def win(): Boolean = {
-    if (player.xPos == winX && player.yPos == winY && this.sum() == 1) {
+    if (player.xPos == winX && player.yPos == winY && this.sum() == 0) {
       return true
     }
     false
