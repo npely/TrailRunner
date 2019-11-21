@@ -17,7 +17,7 @@ class TUI(controller: Controller) extends Observer {
 
   val greetings: String = "Welcome to TrailRunner!"
   val mainMenu: List[String] = List("Begin a new game!", "End game!")
-  val winMenu: List[String] = List("Begin a new game!", "End game!")
+  val endMenu: List[String] = List("Begin a new game!", "End game!")
   val banner: String = getTitleBanner
 
   val TUIMODE_INVALID_ACTION: Int = -4
@@ -62,7 +62,7 @@ class TUI(controller: Controller) extends Observer {
     case TUIMODE_MAINMENU => evaluateMainMenu(input)
     case TUIMODE_SELECTION => evaluateSelection(input)
     case TUIMODE_WIN => evaluateWin(input)
-    case TUIMODE_LOSE => evaluateLoose(input)
+    case TUIMODE_LOSE => evaluateLose(input)
     case TUIMODE_INVALID_ACTION =>
       tuiMode = oldtuiMode
       evaluateInput(input)
@@ -146,64 +146,38 @@ class TUI(controller: Controller) extends Observer {
     oldtuiMode = TUIMODE_RUNNING
     input match {
       case "d" =>
-        if (!controller.levelLose()) {
-          controller.playerMoveRight()
-          tuiMode = TUIMODE_RUNNING
-          if (controller.levelWin()) {
-            tuiMode = TUIMODE_WIN
-            updateScreen()
-            return tuiMode
-          }
-        }
-        else {
-          tuiMode = TUIMODE_MAINMENU
-          updateScreen()
-        }
+        controller.playerMoveRight()
+        evaluateMove()
       case "w" =>
-        if (!controller.levelLose()) {
-          controller.playerMoveUp()
-          tuiMode = TUIMODE_RUNNING
-          if (controller.levelWin()) {
-            tuiMode = TUIMODE_WIN
-            updateScreen()
-            return tuiMode
-          }
-        }
-        else {
-          tuiMode = TUIMODE_MAINMENU
-          updateScreen()
-        }
+        controller.playerMoveUp()
+        evaluateMove()
       case "s" =>
-        if (!controller.levelLose()) {
-          controller.playerMoveDown()
-          tuiMode = TUIMODE_RUNNING
-          if (controller.levelWin()) {
-            tuiMode = TUIMODE_WIN
-            updateScreen()
-            return tuiMode
-          }
-        }
-        else {
-          tuiMode = TUIMODE_MAINMENU
-          updateScreen()
-        }
+        controller.playerMoveDown()
+        evaluateMove()
       case "a" =>
-        if (!controller.levelLose()) {
-          controller.playerMoveLeft()
-          tuiMode = TUIMODE_RUNNING
-          if (controller.levelWin()) {
-            tuiMode = TUIMODE_WIN
-            updateScreen()
-            return tuiMode
-          }
-        }
-        else {
-          tuiMode = TUIMODE_MAINMENU
-          updateScreen()
-        }
+        controller.playerMoveLeft()
+        evaluateMove()
       case _ =>
         tuiMode = TUIMODE_INVALID_ACTION
         updateScreen()
+    }
+    tuiMode
+  }
+
+  /**
+   * Evaluates a move by the player
+   */
+  def evaluateMove(): Int = {
+    if (!controller.levelLose()) {
+      tuiMode = TUIMODE_RUNNING
+      if (controller.levelWin()) {
+        tuiMode = TUIMODE_WIN
+        updateScreen()
+      }
+    }
+    else {
+      tuiMode = TUIMODE_LOSE
+      updateScreen()
     }
     tuiMode
   }
@@ -215,24 +189,7 @@ class TUI(controller: Controller) extends Observer {
    */
   def evaluateWin(inputStr: String): Int = {
     oldtuiMode = TUIMODE_WIN
-    var inputW: Int = 0
-
-    try {
-      inputW = inputStr.toInt
-    } catch {
-      case _: NumberFormatException => return INVALID_INPUT
-    }
-    if (inputW == 1) {
-      tuiMode = TUIMODE_MAINMENU
-      updateScreen()
-    } else if (inputW == 2) {
-      tuiMode = TUIMODE_QUIT
-    }
-    else {
-      tuiMode = TUIMODE_INVALID_ACTION
-      updateScreen()
-    }
-    tuiMode
+    evaluateEndOfGame(inputStr)
   }
 
   /**
@@ -241,22 +198,32 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
     //TODO:
-  def evaluateLoose(inputStr: String): Int = {
-    oldtuiMode = TUIMODE_LOSE
-    var inputL: Int = 0
+  def evaluateLose(inputStr: String): Int = {
+      oldtuiMode = TUIMODE_LOSE
+      evaluateEndOfGame(inputStr)
+  }
+
+  /**
+   * Evaluates when the game is over
+   * @return tuiMode
+   */
+  def evaluateEndOfGame(inputStr: String): Int = {
+    var input: Int = 0
 
     try {
-      inputL = inputStr.toInt
+      input = inputStr.toInt
     } catch {
       case _: NumberFormatException => return INVALID_INPUT
     }
-    if (inputL == 1) {
-
-    } else if (inputL == 2) {
-
+    if (input == 1) {
+      tuiMode = TUIMODE_SELECTION
+      updateScreen()
+    } else if (input == 2) {
+      tuiMode = TUIMODE_QUIT
     }
     else {
       tuiMode = TUIMODE_INVALID_ACTION
+      updateScreen()
     }
     tuiMode
   }
@@ -289,6 +256,9 @@ class TUI(controller: Controller) extends Observer {
     }
     else if (tuiMode == TUIMODE_WIN) {
       buildOutputStringForWin()
+    }
+    else if (tuiMode == TUIMODE_LOSE) {
+      buildOutputStringForLose()
     }
     output
   }
@@ -357,7 +327,21 @@ class TUI(controller: Controller) extends Observer {
   def buildOutputStringForWin(): String = {
     output = "\nCongratulations, you've found your way out of the dungeon!\n"
     var index = 1
-    for (x <- winMenu) {
+    for (x <- endMenu) {
+      output += "'" + index.toString + "': " + x + "\n"
+      index += 1
+    }
+    output
+  }
+
+  /**
+   * Builds the tui String if user loses the game
+   * @return output
+   */
+  def buildOutputStringForLose(): String = {
+    output = "\nYou died! Try again?\n"
+    var index = 1
+    for (x <- endMenu) {
       output += "'" + index.toString + "': " + x + "\n"
       index += 1
     }

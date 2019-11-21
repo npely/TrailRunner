@@ -19,8 +19,7 @@ case class Level(name: String, playerName: String, rows: Int, columns: Int, star
 
   def lose(): Boolean = {
 
-    if (dungeon(player.yPos)(player.xPos).value == -1) {
-      System.out.println("You died!")
+    if (dungeon(player.yPos)(player.xPos).value < 0) {
       return true
     }
     false
