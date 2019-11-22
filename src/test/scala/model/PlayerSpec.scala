@@ -35,6 +35,9 @@ class PlayerSpec extends WordSpec with Matchers {
         player.moveUp
         player.yPos == -1 should be(false)
       }
+      "be displayed in TUI as 'P'" in {
+        player.toGameString should be("P")
+      }
     }
   }
 }
