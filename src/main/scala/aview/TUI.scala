@@ -75,16 +75,11 @@ class TUI(controller: Controller) extends Observer {
    */
   def evaluateMainMenu(inputStr: String): Int = {
     oldtuiMode = TUIMODE_MAINMENU
-    var inputM: Int = 0
-    try {
-      inputM = inputStr.toInt
-    } catch {
-      case _: NumberFormatException => return INVALID_INPUT
-    }
-    if (inputM == 1) {
+    val input = inputStr
+    if (input.equals("1")) {
       tuiMode = TUIMODE_SELECTION
       updateScreen()
-    } else if (inputM == 2) {
+    } else if (input .equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
     else {
@@ -101,29 +96,22 @@ class TUI(controller: Controller) extends Observer {
    */
   def evaluateSelection(inputStr: String): Int = {
     oldtuiMode = TUIMODE_SELECTION
-    var inputS = 0
-
-    try {
-      inputS = inputStr.toInt
-    }
-    catch {
-      case _: NumberFormatException => return INVALID_INPUT
-    }
-    if(inputS == 1) {
+    var input = inputStr
+    if(input.equals("1")) {
       controller.level = Level1
       controller.player = Level1.player
       controller.playerStandsOnField()
       tuiMode = TUIMODE_RUNNING
       updateScreen()
     }
-    else if(inputS == 2) {
+    else if(input.equals("2")) {
       controller.level = Level2
       controller.player = Level2.player
       controller.playerStandsOnField()
       tuiMode = TUIMODE_RUNNING
       updateScreen()
     }
-    else if(inputS == 3) {
+    else if(input.equals("3")) {
       controller.level = Level3
       controller.player = Level3.player
       controller.playerStandsOnField()
@@ -208,17 +196,11 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateEndOfGame(inputStr: String): Int = {
-    var input: Int = 0
-
-    try {
-      input = inputStr.toInt
-    } catch {
-      case _: NumberFormatException => return INVALID_INPUT
-    }
-    if (input == 1) {
+    val input = inputStr
+    if (input.equals("1")) {
       tuiMode = TUIMODE_SELECTION
       updateScreen()
-    } else if (input == 2) {
+    } else if (input.equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
     else {
