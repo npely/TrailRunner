@@ -30,6 +30,11 @@ class ControllerSpec extends WordSpec with Matchers{
         observer.updated should be(true)
         controller.field.value should be(-1)
       }
+      "notify its Observer when counter increases" in {
+        controller.count
+        observer.updated should be(true)
+        controller.counter should be(1)
+      }
     }
   }
 
