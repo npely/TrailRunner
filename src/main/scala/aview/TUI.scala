@@ -339,7 +339,7 @@ class TUI(controller: Controller) extends Observer {
   /**
    * Prints the output on terminal
    */
-  def updateScreen(): Unit = println(toString())
+  def updateScreen(): Unit = print(toString())
 
   /**
    * Updates if controller changed data

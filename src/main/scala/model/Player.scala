@@ -1,4 +1,7 @@
 package model
+import model.Item
+
+import scala.collection.mutable.ListBuffer
 
 case class Player(name: String) {
 
@@ -8,6 +11,7 @@ case class Player(name: String) {
 
   var xPos: Int = 0
   var yPos: Int = 0
+  var inventory: ListBuffer[Item] = null
 
   def moveRight(): Unit = {
     xPos += 1

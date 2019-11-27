@@ -1,6 +1,6 @@
 package model.maps
 
-import model.{Field, Player}
+import model.{Field, Player, Item, RightDash, LeftDash}
 
 case class Level(name: String, playerName: String, rows: Int, columns: Int, startX: Int, startY: Int, winX: Int, winY: Int) {
 
@@ -131,6 +131,7 @@ object Level2 extends Level("Level2", "Niklas",5, 5, 0, 4, 4, 0){
   dungeon(4)(2) = field53
   dungeon(4)(3) = field54
   dungeon(4)(4) = field55
+
 
 }
 
