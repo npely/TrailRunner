@@ -4,14 +4,14 @@ import org.scalatest.{Matchers, WordSpec}
 
 class LevelSpec extends WordSpec with Matchers {
 
-  "Level 1" when {
+  /*"Level 2" when {
     "new" should {
-      val level1 = Level1.dungeon
+      val level2 = Level2.dungeon
       "has startvalue 2" in {
-        level1(1)(0).value == 2 should be(true)
+        level2(1)(0).value == 2 should be(true)
       }
       "not be zero" in {
-        level1(1)(1).value != 0 should be(true)
+        level2(1)(1).value != 0 should be(true)
       }
       "player should be on startfield" in {
         Level1.player.xPos == 0 should be(true)
@@ -19,7 +19,7 @@ class LevelSpec extends WordSpec with Matchers {
       "player should be on startfield: y" in {
         Level1.player.yPos == 1 should be(true)
       }
-    }
+    }*/
 
     "Level 2" when {
       "new" should {
@@ -56,5 +56,4 @@ class LevelSpec extends WordSpec with Matchers {
         }
       }
     }
-  }
 }

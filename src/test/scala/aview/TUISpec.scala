@@ -34,7 +34,7 @@ class TUISpec extends WordSpec with Matchers{
 
       "return 0 in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
         tui.tuiMode = tui.TUIMODE_RUNNING
-        tui.evaluateRunning(input = "d") should be(0)
+        tui.evaluateRunning(input = "d") should be(-3)
       }
 
       "return -4 in TUIMODE_RUNNING when player makes a invalid move" in {
