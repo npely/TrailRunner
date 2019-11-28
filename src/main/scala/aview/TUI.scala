@@ -278,16 +278,8 @@ class TUI(controller: Controller) extends Observer {
    * @return output
    */
   def buildOutputStringForRunningGame() : String = {
-    try {
-      output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
-        "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
-    } catch {
-      case _: ArrayIndexOutOfBoundsException =>
-        //TODO: Handle ArrayIndexOutOfBoundsException without exit the game
-        println("You fell off the trail!")
-        println("Restart to begin a new game!")
-        System.exit(0)
-    }
+    output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
+                                        "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
     output
   }
 
