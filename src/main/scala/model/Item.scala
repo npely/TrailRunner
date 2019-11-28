@@ -1,47 +1,40 @@
 package model
-import model.Player
+
+import model.player.{Player, PlayerFactory}
 
 abstract class Item(var player: Player) {
   def whenUsed()
 }
 
-class RightDash extends Item(player = new Player("")) {
-
-  var rightdash = new RightDash
+object RightDash extends Item(player = PlayerFactory.createPlayer1()) {
 
   override def whenUsed(): Unit = {
     player.xPos += 2
-    player.inventory -= rightdash
+    player.inventory -= RightDash
   }
 }
 
-class LeftDash extends Item(player = new Player("")) {
-
-  var leftdash = new LeftDash;
+object LeftDash extends Item(player = PlayerFactory.createPlayer1()) {
 
   override def whenUsed(): Unit = {
     player.xPos -= 2
-    player.inventory -= leftdash
+    player.inventory -= LeftDash
   }
 }
 
-class UpDash extends Item(player = new Player("")) {
-
-  var updash = new UpDash
+object UpDash extends Item(player = PlayerFactory.createPlayer1()) {
 
   override def whenUsed(): Unit = {
     player.yPos -= 2
-    player.inventory -= updash
+    player.inventory -= UpDash
   }
 }
 
-class DownDash extends Item(player = new Player("")) {
-
-  var downdash = new DownDash
+object DownDash extends Item(player = PlayerFactory.createPlayer1()) {
 
   override def whenUsed(): Unit = {
     player.yPos += 2
-    player.inventory -= downdash
+    player.inventory -= DownDash
   }
 }
 

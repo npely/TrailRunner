@@ -1,7 +1,8 @@
 package controller
 
 import model.maps.Level1
-import model.{Field, Player}
+import model.Field
+import model.player.{Player, PlayerFactory}
 import org.scalatest.{Matchers, WordSpec}
 import util.Observer
 
@@ -9,7 +10,7 @@ class ControllerSpec extends WordSpec with Matchers{
 
   "A Controller" when {
     "observed by an Observer"  should {
-      val player = Player("Pete")
+      val player = PlayerFactory.createPlayer2()
       val field = Field(0)
       val level = new Level1
       val controller = new Controller(player, field, level)

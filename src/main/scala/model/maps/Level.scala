@@ -1,8 +1,10 @@
 package model.maps
 
-import model.{Field, Player, Item, RightDash, LeftDash}
+import model.player.{Player, PlayerFactory}
+import model.player.PlayerFactory.{Player1, Player2}
+import model.{Field, Item, LeftDash, RightDash}
 
-trait Level {
+trait Level extends {
 
   var name: String
   var playerName: String
@@ -14,7 +16,7 @@ trait Level {
   var winY: Int
 
   val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
-  var player = Player(playerName)
+  val player = PlayerFactory.createPlayer1()
 
   def sum() : Int = {
 
@@ -57,6 +59,8 @@ class Level1() extends Level {
   override var winX: Int = 1
   override var winY: Int = 0
 
+  override val player = new Player1(playerName)
+
   override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
 
   player.xPos = startX
@@ -89,6 +93,8 @@ class Level2 extends Level {
   override var startY: Int = 4
   override var winX: Int = 4
   override var winY: Int = 0
+
+  override val player = PlayerFactory.createPlayer2()
 
   override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
 
@@ -171,6 +177,8 @@ class Level3 extends Level {
   override var startY: Int = 1
   override var winX: Int = 1
   override var winY: Int = 1
+
+  override val player = PlayerFactory.createPlayer3()
 
   override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
 
