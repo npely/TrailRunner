@@ -71,8 +71,30 @@ class TUISpec extends WordSpec with Matchers{
         tui.tuiMode = tui.TUIMODE_LOSE
         tui.evaluateLose(inputStr = (-1).toString) should be(-4)
       }
-
-
+      "win output" in {
+        val Winoutput = tui.buildOutputStringForWin();
+        tui.output should be(Winoutput);
+      }
+      "lose output" in {
+        val Loseoutput = tui.buildOutputStringForLose();
+        tui.output should be(Loseoutput);
+      }
+      "invalid output" in {
+        val Invalidoutput = tui.buildOutputStringForInvalidAction();
+        tui.output should be(Invalidoutput);
+      }
+      "running game output" in {
+        val Runningoutput = tui.buildOutputStringForRunningGame();
+        tui.output should be(Runningoutput);
+      }
+      "selection output" in {
+        val Selectionoutput = tui.buildOutputStringForSelectionMenu();
+        tui.output should be(Selectionoutput);
+      }
+      "main menu output" in {
+        val Mainoutput = tui.buildOutputStringForMainMenu();
+        tui.output should be(Mainoutput);
+      }
     }
   }
 }

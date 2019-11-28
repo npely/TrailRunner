@@ -34,6 +34,7 @@ class ControllerSpec extends WordSpec with Matchers{
         controller.playerStandsOnField()
         observer.updated should be(true)
         controller.field.value should be(0)
+        controller.fieldToString should be(" |0| ")
       }
       "notify its Observer when counter increases" in {
         controller.count
