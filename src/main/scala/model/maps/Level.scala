@@ -4,8 +4,6 @@ import model.{Field, Player, Item, RightDash, LeftDash}
 
 trait Level {
 
-  def levelclone(): Level
-
   var name: String
   var playerName: String
   var rows: Int
@@ -48,9 +46,7 @@ trait Level {
 }
 
 
-object Level1 extends Level() {
-
-  override def levelclone(): Level = Level1
+class Level1() extends Level {
 
   override var name: String = "Level1"
   override var playerName: String = "Pete"
@@ -83,9 +79,7 @@ object Level1 extends Level() {
 
 }
 
-object Level2 extends Level(){
-
-  override def levelclone(): Level = Level2
+class Level2 extends Level {
 
   override var name: String = "Level2"
   override var playerName: String = "Niklas"
@@ -167,11 +161,16 @@ object Level2 extends Level(){
   dungeon(4)(4) = field55
 }
 
-object Level3 extends Level() {
+class Level3 extends Level {
 
-  override def levelclone(): Level = Level3
-
-object Level3 extends Level("Level3", "Roland", 2, 5, 0, 1, 1, 1) {
+  override var name: String = "Level3"
+  override var playerName: String = "Roland"
+  override var rows: Int = 2
+  override var columns: Int = 5
+  override var startX: Int = 0
+  override var startY: Int = 1
+  override var winX: Int = 1
+  override var winY: Int = 1
 
   override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
 

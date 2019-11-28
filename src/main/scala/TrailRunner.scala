@@ -6,7 +6,7 @@ import model.{Player, Field}
 import model.maps._
 
 object TrailRunner {
-    val controller = new Controller(Player(""), Field(0), Level1)
+    val controller = new Controller(Player(""), Field(0), new Level1)
     val tui = new TUI(controller)
     controller.notifyObservers()
 

@@ -11,7 +11,7 @@ class ControllerSpec extends WordSpec with Matchers{
     "observed by an Observer"  should {
       val player = Player("Pete")
       val field = Field(0)
-      val level = Level1
+      val level = new Level1
       val controller = new Controller(player, field, level)
       val observer = new Observer {
         var updated: Boolean = false

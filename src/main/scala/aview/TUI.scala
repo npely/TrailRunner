@@ -98,22 +98,22 @@ class TUI(controller: Controller) extends Observer {
     oldtuiMode = TUIMODE_SELECTION
     var input = inputStr
     if(input.equals("1")) {
-      controller.level = Level1
-      controller.player = Level1.player
+      controller.level = new Level1
+      controller.player = controller.level.player
       controller.playerStandsOnField()
       tuiMode = TUIMODE_RUNNING
       updateScreen()
     }
     else if(input.equals("2")) {
-      controller.level = Level2
-      controller.player = Level2.player
+      controller.level = new Level2
+      controller.player = controller.level.player
       controller.playerStandsOnField()
       tuiMode = TUIMODE_RUNNING
       updateScreen()
     }
     else if(input.equals("3")) {
-      controller.level = Level3
-      controller.player = Level3.player
+      controller.level = new Level3
+      controller.player = controller.level.player
       controller.playerStandsOnField()
       tuiMode = TUIMODE_RUNNING
       updateScreen()
