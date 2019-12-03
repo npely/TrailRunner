@@ -1,8 +1,8 @@
 package model.maps
 
+import model.Field
 import model.player.{Player, PlayerFactory}
 import model.player.PlayerFactory.{Player1, Player2}
-import model.{Field, Item, LeftDash, RightDash}
 
 trait Level extends {
 
