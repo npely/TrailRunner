@@ -14,26 +14,25 @@ import controller.Controller
 class TUI(controller: Controller) extends Observer {
 
   controller.add(this)
+  var state: State = new MainMenuState(this)
 
   val greetings: String = "Welcome to TrailRunner!"
   val mainMenu: List[String] = List("Begin a new game!", "End game!")
   val endMenu: List[String] = List("Begin a new game!", "End game!")
   val banner: String = getTitleBanner
 
-  val TUIMODE_INVALID_ACTION: Int = -4
-  val TUIMODE_LOSE: Int = -3
-  val TUIMODE_WIN: Int = -2
+  //val TUIMODE_INVALID_ACTION: Int = -4
+  //val TUIMODE_LOSE: Int = -3
+  //val TUIMODE_WIN: Int = -2
   val TUIMODE_QUIT: Int = -1
-  val TUIMODE_RUNNING: Int = 0
+  //val TUIMODE_RUNNING: Int = 0
   val TUIMODE_MAINMENU: Int = 1
-  val TUIMODE_SELECTION: Int = 2
+  //val TUIMODE_SELECTION: Int = 2
   //TODO: val TUIMODE_CHOOSE_NAME: Int = 3
 
   val INVALID_INPUT: Int = 99
 
   var tuiMode: Int = TUIMODE_MAINMENU
-  var oldtuiMode: Int = tuiMode
-
   /**
    * Gets the source of the TitleBanner
    * @return TrailRunnerStart.txt
@@ -52,20 +51,12 @@ class TUI(controller: Controller) extends Observer {
     titleBanner
   }
 
-  /**
-   * Calls the evaluation method for the current tuiMode
-   * @param input string read from console
-   * @return the fitting evaluation method
-   */
-  def evaluateInput(input: String): Int = tuiMode match {
-    case TUIMODE_RUNNING => evaluateRunning(input)
-    case TUIMODE_MAINMENU => evaluateMainMenu(input)
-    case TUIMODE_SELECTION => evaluateSelection(input)
-    case TUIMODE_WIN => evaluateWin(input)
-    case TUIMODE_LOSE => evaluateLose(input)
-    case TUIMODE_INVALID_ACTION =>
-      tuiMode = oldtuiMode
-      evaluateInput(input)
+  def changeState(state: State): Unit = {
+    this.state = state
+  }
+
+  def evaluateInput(input: String): Int = {
+    state.evaluateInput(input)
   }
 
   /**
@@ -74,16 +65,15 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateMainMenu(inputStr: String): Int = {
-    oldtuiMode = TUIMODE_MAINMENU
     val input = inputStr
     if (input.equals("1")) {
-      tuiMode = TUIMODE_SELECTION
+      changeState(new SelectionState(this))
       updateScreen()
     } else if (input .equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
     else {
-      tuiMode = TUIMODE_INVALID_ACTION
+      changeState(new InvalidActionState(this))
       updateScreen()
     }
     tuiMode
@@ -95,31 +85,30 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateSelection(inputStr: String): Int = {
-    oldtuiMode = TUIMODE_SELECTION
     var input = inputStr
     if(input.equals("1")) {
-      controller.level = Level1
-      controller.player = Level1.player
+      controller.level = new Level1
+      controller.player = controller.level.player
       controller.playerStandsOnField()
-      tuiMode = TUIMODE_RUNNING
+      changeState(new RunningState(this))
       updateScreen()
     }
     else if(input.equals("2")) {
-      controller.level = Level2
-      controller.player = Level2.player
+      controller.level = new Level2
+      controller.player = controller.level.player
       controller.playerStandsOnField()
-      tuiMode = TUIMODE_RUNNING
+      changeState(new RunningState(this))
       updateScreen()
     }
     else if(input.equals("3")) {
-      controller.level = Level3
-      controller.player = Level3.player
+      controller.level = new Level3
+      controller.player = controller.level.player
       controller.playerStandsOnField()
-      tuiMode = TUIMODE_RUNNING
+      changeState(new RunningState(this))
       updateScreen()
     }
     else {
-      tuiMode = TUIMODE_INVALID_ACTION
+      changeState(new InvalidActionState(this))
       updateScreen()
     }
     tuiMode
@@ -131,7 +120,6 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateRunning(input: String): Int = {
-    oldtuiMode = TUIMODE_RUNNING
     input match {
       case "d" =>
         controller.playerMoveRight()
@@ -146,7 +134,7 @@ class TUI(controller: Controller) extends Observer {
         controller.playerMoveLeft()
         evaluateMove()
       case _ =>
-        tuiMode = TUIMODE_INVALID_ACTION
+        changeState(new InvalidActionState(this))
         updateScreen()
     }
     tuiMode
@@ -157,14 +145,14 @@ class TUI(controller: Controller) extends Observer {
    */
   def evaluateMove(): Int = {
     if (!controller.levelLose()) {
-      tuiMode = TUIMODE_RUNNING
+      changeState(new RunningState(this))
       if (controller.levelWin()) {
-        tuiMode = TUIMODE_WIN
+        changeState(new WinState(this))
         updateScreen()
       }
     }
     else {
-      tuiMode = TUIMODE_LOSE
+      changeState(new LoseState(this))
       updateScreen()
     }
     tuiMode
@@ -176,7 +164,7 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateWin(inputStr: String): Int = {
-    oldtuiMode = TUIMODE_WIN
+    changeState(new WinState(this))
     evaluateEndOfGame(inputStr)
   }
 
@@ -187,7 +175,7 @@ class TUI(controller: Controller) extends Observer {
    */
     //TODO:
   def evaluateLose(inputStr: String): Int = {
-      oldtuiMode = TUIMODE_LOSE
+      changeState(new LoseState(this))
       evaluateEndOfGame(inputStr)
   }
 
@@ -198,13 +186,14 @@ class TUI(controller: Controller) extends Observer {
   def evaluateEndOfGame(inputStr: String): Int = {
     val input = inputStr
     if (input.equals("1")) {
-      tuiMode = TUIMODE_SELECTION
+      changeState(new MainMenuState(this))
       updateScreen()
     } else if (input.equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
     else {
-      tuiMode = TUIMODE_INVALID_ACTION
+      //tuiMode = TUIMODE_INVALID_ACTION
+      changeState(new InvalidActionState(this))
       updateScreen()
     }
     tuiMode
@@ -216,40 +205,11 @@ class TUI(controller: Controller) extends Observer {
   var output: String = ""
 
   /**
-   * Builds the string for output
-   * @return output
-   */
-  def buildOutputStringForMenus(): String = {
-
-    if (tuiMode >= 1) {
-      output = output + banner
-      if (tuiMode == TUIMODE_MAINMENU) {
-        buildOutputStringForMainMenu()
-      }
-      else if (tuiMode == TUIMODE_SELECTION) {
-        buildOutputStringForSelectionMenu()
-      }
-    }
-    else if (tuiMode == TUIMODE_RUNNING) {
-      buildOutputStringForRunningGame()
-    }
-    else if (tuiMode == TUIMODE_INVALID_ACTION) {
-      buildOutputStringForInvalidAction()
-    }
-    else if (tuiMode == TUIMODE_WIN) {
-      buildOutputStringForWin()
-    }
-    else if (tuiMode == TUIMODE_LOSE) {
-      buildOutputStringForLose()
-    }
-    output
-  }
-
-  /**
    * Builds the tui String for main menu
    * @return output
    */
   def buildOutputStringForMainMenu() : String = {
+    output = output + banner
     output = output + greetings + "\n"
     var index = 1
     for (x <- mainMenu) {
@@ -278,9 +238,9 @@ class TUI(controller: Controller) extends Observer {
    * @return output
    */
   def buildOutputStringForRunningGame() : String = {
-    output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
-      "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
-    output
+      output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
+        "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
+      output
   }
 
   /**
@@ -324,14 +284,15 @@ class TUI(controller: Controller) extends Observer {
 
   /**
    * Builds the tui String depending on the current tui mode
+   *
    * @return output
    */
-  override def toString: String = buildOutputStringForMenus()
+  override def toString: String = state.toString
 
   /**
    * Prints the output on terminal
    */
-  def updateScreen(): Unit = println(toString())
+  def updateScreen(): Unit = print(toString())
 
   /**
    * Updates if controller changed data

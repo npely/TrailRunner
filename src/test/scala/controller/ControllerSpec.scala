@@ -1,7 +1,8 @@
 package controller
 
 import model.maps.Level1
-import model.{Field, Player}
+import model.Field
+import model.player.{Player, PlayerFactory}
 import org.scalatest.{Matchers, WordSpec}
 import util.Observer
 
@@ -9,9 +10,9 @@ class ControllerSpec extends WordSpec with Matchers{
 
   "A Controller" when {
     "observed by an Observer"  should {
-      val player = Player("Pete")
+      val player = PlayerFactory.createPlayer2()
       val field = Field(0)
-      val level = Level1
+      val level = new Level1
       val controller = new Controller(player, field, level)
       val observer = new Observer {
         var updated: Boolean = false
@@ -46,6 +47,15 @@ class ControllerSpec extends WordSpec with Matchers{
       }
       "should have a string representation" in {
         controller.playerToString should be("Pete")
+      }
+      "Player1 and Player3" in {
+        val player1 = PlayerFactory.createPlayer1()
+        player1.id should be(1)
+        player1.toString should be("Niklas")
+        val player3 = PlayerFactory.createPlayer3()
+        player3.id should be(3)
+        player3.toString should be("Roland")
+        controller.remove(observer)
       }
     }
   }

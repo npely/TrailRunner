@@ -1,14 +1,15 @@
 
-import model.{Field, Player}
+import model.Field
 import model.maps.Level
+import model.player.{Player, PlayerFactory}
 import org.scalatest.{Matchers, WordSpec}
 
 class PlayerSpec extends WordSpec with Matchers {
-  "A Player" when {
+  "Player1" when {
     "new" should {
-      val player = Player("Niklas")
+      val player = PlayerFactory.createPlayer1()
       "have a name" in {
-        player.name should be("Niklas")
+        player.id should be(1)
       }
       "have a nice String representation" in {
         player.toString should be("Niklas")
@@ -37,6 +38,28 @@ class PlayerSpec extends WordSpec with Matchers {
       }
       "be displayed in TUI as 'P'" in {
         player.toGameString should be("P")
+      }
+    }
+  }
+  "Player2" when {
+    "new" should {
+      val player2 = PlayerFactory.createPlayer2()
+      "have a name" in {
+        player2.id should be(2)
+      }
+      "have a nice String representation" in {
+        player2.toString should be("Pete")
+      }
+    }
+  }
+  "Player3" when {
+    "new" should {
+      val player3 = PlayerFactory.createPlayer3()
+      "have a name" in {
+        player3.id should be(3)
+      }
+      "have a nice String representation" in {
+        player3.toString should be("Roland")
       }
     }
   }

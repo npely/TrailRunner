@@ -13,7 +13,7 @@ class AllLevelsSpec extends WordSpec with Matchers{
 
     "All levels" should {
       "have a string representation" in {
-        AllLevels.showLevel(Level1) should be("Level1")
+        AllLevels.showLevel(new Level1) should be("Level1")
       }
     }
   }
