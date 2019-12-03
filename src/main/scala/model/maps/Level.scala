@@ -59,7 +59,7 @@ class Level1() extends Level {
   override var winX: Int = 1
   override var winY: Int = 0
 
-  override val player = new Player1(playerName)
+  override val player = PlayerFactory.createPlayer1()
 
   override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
 
