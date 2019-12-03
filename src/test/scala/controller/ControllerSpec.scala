@@ -21,15 +21,20 @@ class ControllerSpec extends WordSpec with Matchers{
       }
       controller.add(observer)
       "notify its Observer after player makes a move" in {
+        controller.fieldIsBroken should be(true)
+        controller.fieldIsSet should be(true)
         player.yPos = 1
         controller.playerMoveUp()
+        controller.playerMoveRight()
+        controller.playerMoveDown()
+        controller.playerMoveLeft()
         observer.updated should be(true)
-        controller.player.yPos should be(0)
+        controller.player.yPos should be(1)
       }
       "notify its Observer when player stands on an other field" in {
         controller.playerStandsOnField()
         observer.updated should be(true)
-        controller.field.value should be(-1)
+        controller.field.value should be(0)
       }
       "notify its Observer when counter increases" in {
         controller.count
