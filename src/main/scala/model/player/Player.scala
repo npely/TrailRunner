@@ -1,7 +1,5 @@
 package model.player
 
-import model.Item
-
 import scala.collection.mutable.ListBuffer
 
 trait Player {
@@ -12,7 +10,7 @@ trait Player {
 
   var xPos: Int = 0
   var yPos: Int = 0
-  var inventory: ListBuffer[Item] = null
+  var inventory: ListBuffer[String] = null
 
   def moveRight(): Unit = {
     xPos += 1
