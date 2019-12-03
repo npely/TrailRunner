@@ -47,6 +47,15 @@ class ControllerSpec extends WordSpec with Matchers{
       "should have a string representation" in {
         controller.playerToString should be("Pete")
       }
+      "Player1 and Player3" in {
+        val player1 = PlayerFactory.createPlayer1()
+        player1.id should be(1)
+        player1.toString should be("Niklas")
+        val player3 = PlayerFactory.createPlayer3()
+        player3.id should be(3)
+        player3.toString should be("Roland")
+        controller.remove(observer)
+      }
     }
   }
 

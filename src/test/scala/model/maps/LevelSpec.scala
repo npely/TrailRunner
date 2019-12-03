@@ -19,6 +19,9 @@ class LevelSpec extends WordSpec with Matchers {
       "player should be on startfield: y" in {
         level1.player.yPos == 1 should be(true)
       }
+      "sum should be" in {
+        level1.sum() should be(5)
+      }
     }
 
     "Level 2" when {
