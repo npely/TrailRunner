@@ -31,6 +31,17 @@ class ControllerSpec extends WordSpec with Matchers{
         observer.updated should be(true)
         controller.field.value should be(-1)
       }
+      "notify its Observer when counter increases" in {
+        controller.count
+        observer.updated should be(true)
+        controller.counter should be(1)
+      }
+      "should have a game string representation" in {
+        controller.playerToGameString should be ("P")
+      }
+      "should have a string representation" in {
+        controller.playerToString should be("Pete")
+      }
     }
   }
 
