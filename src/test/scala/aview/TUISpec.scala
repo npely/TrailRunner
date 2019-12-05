@@ -15,6 +15,14 @@ class TUISpec extends WordSpec with Matchers{
         tui.evaluateSelection(1.toString) should be(1)
       }
 
+      "return 1 in TUIMODE_SELECTION when a levelnumber is selected" in {
+        tui.evaluateSelection(2.toString) should be(1)
+      }
+
+      "return 2 in TUIMODE_SELECTION when a levelnumber is selected" in {
+        tui.evaluateSelection(3.toString) should be(1)
+      }
+
       "return -4 in TUIMODE_SELECTION when anything else then a levelnumber is selected" in {
         tui.evaluateSelection((-1).toString) should be(1)
       }
@@ -32,6 +40,36 @@ class TUISpec extends WordSpec with Matchers{
       "return -4 in TUIMODE_MAINMENU when anything else then 1 or 2 is selected" in {
         tui.changeState(new MainMenuState(tui))
         tui.evaluateInput(input = (-1).toString) should be(1)
+      }
+
+      "return d in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "d") should be(1)
+      }
+
+      "return w in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "w") should be(1)
+      }
+
+      "return a in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "a") should be(1)
+      }
+
+      "return s in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "s") should be(1)
+      }
+
+      "return z in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "z") should be(1)
+      }
+
+      "return y in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "y") should be(1)
       }
 
       "return 0 in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
