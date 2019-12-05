@@ -133,6 +133,12 @@ class TUI(controller: Controller) extends Observer {
       case "a" =>
         controller.playerMoveLeft()
         evaluateMove()
+      case "z" =>
+        controller.undo
+        evaluateMove()
+      case "y" =>
+        controller.redo
+        evaluateMove()
       case _ =>
         changeState(new InvalidActionState(this))
         updateScreen()

@@ -15,6 +15,7 @@ trait Player {
   def moveRight(): Unit = {
     xPos += 1
   }
+
   def moveLeft(): Unit = {
     xPos -= 1
   }
@@ -22,6 +23,7 @@ trait Player {
   def moveUp(): Unit = {
     yPos -= 1
   }
+
   def moveDown(): Unit = {
     yPos += 1
   }
