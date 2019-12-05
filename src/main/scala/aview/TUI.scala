@@ -21,13 +21,9 @@ class TUI(controller: Controller) extends Observer {
   val endMenu: List[String] = List("Begin a new game!", "End game!")
   val banner: String = getTitleBanner
 
-  //val TUIMODE_INVALID_ACTION: Int = -4
-  //val TUIMODE_LOSE: Int = -3
-  //val TUIMODE_WIN: Int = -2
+  val TUIMODE_INVALID_ACTION: Int = 1
   val TUIMODE_QUIT: Int = -1
-  //val TUIMODE_RUNNING: Int = 0
   val TUIMODE_MAINMENU: Int = 1
-  //val TUIMODE_SELECTION: Int = 2
   //TODO: val TUIMODE_CHOOSE_NAME: Int = 3
 
   val INVALID_INPUT: Int = 99
@@ -73,7 +69,8 @@ class TUI(controller: Controller) extends Observer {
       tuiMode = TUIMODE_QUIT
     }
     else {
-      changeState(new InvalidActionState(this))
+      //changeState(new InvalidActionState(this))
+      tuiMode = TUIMODE_INVALID_ACTION
       updateScreen()
     }
     tuiMode
@@ -108,7 +105,7 @@ class TUI(controller: Controller) extends Observer {
       updateScreen()
     }
     else {
-      changeState(new InvalidActionState(this))
+      tuiMode = TUIMODE_INVALID_ACTION
       updateScreen()
     }
     tuiMode
@@ -140,7 +137,7 @@ class TUI(controller: Controller) extends Observer {
         controller.redo
         evaluateMove()
       case _ =>
-        changeState(new InvalidActionState(this))
+        tuiMode = TUIMODE_INVALID_ACTION
         updateScreen()
     }
     tuiMode
@@ -198,8 +195,7 @@ class TUI(controller: Controller) extends Observer {
       tuiMode = TUIMODE_QUIT
     }
     else {
-      //tuiMode = TUIMODE_INVALID_ACTION
-      changeState(new InvalidActionState(this))
+      tuiMode = TUIMODE_INVALID_ACTION
       updateScreen()
     }
     tuiMode
@@ -247,17 +243,6 @@ class TUI(controller: Controller) extends Observer {
       output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
         "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
       output
-  }
-
-  /**
-   * Builds the tui String if user presses invalid keys
-   * @return output
-   */
-  def buildOutputStringForInvalidAction() : String = {
-    if (!output.contains("Ungültige Eingabe!")) {
-      output += "Ungültige Eingabe!\n"
-    }
-    output
   }
 
   /**

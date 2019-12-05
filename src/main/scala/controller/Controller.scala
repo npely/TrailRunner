@@ -1,6 +1,5 @@
 package controller
 
-import controller.GameStatus._
 import controller.MoveCommands.{MoveDownCommand, MoveLeftCommand, MoveRightCommand, MoveUpCommand}
 import model.{AllLevels, Field}
 import model.maps.Level
@@ -11,7 +10,6 @@ import util.{Observable, UndoManager}
 
 class Controller(var player: Player, var field: Field, var level: Level) extends Observable {
 
-  var gameStatus: GameStatus = IDLE
   private val undoManager = new UndoManager
 
   def playerToString: String = player.toString

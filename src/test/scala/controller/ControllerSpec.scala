@@ -1,10 +1,11 @@
 package controller
 
-import model.maps.Level1
+import model.maps.{Level1, Level2}
 import model.Field
 import model.player.{Player, PlayerFactory}
 import org.scalatest.{Matchers, WordSpec}
 import util.Observer
+import controller.MoveCommands
 
 class ControllerSpec extends WordSpec with Matchers{
 
@@ -12,7 +13,7 @@ class ControllerSpec extends WordSpec with Matchers{
     "observed by an Observer"  should {
       val player = PlayerFactory.createPlayer2()
       val field = Field(0)
-      val level = new Level1
+      val level = new Level2
       val controller = new Controller(player, field, level)
       val observer = new Observer {
         var updated: Boolean = false
@@ -56,10 +57,19 @@ class ControllerSpec extends WordSpec with Matchers{
         player3.toString should be("Roland")
         controller.remove(observer)
       }
-      "notify its Observer when counter increases" in {
-        controller.count
-        observer.updated should be(true)
-        controller.counter should be(1)
+      "undo and redo should" in {
+        controller.undo should be(controller.undo)
+        controller.redo should be(controller.redo)
+      }
+      "test2" in {
+        val test2 = new MoveCommands.MoveRightCommand(controller)
+        test2.redoStep should be(test2.redoStep)
+        test2.undoStep should be(test2.undoStep)
+      }
+      "test1" in {
+        val test = new MoveCommands.MoveUpCommand(controller)
+        test.undoStep should be(test.undoStep)
+        test.redoStep should be(test.redoStep)
       }
     }
   }

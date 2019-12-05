@@ -35,16 +35,6 @@ class RunningState(tui: TUI) extends State(tui: TUI) {
   }
 }
 
-class InvalidActionState(tui: TUI) extends State(tui: TUI) {
-  override def evaluateInput(input: String): Int = {
-    tui.evaluateInput(input)
-  }
-
-  override def toString: String = {
-    tui.buildOutputStringForInvalidAction()
-  }
-}
-
 class WinState(tui: TUI) extends State(tui: TUI) {
   override def evaluateInput(input: String): Int = {
     tui.evaluateWin(input)
