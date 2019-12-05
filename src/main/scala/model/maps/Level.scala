@@ -1,11 +1,22 @@
 package model.maps
 
-import model.{Field, Player}
+import model.Field
+import model.player.{Player, PlayerFactory}
+import model.player.PlayerFactory.{Player1, Player2}
 
-case class Level(name: String, playerName: String, rows: Int, columns: Int, startX: Int, startY: Int, winX: Int, winY: Int) {
+trait Level extends {
 
-  var dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
-  var player = Player(playerName)
+  var name: String
+  var playerName: String
+  var rows: Int
+  var columns: Int
+  var startX: Int
+  var startY: Int
+  var winX: Int
+  var winY: Int
+
+  val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
+  val player = PlayerFactory.createPlayer1()
 
   def sum() : Int = {
 
@@ -36,9 +47,21 @@ case class Level(name: String, playerName: String, rows: Int, columns: Int, star
 
 }
 
-object Level1 extends Level("Level1", "Pete", 2, 2, 0, 1, 1, 0) {
 
-  //var player1 = Player(playerName)
+class Level1() extends Level {
+
+  override var name: String = "Level1"
+  override var playerName: String = "Pete"
+  override var rows: Int = 2
+  override var columns: Int = 2
+  override var startX: Int = 0
+  override var startY: Int = 1
+  override var winX: Int = 1
+  override var winY: Int = 0
+
+  override val player = PlayerFactory.createPlayer1()
+
+  override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
 
   player.xPos = startX
   player.yPos = startY
@@ -60,9 +83,20 @@ object Level1 extends Level("Level1", "Pete", 2, 2, 0, 1, 1, 0) {
 
 }
 
-object Level2 extends Level("Level2", "Niklas",5, 5, 0, 4, 4, 0){
+class Level2 extends Level {
 
-  //var player2 = Player(playerName)
+  override var name: String = "Level2"
+  override var playerName: String = "Niklas"
+  override var rows: Int = 5
+  override var columns: Int = 5
+  override var startX: Int = 0
+  override var startY: Int = 4
+  override var winX: Int = 4
+  override var winY: Int = 0
+
+  override val player = PlayerFactory.createPlayer2()
+
+  override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
 
   player.xPos = startX
   player.yPos = startY
@@ -131,12 +165,22 @@ object Level2 extends Level("Level2", "Niklas",5, 5, 0, 4, 4, 0){
   dungeon(4)(2) = field53
   dungeon(4)(3) = field54
   dungeon(4)(4) = field55
-
 }
 
-object Level3 extends Level("Level3", "Roland", 2, 5, 0, 1, 1, 1) {
+class Level3 extends Level {
 
-  //var player3 = Player(playerName)
+  override var name: String = "Level3"
+  override var playerName: String = "Roland"
+  override var rows: Int = 2
+  override var columns: Int = 5
+  override var startX: Int = 0
+  override var startY: Int = 1
+  override var winX: Int = 1
+  override var winY: Int = 1
+
+  override val player = PlayerFactory.createPlayer3()
+
+  override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
 
   player.xPos = startX
   player.yPos = startY
@@ -166,7 +210,6 @@ object Level3 extends Level("Level3", "Roland", 2, 5, 0, 1, 1, 1) {
   dungeon(1)(2) = field23
   dungeon(1)(3) = field24
   dungeon(1)(4) = field25
-
 }
 
 

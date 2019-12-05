@@ -1,7 +1,8 @@
 package controller
 
-import model.{Field, Player, AllLevels}
+import model.{AllLevels, Field}
 import model.maps.Level
+import model.player.Player
 import util.Observable
 
 
