@@ -1,10 +1,14 @@
 package aview
 
 import java.io.FileNotFoundException
+
 import model.maps.{Level1, Level2, Level3}
+
 import scala.io.{BufferedSource, Source}
 import util.Observer
 import controller.Controller
+
+import scala.util.{Failure, Success, Try}
 
 /**
  * @author npely @author screp99
@@ -24,7 +28,6 @@ class TUI(controller: Controller) extends Observer {
   val TUIMODE_INVALID_ACTION: Int = 1
   val TUIMODE_QUIT: Int = -1
   val TUIMODE_MAINMENU: Int = 1
-  //TODO: val TUIMODE_CHOOSE_NAME: Int = 3
 
   val INVALID_INPUT: Int = 99
 
@@ -34,17 +37,12 @@ class TUI(controller: Controller) extends Observer {
    * @return TrailRunnerStart.txt
    */
   private def getTitleBanner: String = {
-    var bufferedSource: BufferedSource = null
-    try {
-      bufferedSource = Source.fromFile("src/TrailRunnerStart.txt")
-    } catch {
-      case _: FileNotFoundException => bufferedSource = Source.fromFile("./src/TrailRunnerStart.txt")
-      case _: Throwable =>
+    var banner = ""
+    Try(Source.fromFile("src/TrailRunnerStart.txt")) match {
+      case Success(v) => banner = v.asInstanceOf[BufferedSource].mkString; v.asInstanceOf[BufferedSource].close()
+      case Failure(e) => banner = "<Error while reading from " + "\"" + "src/TrailRunnerStart.txt" + "\">"
     }
-
-    val titleBanner = bufferedSource.mkString
-    bufferedSource.close
-    titleBanner
+    banner
   }
 
   def changeState(state: State): Unit = {
@@ -117,7 +115,7 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateRunning(input: String): Int = {
-    input match {
+    Try(input match {
       case "d" =>
         controller.playerMoveRight()
         evaluateMove()
@@ -140,7 +138,11 @@ class TUI(controller: Controller) extends Observer {
         tuiMode = TUIMODE_INVALID_ACTION
         updateScreen()
     }
-    tuiMode
+    ) match {
+      case Success(s) => tuiMode
+      case Failure(f) => println("Invalid Mode"); return tuiMode
+    }
+    //tuiMode
   }
 
   /**

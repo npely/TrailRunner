@@ -22,21 +22,36 @@ object PlayerFactory {
     override def toString: String = {
       name
     }
+
+    def validateName(): Option[String] = try {
+      case Some(name) => name
+      case None => "Name can not be empty"
+    }
   }
 
   case class Player2(name: String) extends Player {
     override val id: Int = PLAYER2
+
     override def toString: String = {
       name
+    }
+
+    def validateName(): Option[String] = try {
+      case Some(name) => name
+      case None => "Name can not be empty"
     }
   }
 
   case class Player3(name: String) extends Player {
     override val id: Int = PLAYER3
+
     override def toString: String = {
       name
     }
+
+    def validateName(): Option[String] = try {
+      case Some(name) => name
+      case None => "Name can not be empty"
+    }
   }
-
-
 }

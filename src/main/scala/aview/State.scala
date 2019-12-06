@@ -1,5 +1,7 @@
 package aview
 
+import scala.util.Try
+
 abstract class State(tui: TUI) {
   def evaluateInput(input: String): Int
 }
