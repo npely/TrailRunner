@@ -1,5 +1,7 @@
 package aview
 
+import scala.util.Try
+
 abstract class State(tui: TUI) {
   def evaluateInput(input: String): Int
 }
@@ -32,16 +34,6 @@ class RunningState(tui: TUI) extends State(tui: TUI) {
 
   override def toString: String = {
     tui.buildOutputStringForRunningGame()
-  }
-}
-
-class InvalidActionState(tui: TUI) extends State(tui: TUI) {
-  override def evaluateInput(input: String): Int = {
-    tui.evaluateInput(input)
-  }
-
-  override def toString: String = {
-    tui.buildOutputStringForInvalidAction()
   }
 }
 

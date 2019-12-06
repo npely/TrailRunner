@@ -1,13 +1,16 @@
 package controller
 
+import controller.MoveCommands.{MoveDownCommand, MoveLeftCommand, MoveRightCommand, MoveUpCommand}
 import model.{AllLevels, Field}
 import model.maps.Level
 import model.player.Player
-import util.Observable
+import util.{Observable, UndoManager}
 
 
 
 class Controller(var player: Player, var field: Field, var level: Level) extends Observable {
+
+  private val undoManager = new UndoManager
 
   def playerToString: String = player.toString
 
@@ -16,26 +19,22 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
   var counter: Int = 0
 
   def playerMoveUp(): Unit = {
-    player.moveUp()
-    playerStandsOnField
+    undoManager.doStep(new MoveUpCommand(this))
     notifyObservers()
   }
 
   def playerMoveDown(): Unit = {
-    player.moveDown()
-    playerStandsOnField
+    undoManager.doStep(new MoveDownCommand(this))
     notifyObservers()
   }
 
   def playerMoveRight(): Unit = {
-    player.moveRight()
-    playerStandsOnField
+    undoManager.doStep(new MoveRightCommand(this))
     notifyObservers()
   }
 
   def playerMoveLeft(): Unit = {
-    player.moveLeft()
-    playerStandsOnField
+    undoManager.doStep(new MoveLeftCommand(this))
     notifyObservers()
   }
 
@@ -48,10 +47,25 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
     field.PlayerStandsOnField()
   }
 
+  def increaseFieldValueByOne():Unit = {
+    field = level.dungeon(player.yPos)(player.xPos)
+    field.setValue(field.value + 1)
+  }
+
   def count: Int = {
     counter += 1
     notifyObservers()
     counter
+  }
+
+  def undo: Unit = {
+    undoManager.undoStep
+    notifyObservers()
+  }
+
+  def redo: Unit = {
+    undoManager.redoStep
+    notifyObservers()
   }
 
   def fieldToString: String = field.toString

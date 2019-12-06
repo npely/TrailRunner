@@ -10,6 +10,8 @@ case class Field(var value : Int) {
     value = value - 1
   }
 
+  def setValue(value : Int): Unit = this.value = value
+
   override def toString: String = " |" + value.toString + "| "
 }
 

@@ -1,10 +1,14 @@
 package aview
 
 import java.io.FileNotFoundException
+
 import model.maps.{Level1, Level2, Level3}
+
 import scala.io.{BufferedSource, Source}
 import util.Observer
 import controller.Controller
+
+import scala.util.{Failure, Success, Try}
 
 /**
  * @author npely @author screp99
@@ -21,14 +25,9 @@ class TUI(controller: Controller) extends Observer {
   val endMenu: List[String] = List("Begin a new game!", "End game!")
   val banner: String = getTitleBanner
 
-  //val TUIMODE_INVALID_ACTION: Int = -4
-  //val TUIMODE_LOSE: Int = -3
-  //val TUIMODE_WIN: Int = -2
+  val TUIMODE_INVALID_ACTION: Int = 1
   val TUIMODE_QUIT: Int = -1
-  //val TUIMODE_RUNNING: Int = 0
   val TUIMODE_MAINMENU: Int = 1
-  //val TUIMODE_SELECTION: Int = 2
-  //TODO: val TUIMODE_CHOOSE_NAME: Int = 3
 
   val INVALID_INPUT: Int = 99
 
@@ -38,17 +37,12 @@ class TUI(controller: Controller) extends Observer {
    * @return TrailRunnerStart.txt
    */
   private def getTitleBanner: String = {
-    var bufferedSource: BufferedSource = null
-    try {
-      bufferedSource = Source.fromFile("src/TrailRunnerStart.txt")
-    } catch {
-      case _: FileNotFoundException => bufferedSource = Source.fromFile("./src/TrailRunnerStart.txt")
-      case _: Throwable =>
+    var banner = ""
+    Try(Source.fromFile("src/TrailRunnerStart.txt")) match {
+      case Success(v) => banner = v.asInstanceOf[BufferedSource].mkString; v.asInstanceOf[BufferedSource].close()
+      case Failure(e) => banner = "<Error while reading from " + "\"" + "src/TrailRunnerStart.txt" + "\">"
     }
-
-    val titleBanner = bufferedSource.mkString
-    bufferedSource.close
-    titleBanner
+    banner
   }
 
   def changeState(state: State): Unit = {
@@ -73,7 +67,8 @@ class TUI(controller: Controller) extends Observer {
       tuiMode = TUIMODE_QUIT
     }
     else {
-      changeState(new InvalidActionState(this))
+      //changeState(new InvalidActionState(this))
+      tuiMode = TUIMODE_INVALID_ACTION
       updateScreen()
     }
     tuiMode
@@ -108,7 +103,7 @@ class TUI(controller: Controller) extends Observer {
       updateScreen()
     }
     else {
-      changeState(new InvalidActionState(this))
+      tuiMode = TUIMODE_INVALID_ACTION
       updateScreen()
     }
     tuiMode
@@ -120,7 +115,7 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateRunning(input: String): Int = {
-    input match {
+    Try(input match {
       case "d" =>
         controller.playerMoveRight()
         evaluateMove()
@@ -133,11 +128,21 @@ class TUI(controller: Controller) extends Observer {
       case "a" =>
         controller.playerMoveLeft()
         evaluateMove()
+      case "z" =>
+        controller.undo
+        evaluateMove()
+      case "y" =>
+        controller.redo
+        evaluateMove()
       case _ =>
-        changeState(new InvalidActionState(this))
+        tuiMode = TUIMODE_INVALID_ACTION
         updateScreen()
     }
-    tuiMode
+    ) match {
+      case Success(s) => tuiMode
+      case Failure(f) => println("Invalid Mode"); return tuiMode
+    }
+    //tuiMode
   }
 
   /**
@@ -192,8 +197,7 @@ class TUI(controller: Controller) extends Observer {
       tuiMode = TUIMODE_QUIT
     }
     else {
-      //tuiMode = TUIMODE_INVALID_ACTION
-      changeState(new InvalidActionState(this))
+      tuiMode = TUIMODE_INVALID_ACTION
       updateScreen()
     }
     tuiMode
@@ -241,17 +245,6 @@ class TUI(controller: Controller) extends Observer {
       output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
         "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
       output
-  }
-
-  /**
-   * Builds the tui String if user presses invalid keys
-   * @return output
-   */
-  def buildOutputStringForInvalidAction() : String = {
-    if (!output.contains("Ungültige Eingabe!")) {
-      output += "Ungültige Eingabe!\n"
-    }
-    output
   }
 
   /**

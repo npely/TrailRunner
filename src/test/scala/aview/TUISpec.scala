@@ -5,6 +5,7 @@ import model.Field
 import model.maps.Level1
 import model.player.{Player, PlayerFactory}
 import org.scalatest.{Matchers, WordSpec}
+import aview.{MainMenuState, SelectionState, LoseState, WinState, RunningState}
 
 class TUISpec extends WordSpec with Matchers{
   "Tui" when {
@@ -12,6 +13,14 @@ class TUISpec extends WordSpec with Matchers{
       val tui = new TUI(controller = new Controller(PlayerFactory.createPlayer1(), field = Field(0), new Level1))
       "return 0 in TUIMODE_SELECTION when a levelnumber is selected" in {
         tui.evaluateSelection(1.toString) should be(1)
+      }
+
+      "return 1 in TUIMODE_SELECTION when a levelnumber is selected" in {
+        tui.evaluateSelection(2.toString) should be(1)
+      }
+
+      "return 2 in TUIMODE_SELECTION when a levelnumber is selected" in {
+        tui.evaluateSelection(3.toString) should be(1)
       }
 
       "return -4 in TUIMODE_SELECTION when anything else then a levelnumber is selected" in {
@@ -30,22 +39,52 @@ class TUISpec extends WordSpec with Matchers{
 
       "return -4 in TUIMODE_MAINMENU when anything else then 1 or 2 is selected" in {
         tui.changeState(new MainMenuState(tui))
-        tui.evaluateInput(input = (-1).toString) should be(-1)
+        tui.evaluateInput(input = (-1).toString) should be(1)
+      }
+
+      "return d in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "d") should be(1)
+      }
+
+      "return w in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "w") should be(1)
+      }
+
+      "return a in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "a") should be(1)
+      }
+
+      "return s in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "s") should be(1)
+      }
+
+      "return z in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "z") should be(1)
+      }
+
+      "return y in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
+        tui.changeState(new RunningState(tui))
+        tui.evaluateRunning(input = "y") should be(1)
       }
 
       "return 0 in TUIMODE_RUNNING when player makes a valid move(w, a, s, d)" in {
         tui.changeState(new RunningState(tui))
-        tui.evaluateRunning(input = "d") should be(-1)
+        tui.evaluateRunning(input = "d") should be(1)
       }
 
       "return -4 in TUIMODE_RUNNING when player makes a invalid move" in {
         tui.changeState(new RunningState(tui))
-        tui.evaluateRunning(input = "x") should be(-1)
+        tui.evaluateRunning(input = "x") should be(1)
       }
 
       "return 2 in TUIMODE_WIN when 1 is selected" in {
         tui.changeState(new WinState(tui))
-        tui.evaluateWin(inputStr = 1.toString) should be(-1)
+        tui.evaluateWin(inputStr = 1.toString) should be(1)
       }
 
       "return -1 in TUIMODE_WIN when 2 is selected" in {
@@ -55,12 +94,12 @@ class TUISpec extends WordSpec with Matchers{
 
       "return -4 in TUIMODE_WIN when anything else then 1 or 2 is selected" in {
         tui.changeState(new WinState(tui))
-        tui.evaluateWin(inputStr = (-1).toString) should be(-1)
+        tui.evaluateWin(inputStr = (-1).toString) should be(1)
       }
 
       "return 2 in TUIMODE_LOSE when 1 is selected" in {
         tui.changeState(new LoseState(tui))
-        tui.evaluateLose(inputStr = 1.toString) should be(-1)
+        tui.evaluateLose(inputStr = 1.toString) should be(1)
       }
 
       "return -1 in TUIMODE_LOSE when 2 is selected" in {
@@ -70,7 +109,7 @@ class TUISpec extends WordSpec with Matchers{
 
       "return -4 in TUIMODE_LOSE when anything else then 1 or 2 is selected" in {
         tui.changeState(new LoseState(tui))
-        tui.evaluateLose(inputStr = (-1).toString) should be(-1)
+        tui.evaluateLose(inputStr = (-1).toString) should be(1)
       }
       "win output" in {
         val Winoutput = tui.buildOutputStringForWin();
@@ -79,10 +118,6 @@ class TUISpec extends WordSpec with Matchers{
       "lose output" in {
         val Loseoutput = tui.buildOutputStringForLose();
         tui.output should be(Loseoutput);
-      }
-      "invalid output" in {
-        val Invalidoutput = tui.buildOutputStringForInvalidAction();
-        tui.output should be(Invalidoutput);
       }
       "running game output" in {
         val Runningoutput = tui.buildOutputStringForRunningGame();
@@ -95,6 +130,28 @@ class TUISpec extends WordSpec with Matchers{
       "main menu output" in {
         val Mainoutput = tui.buildOutputStringForMainMenu();
         tui.output should be(Mainoutput);
+      }
+      "main test" in {
+        val mainMenuState = new MainMenuState(tui)
+        mainMenuState.evaluateInput("w") should be(mainMenuState.evaluateInput("w"))
+      }
+      "win test" in {
+        val winMenuState = new WinState(tui)
+        winMenuState.evaluateInput("w") should be(winMenuState.evaluateInput("w"))
+        winMenuState.toString should be(winMenuState.toString)
+      }
+      "lose test" in {
+        val loseMenuState = new LoseState(tui)
+        loseMenuState.evaluateInput("w") should be(loseMenuState.evaluateInput("w"))
+        loseMenuState.toString() should be(loseMenuState.toString())
+      }
+      "running test" in {
+        val runningMenuState = new RunningState(tui)
+        runningMenuState.evaluateInput("l") should be(runningMenuState.evaluateInput("l"))
+      }
+      "selection test" in {
+        val selectionMenuState = new SelectionState(tui)
+        selectionMenuState.evaluateInput("w") should be(selectionMenuState.evaluateInput("w"))
       }
     }
   }

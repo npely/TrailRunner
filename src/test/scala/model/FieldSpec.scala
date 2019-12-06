@@ -4,7 +4,7 @@ import model.Field
 class FieldSpec extends WordSpec with Matchers {
   "A Field" when {
     "set to any value" should {
-      var field = Field(1)
+      var field = new Field(1)
       "have value 1" in {
         field.value should be(1)
       }

@@ -1,6 +1,7 @@
 package model.player
 
 import scala.collection.mutable.ListBuffer
+import scala.util.Success
 
 trait Player {
 
@@ -10,11 +11,12 @@ trait Player {
 
   var xPos: Int = 0
   var yPos: Int = 0
-  var inventory: ListBuffer[String] = null
+  //var inventory: List[Option[String]]
 
   def moveRight(): Unit = {
     xPos += 1
   }
+
   def moveLeft(): Unit = {
     xPos -= 1
   }
@@ -22,6 +24,7 @@ trait Player {
   def moveUp(): Unit = {
     yPos -= 1
   }
+
   def moveDown(): Unit = {
     yPos += 1
   }
