@@ -23,10 +23,10 @@ object PlayerFactory {
       name
     }
 
-    def validateName(): Option[String] = try {
+    /*def validateName(): Option[String] = try {
       case Some(name) => name
       case None => "Name can not be empty"
-    }
+    }*/
   }
 
   case class Player2(name: String) extends Player {
@@ -36,10 +36,10 @@ object PlayerFactory {
       name
     }
 
-    def validateName(): Option[String] = try {
+    /*def validateName(): Option[String] = try {
       case Some(name) => name
       case None => "Name can not be empty"
-    }
+    }*/
   }
 
   case class Player3(name: String) extends Player {
@@ -49,9 +49,9 @@ object PlayerFactory {
       name
     }
 
-    def validateName(): Option[String] = try {
+    /*def validateName(): Option[String] = try {
       case Some(name) => name
       case None => "Name can not be empty"
-    }
+    }*/
   }
 }

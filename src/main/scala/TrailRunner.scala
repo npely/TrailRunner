@@ -1,4 +1,5 @@
 import aview.TUI
+import aview.gui.GUI
 
 import scala.io.StdIn.readLine
 import controller.Controller
@@ -9,6 +10,7 @@ import model.player.{Player, PlayerFactory}
 object TrailRunner {
     val controller = new Controller(PlayerFactory.createPlayer1(), Field(0), new Level1)
     val tui = new TUI(controller)
+    //val gui = new GUI(controller)
     controller.notifyObservers()
 
     def main(args: Array[String]): Unit = {

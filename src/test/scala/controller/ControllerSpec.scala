@@ -1,11 +1,10 @@
 package controller
 
-import model.maps.{Level1, Level2}
 import model.Field
-import model.player.{Player, PlayerFactory}
+import model.maps.Level2
+import model.player.PlayerFactory
 import org.scalatest.{Matchers, WordSpec}
 import util.Observer
-import controller.MoveCommands
 
 class ControllerSpec extends WordSpec with Matchers{
 
