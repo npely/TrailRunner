@@ -48,6 +48,7 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
   def playerStandsOnField():Unit = {
     field = level.dungeon(player.yPos)(player.xPos)
     field.PlayerStandsOnField()
+    field.isPlayerOnField = true
   }
 
   def increaseFieldValueByOne():Unit = {
@@ -78,6 +79,8 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
   def levelWin():Boolean = level.win()
 
   def levelLose():Boolean = level.lose()
+
+  def levelGetName(): String = level.getName
 
   def showLevel(level: Level): String = AllLevels.showLevel(level)
 

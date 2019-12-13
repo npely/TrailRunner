@@ -43,6 +43,8 @@ trait Level extends {
     false
   }
 
+  def getName: String = name
+
   override def toString: String = dungeon.map(_.mkString).mkString("\n")
 
 }
