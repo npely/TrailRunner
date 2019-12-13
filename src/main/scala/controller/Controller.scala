@@ -1,14 +1,17 @@
 package controller
 
 import controller.MoveCommands.{MoveDownCommand, MoveLeftCommand, MoveRightCommand, MoveUpCommand}
-import model.{AllLevels, Field}
+import de.htwg.se.sudoku.controller.DungeonChanged
 import model.maps.Level
 import model.player.Player
-import util.{Observable, UndoManager}
+import model.{AllLevels, Field}
+import util.UndoManager
+
+import scala.swing.Publisher
 
 
 
-class Controller(var player: Player, var field: Field, var level: Level) extends Observable {
+class Controller(var player: Player, var field: Field, var level: Level) extends Publisher {
 
   private val undoManager = new UndoManager
 
@@ -20,22 +23,22 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
 
   def playerMoveUp(): Unit = {
     undoManager.doStep(new MoveUpCommand(this))
-    notifyObservers()
+    publish(new DungeonChanged)
   }
 
   def playerMoveDown(): Unit = {
     undoManager.doStep(new MoveDownCommand(this))
-    notifyObservers()
+    publish(new DungeonChanged)
   }
 
   def playerMoveRight(): Unit = {
     undoManager.doStep(new MoveRightCommand(this))
-    notifyObservers()
+    publish(new DungeonChanged)
   }
 
   def playerMoveLeft(): Unit = {
     undoManager.doStep(new MoveLeftCommand(this))
-    notifyObservers()
+    publish(new DungeonChanged)
   }
 
   def fieldIsBroken:Boolean = field.isBroken
@@ -54,18 +57,18 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
 
   def count: Int = {
     counter += 1
-    notifyObservers()
+    publish(new DungeonChanged)
     counter
   }
 
   def undo: Unit = {
     undoManager.undoStep
-    notifyObservers()
+    publish(new DungeonChanged)
   }
 
   def redo: Unit = {
     undoManager.redoStep
-    notifyObservers()
+    publish(new DungeonChanged)
   }
 
   def fieldToString: String = field.toString
