@@ -15,6 +15,9 @@ case class Field(var value : Int) {
   def setValue(value : Int): Unit = this.value = value
 
   override def toString: String = {
+    if (value == -99){
+      return " |X| "
+    }
     if (isPlayerOnField){
       return " |P| "
     }

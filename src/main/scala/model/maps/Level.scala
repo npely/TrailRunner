@@ -8,8 +8,8 @@ trait Level extends {
 
   var name: String
   var playerName: String
-  var rows: Int
-  var columns: Int
+  var rows: Int = 10
+  var columns: Int = 10
   var startX: Int
   var startY: Int
   var winX: Int
@@ -23,7 +23,9 @@ trait Level extends {
     var sum = 0
 
     for (i <- 0 until rows; j <- 0 until columns) {
-      sum += dungeon(i)(j).value
+      if (dungeon(i)(j).value != -99){
+        sum += dungeon(i)(j).value
+      }
     }
     sum
   }
@@ -43,6 +45,15 @@ trait Level extends {
     false
   }
 
+  def fillNullValues() : Unit = {
+
+    for (i <- 0 until rows; j <- 0 until columns) {
+      if (dungeon(i)(j) == null){
+        dungeon(i)(j) = Field(-99)
+      }
+    }
+  }
+
   def getName: String = name
 
   override def toString: String = dungeon.map(_.mkString).mkString("\n")
@@ -54,8 +65,8 @@ class Level1() extends Level {
 
   override var name: String = "Level1"
   override var playerName: String = "Pete"
-  override var rows: Int = 2
-  override var columns: Int = 2
+//  override var rows: Int = 2
+//  override var columns: Int = 2
   override var startX: Int = 0
   override var startY: Int = 1
   override var winX: Int = 1
@@ -83,14 +94,16 @@ class Level1() extends Level {
   dungeon(startY)(startX) = field21
   dungeon(1)(1) = field22
 
+  fillNullValues()
+
 }
 
 class Level2 extends Level {
 
   override var name: String = "Level2"
   override var playerName: String = "Niklas"
-  override var rows: Int = 5
-  override var columns: Int = 5
+  //override var rows: Int = 5
+  //override var columns: Int = 5
   override var startX: Int = 0
   override var startY: Int = 4
   override var winX: Int = 4
@@ -167,14 +180,16 @@ class Level2 extends Level {
   dungeon(4)(2) = field53
   dungeon(4)(3) = field54
   dungeon(4)(4) = field55
+
+  fillNullValues()
 }
 
 class Level3 extends Level {
 
   override var name: String = "Level3"
   override var playerName: String = "Roland"
-  override var rows: Int = 2
-  override var columns: Int = 5
+  //override var rows: Int = 2
+  //override var columns: Int = 5
   override var startX: Int = 0
   override var startY: Int = 1
   override var winX: Int = 1
@@ -212,6 +227,8 @@ class Level3 extends Level {
   dungeon(1)(2) = field23
   dungeon(1)(3) = field24
   dungeon(1)(4) = field25
+
+  fillNullValues()
 }
 
 

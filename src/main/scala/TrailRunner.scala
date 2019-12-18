@@ -10,8 +10,8 @@ import scala.io.StdIn.readLine
 
 object TrailRunner {
     val controller = new Controller(PlayerFactory.createPlayer1(), Field(0), new Level1)
-    val tui = new TUI(controller)
     val gui = new GUI(controller)
+    val tui = new TUI(controller)
     controller.publish(new DungeonChanged)
 
     def main(args: Array[String]): Unit = {

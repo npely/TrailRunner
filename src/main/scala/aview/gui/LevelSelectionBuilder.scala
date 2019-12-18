@@ -8,6 +8,8 @@ import scala.swing.{Action, BorderPanel, BoxPanel, Button, Dimension, Menu, Menu
 class LevelSelectionBuilder(controller: Controller, gui: GUI) {
   var selectedListIndex = 2
 
+
+
   def menuBar = new MenuBar {
 
     contents += new Menu("File") {

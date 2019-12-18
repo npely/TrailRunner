@@ -5,7 +5,7 @@ import controller.Controller
 import scala.swing.event.Key
 import scala.swing.{Action, BorderPanel, Menu, MenuBar, MenuItem}
 
-case class GameBuilder(controller: Controller, gui: GUI) {
+class GameBuilder(controller: Controller, gui: GUI) {
   var selectedListIndex = 3
 
   def menuBar = new MenuBar {

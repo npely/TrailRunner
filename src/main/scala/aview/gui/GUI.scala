@@ -4,15 +4,15 @@ import controller.Controller
 import de.htwg.se.sudoku.controller.DungeonChanged
 
 import scala.swing._
-import scala.swing.event.Key
 
 
-class GUI(controller: Controller) extends Frame{
+class GUI(controller: Controller) extends MainFrame{
 
   listenTo(controller)
 
   title = "TrailRunner"
   preferredSize = new Dimension(600,400)
+  background = java.awt.Color.BLACK
   centerOnScreen()
 
   contents = mainMenuPanel
