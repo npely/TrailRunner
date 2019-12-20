@@ -1,7 +1,7 @@
 package controller
 
-import controller.MoveCommands.{MoveDownCommand, MoveLeftCommand, MoveRightCommand, MoveUpCommand}
-import de.htwg.se.sudoku.controller.DungeonChanged
+import controller.MoveCommands._
+import de.htwg.se.sudoku.controller._
 import model.maps.Level
 import model.player.Player
 import model.{AllLevels, Field}
@@ -20,6 +20,18 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
   def playerToGameString: String = player.toGameString
 
   var counter: Int = 0
+
+  def changeToSelection(): Unit = {
+    publish(new ChangeToSelection)
+  }
+
+  def changeToGame(): Unit = {
+    publish(new ChangeToGame)
+  }
+
+  def changeToMain(): Unit = {
+    publish(new ChangeToMain)
+  }
 
   def playerMoveUp(): Unit = {
     undoManager.doStep(new MoveUpCommand(this))

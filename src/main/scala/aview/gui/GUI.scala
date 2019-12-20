@@ -1,7 +1,7 @@
 package aview.gui
 
 import controller.Controller
-import de.htwg.se.sudoku.controller.DungeonChanged
+import de.htwg.se.sudoku.controller._
 
 import scala.swing._
 
@@ -50,6 +50,15 @@ class GUI(controller: Controller) extends MainFrame{
 
   reactions += {
     case event: DungeonChanged => //redraw
+    case event: ChangeToGame => {
+      changeToRunningGame()
+    }
+    case event: ChangeToSelection => {
+      changeToLevelSelection()
+    }
+    case event: ChangeToMain => {
+      changeToMainMenu()
+    }
   }
 
   def redraw = {

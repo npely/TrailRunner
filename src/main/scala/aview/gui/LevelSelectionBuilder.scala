@@ -16,7 +16,10 @@ class LevelSelectionBuilder(controller: Controller, gui: GUI) {
 
     contents += new Menu("File") {
       mnemonic = Key.F
-      contents += new MenuItem(Action("Main menu") { gui.changeToMainMenu() })
+      contents += new MenuItem(Action("Main menu") {
+        //gui.changeToMainMenu()
+        controller.changeToMain()
+      })
       contents += new MenuItem(Action("Quit") { System.exit(0) })
     }
    }
@@ -47,7 +50,7 @@ class LevelSelectionBuilder(controller: Controller, gui: GUI) {
     controller.level = level
     controller.player = controller.level.player
     controller.playerStandsOnField()
-    gui.changeToRunningGame()
+    controller.changeToGame()
   }
 
   /*var btnList: List[Button]

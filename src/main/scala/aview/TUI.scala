@@ -1,8 +1,8 @@
 package aview
 
 import controller.Controller
-import de.htwg.se.sudoku.controller.DungeonChanged
-import model.maps.{Level1, Level2, Level3}
+import de.htwg.se.sudoku.controller._
+import model.maps.{Level, Level1, Level2, Level3}
 
 import scala.io.{BufferedSource, Source}
 import scala.swing.Reactor
@@ -59,8 +59,8 @@ class TUI(controller: Controller) extends Reactor {
   def evaluateMainMenu(inputStr: String): Int = {
     val input = inputStr
     if (input.equals("1")) {
-      changeState(new SelectionState(this))
-      updateScreen()
+      //changeState(new SelectionState(this))
+      controller.changeToSelection()
     } else if (input .equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
@@ -80,16 +80,13 @@ class TUI(controller: Controller) extends Reactor {
   def evaluateSelection(inputStr: String): Int = {
     val input = inputStr
     if(input.equals("1")) {
-      controller.level = new Level1
-      initializeLevel()
+      initializeLevel(new Level1)
     }
     else if(input.equals("2")) {
-      controller.level = new Level2
-      initializeLevel()
+      initializeLevel(new Level2)
     }
     else if(input.equals("3")) {
-      controller.level = new Level3
-      initializeLevel()
+      initializeLevel(new Level3)
     }
     else {
       tuiMode = TUIMODE_INVALID_ACTION
@@ -98,11 +95,12 @@ class TUI(controller: Controller) extends Reactor {
     tuiMode
   }
 
-  def initializeLevel(): Unit = {
+  def initializeLevel(level: Level): Unit = {
+    controller.level = level
     controller.player = controller.level.player
     controller.playerStandsOnField()
-    changeState(new RunningState(this))
-    updateScreen()
+    //changeState(new RunningState(this))
+    controller.changeToGame()
   }
 
   /**
@@ -188,7 +186,7 @@ class TUI(controller: Controller) extends Reactor {
     val input = inputStr
     if (input.equals("1")) {
       changeState(new MainMenuState(this))
-      updateScreen()
+      controller.changeToMain()
     } else if (input.equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
@@ -284,6 +282,18 @@ class TUI(controller: Controller) extends Reactor {
 
   reactions += {
     case event: DungeonChanged => updateScreen()
+    case event: ChangeToGame => {
+      changeState(new RunningState(this))
+      updateScreen()
+    }
+    case event: ChangeToSelection => {
+      changeState(new SelectionState(this))
+      updateScreen()
+    }
+    case event: ChangeToMain => {
+      changeState(new MainMenuState(this))
+      updateScreen()
+    }
   }
 }
 
