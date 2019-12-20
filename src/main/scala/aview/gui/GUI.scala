@@ -11,7 +11,7 @@ class GUI(controller: Controller) extends MainFrame{
   listenTo(controller)
 
   title = "TrailRunner"
-  preferredSize = new Dimension(600,400)
+  preferredSize = new Dimension(550,630)
   background = java.awt.Color.BLACK
   centerOnScreen()
 
@@ -47,7 +47,7 @@ class GUI(controller: Controller) extends MainFrame{
   }
 
   reactions += {
-    case event: DungeonChanged => redraw
+    case event: DungeonChanged => //redraw
   }
 
   def redraw = {

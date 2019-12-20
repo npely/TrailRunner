@@ -5,7 +5,7 @@ import java.awt.Dimension
 import controller.Controller
 
 import scala.swing.event.ButtonClicked
-import scala.swing.{BorderPanel, BoxPanel, Button, Orientation}
+import scala.swing.{BorderPanel, BoxPanel, Button, Dimension, Orientation}
 
 class MainMenuBuilder(controller: Controller, gui: GUI) {
   var selectedListIndex = 1
@@ -23,7 +23,8 @@ class MainMenuBuilder(controller: Controller, gui: GUI) {
   }
 
   def mainMenu = new BoxPanel(Orientation.Vertical) {
-    preferredSize = new Dimension(70, 50)
+    preferredSize = new Dimension(500,300)
+    background = java.awt.Color.BLACK
     contents ++= List(newGameBtn, quitBtn)
   }
 

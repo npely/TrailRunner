@@ -1,6 +1,7 @@
 package aview.gui
 
 import controller.Controller
+import model.maps._
 
 import scala.swing.event.{ButtonClicked, Key}
 import scala.swing.{Action, BorderPanel, BoxPanel, Button, Dimension, Menu, MenuBar, MenuItem, Orientation}
@@ -11,6 +12,7 @@ class LevelSelectionBuilder(controller: Controller, gui: GUI) {
 
 
   def menuBar = new MenuBar {
+    background = java.awt.Color.DARK_GRAY
 
     contents += new Menu("File") {
       mnemonic = Key.F
@@ -20,24 +22,32 @@ class LevelSelectionBuilder(controller: Controller, gui: GUI) {
    }
 
   private def buildLevelSelectionPanel(): BoxPanel = new BoxPanel(Orientation.Vertical) {
-    preferredSize = new Dimension(70,50)
+    preferredSize = new Dimension(500,300)
+    background = java.awt.Color.BLACK
     contents ++= List(
       new Button("Level 1") {
         reactions += {
-          case e: ButtonClicked => gui.changeToRunningGame()
+          case e: ButtonClicked => initializeGame(new Level1)
         }
       },
       new Button("Level 2") {
         reactions += {
-          case e: ButtonClicked => gui.changeToRunningGame()
+          case e: ButtonClicked => initializeGame(new Level2)
         }
       },
       new Button("Level 3") {
         reactions += {
-          case e: ButtonClicked => gui.changeToRunningGame()
+          case e: ButtonClicked => initializeGame(new Level3)
         }
       }
     )
+  }
+
+  def initializeGame(level: Level): Unit = {
+    controller.level = level
+    controller.player = controller.level.player
+    controller.playerStandsOnField()
+    gui.changeToRunningGame()
   }
 
   /*var btnList: List[Button]

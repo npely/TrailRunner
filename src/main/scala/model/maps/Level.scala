@@ -19,9 +19,7 @@ trait Level extends {
   val player = PlayerFactory.createPlayer1()
 
   def sum() : Int = {
-
     var sum = 0
-
     for (i <- 0 until rows; j <- 0 until columns) {
       if (dungeon(i)(j).value != -99){
         sum += dungeon(i)(j).value
@@ -31,7 +29,6 @@ trait Level extends {
   }
 
   def lose(): Boolean = {
-
     if (dungeon(player.yPos)(player.xPos).value < 0) {
       return true
     }
@@ -46,7 +43,6 @@ trait Level extends {
   }
 
   def fillNullValues() : Unit = {
-
     for (i <- 0 until rows; j <- 0 until columns) {
       if (dungeon(i)(j) == null){
         dungeon(i)(j) = Field(-99)
@@ -57,9 +53,7 @@ trait Level extends {
   def getName: String = name
 
   override def toString: String = dungeon.map(_.mkString).mkString("\n")
-
 }
-
 
 class Level1() extends Level {
 
@@ -67,10 +61,10 @@ class Level1() extends Level {
   override var playerName: String = "Pete"
 //  override var rows: Int = 2
 //  override var columns: Int = 2
-  override var startX: Int = 0
-  override var startY: Int = 1
-  override var winX: Int = 1
-  override var winY: Int = 0
+  override var startX: Int = 4
+  override var startY: Int = 5
+  override var winX: Int = 5
+  override var winY: Int = 4
 
   override val player = PlayerFactory.createPlayer1()
 
@@ -88,11 +82,11 @@ class Level1() extends Level {
   var field22 = Field(1)
 
 
-  dungeon(0)(0) = field11
+  dungeon(4)(4) = field11
   dungeon(winY)(winX) = field12
 
   dungeon(startY)(startX) = field21
-  dungeon(1)(1) = field22
+  dungeon(5)(5) = field22
 
   fillNullValues()
 
@@ -104,10 +98,10 @@ class Level2 extends Level {
   override var playerName: String = "Niklas"
   //override var rows: Int = 5
   //override var columns: Int = 5
-  override var startX: Int = 0
-  override var startY: Int = 4
-  override var winX: Int = 4
-  override var winY: Int = 0
+  override var startX: Int = 1
+  override var startY: Int = 5
+  override var winX: Int = 5
+  override var winY: Int = 1
 
   override val player = PlayerFactory.createPlayer2()
 
@@ -151,35 +145,35 @@ class Level2 extends Level {
   var field54 = Field(1)
   var field55 = Field(1)
 
-  dungeon(0)(0) = field11
-  dungeon(0)(1) = field12
-  dungeon(0)(2) = field13
-  dungeon(0)(3) = field14
+  dungeon(1)(1) = field11
+  dungeon(1)(2) = field12
+  dungeon(1)(3) = field13
+  dungeon(1)(4) = field14
   dungeon(winY)(winX) = field15
 
-  dungeon(1)(0) = field21
-  dungeon(1)(1) = field22
-  dungeon(1)(2) = field23
-  dungeon(1)(3) = field24
-  dungeon(1)(4) = field25
+  dungeon(2)(1) = field21
+  dungeon(2)(2) = field22
+  dungeon(2)(3) = field23
+  dungeon(2)(4) = field24
+  dungeon(2)(5) = field25
 
-  dungeon(2)(0) = field31
-  dungeon(2)(1) = field32
-  dungeon(2)(2) = field33
-  dungeon(2)(3) = field34
-  dungeon(2)(4) = field35
+  dungeon(3)(1) = field31
+  dungeon(3)(2) = field32
+  dungeon(3)(3) = field33
+  dungeon(3)(4) = field34
+  dungeon(3)(5) = field35
 
-  dungeon(3)(0) = field41
-  dungeon(3)(1) = field42
-  dungeon(3)(2) = field43
-  dungeon(3)(3) = field44
-  dungeon(3)(4) = field45
+  dungeon(4)(1) = field41
+  dungeon(4)(2) = field42
+  dungeon(4)(3) = field43
+  dungeon(4)(4) = field44
+  dungeon(4)(5) = field45
 
   dungeon(startY)(startX) = field51
-  dungeon(4)(1) = field52
-  dungeon(4)(2) = field53
-  dungeon(4)(3) = field54
-  dungeon(4)(4) = field55
+  dungeon(5)(2) = field52
+  dungeon(5)(3) = field53
+  dungeon(5)(4) = field54
+  dungeon(5)(5) = field55
 
   fillNullValues()
 }
@@ -190,10 +184,10 @@ class Level3 extends Level {
   override var playerName: String = "Roland"
   //override var rows: Int = 2
   //override var columns: Int = 5
-  override var startX: Int = 0
-  override var startY: Int = 1
-  override var winX: Int = 1
-  override var winY: Int = 1
+  override var startX: Int = 1
+  override var startY: Int = 2
+  override var winX: Int = 2
+  override var winY: Int = 2
 
   override val player = PlayerFactory.createPlayer3()
 
@@ -216,17 +210,17 @@ class Level3 extends Level {
   var field24 = Field(3)
   var field25 = Field(2)
 
-  dungeon(0)(0) = field11
-  dungeon(0)(1) = field12
-  dungeon(0)(2) = field13
-  dungeon(0)(3) = field14
-  dungeon(0)(4) = field15
+  dungeon(1)(1) = field11
+  dungeon(1)(2) = field12
+  dungeon(1)(3) = field13
+  dungeon(1)(4) = field14
+  dungeon(1)(5) = field15
 
   dungeon(startY)(startX) = field21
   dungeon(winY)(winX) = field22
-  dungeon(1)(2) = field23
-  dungeon(1)(3) = field24
-  dungeon(1)(4) = field25
+  dungeon(2)(3) = field23
+  dungeon(2)(4) = field24
+  dungeon(2)(5) = field25
 
   fillNullValues()
 }
