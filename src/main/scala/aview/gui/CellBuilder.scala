@@ -17,10 +17,10 @@ import scala.util.{Failure, Success, Try}
 case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel(1, 1) {
   background = java.awt.Color.BLACK
   visible = true
+  //listenTo(controller)
   var myField: Field = controller.level.dungeon(x)(y)
   var myPicture: BufferedImage = _
   val path = "src/main/scala/aview/gui/Images/"
-  //val path = "Nikis Pfad hier einfügen"
 
   var label: Label = new Label {
     override val size = new Dimension(55,55)
@@ -30,6 +30,7 @@ case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel
   def cell: BorderPanel = new BorderPanel() {
     add(label, BorderPanel.Position.Center)
     background = java.awt.Color.BLACK
+    //cell.border = new LineBorder(java.awt.Color.BLACK)
     listenTo(controller)
     setCellPicture
 
@@ -41,11 +42,8 @@ case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel
   contents += cell
 
   def redrawCell: Unit = {
-    setCellPicture
     contents.clear()
     contents += cell
-    cell.background = java.awt.Color.DARK_GRAY
-    cell.border = new LineBorder(java.awt.Color.BLACK)
     repaint
   }
 

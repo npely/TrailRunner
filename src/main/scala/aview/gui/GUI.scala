@@ -11,13 +11,15 @@ class GUI(controller: Controller) extends MainFrame{
   listenTo(controller)
 
   title = "TrailRunner"
+  minimumSize = new Dimension(550,630)
   preferredSize = new Dimension(550,630)
+  maximumSize = new Dimension(550,630)
   background = java.awt.Color.BLACK
-  centerOnScreen()
 
   contents = mainMenuPanel
 
   visible = true
+  centerOnScreen()
 
   def mainMenuPanel(): BorderPanel = {
     val mainMenuBuilder = new MainMenuBuilder(controller, this)
