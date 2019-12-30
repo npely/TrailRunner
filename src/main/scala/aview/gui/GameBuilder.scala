@@ -16,7 +16,6 @@ class GameBuilder(controller: Controller, gui: GUI) {
     contents += new Menu("File") {
       mnemonic = Key.F
       contents += new MenuItem(Action("Main menu") {
-        //gui.changeToMainMenu()
         controller.changeToMain()
       })
       contents += new MenuItem(Action("Quit") { System.exit(0) })
