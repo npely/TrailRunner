@@ -3,7 +3,7 @@ package controller.controllerComponent.controllerBaseImpl
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import model.levelComponent.levelBaseImpl.Level
-import model.player.Player
+import model.playerComponent.playerBaseImpl.Player
 import model.{AllLevels, Field}
 import util.UndoManager
 

@@ -1,7 +1,7 @@
 package model.levelComponent.levelBaseImpl
 
 import model.Field
-import model.player.PlayerFactory
+import model.playerComponent.playerBaseImpl.PlayerFactory
 
 class Level3 extends Level {
 

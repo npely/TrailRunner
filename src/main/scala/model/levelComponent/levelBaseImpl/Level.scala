@@ -2,7 +2,7 @@ package model.levelComponent.levelBaseImpl
 
 import model.Field
 import model.levelComponent.LevelInterface
-import model.player.PlayerFactory
+import model.playerComponent.playerBaseImpl.PlayerFactory
 
 abstract class Level extends LevelInterface {
 

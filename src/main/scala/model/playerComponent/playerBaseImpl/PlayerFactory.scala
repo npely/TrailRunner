@@ -1,6 +1,9 @@
-package model.player
+package model.playerComponent.playerBaseImpl
 
-object PlayerFactory {
+import model.playerComponent.PlayerFactoryInterface
+
+object PlayerFactory extends PlayerFactoryInterface {
+
   val PLAYER1: Int = 1
   val PLAYER2: Int = 2
   val PLAYER3: Int = 3
@@ -22,36 +25,19 @@ object PlayerFactory {
     override def toString: String = {
       name
     }
-
-    /*def validateName(): Option[String] = try {
-      case Some(name) => name
-      case None => "Name can not be empty"
-    }*/
   }
 
   case class Player2(name: String) extends Player {
     override val id: Int = PLAYER2
-
     override def toString: String = {
       name
     }
-
-    /*def validateName(): Option[String] = try {
-      case Some(name) => name
-      case None => "Name can not be empty"
-    }*/
   }
 
   case class Player3(name: String) extends Player {
     override val id: Int = PLAYER3
-
     override def toString: String = {
       name
     }
-
-    /*def validateName(): Option[String] = try {
-      case Some(name) => name
-      case None => "Name can not be empty"
-    }*/
   }
 }
