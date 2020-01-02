@@ -1,6 +1,6 @@
 package model.levelComponent.levelBaseImpl
 
-import model.Field
+import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
 import model.playerComponent.playerBaseImpl.PlayerFactory
 

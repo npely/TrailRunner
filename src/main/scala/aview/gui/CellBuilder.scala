@@ -9,7 +9,7 @@ import controller.controllerComponent.controllerBaseImpl.Controller
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 import javax.swing.border.LineBorder
-import model.Field
+import model.fieldComponent.fieldBaseImpl.Field
 
 import scala.swing.{BorderPanel, Dimension, GridPanel, Label}
 import scala.util.{Failure, Success, Try}

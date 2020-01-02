@@ -4,7 +4,8 @@ import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelec
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
-import model.{AllLevels, Field}
+import model.AllLevels
+import model.fieldComponent.fieldBaseImpl.Field
 import util.UndoManager
 
 import scala.swing.Publisher

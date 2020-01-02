@@ -1,5 +1,5 @@
 
-import model.Field
+import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.PlayerFactory
 import org.scalatest.{Matchers, WordSpec}

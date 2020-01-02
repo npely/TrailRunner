@@ -1,9 +1,9 @@
 package aview
 
-import model.Field
 import org.scalatest.{Matchers, WordSpec}
 import aview.{LoseState, MainMenuState, RunningState, SelectionState, WinState}
 import controller.controllerComponent.controllerBaseImpl.Controller
+import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.levelBaseImpl.Level1
 import model.playerComponent.playerBaseImpl.PlayerFactory
 

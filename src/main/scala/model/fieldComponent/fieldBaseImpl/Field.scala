@@ -1,6 +1,8 @@
-package model
+package model.fieldComponent.fieldBaseImpl
 
-case class Field(var value : Int) {
+import model.fieldComponent.FieldInterface
+
+case class Field(var value : Int) extends FieldInterface {
 
   def isBroken:Boolean = value == 0
 
@@ -24,5 +26,3 @@ case class Field(var value : Int) {
     " |" + value.toString + "| "
   }
 }
-
-

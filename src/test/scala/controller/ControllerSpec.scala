@@ -1,6 +1,6 @@
 package controller
 
-import model.Field
+import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.levelBaseImpl.Level2
 import model.playerComponent.playerBaseImpl.PlayerFactory
 import org.scalatest.{Matchers, WordSpec}

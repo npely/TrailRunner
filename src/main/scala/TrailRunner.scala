@@ -2,7 +2,7 @@ import aview.TUI
 import aview.gui.GUI
 import controller.controllerComponent.DungeonChanged
 import controller.controllerComponent.controllerBaseImpl.Controller
-import model.Field
+import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.levelBaseImpl.Level1
 import model.playerComponent.playerBaseImpl.PlayerFactory
 
