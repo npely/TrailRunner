@@ -1,9 +1,9 @@
 import aview.TUI
 import aview.gui.GUI
-import controller.Controller
-import de.htwg.se.sudoku.controller.DungeonChanged
+import controller.controllerComponent.DungeonChanged
+import controller.controllerComponent.controllerBaseImpl.Controller
 import model.Field
-import model.maps._
+import model.levelComponent.levelBaseImpl.Level1
 import model.player.PlayerFactory
 
 import scala.io.StdIn.readLine

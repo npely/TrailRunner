@@ -1,8 +1,8 @@
-package controller
+package controller.controllerComponent.controllerBaseImpl
 
-import controller.MoveCommands._
-import de.htwg.se.sudoku.controller._
-import model.maps.Level
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged}
+import controller.controllerComponent.controllerBaseImpl.MoveCommands._
+import model.levelComponent.levelBaseImpl.Level
 import model.player.Player
 import model.{AllLevels, Field}
 import util.UndoManager
@@ -11,7 +11,7 @@ import scala.swing.Publisher
 
 
 
-class Controller(var player: Player, var field: Field, var level: Level) extends Publisher {
+class Controller(var player: Player, var field: Field, var level: Level) extends ControllerInterface with Publisher {
 
   private val undoManager = new UndoManager
 

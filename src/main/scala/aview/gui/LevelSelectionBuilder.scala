@@ -1,7 +1,8 @@
 package aview.gui
 
-import controller.Controller
-import model.maps._
+import controller.controllerComponent.controllerBaseImpl.Controller
+import model.levelComponent._
+import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3}
 
 import scala.swing.event.{ButtonClicked, Key}
 import scala.swing.{Action, BorderPanel, BoxPanel, Button, Dimension, Menu, MenuBar, MenuItem, Orientation}
@@ -17,7 +18,6 @@ class LevelSelectionBuilder(controller: Controller, gui: GUI) {
     contents += new Menu("File") {
       mnemonic = Key.F
       contents += new MenuItem(Action("Main menu") {
-        //gui.changeToMainMenu()
         controller.changeToMain()
       })
       contents += new MenuItem(Action("Quit") { System.exit(0) })

@@ -1,6 +1,6 @@
 
 import model.Field
-import model.maps.Level
+import model.levelComponent.levelBaseImpl.Level
 import model.player.{Player, PlayerFactory}
 import org.scalatest.{Matchers, WordSpec}
 

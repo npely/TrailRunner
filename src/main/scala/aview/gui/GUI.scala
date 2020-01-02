@@ -1,7 +1,7 @@
 package aview.gui
 
-import controller.Controller
-import de.htwg.se.sudoku.controller._
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, DungeonChanged}
+import controller.controllerComponent.controllerBaseImpl.Controller
 
 import scala.swing._
 

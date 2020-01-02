@@ -1,5 +1,6 @@
-package model.maps
+package model.levelComponent
 
+import model.levelComponent.levelBaseImpl.{Level1, Level2, Level3}
 import org.scalatest.{Matchers, WordSpec}
 
 class LevelSpec extends WordSpec with Matchers {

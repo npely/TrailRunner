@@ -1,8 +1,8 @@
 package aview
 
-import controller.Controller
-import de.htwg.se.sudoku.controller._
-import model.maps.{Level, Level1, Level2, Level3}
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, DungeonChanged}
+import controller.controllerComponent.controllerBaseImpl.Controller
+import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3}
 
 import scala.io.{BufferedSource, Source}
 import scala.swing.Reactor

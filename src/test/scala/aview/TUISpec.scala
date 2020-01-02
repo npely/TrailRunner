@@ -1,11 +1,11 @@
 package aview
 
-import controller.Controller
 import model.Field
-import model.maps.Level1
 import model.player.{Player, PlayerFactory}
 import org.scalatest.{Matchers, WordSpec}
-import aview.{MainMenuState, SelectionState, LoseState, WinState, RunningState}
+import aview.{LoseState, MainMenuState, RunningState, SelectionState, WinState}
+import controller.controllerComponent.controllerBaseImpl.Controller
+import model.levelComponent.levelBaseImpl.Level1
 
 class TUISpec extends WordSpec with Matchers{
   "Tui" when {

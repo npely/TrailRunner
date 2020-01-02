@@ -2,7 +2,7 @@ package aview.gui
 
 import java.awt.Dimension
 
-import controller.Controller
+import controller.controllerComponent.controllerBaseImpl.Controller
 
 import scala.swing.event.ButtonClicked
 import scala.swing.{BorderPanel, BoxPanel, Button, Dimension, Orientation}

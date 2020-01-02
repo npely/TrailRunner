@@ -1,10 +1,10 @@
-package model.maps
+package model.levelComponent.levelBaseImpl
 
 import model.Field
-import model.player.{Player, PlayerFactory}
-import model.player.PlayerFactory.{Player1, Player2}
+import model.levelComponent.LevelInterface
+import model.player.PlayerFactory
 
-trait Level extends {
+abstract class Level extends LevelInterface {
 
   var name: String
   var playerName: String
@@ -55,12 +55,10 @@ trait Level extends {
   override def toString: String = dungeon.map(_.mkString).mkString("\n")
 }
 
-class Level1() extends Level {
+/*class Level1() extends Level {
 
   override var name: String = "Level1"
   override var playerName: String = "Pete"
-//  override var rows: Int = 2
-//  override var columns: Int = 2
   override var startX: Int = 4
   override var startY: Int = 5
   override var winX: Int = 5
@@ -90,14 +88,12 @@ class Level1() extends Level {
 
   fillNullValues()
 
-}
+}*/
 
-class Level2 extends Level {
+/*class Level2 extends Level {
 
   override var name: String = "Level2"
   override var playerName: String = "Niklas"
-  //override var rows: Int = 5
-  //override var columns: Int = 5
   override var startX: Int = 1
   override var startY: Int = 5
   override var winX: Int = 5
@@ -176,14 +172,12 @@ class Level2 extends Level {
   dungeon(5)(5) = field55
 
   fillNullValues()
-}
+}*/
 
-class Level3 extends Level {
+/*class Level3 extends Level {
 
   override var name: String = "Level3"
   override var playerName: String = "Roland"
-  //override var rows: Int = 2
-  //override var columns: Int = 5
   override var startX: Int = 1
   override var startY: Int = 2
   override var winX: Int = 2
@@ -223,6 +217,6 @@ class Level3 extends Level {
   dungeon(2)(5) = field25
 
   fillNullValues()
-}
+}*/
 
 

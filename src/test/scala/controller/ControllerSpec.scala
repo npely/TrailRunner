@@ -1,7 +1,7 @@
 package controller
 
 import model.Field
-import model.maps.Level2
+import model.levelComponent.levelBaseImpl.Level2
 import model.player.PlayerFactory
 import org.scalatest.{Matchers, WordSpec}
 import util.Observer
