@@ -1,5 +1,6 @@
 package controller.controllerComponent.controllerBaseImpl
 
+import com.google.inject.Inject
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import model.levelComponent.levelBaseImpl.Level
@@ -13,7 +14,7 @@ import scala.swing.Publisher
 
 
 
-class Controller(var player: Player, var field: Field, var level: Level) extends ControllerInterface with Publisher {
+class Controller @Inject() (var player: Player, var field: Field, var level: Level) extends ControllerInterface with Publisher {
 
   private val undoManager = new UndoManager
 
