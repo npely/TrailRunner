@@ -6,6 +6,7 @@ import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
 import model.AllLevels
 import model.fieldComponent.fieldBaseImpl.Field
+import model.playerComponent.PlayerInterface
 import util.UndoManager
 
 import scala.swing.Publisher
