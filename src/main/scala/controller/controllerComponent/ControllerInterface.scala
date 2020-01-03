@@ -1,7 +1,9 @@
 package controller.controllerComponent
 import model.levelComponent.levelBaseImpl.Level
 
-trait ControllerInterface {
+import scala.swing.Publisher
+
+trait ControllerInterface extends Publisher {
 
   def playerToString: String
   def playerToGameString: String
