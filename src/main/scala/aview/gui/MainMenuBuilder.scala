@@ -13,7 +13,6 @@ class MainMenuBuilder(controller: Controller, gui: GUI) {
   var newGameBtn = new Button("New Game") {
     reactions += {
       case e: ButtonClicked => {
-        //gui.changeToLevelSelection()
         controller.changeToSelection()
       }
     }
