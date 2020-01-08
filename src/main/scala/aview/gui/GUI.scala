@@ -1,6 +1,6 @@
 package aview.gui
 
-import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, DungeonChanged}
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged}
 import controller.controllerComponent.controllerBaseImpl.Controller
 
 import scala.swing._
