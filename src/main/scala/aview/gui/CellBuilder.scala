@@ -8,7 +8,6 @@ import controller.Controller
 import de.htwg.se.sudoku.controller.DungeonChanged
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
-import javax.swing.border.LineBorder
 import model.Field
 
 import scala.swing.{BorderPanel, Dimension, GridPanel, Label}
@@ -20,7 +19,9 @@ case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel
   //listenTo(controller)
   var myField: Field = controller.level.dungeon(x)(y)
   var myPicture: BufferedImage = _
-  val path = "src/main/scala/aview/gui/Images/"
+  var actualValue: Int = _
+  var actualPlayerStatus: Boolean = _
+  val path = "src/main/scala/aview/gui/images/"
 
   var label: Label = new Label {
     override val size = new Dimension(55,55)
@@ -35,20 +36,24 @@ case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel
     setCellPicture
 
     reactions += {
-      case event: DungeonChanged => redrawCell
+      case event: DungeonChanged => {
+        if (myField.value != actualValue || actualPlayerStatus != myField.isPlayerOnField){
+          redrawCell
+        }
+      }
     }
   }
 
   contents += cell
 
-  def redrawCell: Unit = {
-    contents.clear()
-    contents += cell
+  def redrawCell(): Unit = {
+    setCellPicture()
     repaint
   }
 
-  def setCellPicture: Unit = {
+  def setCellPicture(): Unit = {
     myField.value match {
+      case -99 => myPicture = ImageIO.read(new File(path + "Wall.png"))
       case 0 => {
         if(myField.isPlayerOnField){
           myPicture = ImageIO.read(new File(path + "Ground_0_P.png"))
@@ -99,6 +104,8 @@ case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel
       }
       case _ => myPicture = ImageIO.read(new File(path + "Wall.png"))
     }
+    actualValue = myField.value
+    actualPlayerStatus = myField.isPlayerOnField
     Try(label.icon = new ImageIcon(myPicture.getScaledInstance(label.size.width, label.size.height, Image.SCALE_SMOOTH)))
     match {
       case Success(v) =>

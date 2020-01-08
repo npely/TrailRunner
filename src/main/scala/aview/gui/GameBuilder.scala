@@ -25,10 +25,8 @@ class GameBuilder(controller: Controller, gui: GUI) {
     contents += new Menu("Edit") {
       mnemonic = Key.E
       contents += new MenuItem(Action("Undo") {
-        mnemonic = Key.Z
         controller.undo })
       contents += new MenuItem(Action("Redo") {
-        mnemonic = Key.Y
         controller.redo })
     }
   }
@@ -72,10 +70,24 @@ class GameBuilder(controller: Controller, gui: GUI) {
     }
   }
 
+  var undoBtn = new Button("Undo") {
+    mnemonic = Key.Q
+    reactions += {
+      case e: ButtonClicked => controller.undo
+    }
+  }
+
+  var redoBtn = new Button("Redo") {
+    mnemonic = Key.E
+    reactions += {
+      case e: ButtonClicked => controller.redo
+    }
+  }
+
   def controlPanel(): FlowPanel = new FlowPanel() {
     preferredSize = new Dimension(800,50)
     background = java.awt.Color.DARK_GRAY
-    contents ++= List(upBtn, downBtn, leftBtn, rightBtn)
+    contents ++= List(upBtn, downBtn, leftBtn, rightBtn, undoBtn, redoBtn)
   }
 
   def getPanel(): BorderPanel = {

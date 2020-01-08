@@ -1,7 +1,11 @@
 package aview.gui
 
+import java.io.File
+
 import controller.Controller
 import de.htwg.se.sudoku.controller._
+import javafx.scene.media.AudioClip
+import javax.imageio.ImageIO
 
 import scala.swing._
 
@@ -11,6 +15,7 @@ class GUI(controller: Controller) extends MainFrame{
   listenTo(controller)
 
   title = "TrailRunner"
+  iconImage = ImageIO.read(new File("src/main/scala/aview/gui/images/TrailRunnerLogo2.png"))
   minimumSize = new Dimension(550,630)
   preferredSize = new Dimension(550,630)
   maximumSize = new Dimension(550,630)
