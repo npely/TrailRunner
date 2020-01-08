@@ -8,12 +8,14 @@ trait Level extends {
 
   var name: String
   var playerName: String
-  var rows: Int = 10
-  var columns: Int = 10
+  val rows: Int = 10
+  val columns: Int = 10
   var startX: Int
   var startY: Int
   var winX: Int
   var winY: Int
+  val fieldDoor: Field = Field(-10)
+  val fieldDoorReversed: Field = Field(-20)
 
   val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
   val player = PlayerFactory.createPlayer1()
@@ -21,7 +23,7 @@ trait Level extends {
   def sum() : Int = {
     var sum = 0
     for (i <- 0 until rows; j <- 0 until columns) {
-      if (dungeon(i)(j).value != -99){
+      if (dungeon(i)(j).value >= 0){
         sum += dungeon(i)(j).value
       }
     }
@@ -84,6 +86,7 @@ class Level1() extends Level {
 
   dungeon(4)(4) = field11
   dungeon(winY)(winX) = field12
+  dungeon(winY - 1)(winX) = fieldDoor
 
   dungeon(startY)(startX) = field21
   dungeon(5)(5) = field22
@@ -150,6 +153,7 @@ class Level2 extends Level {
   dungeon(1)(3) = field13
   dungeon(1)(4) = field14
   dungeon(winY)(winX) = field15
+  dungeon(winY - 1)(winX) = fieldDoor
 
   dungeon(2)(1) = field21
   dungeon(2)(2) = field22
@@ -218,6 +222,7 @@ class Level3 extends Level {
 
   dungeon(startY)(startX) = field21
   dungeon(winY)(winX) = field22
+  dungeon(winY + 1)(winX) = fieldDoorReversed
   dungeon(2)(3) = field23
   dungeon(2)(4) = field24
   dungeon(2)(5) = field25

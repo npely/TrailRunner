@@ -18,6 +18,9 @@ case class Field(var value : Int) {
     if (value == -99){
       return " |X| "
     }
+    if (value == -10){
+      return " |T| "
+    }
     if (isPlayerOnField){
       return " |P| "
     }

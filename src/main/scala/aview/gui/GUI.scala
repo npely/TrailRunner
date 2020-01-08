@@ -4,7 +4,6 @@ import java.io.File
 
 import controller.Controller
 import de.htwg.se.sudoku.controller._
-import javafx.scene.media.AudioClip
 import javax.imageio.ImageIO
 
 import scala.swing._
@@ -15,13 +14,13 @@ class GUI(controller: Controller) extends MainFrame{
   listenTo(controller)
 
   title = "TrailRunner"
-  iconImage = ImageIO.read(new File("src/main/scala/aview/gui/images/TrailRunnerLogo2.png"))
+  iconImage = ImageIO.read(new File("src/main/scala/aview/gui/images/TR.png"))
   minimumSize = new Dimension(550,630)
   preferredSize = new Dimension(550,630)
   maximumSize = new Dimension(550,630)
   background = java.awt.Color.BLACK
 
-  contents = mainMenuPanel
+  contents = mainMenuPanel()
 
   visible = true
   centerOnScreen()
@@ -54,19 +53,11 @@ class GUI(controller: Controller) extends MainFrame{
   }
 
   reactions += {
-    case event: DungeonChanged => //redraw
-    case event: ChangeToGame => {
-      changeToRunningGame()
-    }
-    case event: ChangeToSelection => {
-      changeToLevelSelection()
-    }
-    case event: ChangeToMain => {
-      changeToMainMenu()
-    }
+    //case _: DungeonChanged => //redraw
+    case _: ChangeToGame => changeToRunningGame()
+    case _: ChangeToSelection => changeToLevelSelection()
+    case _: ChangeToMain => changeToMainMenu()
+    //case _: OpenDoor => //redraw
   }
 
-  def redraw = {
-    repaint
-  }
 }

@@ -84,6 +84,10 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
     publish(new DungeonChanged)
   }
 
+  def openDoor: Unit = {
+    publish(new OpenDoor)
+  }
+
   def fieldToString: String = field.toString
 
   def levelToString: String = level.toString
