@@ -28,7 +28,6 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
   def cell: BorderPanel = new BorderPanel() {
     add(label, BorderPanel.Position.Center)
     background = java.awt.Color.BLACK
-    //cell.border = new LineBorder(java.awt.Color.BLACK)
     listenTo(controller)
     setCellPicture
 
