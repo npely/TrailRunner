@@ -40,6 +40,16 @@ class GUI(controller: Controller) extends MainFrame{
     gameBuilder.getPanel()
   }
 
+  def losePanel(): BorderPanel = {
+    val mainMenuBuilder = new MainMenuBuilder(controller, this)
+    mainMenuBuilder.getPanel()
+  }
+
+  def winPanel(): BorderPanel = {
+    val mainMenuBuilder = new MainMenuBuilder(controller, this)
+    mainMenuBuilder.getPanel()
+  }
+
   def changeToLevelSelection(): Unit = {
     contents = levelSelectionPanel()
   }
@@ -52,11 +62,21 @@ class GUI(controller: Controller) extends MainFrame{
     contents = gamePanel()
   }
 
+  def lose(): Unit = {
+    contents = losePanel()
+  }
+
+  def win(): Unit = {
+    contents = winPanel()
+  }
+
   reactions += {
     //case _: DungeonChanged => //redraw
     case _: ChangeToGame => changeToRunningGame()
     case _: ChangeToSelection => changeToLevelSelection()
     case _: ChangeToMain => changeToMainMenu()
+    case _: Lose => changeToMainMenu()
+    case _: Win => changeToMainMenu()
     //case _: OpenDoor => //redraw
   }
 

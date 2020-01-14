@@ -163,7 +163,7 @@ class TUI(controller: Controller) extends Reactor {
    * @return tuiMode
    */
   def evaluateWin(inputStr: String): Int = {
-    changeState(new WinState(this))
+    controller.win()
     evaluateEndOfGame(inputStr)
   }
 
@@ -174,7 +174,7 @@ class TUI(controller: Controller) extends Reactor {
    */
     //TODO:
   def evaluateLose(inputStr: String): Int = {
-      changeState(new LoseState(this))
+      controller.lose()
       evaluateEndOfGame(inputStr)
   }
 
@@ -185,7 +185,6 @@ class TUI(controller: Controller) extends Reactor {
   def evaluateEndOfGame(inputStr: String): Int = {
     val input = inputStr
     if (input.equals("1")) {
-      changeState(new MainMenuState(this))
       controller.changeToMain()
     } else if (input.equals("2")) {
       tuiMode = TUIMODE_QUIT
@@ -282,18 +281,21 @@ class TUI(controller: Controller) extends Reactor {
 
   reactions += {
     case event: DungeonChanged => updateScreen()
-    case event: ChangeToGame => {
+    case event: ChangeToGame =>
       changeState(new RunningState(this))
       updateScreen()
-    }
-    case event: ChangeToSelection => {
+    case event: ChangeToSelection =>
       changeState(new SelectionState(this))
       updateScreen()
-    }
-    case event: ChangeToMain => {
+    case event: ChangeToMain =>
       changeState(new MainMenuState(this))
       updateScreen()
-    }
+    case event: Lose =>
+      changeState(new LoseState(this))
+      updateScreen()
+    case event: Win =>
+      changeState(new WinState(this))
+      updateScreen()
   }
 }
 

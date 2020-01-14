@@ -33,6 +33,14 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
     publish(new ChangeToMain)
   }
 
+  def lose(): Unit = {
+    publish(new Lose)
+  }
+
+  def win(): Unit = {
+    publish(new Win)
+  }
+
   def playerMoveUp(): Unit = {
     undoManager.doStep(new MoveUpCommand(this))
     publish(new DungeonChanged)
