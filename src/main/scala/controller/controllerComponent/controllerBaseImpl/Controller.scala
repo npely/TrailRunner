@@ -1,17 +1,26 @@
-package controller
+package controller.controllerComponent.controllerBaseImpl
 
-import controller.MoveCommands._
-import de.htwg.se.sudoku.controller._
-import model.maps.Level
-import model.player.Player
-import model.{AllLevels, Field}
+import com.google.inject.Inject
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, OpenDoor, Win}
+import controller.controllerComponent.controllerBaseImpl.MoveCommands._
+import model.levelComponent.levelBaseImpl.{Level, Level1}
+import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
+import model.AllLevels
+import model.fieldComponent.FieldInterface
+import model.fieldComponent.fieldBaseImpl.Field
+import model.levelComponent.LevelInterface
+import model.playerComponent.PlayerInterface
 import util.UndoManager
 
 import scala.swing.Publisher
 
+class Controller @Inject() () extends ControllerInterface with Publisher {
 
+  var level: LevelInterface = new Level1
 
-class Controller(var player: Player, var field: Field, var level: Level) extends Publisher {
+  var field: FieldInterface = Field(0)
+
+  var player: PlayerInterface = PlayerFactory.createPlayer1()
 
   private val undoManager = new UndoManager
 
@@ -106,7 +115,7 @@ class Controller(var player: Player, var field: Field, var level: Level) extends
 
   def levelGetName(): String = level.getName
 
-  def showLevel(level: Level): String = AllLevels.showLevel(level)
+  def showLevel(level: LevelInterface): String = AllLevels.showLevel(level)
 
-  def getImplementedLevels: List[Level] = AllLevels.getImplementedList()
+  def getImplementedLevels: List[LevelInterface] = AllLevels.getImplementedList()
 }

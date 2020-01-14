@@ -2,12 +2,13 @@ package aview.gui
 
 import java.awt.Dimension
 
-import controller.Controller
+import controller.controllerComponent.ControllerInterface
+import controller.controllerComponent.controllerBaseImpl.Controller
 
 import scala.swing.event.ButtonClicked
 import scala.swing.{BorderPanel, BoxPanel, Button, Dimension, Orientation}
 
-class MainMenuBuilder(controller: Controller, gui: GUI) {
+class MainMenuBuilder(controller: ControllerInterface, gui: GUI) {
   var selectedListIndex = 1
 
   var newGameBtn = new Button("New Game") {

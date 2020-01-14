@@ -4,20 +4,19 @@ import java.awt.Image
 import java.awt.image.BufferedImage
 import java.io.File
 
-import controller.Controller
-import de.htwg.se.sudoku.controller._
+import controller.controllerComponent.{ControllerInterface, DungeonChanged, OpenDoor}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
-import model.Field
+import model.fieldComponent.FieldInterface
 
 import scala.swing.{BorderPanel, Dimension, GridPanel, Label}
 import scala.util.{Failure, Success, Try}
 
-case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel(1, 1) {
+case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends GridPanel(1, 1) {
   background = java.awt.Color.BLACK
   visible = true
   //listenTo(controller)
-  var myField: Field = controller.level.dungeon(x)(y)
+  var myField: FieldInterface = controller.level.dungeon(x)(y)
   var myPicture: BufferedImage = _
   var actualValue: Int = _
   var actualPlayerStatus: Boolean = _
@@ -32,7 +31,6 @@ case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel
   def cell: BorderPanel = new BorderPanel() {
     add(label, BorderPanel.Position.Center)
     background = java.awt.Color.BLACK
-    //cell.border = new LineBorder(java.awt.Color.BLACK)
     listenTo(controller)
     setCellPicture()
 

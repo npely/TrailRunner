@@ -1,7 +1,7 @@
 
-import model.Field
-import model.maps.Level
-import model.player.{Player, PlayerFactory}
+/*import model.fieldComponent.fieldBaseImpl.Field
+import model.levelComponent.levelBaseImpl.Level
+import model.playerComponent.playerBaseImpl.PlayerFactory
 import org.scalatest.{Matchers, WordSpec}
 
 class PlayerSpec extends WordSpec with Matchers {
@@ -63,4 +63,4 @@ class PlayerSpec extends WordSpec with Matchers {
       }
     }
   }
-}
+}*/

@@ -1,9 +1,8 @@
-package model.player
+package model.playerComponent.playerBaseImpl
 
-import scala.collection.mutable.ListBuffer
-import scala.util.Success
+import model.playerComponent.PlayerInterface
 
-trait Player {
+trait Player extends PlayerInterface {
 
   val id: Int
 
@@ -11,7 +10,6 @@ trait Player {
 
   var xPos: Int = 0
   var yPos: Int = 0
-  //var inventory: List[Option[String]]
 
   def moveRight(): Unit = {
     xPos += 1
@@ -29,3 +27,5 @@ trait Player {
     yPos += 1
   }
 }
+
+

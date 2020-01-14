@@ -1,8 +1,7 @@
 package aview
 
-import controller.Controller
-import de.htwg.se.sudoku.controller._
-import model.maps.{Level, Level1, Level2, Level3}
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
+import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3}
 
 import scala.io.{BufferedSource, Source}
 import scala.swing.Reactor
@@ -13,9 +12,10 @@ import scala.util.{Failure, Success, Try}
  * This class makes the game playable with the console
  * @param controller for communication with model
  */
-class TUI(controller: Controller) extends Reactor {
+class TUI(controller: ControllerInterface) extends Reactor {
 
   listenTo(controller)
+
   var state: State = new MainMenuState(this)
 
   val greetings: String = "Welcome to TrailRunner!"
@@ -61,7 +61,7 @@ class TUI(controller: Controller) extends Reactor {
     if (input.equals("1")) {
       //changeState(new SelectionState(this))
       controller.changeToSelection()
-    } else if (input .equals("2")) {
+    } else if (input.equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
     else {
@@ -213,6 +213,7 @@ class TUI(controller: Controller) extends Reactor {
       output = output + "'" + index.toString + "': " + x + "\n"
       index += 1
     }
+    output += "\n"
     output
   }
 
@@ -227,6 +228,7 @@ class TUI(controller: Controller) extends Reactor {
       output = output + "'" + index.toString + "': " + controller.showLevel(x) + "\n"
       index += 1
     }
+    output += "\n"
     output
   }
 
@@ -245,7 +247,7 @@ class TUI(controller: Controller) extends Reactor {
    * @return output
    */
   def buildOutputStringForWin(): String = {
-    output = "\nCongratulations, you've found your way out of the dungeon!\n"
+    output = "\nCongratulations, you've found your way out of the dungeon!\n\n"
     buildOutputStringForEndGame()
   }
 
@@ -264,6 +266,7 @@ class TUI(controller: Controller) extends Reactor {
       output += "'" + index.toString + "': " + x + "\n"
       index += 1
     }
+    output += "\n"
     output
   }
 
@@ -298,5 +301,4 @@ class TUI(controller: Controller) extends Reactor {
       updateScreen()
   }
 }
-
 

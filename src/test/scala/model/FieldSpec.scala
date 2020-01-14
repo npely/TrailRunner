@@ -1,5 +1,5 @@
+import model.fieldComponent.fieldBaseImpl.Field
 import org.scalatest.{Matchers, WordSpec}
-import model.Field
 
 class FieldSpec extends WordSpec with Matchers {
   "A Field" when {

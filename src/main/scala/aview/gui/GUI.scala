@@ -2,14 +2,13 @@ package aview.gui
 
 import java.io.File
 
-import controller.Controller
-import de.htwg.se.sudoku.controller._
 import javax.imageio.ImageIO
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
 
 import scala.swing._
 
 
-class GUI(controller: Controller) extends MainFrame{
+class GUI(controller: ControllerInterface) extends MainFrame{
 
   listenTo(controller)
 

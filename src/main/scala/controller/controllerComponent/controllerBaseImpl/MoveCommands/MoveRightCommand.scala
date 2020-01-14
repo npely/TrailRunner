@@ -1,27 +1,27 @@
-package controller.MoveCommands
+package controller.controllerComponent.controllerBaseImpl.MoveCommands
 
-import controller.Controller
+import controller.controllerComponent.controllerBaseImpl.Controller
 import util.Command
 
-class MoveDownCommand(controller: Controller) extends Command {
+class MoveRightCommand(controller: Controller) extends Command {
 
   override def doStep: Unit = {
-      controller.field.isPlayerOnField = false
-      controller.player.moveDown()
-      controller.playerStandsOnField()
+    controller.field.isPlayerOnField = false
+    controller.player.moveRight()
+    controller.playerStandsOnField()
   }
 
   override def undoStep: Unit = {
     controller.field.isPlayerOnField = false
     controller.increaseFieldValueByOne
-    controller.player.moveUp()
+    controller.player.moveLeft()
     controller.field = controller.level.dungeon(controller.player.yPos)(controller.player.xPos)
     controller.field.isPlayerOnField = true
   }
 
   override def redoStep: Unit = {
     controller.field.isPlayerOnField = false
-    controller.player.moveDown()
+    controller.player.moveRight()
     controller.playerStandsOnField()
   }
 }
