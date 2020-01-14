@@ -1,7 +1,9 @@
 package model.levelComponent.levelBaseImpl
 
+import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
+import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.PlayerFactory
 
 abstract class Level extends LevelInterface {
@@ -15,8 +17,8 @@ abstract class Level extends LevelInterface {
   var winX: Int
   var winY: Int
 
-  val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
-  val player = PlayerFactory.createPlayer1()
+  val dungeon: Array[Array[FieldInterface]] = Array.ofDim[FieldInterface](rows, columns)
+  val player: PlayerInterface = PlayerFactory.createPlayer1()
 
   def sum() : Int = {
     var sum = 0

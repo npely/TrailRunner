@@ -5,20 +5,18 @@ import java.awt.image.BufferedImage
 import java.io.File
 
 import controller.controllerComponent.{ControllerInterface, DungeonChanged}
-import controller.controllerComponent.controllerBaseImpl.Controller
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
-import javax.swing.border.LineBorder
-import model.fieldComponent.fieldBaseImpl.Field
+import model.fieldComponent.FieldInterface
 
 import scala.swing.{BorderPanel, Dimension, GridPanel, Label}
 import scala.util.{Failure, Success, Try}
 
-case class CellBuilder(x: Int, y: Int, controller: Controller) extends GridPanel(1, 1) {
+case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends GridPanel(1, 1) {
   background = java.awt.Color.BLACK
   visible = true
   //listenTo(controller)
-  var myField: Field = controller.level.dungeon(x)(y)
+  var myField: FieldInterface = controller.level.dungeon(x)(y)
   var myPicture: BufferedImage = _
   val path = "src/main/scala/aview/gui/Images/"
 

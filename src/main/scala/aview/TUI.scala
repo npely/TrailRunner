@@ -1,6 +1,6 @@
 package aview
 
-import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, DungeonChanged}
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged}
 import controller.controllerComponent.controllerBaseImpl.Controller
 import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3}
 
@@ -13,7 +13,7 @@ import scala.util.{Failure, Success, Try}
  * This class makes the game playable with the console
  * @param controller for communication with model
  */
-class TUI(controller: Controller) extends Reactor {
+class TUI(controller: ControllerInterface) extends Reactor {
 
   listenTo(controller)
   var state: State = new MainMenuState(this)

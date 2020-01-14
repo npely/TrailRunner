@@ -3,10 +3,12 @@ package controller.controllerComponent.controllerBaseImpl
 import com.google.inject.Inject
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
-import model.levelComponent.levelBaseImpl.Level
-import model.playerComponent.playerBaseImpl.Player
+import model.levelComponent.levelBaseImpl.{Level, Level1}
+import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
 import model.AllLevels
+import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
+import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import util.UndoManager
 
@@ -14,7 +16,14 @@ import scala.swing.Publisher
 
 
 
-class Controller @Inject() (var player: Player, var field: Field, var level: Level) extends ControllerInterface with Publisher {
+//class Controller @Inject() (var player: PlayerInterface, var field: FieldInterface, var level: LevelInterface) extends ControllerInterface with Publisher {
+class Controller @Inject() () extends ControllerInterface with Publisher {
+
+  var level: LevelInterface = new Level1
+
+  var field: FieldInterface = Field(0)
+
+  var player: PlayerInterface = PlayerFactory.createPlayer1()
 
   private val undoManager = new UndoManager
 
@@ -97,7 +106,7 @@ class Controller @Inject() (var player: Player, var field: Field, var level: Lev
 
   def levelGetName(): String = level.getName
 
-  def showLevel(level: Level): String = AllLevels.showLevel(level)
+  def showLevel(level: LevelInterface): String = AllLevels.showLevel(level)
 
-  def getImplementedLevels: List[Level] = AllLevels.getImplementedList()
+  def getImplementedLevels: List[LevelInterface] = AllLevels.getImplementedList()
 }

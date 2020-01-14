@@ -1,8 +1,11 @@
 package model.fieldComponent.fieldBaseImpl
-
+import com.google.inject.Inject
+import com.google.inject.name.Named
 import model.fieldComponent.FieldInterface
 
-case class Field(var value : Int) extends FieldInterface {
+case class Field @Inject() (@Named("Zero") valu: Int) extends FieldInterface {
+
+  var value = valu
 
   def isBroken:Boolean = value == 0
 

@@ -1,5 +1,5 @@
 
-import model.fieldComponent.fieldBaseImpl.Field
+/*import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.PlayerFactory
 import org.scalatest.{Matchers, WordSpec}
@@ -63,4 +63,4 @@ class PlayerSpec extends WordSpec with Matchers {
       }
     }
   }
-}
+}*/

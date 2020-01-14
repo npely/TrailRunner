@@ -1,9 +1,12 @@
 package model.levelComponent.levelBaseImpl
 
+import com.google.inject.Inject
+import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
+import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.PlayerFactory
 
-class Level2 extends Level {
+class Level2 @Inject() extends Level {
 
   override var name: String = "Level2"
   override var playerName: String = "Niklas"
@@ -12,9 +15,9 @@ class Level2 extends Level {
   override var winX: Int = 5
   override var winY: Int = 1
 
-  override val player = PlayerFactory.createPlayer2()
+  override val player: PlayerInterface = PlayerFactory.createPlayer2()
 
-  override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
+  override val dungeon: Array[Array[FieldInterface]] = Array.ofDim[FieldInterface](rows, columns)
 
   player.xPos = startX
   player.yPos = startY

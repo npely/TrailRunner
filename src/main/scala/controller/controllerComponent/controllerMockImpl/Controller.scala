@@ -2,12 +2,22 @@ package controller.controllerComponent.controllerMockImpl
 
 import controller.controllerComponent.ControllerInterface
 import model.AllLevels
+import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
-import model.levelComponent.levelBaseImpl.Level
+import model.levelComponent.LevelInterface
+import model.levelComponent.levelBaseImpl.{Level, Level1}
 import model.playerComponent.PlayerInterface
-import model.playerComponent.playerBaseImpl.Player
+import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
 
-class Controller(var player: PlayerInterface, var field: Field, var level: Level) extends ControllerInterface {
+import scala.swing.Publisher
+
+class Controller() extends ControllerInterface with Publisher {
+
+  var level: LevelInterface = new Level1
+
+  var field: FieldInterface = Field(0)
+
+  var player: PlayerInterface = PlayerFactory.createPlayer1()
 
   override def playerToString: String = player.toString
 
@@ -41,7 +51,7 @@ class Controller(var player: PlayerInterface, var field: Field, var level: Level
 
   override def redo: Unit = {}
 
-  override def fieldToString: String = Field.toString
+  override def fieldToString: String = field.toString
 
   override def levelToString: String = level.toString
 
@@ -51,7 +61,7 @@ class Controller(var player: PlayerInterface, var field: Field, var level: Level
 
   override def levelGetName(): String = level.getName
 
-  override def showLevel(level: Level): String = AllLevels.showLevel(level)
+  override def showLevel(level: LevelInterface): String = AllLevels.showLevel(level)
 
-  override def getImplementedLevels: List[Level] = List(level)
+  override def getImplementedLevels: List[LevelInterface] = List(level)
 }

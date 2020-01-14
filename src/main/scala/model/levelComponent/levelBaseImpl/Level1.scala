@@ -1,20 +1,23 @@
 package model.levelComponent.levelBaseImpl
 
+import javax.inject.Inject
+import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
+import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.PlayerFactory
 
-class Level1 extends Level {
+class Level1 @Inject() extends Level {
 
-  override var name: String = "Level1"
-  override var playerName: String = "Pete"
-  override var startX: Int = 4
-  override var startY: Int = 5
-  override var winX: Int = 5
-  override var winY: Int = 4
+  var name: String = "Level1"
+  var playerName: String = "Pete"
+  var startX: Int = 4
+  var startY: Int = 5
+  var winX: Int = 5
+  var winY: Int = 4
 
-  override val player = PlayerFactory.createPlayer1()
+  override val player: PlayerInterface = PlayerFactory.createPlayer1()
 
-  override val dungeon: Array[Array[Field]] = Array.ofDim[Field](rows, columns)
+  override val dungeon: Array[Array[FieldInterface]] = Array.ofDim[FieldInterface](rows, columns)
 
   player.xPos = startX
   player.yPos = startY
@@ -36,5 +39,4 @@ class Level1 extends Level {
   dungeon(5)(5) = field22
 
   fillNullValues()
-
 }

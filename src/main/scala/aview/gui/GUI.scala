@@ -6,7 +6,7 @@ import controller.controllerComponent.controllerBaseImpl.Controller
 import scala.swing._
 
 
-class GUI(controller: Controller) extends MainFrame{
+class GUI(controller: ControllerInterface) extends MainFrame{
 
   listenTo(controller)
 

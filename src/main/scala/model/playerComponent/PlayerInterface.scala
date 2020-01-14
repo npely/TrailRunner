@@ -8,10 +8,12 @@ trait PlayerInterface {
   def moveLeft(): Unit
   def moveUp(): Unit
   def moveDown(): Unit
+  var xPos: Int
+  var yPos: Int
 }
 
 trait PlayerFactoryInterface {
-  def createPlayer1(): Player
-  def createPlayer2(): Player
-  def createPlayer3(): Player
+  def createPlayer1(): PlayerInterface
+  def createPlayer2(): PlayerInterface
+  def createPlayer3(): PlayerInterface
 }

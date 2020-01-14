@@ -1,10 +1,15 @@
 package controller.controllerComponent
+import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl.Level
+import model.playerComponent.PlayerInterface
+import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
 
 import scala.swing.Publisher
 
 trait ControllerInterface extends Publisher {
 
+  var player: PlayerInterface
+  var level: LevelInterface
   def playerToString: String
   def playerToGameString: String
   def changeToSelection(): Unit
@@ -26,8 +31,8 @@ trait ControllerInterface extends Publisher {
   def levelWin(): Boolean
   def levelLose(): Boolean
   def levelGetName(): String
-  def showLevel(level: Level): String
-  def getImplementedLevels: List[Level]
+  def showLevel(level: LevelInterface): String
+  def getImplementedLevels: List[LevelInterface]
 
 }
 
