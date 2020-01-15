@@ -70,4 +70,8 @@ class Controller() extends ControllerInterface with Publisher {
   override def win(): Unit = {}
 
   override def openDoor(): Unit = {}
+
+  override def save: Unit = {}
+
+  override def load: Unit = {}
 }

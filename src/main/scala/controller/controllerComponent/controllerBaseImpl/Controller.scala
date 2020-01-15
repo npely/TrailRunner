@@ -1,6 +1,6 @@
 package controller.controllerComponent.controllerBaseImpl
 
-import com.google.inject.Inject
+import com.google.inject.{Guice, Inject}
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, OpenDoor, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import model.levelComponent.levelBaseImpl.{Level, Level1}
@@ -11,10 +11,17 @@ import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import util.UndoManager
+import model.fileIOComponent.FileIOInterface
+import src.main.TrailRunnerModule.TrailRunnerModule
+import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.swing.Publisher
 
 class Controller @Inject() () extends ControllerInterface with Publisher {
+
+  val injector = Guice.createInjector(new TrailRunnerModule)
+
+  val fileIO = injector.instance[FileIOInterface]
 
   var level: LevelInterface = new Level1
 
@@ -99,6 +106,14 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
   def redo: Unit = {
     undoManager.redoStep
     publish(new DungeonChanged)
+  }
+
+  override def save: Unit = {
+    fileIO.save(level)
+  }
+
+  override def load: Unit = {
+    level = fileIO.load
   }
 
   def openDoor: Unit = {

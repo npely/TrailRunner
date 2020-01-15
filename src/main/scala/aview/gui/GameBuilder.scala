@@ -20,6 +20,8 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
         controller.changeToMain()
       })
       contents += new MenuItem(Action("Quit") { System.exit(0) })
+      contents += new MenuItem(Action("Save") { controller.save })
+      contents += new MenuItem(Action("Load") { controller.load })
     }
 
     contents += new Menu("Edit") {

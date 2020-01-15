@@ -26,6 +26,8 @@ trait ControllerInterface extends Publisher {
   def count: Int
   def undo: Unit
   def redo: Unit
+  def save: Unit
+  def load: Unit
   def fieldToString: String
   def levelToString: String
   def levelWin(): Boolean
