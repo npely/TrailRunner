@@ -1,9 +1,9 @@
 {
   "level" : {
-    "name" : "Level2",
+    "name" : "Level3",
     "size" : 10,
-    "xPos" : 5,
-    "yPos" : 2
+    "xPos" : 4,
+    "yPos" : 1
   },
   "fieldvalues" : [ {
     "fieldvalue" : -99
@@ -16,8 +16,6 @@
   }, {
     "fieldvalue" : -99
   }, {
-    "fieldvalue" : -10
-  }, {
     "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
@@ -27,17 +25,19 @@
     "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : 1
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : 2
   }, {
     "fieldvalue" : 2
   }, {
-    "fieldvalue" : 1
-  }, {
     "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
@@ -47,16 +47,16 @@
     "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 3
   }, {
     "fieldvalue" : 2
   }, {
-    "fieldvalue" : 0
+    "fieldvalue" : 3
   }, {
-    "fieldvalue" : 0
-  }, {
-    "fieldvalue" : 1
-  }, {
-    "fieldvalue" : 0
+    "fieldvalue" : 2
   }, {
     "fieldvalue" : -99
   }, {
@@ -68,15 +68,9 @@
   }, {
     "fieldvalue" : -99
   }, {
-    "fieldvalue" : 0
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 0
-  }, {
-    "fieldvalue" : 0
-  }, {
-    "fieldvalue" : 0
-  }, {
-    "fieldvalue" : 0
+    "fieldvalue" : -20
   }, {
     "fieldvalue" : -99
   }, {
@@ -88,15 +82,15 @@
   }, {
     "fieldvalue" : -99
   }, {
-    "fieldvalue" : 0
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 0
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 0
+    "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
   }, {
@@ -108,15 +102,21 @@
   }, {
     "fieldvalue" : -99
   }, {
-    "fieldvalue" : 0
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 0
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : -99
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
   }, {

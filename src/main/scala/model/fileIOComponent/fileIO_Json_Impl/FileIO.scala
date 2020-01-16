@@ -32,13 +32,17 @@ class FileIO extends FileIOInterface {
       level.dungeon(row)(col).setValue(fieldvalue)
     }*/
     val fieldvalues: JsArray = (json \ "fieldvalues").as[JsArray]
+
+    var zeile = 0
+    var spalte = 0
     for (fieldvalue <- fieldvalues.value) {
-      for (i <- 0 to level.dungeon.length - 1) {
-        for (j <- 0 to level.dungeon.length - 1) {
           val value = (fieldvalue \ "fieldvalue").get.toString().toInt
-          level.dungeon(i)(j).setValue(value)
-        }
-      }
+          level.dungeon(zeile)(spalte).setValue(value)
+          spalte += 1
+          if(spalte % 10 == 0){
+            zeile += 1
+            spalte = 0
+          }
     }
 
     val playerX = (json \ "level" \ "xPos").as[Int]
