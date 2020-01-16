@@ -1,19 +1,48 @@
 package model.fileIOComponent.fileIO_XML_Impl
 
-import java.io.PrintWriter
+import java.io.{File, PrintWriter}
 
+import com.google.inject.Guice
+import com.google.inject.name.Names
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
-import java.io.File
+import net.codingwell.scalaguice.InjectorExtensions._
+import src.main.TrailRunnerModule.TrailRunnerModule
 
+import scala.io.Source
 import scala.xml.{Elem, PrettyPrinter, XML}
-
 
 class FileIO extends FileIOInterface{
 
   override def load: LevelInterface = {
+    val injector = Guice.createInjector(new TrailRunnerModule)
     val xmlFile = scala.xml.XML.loadFile("TrailRunner.xml")
-    ???
+    val name = (xmlFile \\ "Level" \ "Name").text
+    var level: LevelInterface = null
+    name match {
+      case "Level1" => level = injector.instance[LevelInterface](Names.named("Level1"))
+      case "Level2" => level = injector.instance[LevelInterface](Names.named("Level2"))
+      case "Level3" => level = injector.instance[LevelInterface](Names.named("Level3"))
+    }
+    val size = (xmlFile \\ "Level" \ "Size").text.toInt
+
+    var x = 0
+    var y = 0
+    for (i <- 0 to (size * size - 1)) {
+      val fieldValue = (xmlFile \\ "Fields" \ "FieldValue")(i).text.toInt
+      level.dungeon(x)(y).setValue(fieldValue)
+      y += 1
+      if (y % 10 == 0){
+        x += 1
+        y = 0
+      }
+    }
+
+    val xPos = (xmlFile \\ "Level" \ "XPos").text.toInt
+    val yPos = (xmlFile \\ "Level" \ "YPos").text.toInt
+    level.player.xPos = xPos
+    level.player.yPos = yPos
+    level
   }
 
   override def save(level: LevelInterface): Unit = {
@@ -30,23 +59,16 @@ class FileIO extends FileIOInterface{
       <Size>{level.dungeon.length}</Size>
       <XPos>{level.player.xPos}</XPos>
       <YPos>{level.player.yPos}</YPos>
-      <Fields></Fields>
+        {allFieldsToXml(level)}
     </Level>
   }
 
-  def fieldToXmlString(level: LevelInterface): String = {
-//    "<Field><name>" + name + "</name> " +
-//
-//    "<stationNumber>" + stationNumber + "</stationNumber>" + "<Field>"""
-    ""
-  }
-
   def allFieldsToXml(level: LevelInterface): Elem = {
-    var fieldString = ""
+    var fieldString = "<Fields>"
     for (i <- 0 until level.rows; j <- 0 until level.columns) {
-      fieldString = fieldString + fieldToXmlString(level)
+      fieldString = fieldString + "<FieldValue>"+ level.dungeon(i)(j).value +"</FieldValue>"
     }
-    fieldString = "<detectives>" + fieldString + "</detectives>"
+    fieldString += "</Fields>"
     XML.loadString(fieldString)
   }
 }

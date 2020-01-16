@@ -45,7 +45,7 @@ class Controller() extends ControllerInterface with Publisher {
 
   override def increaseFieldValueByOne(): Unit = {}
 
-  override def initializeGame(level: LevelInterface): Unit = {}
+  override def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {}
 
   override def count: Int = 1
 

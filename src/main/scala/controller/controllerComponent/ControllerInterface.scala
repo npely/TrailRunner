@@ -23,7 +23,7 @@ trait ControllerInterface extends Publisher {
   def fieldIsSet: Boolean
   def playerStandsOnField(): Unit
   def increaseFieldValueByOne(): Unit
-  def initializeGame(level: LevelInterface): Unit
+  def initializeGame(level: LevelInterface, loaded: Boolean): Unit
   def count: Int
   def undo: Unit
   def redo: Unit

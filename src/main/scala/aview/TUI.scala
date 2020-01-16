@@ -80,13 +80,13 @@ class TUI(controller: ControllerInterface) extends Reactor {
   def evaluateSelection(inputStr: String): Int = {
     val input = inputStr
     if(input.equals("1")) {
-      controller.initializeGame(new Level1)
+      controller.initializeGame(new Level1, false)
     }
     else if(input.equals("2")) {
-      controller.initializeGame(new Level2)
+      controller.initializeGame(new Level2, false)
     }
     else if(input.equals("3")) {
-      controller.initializeGame(new Level3)
+      controller.initializeGame(new Level3, false)
     }
     else {
       tuiMode = TUIMODE_INVALID_ACTION

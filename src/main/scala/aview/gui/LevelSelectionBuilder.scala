@@ -31,17 +31,17 @@ class LevelSelectionBuilder(controller: ControllerInterface, gui: GUI) {
     contents ++= List(
       new Button("Level 1") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level1)
+          case e: ButtonClicked => controller.initializeGame(new Level1, false)
         }
       },
       new Button("Level 2") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level2)
+          case e: ButtonClicked => controller.initializeGame(new Level2, false)
         }
       },
       new Button("Level 3") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level3)
+          case e: ButtonClicked => controller.initializeGame(new Level3, false)
         }
       }
     )

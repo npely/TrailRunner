@@ -114,17 +114,20 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
 
   override def load: Unit = {
     level = fileIO.load
-    initializeGame(level)
+    initializeGame(level, true)
   }
 
   def openDoor: Unit = {
     publish(new OpenDoor)
   }
 
-  def initializeGame(level: LevelInterface): Unit = {
+  def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {
     this.level = level
     player = level.player
     playerStandsOnField()
+    if (loaded) {
+      increaseFieldValueByOne()
+    }
     changeToGame()
   }
 

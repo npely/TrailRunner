@@ -4,7 +4,6 @@ import com.google.inject.Guice
 import com.google.inject.name.Names
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
-import model.playerComponent.PlayerInterface
 import play.api.libs.json.{JsArray, JsNumber, JsValue, Json}
 import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
