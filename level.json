@@ -1,10 +1,9 @@
 {
-  "xPos" : 5,
-  "yPos" : 5
-}{
   "level" : {
     "name" : "Level1",
     "size" : 10,
+    "xPos" : 4,
+    "yPos" : 5,
     "fields" : [ {
       "fieldvalue" : -99
     }, {
@@ -94,7 +93,7 @@
     }, {
       "fieldvalue" : -99
     }, {
-      "fieldvalue" : 0
+      "fieldvalue" : 1
     }, {
       "fieldvalue" : 1
     }, {
@@ -114,9 +113,9 @@
     }, {
       "fieldvalue" : -99
     }, {
-      "fieldvalue" : 0
+      "fieldvalue" : 1
     }, {
-      "fieldvalue" : 0
+      "fieldvalue" : 1
     }, {
       "fieldvalue" : -99
     }, {

@@ -28,11 +28,11 @@ class FileIO extends FileIOInterface {
       row <- 0 until level.dungeon.length;
       col <- 0 until level.dungeon.length
     } yield {
-      val fieldvalue = (json \ "fieldvalue").as[Int]
+      val fieldvalue = (json \ "level" \ "fields" \ "fieldvalue").as[Int]
       level.dungeon(row)(col).setValue(fieldvalue)
     }
-    val playerX = (json \ "xPos").as[Int]
-    val playerY = (json \ "yPos").as[Int]
+    val playerX = (json \ "level" \ "xPos").as[Int]
+    val playerY = (json \ "level" \ "yPos").as[Int]
     level.player.xPos = playerX
     level.player.yPos = playerY
     level
@@ -41,23 +41,25 @@ class FileIO extends FileIOInterface {
   override def save(level: LevelInterface): Unit = {
     import java.io._
     val pw = new PrintWriter(new File("level.json"))
-    pw.write(Json.prettyPrint(playerToJson(level.player)))
+    //pw.write(Json.prettyPrint(playerToJson(level.player)))
     pw.write(Json.prettyPrint(levelToJson(level)))
     pw.close()
   }
 
-  def playerToJson(player: PlayerInterface) = {
+  /*def playerToJson(player: PlayerInterface) = {
     Json.obj(
       "xPos" -> player.xPos,
       "yPos" -> player.yPos
     )
-  }
+  }*/
 
   def levelToJson(level: LevelInterface) = {
     Json.obj(
       "level" -> Json.obj(
         "name" -> level.getName,
         "size" -> JsNumber(level.dungeon.length),
+        "xPos" -> JsNumber(level.player.xPos),
+        "yPos" -> JsNumber(level.player.yPos),
         "fields" -> Json.toJson(
           for {
             row <- 0 until level.dungeon.length;
