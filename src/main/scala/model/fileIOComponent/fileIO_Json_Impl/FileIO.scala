@@ -5,7 +5,7 @@ import com.google.inject.name.Names
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
-import play.api.libs.json.{JsNumber, JsValue, Json}
+import play.api.libs.json.{JsArray, JsNumber, JsValue, Json}
 import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
 
@@ -24,13 +24,23 @@ class FileIO extends FileIOInterface {
       case "Level2" => level = injector.instance[LevelInterface](Names.named("Level2"))
       case "Level3" => level = injector.instance[LevelInterface](Names.named("Level3"))
     }
-    for {
+    /*for {
       row <- 0 until level.dungeon.length;
       col <- 0 until level.dungeon.length
     } yield {
       val fieldvalue = (json \ "level" \ "fields" \ "fieldvalue").as[Int]
       level.dungeon(row)(col).setValue(fieldvalue)
+    }*/
+    val fieldvalues: JsArray = (json \ "fieldvalues").as[JsArray]
+    for (fieldvalue <- fieldvalues.value) {
+      for (i <- 0 to level.dungeon.length - 1) {
+        for (j <- 0 to level.dungeon.length - 1) {
+          val value = (fieldvalue \ "fieldvalue").get.toString().toInt
+          level.dungeon(i)(j).setValue(value)
+        }
+      }
     }
+
     val playerX = (json \ "level" \ "xPos").as[Int]
     val playerY = (json \ "level" \ "yPos").as[Int]
     level.player.xPos = playerX
@@ -41,29 +51,30 @@ class FileIO extends FileIOInterface {
   override def save(level: LevelInterface): Unit = {
     import java.io._
     val pw = new PrintWriter(new File("level.json"))
-    //pw.write(Json.prettyPrint(playerToJson(level.player)))
     pw.write(Json.prettyPrint(levelToJson(level)))
     pw.close()
   }
 
   def levelToJson(level: LevelInterface) = {
+    val levelObj = Json.obj(
+      "name" -> level.getName,
+      "size" -> JsNumber(level.dungeon.length),
+      "xPos" -> JsNumber(level.player.xPos),
+      "yPos" -> JsNumber(level.player.yPos),
+    )
+
+    var fieldvalues = new JsArray()
+    for (i <- 0 to level.dungeon.length - 1) {
+      for (j <- 0 to level.dungeon.length - 1) {
+        fieldvalues = fieldvalues.append(Json.obj(
+          "fieldvalue" -> level.dungeon(i)(j).value
+        ))
+      }
+    }
+
     Json.obj(
-      "level" -> Json.obj(
-        "name" -> level.getName,
-        "size" -> JsNumber(level.dungeon.length),
-        "xPos" -> JsNumber(level.player.xPos),
-        "yPos" -> JsNumber(level.player.yPos),
-        "fields" -> Json.toJson(
-          for {
-            row <- 0 until level.dungeon.length;
-            col <- 0 until level.dungeon.length
-          } yield {
-            Json.obj(
-              "fieldvalue" -> Json.toJson(level.dungeon(row)(col).value)
-            )
-          }
-        )
-      )
+      "level" -> levelObj,
+      "fieldvalues" -> fieldvalues
     )
   }
 }

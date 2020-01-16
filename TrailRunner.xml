@@ -1,7 +1,7 @@
 <Level>
-    <Name>Level1</Name>
+    <Name>Level2</Name>
     <Size>10</Size>
-    <XPos>4</XPos>
-    <YPos>4</YPos>
+    <XPos>2</XPos>
+    <YPos>1</YPos>
     <Fields></Fields>
 </Level>
