@@ -6,7 +6,7 @@ import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import java.io.File
 
-import scala.xml.PrettyPrinter
+import scala.xml.{Elem, PrettyPrinter, XML}
 
 
 class FileIO extends FileIOInterface{
@@ -32,5 +32,21 @@ class FileIO extends FileIOInterface{
       <YPos>{level.player.yPos}</YPos>
       <Fields></Fields>
     </Level>
+  }
+
+  def fieldToXmlString(level: LevelInterface): String = {
+//    "<Field><name>" + name + "</name> " +
+//
+//    "<stationNumber>" + stationNumber + "</stationNumber>" + "<Field>"""
+    ""
+  }
+
+  def allFieldsToXml(level: LevelInterface): Elem = {
+    var fieldString = ""
+    for (i <- 0 until level.rows; j <- 0 until level.columns) {
+      fieldString = fieldString + fieldToXmlString(level)
+    }
+    fieldString = "<detectives>" + fieldString + "</detectives>"
+    XML.loadString(fieldString)
   }
 }

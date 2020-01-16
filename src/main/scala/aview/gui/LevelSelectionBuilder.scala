@@ -31,27 +31,20 @@ class LevelSelectionBuilder(controller: ControllerInterface, gui: GUI) {
     contents ++= List(
       new Button("Level 1") {
         reactions += {
-          case e: ButtonClicked => initializeGame(new Level1)
+          case e: ButtonClicked => controller.initializeGame(new Level1)
         }
       },
       new Button("Level 2") {
         reactions += {
-          case e: ButtonClicked => initializeGame(new Level2)
+          case e: ButtonClicked => controller.initializeGame(new Level2)
         }
       },
       new Button("Level 3") {
         reactions += {
-          case e: ButtonClicked => initializeGame(new Level3)
+          case e: ButtonClicked => controller.initializeGame(new Level3)
         }
       }
     )
-  }
-
-  def initializeGame(level: Level): Unit = {
-    controller.level = level
-    controller.player = controller.level.player
-    controller.playerStandsOnField()
-    controller.changeToGame()
   }
 
   /*var btnList: List[Button]
