@@ -15,21 +15,14 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
     background = java.awt.Color.DARK_GRAY
 
     contents += new Menu("File") {
-      mnemonic = Key.F
-      contents += new MenuItem(Action("Main menu") {
-        controller.changeToMain()
-      })
+      contents += new MenuItem(Action("Main menu") {controller.changeToMain()})
       contents += new MenuItem(Action("Quit") { System.exit(0) })
       contents += new MenuItem(Action("Save") { controller.save })
-      contents += new MenuItem(Action("Load") { controller.load })
     }
 
     contents += new Menu("Edit") {
-      mnemonic = Key.E
-      contents += new MenuItem(Action("Undo") {
-        controller.undo })
-      contents += new MenuItem(Action("Redo") {
-        controller.redo })
+      contents += new MenuItem(Action("Undo") {controller.undo })
+      contents += new MenuItem(Action("Redo") {controller.redo })
     }
   }
 

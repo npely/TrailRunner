@@ -19,6 +19,14 @@ class MainMenuBuilder(controller: ControllerInterface, gui: GUI) {
     }
   }
 
+  var loadGameBtn = new Button("Load Game") {
+    reactions += {
+      case e: ButtonClicked => {
+        controller.load
+      }
+    }
+  }
+
   var quitBtn = new Button("Quit") {
     reactions += {
       case e: ButtonClicked => System.exit(0)
@@ -28,7 +36,7 @@ class MainMenuBuilder(controller: ControllerInterface, gui: GUI) {
   def mainMenu = new BoxPanel(Orientation.Vertical) {
     preferredSize = new Dimension(500,300)
     background = java.awt.Color.BLACK
-    contents ++= List(newGameBtn, quitBtn)
+    contents ++= List(newGameBtn, loadGameBtn, quitBtn)
   }
 
 
