@@ -1,70 +1,10 @@
 {
   "level" : {
-    "name" : "Level1",
+    "name" : "Level2",
     "size" : 10,
-    "xPos" : 4,
-    "yPos" : 5,
+    "xPos" : 1,
+    "yPos" : 4,
     "fields" : [ {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
-      "fieldvalue" : -99
-    }, {
       "fieldvalue" : -99
     }, {
       "fieldvalue" : -99
@@ -87,6 +27,40 @@
     }, {
       "fieldvalue" : -99
     }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : 2
+    }, {
+      "fieldvalue" : 2
+    }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : 2
+    }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : 2
+    }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : -99
+    }, {
       "fieldvalue" : -99
     }, {
       "fieldvalue" : -99
@@ -97,7 +71,11 @@
     }, {
       "fieldvalue" : 1
     }, {
-      "fieldvalue" : -99
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : 1
     }, {
       "fieldvalue" : -99
     }, {
@@ -109,9 +87,31 @@
     }, {
       "fieldvalue" : -99
     }, {
+      "fieldvalue" : 0
+    }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : 3
+    }, {
+      "fieldvalue" : 2
+    }, {
+      "fieldvalue" : 1
+    }, {
       "fieldvalue" : -99
     }, {
       "fieldvalue" : -99
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : -99
+    }, {
+      "fieldvalue" : 0
+    }, {
+      "fieldvalue" : 1
+    }, {
+      "fieldvalue" : 2
     }, {
       "fieldvalue" : 1
     }, {

@@ -9,7 +9,7 @@ import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3}
 import model.playerComponent.PlayerInterface
 import net.codingwell.scalaguice.ScalaModule
-import model.fileIOComponent.fileIoJsonImpl.FileIO
+import model.fileIOComponent.fileIO_Json_Impl.FileIO
 
 class TrailRunnerModule extends AbstractModule with ScalaModule {
 
@@ -24,7 +24,7 @@ class TrailRunnerModule extends AbstractModule with ScalaModule {
     bind[LevelInterface].annotatedWithName("Level2").toInstance(new Level2)
     bind[LevelInterface].annotatedWithName("Level3").toInstance(new Level3)
 
-    bind[FileIOInterface].to[model.fileIOComponent.fileIoJsonImpl.FileIO]
+    bind[FileIOInterface].to[model.fileIOComponent.fileIO_XML_Impl.FileIO]
   }
 
 }

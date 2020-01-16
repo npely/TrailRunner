@@ -1,4 +1,4 @@
-package model.fileIOComponent.fileIoJsonImpl
+package model.fileIOComponent.fileIO_Json_Impl
 
 import com.google.inject.Guice
 import com.google.inject.name.Names
@@ -45,13 +45,6 @@ class FileIO extends FileIOInterface {
     pw.write(Json.prettyPrint(levelToJson(level)))
     pw.close()
   }
-
-  /*def playerToJson(player: PlayerInterface) = {
-    Json.obj(
-      "xPos" -> player.xPos,
-      "yPos" -> player.yPos
-    )
-  }*/
 
   def levelToJson(level: LevelInterface) = {
     Json.obj(
