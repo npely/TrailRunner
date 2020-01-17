@@ -1,9 +1,39 @@
 <Level>
-    <Name>Level2</Name>
+    <Name>Level1</Name>
     <Size>10</Size>
-    <XPos>5</XPos>
-    <YPos>1</YPos>
+    <XPos>4</XPos>
+    <YPos>5</YPos>
     <Fields>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
@@ -15,51 +45,21 @@
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>-99</FieldValue>
+        <FieldValue>1</FieldValue>
+        <FieldValue>1</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>-99</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
-        <FieldValue>0</FieldValue>
+        <FieldValue>1</FieldValue>
+        <FieldValue>1</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>
         <FieldValue>-99</FieldValue>

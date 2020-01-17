@@ -25,7 +25,7 @@ abstract class Level extends LevelInterface {
   def sum() : Int = {
     var sum = 0
     for (i <- 0 until rows; j <- 0 until columns) {
-      if (dungeon(i)(j).value != -99){
+      if (dungeon(i)(j).value > 0){
         sum += dungeon(i)(j).value
       }
     }
