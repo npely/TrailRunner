@@ -23,7 +23,7 @@ case class Field @Inject() (@Named("Zero") valu: Int) extends FieldInterface {
     if (value == -99){
       return " |X| "
     }
-    if (value == -10){
+    if (value == -10 || value == -20){
       return " |T| "
     }
     if (isPlayerOnField){
