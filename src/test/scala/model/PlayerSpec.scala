@@ -72,9 +72,9 @@ class PlayerSpec extends WordSpec with Matchers {
       val mplayer2 = model.playerComponent.playerMockImpl.PlayerFactory.createPlayer2()
       val mplayer3 = model.playerComponent.playerMockImpl.PlayerFactory.createPlayer3()
 
-      val moplayer1 = new model.playerComponent.playerMockImpl.PlayerFactory.Player1("1")
-      val moplayer2 = new model.playerComponent.playerMockImpl.PlayerFactory.Player2("2")
-      val moplayer3 = new model.playerComponent.playerMockImpl.PlayerFactory.Player3("3")
+      val moplayer1 = model.playerComponent.playerMockImpl.PlayerFactory.Player1("1")
+      val moplayer2 = model.playerComponent.playerMockImpl.PlayerFactory.Player2("2")
+      val moplayer3 = model.playerComponent.playerMockImpl.PlayerFactory.Player3("3")
       "have a name" in {
         moplayer1.toString should be(moplayer1.name)
         moplayer2.toString should be(moplayer2.name)
