@@ -1,17 +1,25 @@
 package controller.controllerComponent.controllerMockImpl
 
+import com.google.inject.Guice
 import controller.controllerComponent.ControllerInterface
 import model.AllLevels
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
+import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl.{Level, Level1}
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
+import src.main.TrailRunnerModule.TrailRunnerModule
+import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.swing.Publisher
 
 class Controller() extends ControllerInterface with Publisher {
+
+  val injector = Guice.createInjector(new TrailRunnerModule)
+
+  var fileIO = injector.instance[FileIOInterface]
 
   var level: LevelInterface = new Level1
 

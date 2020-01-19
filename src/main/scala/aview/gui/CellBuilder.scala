@@ -65,6 +65,10 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
   def setCellPicture(): Unit = {
     myField.value match {
       case -99 => myPicture = ImageIO.read(new File(path + "Wall.png"))
+      case -1 =>
+        if(myField.isPlayerOnField){
+          myPicture = ImageIO.read(new File(path + "Ground_0.png"))
+        }
       case 0 =>
         if(myField.isPlayerOnField){
           myPicture = ImageIO.read(new File(path + "Ground_0_P.png"))

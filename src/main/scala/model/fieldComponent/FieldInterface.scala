@@ -8,7 +8,5 @@ trait FieldInterface {
   var isPlayerOnField: Boolean
   def PlayerStandsOnField(): Unit
   def setValue(value : Int): Unit
-  //def decFieldVal: FieldInterface
-  //def FieldVal: FieldInterface
   var value: Int
 }

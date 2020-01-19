@@ -21,7 +21,7 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
 
   val injector = Guice.createInjector(new TrailRunnerModule)
 
-  val fileIO = injector.instance[FileIOInterface]
+  var fileIO = injector.instance[FileIOInterface]
 
   var level: LevelInterface = new Level1
 
