@@ -17,3 +17,8 @@ libraryDependencies += "com.google.inject" % "guice" % "4.1.0"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.8.1"
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
+
+parallelExecution in Test := false
+coverageExcludedPackages := "<empty>;.*aview.*;.*TrailRunner"
+//coverageExcludedPackages := "<empty>;.*TUI.*;.*TrailRunner"
+coverageEnabled.in(Test, test) := true
