@@ -1,10 +1,12 @@
+import model.fieldComponent.fieldBaseImpl.Field
+import model.fieldComponent.fieldMockImpl.Field
+
 import org.scalatest.{Matchers, WordSpec}
-import model.Field
 
 class FieldSpec extends WordSpec with Matchers {
   "A Field" when {
     "set to any value" should {
-      var field = new Field(1)
+      var field = new model.fieldComponent.fieldBaseImpl.Field(1)
       "have value 1" in {
         field.value should be(1)
       }
@@ -25,7 +27,6 @@ class FieldSpec extends WordSpec with Matchers {
         field.toString should be(" |0| ")
       }
     }
-
     "not set to any value" should {
       val brokenField = Field(0)
       "have value 0" in {
@@ -38,7 +39,6 @@ class FieldSpec extends WordSpec with Matchers {
         brokenField.isBroken should be(true)
       }
     }
-
     "not existing" should {
       val nonExistingField = Field(-1)
       "have value -1" in {
@@ -49,6 +49,16 @@ class FieldSpec extends WordSpec with Matchers {
       }
       "not be broken" in {
         nonExistingField.isBroken should be(false)
+      }
+    }
+  }
+
+  "A mock Field" when {
+    "new" should {
+      var mfield = new model.fieldComponent.fieldMockImpl.Field
+      "Player stands on field" in {
+        mfield.PlayerStandsOnField() should be()
+        mfield.setValue(1) should be()
       }
     }
   }

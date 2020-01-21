@@ -1,13 +1,10 @@
 package aview
 
-import java.io.FileNotFoundException
-
-import model.maps.{Level1, Level2, Level3}
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
+import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3}
 
 import scala.io.{BufferedSource, Source}
-import util.Observer
-import controller.Controller
-
+import scala.swing.Reactor
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -15,9 +12,10 @@ import scala.util.{Failure, Success, Try}
  * This class makes the game playable with the console
  * @param controller for communication with model
  */
-class TUI(controller: Controller) extends Observer {
+class TUI(controller: ControllerInterface) extends Reactor {
 
-  controller.add(this)
+  listenTo(controller)
+
   var state: State = new MainMenuState(this)
 
   val greetings: String = "Welcome to TrailRunner!"
@@ -61,9 +59,9 @@ class TUI(controller: Controller) extends Observer {
   def evaluateMainMenu(inputStr: String): Int = {
     val input = inputStr
     if (input.equals("1")) {
-      changeState(new SelectionState(this))
-      updateScreen()
-    } else if (input .equals("2")) {
+      //changeState(new SelectionState(this))
+      controller.changeToSelection()
+    } else if (input.equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
     else {
@@ -80,27 +78,15 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateSelection(inputStr: String): Int = {
-    var input = inputStr
+    val input = inputStr
     if(input.equals("1")) {
-      controller.level = new Level1
-      controller.player = controller.level.player
-      controller.playerStandsOnField()
-      changeState(new RunningState(this))
-      updateScreen()
+      controller.initializeGame(new Level1, false)
     }
     else if(input.equals("2")) {
-      controller.level = new Level2
-      controller.player = controller.level.player
-      controller.playerStandsOnField()
-      changeState(new RunningState(this))
-      updateScreen()
+      controller.initializeGame(new Level2, false)
     }
     else if(input.equals("3")) {
-      controller.level = new Level3
-      controller.player = controller.level.player
-      controller.playerStandsOnField()
-      changeState(new RunningState(this))
-      updateScreen()
+      controller.initializeGame(new Level3, false)
     }
     else {
       tuiMode = TUIMODE_INVALID_ACTION
@@ -140,9 +126,9 @@ class TUI(controller: Controller) extends Observer {
     }
     ) match {
       case Success(s) => tuiMode
-      case Failure(f) => println("Invalid Mode"); return tuiMode
+      case Failure(f) => println("Invalid Mode");
+        tuiMode
     }
-    //tuiMode
   }
 
   /**
@@ -169,7 +155,7 @@ class TUI(controller: Controller) extends Observer {
    * @return tuiMode
    */
   def evaluateWin(inputStr: String): Int = {
-    changeState(new WinState(this))
+    controller.win()
     evaluateEndOfGame(inputStr)
   }
 
@@ -180,7 +166,7 @@ class TUI(controller: Controller) extends Observer {
    */
     //TODO:
   def evaluateLose(inputStr: String): Int = {
-      changeState(new LoseState(this))
+      controller.lose()
       evaluateEndOfGame(inputStr)
   }
 
@@ -191,8 +177,7 @@ class TUI(controller: Controller) extends Observer {
   def evaluateEndOfGame(inputStr: String): Int = {
     val input = inputStr
     if (input.equals("1")) {
-      changeState(new MainMenuState(this))
-      updateScreen()
+      controller.changeToMain()
     } else if (input.equals("2")) {
       tuiMode = TUIMODE_QUIT
     }
@@ -220,6 +205,7 @@ class TUI(controller: Controller) extends Observer {
       output = output + "'" + index.toString + "': " + x + "\n"
       index += 1
     }
+    output += "\n"
     output
   }
 
@@ -234,6 +220,7 @@ class TUI(controller: Controller) extends Observer {
       output = output + "'" + index.toString + "': " + controller.showLevel(x) + "\n"
       index += 1
     }
+    output += "\n"
     output
   }
 
@@ -252,13 +239,8 @@ class TUI(controller: Controller) extends Observer {
    * @return output
    */
   def buildOutputStringForWin(): String = {
-    output = "\nCongratulations, you've found your way out of the dungeon!\n"
-    var index = 1
-    for (x <- endMenu) {
-      output += "'" + index.toString + "': " + x + "\n"
-      index += 1
-    }
-    output
+    output = "\nCongratulations, you've found your way out of the dungeon!\n\n"
+    buildOutputStringForEndGame()
   }
 
   /**
@@ -267,11 +249,16 @@ class TUI(controller: Controller) extends Observer {
    */
   def buildOutputStringForLose(): String = {
     output = "\nYou died! Try again?\n"
+    buildOutputStringForEndGame()
+  }
+
+  def buildOutputStringForEndGame(): String = {
     var index = 1
     for (x <- endMenu) {
       output += "'" + index.toString + "': " + x + "\n"
       index += 1
     }
+    output += "\n"
     output
   }
 
@@ -287,10 +274,23 @@ class TUI(controller: Controller) extends Observer {
    */
   def updateScreen(): Unit = print(toString())
 
-  /**
-   * Updates if controller changed data
-   */
-  override def update(): Unit = updateScreen()
+  reactions += {
+    case event: DungeonChanged => updateScreen()
+    case event: ChangeToGame =>
+      changeState(new RunningState(this))
+      updateScreen()
+    case event: ChangeToSelection =>
+      changeState(new SelectionState(this))
+      updateScreen()
+    case event: ChangeToMain =>
+      changeState(new MainMenuState(this))
+      updateScreen()
+    case event: Lose =>
+      changeState(new LoseState(this))
+      updateScreen()
+    case event: Win =>
+      changeState(new WinState(this))
+      updateScreen()
+  }
 }
-
 

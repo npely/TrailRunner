@@ -1,0 +1,209 @@
+{
+  "level" : {
+    "name" : "Level2",
+    "size" : 10,
+    "xPos" : 1,
+    "yPos" : 5
+  },
+  "fieldvalues" : [ {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -10
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -104
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 2
+  }, {
+    "fieldvalue" : 2
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 2
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 2
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 3
+  }, {
+    "fieldvalue" : 2
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 2
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : 1
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  } ]
+}
