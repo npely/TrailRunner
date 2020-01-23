@@ -11,4 +11,4 @@ RUN \
 
 WORKDIR /src/main/scala
 ADD . /src/main/scala
-CMD sbt run
+CMD sbt test
