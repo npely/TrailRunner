@@ -3,7 +3,7 @@ package aview.gui
 import controller.controllerComponent.ControllerInterface
 import controller.controllerComponent.controllerBaseImpl.Controller
 import model.levelComponent._
-import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3}
+import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3, Level4}
 
 import scala.swing.event.{ButtonClicked, Key}
 import scala.swing.{Action, BorderPanel, BoxPanel, Button, Dimension, Menu, MenuBar, MenuItem, Orientation}
@@ -43,7 +43,12 @@ class LevelSelectionBuilder(controller: ControllerInterface, gui: GUI) {
         reactions += {
           case e: ButtonClicked => controller.initializeGame(new Level3, false)
         }
+      },
+    new Button("Level 4") {
+      reactions += {
+        case e: ButtonClicked => controller.initializeGame(new Level4, false)
       }
+    }
     )
   }
 
