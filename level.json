@@ -1,9 +1,9 @@
 {
   "level" : {
-    "name" : "Level2",
+    "name" : "Level4",
     "size" : 10,
     "xPos" : 5,
-    "yPos" : 1
+    "yPos" : 2
   },
   "fieldvalues" : [ {
     "fieldvalue" : -99
@@ -16,69 +16,73 @@
   }, {
     "fieldvalue" : -99
   }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
     "fieldvalue" : -10
   }, {
     "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
   }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : 1
-  }, {
-    "fieldvalue" : 1
-  }, {
-    "fieldvalue" : 2
-  }, {
-    "fieldvalue" : 1
-  }, {
     "fieldvalue" : 0
   }, {
     "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
   }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : 2
-  }, {
-    "fieldvalue" : 1
-  }, {
-    "fieldvalue" : 1
-  }, {
-    "fieldvalue" : 1
-  }, {
-    "fieldvalue" : 1
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : 1
-  }, {
-    "fieldvalue" : 1
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : 0
   }, {
     "fieldvalue" : 0
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : -99
   }, {
@@ -94,11 +98,51 @@
   }, {
     "fieldvalue" : 0
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : -99
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
+  }, {
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : -99
   }, {
@@ -110,79 +154,35 @@
   }, {
     "fieldvalue" : 0
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : 1
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : -99
   }, {
     "fieldvalue" : -99
   }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
-  }, {
-    "fieldvalue" : -99
+    "fieldvalue" : 0
   }, {
     "fieldvalue" : -99
   }, {

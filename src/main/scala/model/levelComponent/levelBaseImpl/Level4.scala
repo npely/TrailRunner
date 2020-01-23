@@ -8,7 +8,7 @@ import model.playerComponent.playerBaseImpl.PlayerFactory
 
 class Level4 @Inject() extends Level {
 
-  override var name: String = "Level2"
+  override var name: String = "Level4"
   override var playerName: String = "Niklas"
   override var startX: Int = 1
   override var startY: Int = 8
