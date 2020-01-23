@@ -1,4 +1,4 @@
-import org.scalatest.{Matchers, WordSpec}
+/*import org.scalatest.{Matchers, WordSpec}
 
 class TrailRunnerSpec extends WordSpec with Matchers {
   "A game" when {
@@ -14,4 +14,4 @@ class TrailRunnerSpec extends WordSpec with Matchers {
     }
   }
 
-}
+}*/
