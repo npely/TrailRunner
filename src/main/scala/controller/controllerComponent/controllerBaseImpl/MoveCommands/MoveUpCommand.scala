@@ -13,7 +13,7 @@ class MoveUpCommand(controller: Controller) extends Command {
 
   override def undoStep: Unit = {
     controller.field.isPlayerOnField = false
-    controller.increaseFieldValueByOne
+    controller.increaseFieldValueByOne()
     controller.player.moveDown()
     controller.field = controller.level.dungeon(controller.player.yPos)(controller.player.xPos)
     controller.field.isPlayerOnField = true

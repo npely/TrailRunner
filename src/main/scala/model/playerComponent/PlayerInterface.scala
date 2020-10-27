@@ -1,7 +1,5 @@
 package model.playerComponent
 
-import model.playerComponent.playerBaseImpl.Player
-
 trait PlayerInterface {
   def toGameString: String
   def moveRight(): Unit

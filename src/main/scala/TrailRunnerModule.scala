@@ -6,7 +6,7 @@ import controller.controllerComponent.ControllerInterface
 import model.fieldComponent.FieldInterface
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
-import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3}
+import model.levelComponent.levelBaseImpl._
 import model.playerComponent.PlayerInterface
 import net.codingwell.scalaguice.ScalaModule
 import model.fileIOComponent.fileIO_Json_Impl.FileIO
@@ -23,6 +23,7 @@ class TrailRunnerModule extends AbstractModule with ScalaModule {
     bind[LevelInterface].annotatedWithName("Level1").toInstance(new Level1)
     bind[LevelInterface].annotatedWithName("Level2").toInstance(new Level2)
     bind[LevelInterface].annotatedWithName("Level3").toInstance(new Level3)
+    bind[LevelInterface].annotatedWithName("Level4").toInstance(new Level4)
 
     //Use XML:
     //bind[FileIOInterface].to[model.fileIOComponent.fileIO_XML_Impl.FileIO]
