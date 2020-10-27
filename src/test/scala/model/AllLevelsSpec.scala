@@ -7,7 +7,7 @@ class AllLevelsSpec extends WordSpec with Matchers{
   "AllLevels" when {
     "Filled with any levels" should {
       "not be empty" in {
-        AllLevels.getImplementedList().isEmpty  should be (false)
+        AllLevels.getImplementedList().isEmpty  should be(false)
       }
     }
 

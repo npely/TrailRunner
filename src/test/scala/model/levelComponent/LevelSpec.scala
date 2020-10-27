@@ -23,6 +23,9 @@ class LevelSpec extends WordSpec with Matchers {
       "sum should be" in {
         level1.sum() should be(5)
       }
+      "win should be" in {
+        level1.win() should be(level1.win)
+      }
     }
   }
 

@@ -102,6 +102,8 @@ class ControllerSpec extends WordSpec with Matchers{
       }*/
 
       "player makes a move" in {
+        controller.undo should be(controller.undo)
+        controller.redo should be(controller.redo)
         controller.fieldIsBroken should be(true)
         controller.fieldIsSet should be(true)
         controller.player.yPos = 1
