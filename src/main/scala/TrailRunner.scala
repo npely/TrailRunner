@@ -29,17 +29,19 @@ object TrailRunner {
     }
 
     def playSound(url: String): Unit = {
-        new Thread(new Runnable() { // The wrapper thread is unnecessary, unless it blocks on the
-            // Clip finishing; see comments.
+        new Thread(new Runnable() {
             override def run(): Unit = {
-                try {
-                    val clip = AudioSystem.getClip
-                    val inputStream = AudioSystem.getAudioInputStream(new File(url))
-                    clip.open(inputStream)
-                    clip.start()
-                } catch {
-                    case e: Exception =>
-                        System.err.println("failed to play audio: " + e.getMessage)
+                while (true) {
+                    try {
+                        val clip = AudioSystem.getClip
+                        val inputStream = AudioSystem.getAudioInputStream(new File(url))
+                        clip.open(inputStream)
+                        clip.start()
+                    } catch {
+                        case e: Exception =>
+                            System.err.println("failed to play audio: " + e.getMessage)
+                    }
+                    Thread.sleep(196000)
                 }
             }
         }).start()
