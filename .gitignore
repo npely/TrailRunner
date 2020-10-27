@@ -45,3 +45,7 @@ project/.sbtserver
 
 # Application
 yourgame.log
+
+# Serialization
+level.json
+level.xml

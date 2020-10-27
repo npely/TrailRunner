@@ -16,7 +16,7 @@ class FileIO extends FileIOInterface{
 
   override def load: LevelInterface = {
     val injector = Guice.createInjector(new TrailRunnerModule)
-    val xmlFile = scala.xml.XML.loadFile("TrailRunner.xml")
+    val xmlFile = scala.xml.XML.loadFile("level.xml")
     val name = (xmlFile \\ "Level" \ "Name").text
     var level: LevelInterface = null
     name match {
@@ -46,7 +46,7 @@ class FileIO extends FileIOInterface{
   }
 
   override def save(level: LevelInterface): Unit = {
-    val pw = new PrintWriter(new File("TrailRunner.xml"))
+    val pw = new PrintWriter(new File("level.xml"))
     val prettyPrinter = new PrettyPrinter(120, 4)
     val xml = prettyPrinter.format(levelToXML(level))
     pw.write(xml)
