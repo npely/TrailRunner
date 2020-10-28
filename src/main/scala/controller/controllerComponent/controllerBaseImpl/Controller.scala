@@ -3,6 +3,7 @@ package controller.controllerComponent.controllerBaseImpl
 import com.google.inject.{Guice, Inject}
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, OpenDoor, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
+import main.TrailRunnerModule
 import model.levelComponent.levelBaseImpl.{Level, Level1}
 import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
 import model.AllLevels
@@ -12,7 +13,6 @@ import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import util.UndoManager
 import model.fileIOComponent.FileIOInterface
-import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.swing.Publisher
