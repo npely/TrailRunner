@@ -38,7 +38,7 @@ class TUI(controller: ControllerInterface) extends Reactor {
     var banner = ""
     Try(Source.fromFile("src/TrailRunnerStart.txt")) match {
       case Success(v) => banner = v.asInstanceOf[BufferedSource].mkString; v.asInstanceOf[BufferedSource].close()
-      case Failure(e) => banner = "<Error while reading from " + "\"" + "src/TrailRunnerStart.txt" + "\">"
+      case Failure(e) => banner = "▄▄▄█████▓ ██▀███   ▄▄▄       ██▓ ██▓        ██▀███   █    ██  ███▄    █  ███▄    █ ▓█████  ██▀███\n▓  ██▒ ▓▒▓██ ▒ ██▒▒████▄    ▓██▒▓██▒       ▓██ ▒ ██▒ ██  ▓██▒ ██ ▀█   █  ██ ▀█   █ ▓█   ▀ ▓██ ▒ ██▒\n▒ ▓██░ ▒░▓██ ░▄█ ▒▒██  ▀█▄  ▒██▒▒██░       ▓██ ░▄█ ▒▓██  ▒██░▓██  ▀█ ██▒▓██  ▀█ ██▒▒███   ▓██ ░▄█ ▒\n░ ▓██▓ ░ ▒██▀▀█▄  ░██▄▄▄▄██ ░██░▒██░       ▒██▀▀█▄  ▓▓█  ░██░▓██▒  ▐▌██▒▓██▒  ▐▌██▒▒▓█  ▄ ▒██▀▀█▄\n  ▒██▒ ░ ░██▓ ▒██▒ ▓█   ▓██▒░██░░██████▒   ░██▓ ▒██▒▒▒█████▓ ▒██░   ▓██░▒██░   ▓██░░▒████▒░██▓ ▒██▒\n  ▒ ░░   ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░▓  ░ ▒░▓  ░   ░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒ ░ ▒░   ▒ ▒ ░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒▓ ░▒▓░\n    ░      ░▒ ░ ▒░  ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░     ░▒ ░ ▒░░░▒░ ░ ░ ░ ░░   ░ ▒░░ ░░   ░ ▒░ ░ ░  ░  ░▒ ░ ▒░\n  ░        ░░   ░   ░   ▒    ▒ ░  ░ ░        ░░   ░  ░░░ ░ ░    ░   ░ ░    ░   ░ ░    ░     ░░   ░\n            ░           ░  ░ ░      ░  ░      ░        ░              ░          ░    ░  ░   ░\n\n                                                      "
     }
     banner
   }
