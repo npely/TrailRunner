@@ -201,8 +201,7 @@ class TUI(controller: ControllerInterface) extends Reactor {
    * @return output
    */
   def buildOutputStringForMainMenu() : String = {
-    output = output + banner
-    output = output + greetings + "\n"
+    output = banner + "\n" + greetings + "\n"
     var index = 1
     for (x <- mainMenu) {
       output = output + "'" + index.toString + "': " + x + "\n"
@@ -217,7 +216,7 @@ class TUI(controller: ControllerInterface) extends Reactor {
    * @return output
    */
   def buildOutputStringForSelectionMenu() : String = {
-    output = "Level Selection" + "\n"
+    output =  banner + "\n" + "Level Selection" + "\n"
     var index = 1
     for (x <- controller.getImplementedLevels) {
       output = output + "'" + index.toString + "': " + controller.showLevel(x) + "\n"
@@ -232,7 +231,7 @@ class TUI(controller: ControllerInterface) extends Reactor {
    * @return output
    */
   def buildOutputStringForRunningGame() : String = {
-      output = controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
+      output =  banner + "\n" + controller.levelToString + "\n" + "Player:" + "[ x: " + (controller.player.xPos + 1) + " | y: " + (controller.player.yPos + 1) + " ]" +
         "\n" + "Ziel: [ x: " + (controller.level.winX + 1) + " | y: " + (controller.level.winY + 1) + "]" + "\n"
       output
   }
@@ -242,7 +241,7 @@ class TUI(controller: ControllerInterface) extends Reactor {
    * @return output
    */
   def buildOutputStringForWin(): String = {
-    output = "\nCongratulations, you've found your way out of the dungeon!\n\n"
+    output =  banner + "\n" + "\nCongratulations, you've found your way out of the dungeon!\n\n"
     buildOutputStringForEndGame()
   }
 
@@ -251,7 +250,7 @@ class TUI(controller: ControllerInterface) extends Reactor {
    * @return output
    */
   def buildOutputStringForLose(): String = {
-    output = "\nYou died! Try again?\n"
+    output =  banner + "\n" + "\nYou died! Try again?\n"
     buildOutputStringForEndGame()
   }
 
