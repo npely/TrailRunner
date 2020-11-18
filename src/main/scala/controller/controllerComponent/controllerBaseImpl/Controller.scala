@@ -17,7 +17,7 @@ import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.swing.Publisher
 
-class Controller @Inject() () extends ControllerInterface with Publisher {
+class Controller @Inject()() extends ControllerInterface with Publisher {
 
   val injector = Guice.createInjector(new TrailRunnerModule)
 
@@ -58,36 +58,44 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
   }
 
   def playerMoveUp(): Unit = {
-    undoManager.doStep(new MoveUpCommand(this))
-    publish(new DungeonChanged)
+    if (level.dungeon(player.xPos)(player.yPos - 1).value > -1) {
+      undoManager.doStep(new MoveUpCommand(this))
+      publish(new DungeonChanged)
+    }
   }
 
   def playerMoveDown(): Unit = {
-    undoManager.doStep(new MoveDownCommand(this))
-    publish(new DungeonChanged)
+    if (level.dungeon(player.xPos)(player.yPos + 1).value > -1) {
+      undoManager.doStep(new MoveDownCommand(this))
+      publish(new DungeonChanged)
+    }
   }
 
   def playerMoveRight(): Unit = {
-    undoManager.doStep(new MoveRightCommand(this))
-    publish(new DungeonChanged)
+    if (level.dungeon(player.xPos + 1)(player.yPos).value > -1) {
+      undoManager.doStep(new MoveRightCommand(this))
+      publish(new DungeonChanged)
+    }
   }
 
   def playerMoveLeft(): Unit = {
-    undoManager.doStep(new MoveLeftCommand(this))
-    publish(new DungeonChanged)
+    if (level.dungeon(player.xPos - 1)(player.yPos).value > -1) {
+      undoManager.doStep(new MoveLeftCommand(this))
+      publish(new DungeonChanged)
+    }
   }
 
-  def fieldIsBroken:Boolean = field.isBroken
+  def fieldIsBroken: Boolean = field.isBroken
 
-  def fieldIsSet:Boolean = field.isSet
+  def fieldIsSet: Boolean = field.isSet
 
-  def playerStandsOnField():Unit = {
+  def playerStandsOnField(): Unit = {
     field = level.dungeon(player.yPos)(player.xPos)
     field.PlayerStandsOnField()
     field.isPlayerOnField = true
   }
 
-  def increaseFieldValueByOne():Unit = {
+  def increaseFieldValueByOne(): Unit = {
     field = level.dungeon(player.yPos)(player.xPos)
     field.setValue(field.value + 1)
   }
@@ -135,9 +143,9 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
 
   def levelToString: String = level.toString
 
-  def levelWin():Boolean = level.win()
+  def levelWin(): Boolean = level.win()
 
-  def levelLose():Boolean = level.lose()
+  def levelLose(): Boolean = level.lose()
 
   def levelGetName(): String = level.getName
 
