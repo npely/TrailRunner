@@ -14,6 +14,7 @@ import util.UndoManager
 import model.fileIOComponent.FileIOInterface
 import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
+import play.api.libs.json.JsObject
 
 import scala.swing.Publisher
 
@@ -114,6 +115,10 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   def redo: Unit = {
     undoManager.redoStep
     publish(new DungeonChanged)
+  }
+
+  override def getLevelAsJson: JsObject = {
+    fileIO.levelToJson(level)
   }
 
   override def save: Unit = {

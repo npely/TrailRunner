@@ -4,7 +4,7 @@ import com.google.inject.Guice
 import com.google.inject.name.Names
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
-import play.api.libs.json.{JsArray, JsNumber, JsValue, Json}
+import play.api.libs.json.{JsArray, JsNumber, JsObject, JsValue, Json}
 import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
 
@@ -58,7 +58,7 @@ class FileIO extends FileIOInterface {
     pw.close()
   }
 
-  def levelToJson(level: LevelInterface) = {
+  override def levelToJson(level: LevelInterface) = {
     val levelObj = Json.obj(
       "name" -> level.getName,
       "size" -> JsNumber(level.dungeon.length),

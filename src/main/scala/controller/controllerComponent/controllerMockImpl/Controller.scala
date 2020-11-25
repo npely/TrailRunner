@@ -12,6 +12,7 @@ import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
 import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
+import play.api.libs.json.JsObject
 
 import scala.swing.Publisher
 
@@ -54,6 +55,8 @@ class Controller() extends ControllerInterface with Publisher {
   override def increaseFieldValueByOne(): Unit = {}
 
   override def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {}
+
+  override def getLevelAsJson: JsObject = {null}
 
   override def count: Int = 1
 

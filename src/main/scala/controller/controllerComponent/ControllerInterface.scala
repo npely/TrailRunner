@@ -3,6 +3,7 @@ import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
+import play.api.libs.json.JsObject
 
 import scala.swing.Publisher
 
@@ -25,6 +26,7 @@ trait ControllerInterface extends Publisher {
   def increaseFieldValueByOne(): Unit
   def initializeGame(level: LevelInterface, loaded: Boolean): Unit
   def count: Int
+  def getLevelAsJson: JsObject
   def undo: Unit
   def redo: Unit
   def save: Unit
