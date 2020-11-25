@@ -30,23 +30,23 @@ class Level5 @Inject() extends Level {
   var field23 = Field(-1, "Ice")
   var field24 = Field(-1, "Ice")
   var field25 = Field(-1, "Ice")
-  var field26 = Field(1, "Ground")
+  var field26 = Field(1, "Snow")
   var field27 = Field(-1, "Ice")
 
   // Zeile 3 der Matrix
   var field31 = Field(-1, "Ice")
-  var field32 = Field(1, "Ground")
+  var field32 = Field(1, "Snow")
   var field33 = Field(1, "Ice")
   var field34 = Field(1, "Ice")
-  var field35 = Field(1, "Ground")
+  var field35 = Field(1, "Snow")
   var field36 = Field(1, "Ice")
   var field37 = Field(-1, "Ice")
 
   // Zeile 4 der Matrix
   var field41 = Field(-1, "Ice")
   var field42 = Field(1, "Ice")
-  var field43 = Field(1, "Ground")
-  var field44 = Field(1, "Ground")
+  var field43 = Field(1, "Snow")
+  var field44 = Field(1, "Snow")
   var field45 = Field(1, "Ice")
   var field46 = Field(1, "Ice")
   var field47 = Field(-1, "Ice")
@@ -66,11 +66,11 @@ class Level5 @Inject() extends Level {
   var field63 = Field(1, "Ice")
   var field64 = Field(2, "Ice")
   var field65 = Field(2, "Ice")
-  var field66 = Field(1, "Ground")
+  var field66 = Field(1, "Snow")
   var field67 = Field(-1, "Ice")
 
   // Zeile 7 der Matrix
-  var field72 = Field(1, "Ground")
+  var field72 = Field(1, "Snow")
   var field74 = Field(2, "Ice")
   var field75 = Field(2, "Ice")
 
