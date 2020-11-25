@@ -14,4 +14,6 @@ class Field extends FieldInterface{
   override def setValue(value: Int): Unit = {}
 
   override var value: Int = 1
+
+  override var fieldType: String = _
 }

@@ -3,9 +3,11 @@ import com.google.inject.Inject
 import com.google.inject.name.Named
 import model.fieldComponent.FieldInterface
 
-case class Field @Inject() (@Named("Zero") valu: Int) extends FieldInterface {
+case class Field @Inject() (@Named("Zero") valu: Int, typ: String) extends FieldInterface {
 
   var value = valu
+
+  var fieldType = typ
 
   def isBroken:Boolean = value == 0
 

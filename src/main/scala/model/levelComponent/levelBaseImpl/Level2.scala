@@ -25,39 +25,39 @@ class Level2 @Inject() extends Level {
   player.yPos = startY
 
   // Zeile 1 der Matrix
-  var field11 = Field(1)
-  var field12 = Field(1)
-  var field13 = Field(2)
-  var field14 = Field(2)
-  var field15 = Field(1)
+  var field11 = Field(1, "Ground")
+  var field12 = Field(1, "Ground")
+  var field13 = Field(2, "Ground")
+  var field14 = Field(2, "Ground")
+  var field15 = Field(1, "Ground")
 
   // Zeile 2 der Matrix
-  var field21 = Field(2)
-  var field22 = Field(1)
-  var field23 = Field(1)
-  var field24 = Field(2)
-  var field25 = Field(1)
+  var field21 = Field(2, "Ground")
+  var field22 = Field(1, "Ground")
+  var field23 = Field(1, "Ground")
+  var field24 = Field(2, "Ground")
+  var field25 = Field(1, "Ground")
 
   // Zeile 3 der Matrix
-  var field31 = Field(1)
-  var field32 = Field(1)
-  var field33 = Field(1)
-  var field34 = Field(1)
-  var field35 = Field(1)
+  var field31 = Field(1, "Ground")
+  var field32 = Field(1, "Ground")
+  var field33 = Field(1, "Ground")
+  var field34 = Field(1, "Ground")
+  var field35 = Field(1, "Ground")
 
   // Zeile 4 der Matrix
-  var field41 = Field(1)
-  var field42 = Field(1)
-  var field43 = Field(3)
-  var field44 = Field(2)
-  var field45 = Field(1)
+  var field41 = Field(1, "Ground")
+  var field42 = Field(1, "Ground")
+  var field43 = Field(3, "Ground")
+  var field44 = Field(2, "Ground")
+  var field45 = Field(1, "Ground")
 
   // Zeile 5 der Matrix
-  var field51 = Field(1)
-  var field52 = Field(1)
-  var field53 = Field(2)
-  var field54 = Field(1)
-  var field55 = Field(1)
+  var field51 = Field(1, "Ground")
+  var field52 = Field(1, "Ground")
+  var field53 = Field(2, "Ground")
+  var field54 = Field(1, "Ground")
+  var field55 = Field(1, "Ground")
 
   dungeon(1)(1) = field11
   dungeon(1)(2) = field12

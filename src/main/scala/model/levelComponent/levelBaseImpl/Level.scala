@@ -19,8 +19,8 @@ abstract class Level extends LevelInterface {
   var doorX: Int
   var doorY: Int
   var isDoorOpen: Boolean = false
-  val fieldDoor: FieldInterface = Field(-10)
-  val fieldDoorReversed: FieldInterface = Field(-20)
+  val fieldDoor: FieldInterface = Field(-10, "Door")
+  val fieldDoorReversed: FieldInterface = Field(-20, "Door")
 
   val dungeon: Array[Array[FieldInterface]] = Array.ofDim[FieldInterface](rows, columns)
   val player: PlayerInterface = PlayerFactory.createPlayer1()
@@ -67,7 +67,7 @@ abstract class Level extends LevelInterface {
   def fillNullValues() : Unit = {
     for (i <- 0 until rows; j <- 0 until columns) {
       if (dungeon(i)(j) == null) {
-        dungeon(i)(j) = Field(-99)
+        dungeon(i)(j) = Field(-99, "Wall")
       }
     }
   }

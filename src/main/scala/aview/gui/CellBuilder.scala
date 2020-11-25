@@ -51,63 +51,18 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
   }
 
   def setCellPicture(): Unit = {
-    myField.value match {
-      case -99 => myPicture = ImageIO.read(new File(path + "Wall.png"))
-      case -1 =>
-        if(myField.isPlayerOnField){
-          myPicture = ImageIO.read(new File(path + "Ground_0.png"))
-        }
-      case 0 =>
-        if(myField.isPlayerOnField){
-          myPicture = ImageIO.read(new File(path + "Ground_0_P.png"))
-        }
-        else {
-          myPicture = ImageIO.read(new File(path + "Ground_0.png"))
-        }
-      case 1 =>
-        if(myField.isPlayerOnField){
-          myPicture = ImageIO.read(new File(path + "Ground_1_P.png"))
-        }
-        else {
-          myPicture = ImageIO.read(new File(path + "Ground_1.png"))
-        }
-      case 2 =>
-        if(myField.isPlayerOnField){
-          myPicture = ImageIO.read(new File(path + "Ground_2_P.png"))
-        }
-        else {
-          myPicture = ImageIO.read(new File(path + "Ground_2.png"))
-        }
-      case 3 =>
-        if(myField.isPlayerOnField){
-          myPicture = ImageIO.read(new File(path + "Ground_3_P.png"))
-        }
-        else {
-          myPicture = ImageIO.read(new File(path + "Ground_3.png"))
-        }
-      case 4 =>
-        if(myField.isPlayerOnField){
-          myPicture = ImageIO.read(new File(path + "Ground_4_P.png"))
-        }
-        else {
-          myPicture = ImageIO.read(new File(path + "Ground_4.png"))
-        }
-      case 5 =>
-        if(myField.isPlayerOnField){
-          myPicture = ImageIO.read(new File(path + "Ground_5_P.png"))
-        }
-        else {
-          myPicture = ImageIO.read(new File(path + "Ground_5.png"))
-        }
-      case 10 =>
-        myPicture = ImageIO.read(new File(path + "Door4.png"))
-      case 20 =>
-        myPicture = ImageIO.read(new File(path + "Door24.png"))
-      case -10 =>
-          myPicture = ImageIO.read(new File(path + "Door1.png"))
-      case -20 =>
-          myPicture = ImageIO.read(new File(path + "Door21.png"))
-      case _ => myPicture = ImageIO.read(new File(path + "Wall.png"))
+    if (myField.value == -1) {
+      myPicture = ImageIO.read(new File(path + myField.fieldType + "_0.png"))
+    }
+    else if (myField.value >= -20 && myField.value <= 20) {
+      if (myField.fieldType.equals("Door") || !myField.isPlayerOnField) {
+        myPicture = ImageIO.read(new File(path + myField.fieldType + "_" + myField.value + ".png"))
+      } else {
+        myPicture = ImageIO.read(new File(path + myField.fieldType + "_" + myField.value + "_P.png"))
+      }
+    }
+    else {
+      myPicture = ImageIO.read(new File(path + "Wall.png"))
     }
     actualValue = myField.value
     actualPlayerStatus = myField.isPlayerOnField

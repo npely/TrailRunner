@@ -26,7 +26,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
 
   var level: LevelInterface = new Level1
 
-  var field: FieldInterface = Field(0)
+  var field: FieldInterface = Field(0, "Ground")
 
   var player: PlayerInterface = PlayerFactory.createPlayer1()
 
@@ -59,6 +59,10 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   }
 
   def playerMoveUp(): Unit = {
+    while ("Ice".equals(level.dungeon(player.yPos - 1)(player.xPos).fieldType)) {
+      undoManager.doStep(new MoveUpCommand(this))
+      publish(new DungeonChanged)
+    }
     if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveUpCommand(this))
       publish(new DungeonChanged)
@@ -66,6 +70,10 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   }
 
   def playerMoveDown(): Unit = {
+    while ("Ice".equals(level.dungeon(player.yPos + 1)(player.xPos).fieldType)) {
+      undoManager.doStep(new MoveDownCommand(this))
+      publish(new DungeonChanged)
+    }
     if (level.dungeon(player.yPos + 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveDownCommand(this))
       publish(new DungeonChanged)
@@ -73,6 +81,10 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   }
 
   def playerMoveRight(): Unit = {
+    while ("Ice".equals(level.dungeon(player.yPos)(player.xPos + 1).fieldType)) {
+      undoManager.doStep(new MoveRightCommand(this))
+      publish(new DungeonChanged)
+    }
     if (level.dungeon(player.yPos)(player.xPos + 1).value >= -1) {
       undoManager.doStep(new MoveRightCommand(this))
       publish(new DungeonChanged)
@@ -80,6 +92,10 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   }
 
   def playerMoveLeft(): Unit = {
+    while ("Ice".equals(level.dungeon(player.yPos)(player.xPos - 1).fieldType)) {
+      undoManager.doStep(new MoveLeftCommand(this))
+      publish(new DungeonChanged)
+    }
     if (level.dungeon(player.yPos)(player.xPos - 1).value >= -1) {
       undoManager.doStep(new MoveLeftCommand(this))
       publish(new DungeonChanged)

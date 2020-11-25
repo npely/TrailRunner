@@ -9,4 +9,5 @@ trait FieldInterface {
   def PlayerStandsOnField(): Unit
   def setValue(value : Int): Unit
   var value: Int
+  var fieldType: String
 }

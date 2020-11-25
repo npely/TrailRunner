@@ -24,7 +24,7 @@ class Controller() extends ControllerInterface with Publisher {
 
   var level: LevelInterface = new Level1
 
-  var field: FieldInterface = Field(0)
+  var field: FieldInterface = Field(0, "Ground")
 
   var player: PlayerInterface = PlayerFactory.createPlayer1()
 

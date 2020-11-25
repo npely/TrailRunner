@@ -25,13 +25,13 @@ class Level1 @Inject() extends Level {
   player.yPos = startY
 
   // Zeile 1 der Matrix
-  var field11 = Field(1)
-  var field12 = Field(1)
+  var field11 = Field(1, "Ground")
+  var field12 = Field(1, "Ground")
 
 
   // Zeile 2 der Matrix
-  var field21 = Field(2)
-  var field22 = Field(1)
+  var field21 = Field(2, "Ground")
+  var field22 = Field(1, "Ground")
 
 
   dungeon(4)(4) = field11
