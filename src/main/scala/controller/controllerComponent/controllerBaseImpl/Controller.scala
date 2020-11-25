@@ -59,28 +59,28 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   }
 
   def playerMoveUp(): Unit = {
-    if (level.dungeon(player.xPos)(player.yPos - 1).value > -1) {
+    if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveUpCommand(this))
       publish(new DungeonChanged)
     }
   }
 
   def playerMoveDown(): Unit = {
-    if (level.dungeon(player.xPos)(player.yPos + 1).value > -1) {
+    if (level.dungeon(player.yPos + 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveDownCommand(this))
       publish(new DungeonChanged)
     }
   }
 
   def playerMoveRight(): Unit = {
-    if (level.dungeon(player.xPos + 1)(player.yPos).value > -1) {
+    if (level.dungeon(player.yPos)(player.xPos + 1).value >= -1) {
       undoManager.doStep(new MoveRightCommand(this))
       publish(new DungeonChanged)
     }
   }
 
   def playerMoveLeft(): Unit = {
-    if (level.dungeon(player.xPos - 1)(player.yPos).value > -1) {
+    if (level.dungeon(player.yPos)(player.xPos - 1).value >= -1) {
       undoManager.doStep(new MoveLeftCommand(this))
       publish(new DungeonChanged)
     }

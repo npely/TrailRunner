@@ -14,7 +14,7 @@ case class Field @Inject() (@Named("Zero") valu: Int) extends FieldInterface {
   var isPlayerOnField: Boolean = false
 
   def PlayerStandsOnField():Unit = {
-    value = value - 1
+    value -= 1
   }
 
   def setValue(value : Int): Unit = this.value = value
