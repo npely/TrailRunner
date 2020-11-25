@@ -1,8 +1,6 @@
 package controller.controllerComponent
 import model.levelComponent.LevelInterface
-import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.PlayerInterface
-import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
 import play.api.libs.json.JsObject
 
 import scala.swing.Publisher
@@ -38,10 +36,9 @@ trait ControllerInterface extends Publisher {
   def levelGetName(): String
   def showLevel(level: LevelInterface): String
   def getImplementedLevels: List[LevelInterface]
-  def openDoor(): Unit
   def win(): Unit
   def lose(): Unit
-
+  def standsPlayerInFrontOfOpenDoor(): Boolean
 }
 
 
@@ -53,4 +50,3 @@ class ChangeToGame extends Event
 class ChangeToMain extends Event
 class Lose extends Event
 class Win extends Event
-class OpenDoor extends Event

@@ -1,6 +1,6 @@
 name := "TrailRunner"
 
-version := "0.3"
+version := "0.1"
 
 organization := "de.htwg.se"
 

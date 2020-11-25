@@ -14,6 +14,8 @@ class Level2 @Inject() extends Level {
   override var startY: Int = 5
   override var winX: Int = 5
   override var winY: Int = 1
+  override var doorX: Int = 5
+  override var doorY: Int = 0
 
   override val player: PlayerInterface = PlayerFactory.createPlayer2()
 
@@ -62,7 +64,7 @@ class Level2 @Inject() extends Level {
   dungeon(1)(3) = field13
   dungeon(1)(4) = field14
   dungeon(winY)(winX) = field15
-  dungeon(winY - 1)(winX) = fieldDoor
+  dungeon(doorY)(doorX) = fieldDoor
 
   dungeon(2)(1) = field21
   dungeon(2)(2) = field22

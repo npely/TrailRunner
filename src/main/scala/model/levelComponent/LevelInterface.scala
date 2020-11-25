@@ -10,6 +10,8 @@ trait LevelInterface {
   def sum() : Int
   def lose(): Boolean
   def win(): Boolean
+  def standsPlayerInFrontOfOpenDoor(): Boolean
+  def playerStandsOnDoor(): Boolean
   def fillNullValues() : Unit
   def getName: String
   def toString: String
@@ -19,4 +21,7 @@ trait LevelInterface {
   var columns: Int
   var winX: Int
   var winY: Int
+  var doorX: Int
+  var doorY: Int
+  var isDoorOpen: Boolean
 }

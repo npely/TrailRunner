@@ -57,7 +57,6 @@ class ControllerSpec extends WordSpec with Matchers{
         controller.levelWin() should be(false)
         controller.levelLose() should be(false)
         controller.increaseFieldValueByOne() should be()
-        controller.openDoor() should be()
         controller.initializeGame(controller.level, false) should be()
       }
     }
@@ -154,7 +153,6 @@ class ControllerSpec extends WordSpec with Matchers{
         controller.showLevel(controller.level) should be(controller.showLevel(controller.level))
         controller.levelToString should be(controller.levelToString)
         controller.getImplementedLevels should be(controller.getImplementedLevels)
-        controller.openDoor should be(controller.openDoor)
       }
       "save and load" in {
         controller.initializeGame(controller.level, true)

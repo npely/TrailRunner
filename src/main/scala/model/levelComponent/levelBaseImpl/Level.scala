@@ -16,6 +16,9 @@ abstract class Level extends LevelInterface {
   var startY: Int
   var winX: Int
   var winY: Int
+  var doorX: Int
+  var doorY: Int
+  var isDoorOpen: Boolean = false
   val fieldDoor: FieldInterface = Field(-10)
   val fieldDoorReversed: FieldInterface = Field(-20)
 
@@ -25,7 +28,7 @@ abstract class Level extends LevelInterface {
   def sum() : Int = {
     var sum = 0
     for (i <- 0 until rows; j <- 0 until columns) {
-      if (dungeon(i)(j).value > 0){
+      if (dungeon(i)(j).value > 0 && dungeon(i)(j).value < 10){
         sum += dungeon(i)(j).value
       }
     }
@@ -39,8 +42,23 @@ abstract class Level extends LevelInterface {
     false
   }
 
+  def playerStandsOnDoor(): Boolean = {
+    if (player.xPos == doorX && player.yPos == doorY) {
+      return true
+    }
+    false
+  }
+
   def win(): Boolean = {
+    if (isDoorOpen && playerStandsOnDoor()) {
+      return true
+    }
+    false
+  }
+
+  def standsPlayerInFrontOfOpenDoor(): Boolean = {
     if (player.xPos == winX && player.yPos == winY && this.sum() == 0) {
+      isDoorOpen = true
       return true
     }
     false
@@ -48,7 +66,7 @@ abstract class Level extends LevelInterface {
 
   def fillNullValues() : Unit = {
     for (i <- 0 until rows; j <- 0 until columns) {
-      if (dungeon(i)(j) == null){
+      if (dungeon(i)(j) == null) {
         dungeon(i)(j) = Field(-99)
       }
     }

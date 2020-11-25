@@ -1,7 +1,7 @@
 package controller.controllerComponent.controllerBaseImpl
 
 import com.google.inject.{Guice, Inject}
-import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, OpenDoor, Win}
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import model.levelComponent.levelBaseImpl.{Level, Level1}
 import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
@@ -130,10 +130,6 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     initializeGame(level, true)
   }
 
-  def openDoor: Unit = {
-    publish(new OpenDoor)
-  }
-
   def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {
     this.level = level
     player = level.player
@@ -157,4 +153,6 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   def showLevel(level: LevelInterface): String = AllLevels.showLevel(level)
 
   def getImplementedLevels: List[LevelInterface] = AllLevels.getImplementedList()
+
+  def standsPlayerInFrontOfOpenDoor(): Boolean = level.standsPlayerInFrontOfOpenDoor()
 }

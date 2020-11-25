@@ -8,12 +8,14 @@ import model.playerComponent.playerBaseImpl.PlayerFactory
 
 class Level1 @Inject() extends Level {
 
-  var name: String = "Level1"
-  var playerName: String = "Pete"
-  var startX: Int = 4
-  var startY: Int = 5
-  var winX: Int = 5
-  var winY: Int = 4
+  override var name: String = "Level1"
+  override var playerName: String = "Pete"
+  override var startX: Int = 4
+  override var startY: Int = 5
+  override var winX: Int = 5
+  override var winY: Int = 4
+  override var doorX: Int = 5
+  override var doorY: Int = 3
 
   override val player: PlayerInterface = PlayerFactory.createPlayer1()
 
@@ -35,7 +37,7 @@ class Level1 @Inject() extends Level {
   dungeon(4)(4) = field11
   dungeon(winY)(winX) = field12
 
-  dungeon(winY - 1)(winX) = fieldDoor
+  dungeon(doorY)(doorX) = fieldDoor
 
   dungeon(startY)(startX) = field21
   dungeon(5)(5) = field22
