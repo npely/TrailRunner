@@ -25,49 +25,49 @@ class Level5 @Inject() extends Level {
   player.yPos = startY
 
   // Zeile 2 der Matrix
-  var field21 = Field(-1, "Ice")
-  var field22 = Field(-1, "Ice")
-  var field23 = Field(-1, "Ice")
-  var field24 = Field(-1, "Ice")
-  var field25 = Field(-1, "Ice")
+  var field21 = Field(0, "Ice")
+  var field22 = Field(0, "Ice")
+  var field23 = Field(0, "Ice")
+  var field24 = Field(0, "Ice")
+  var field25 = Field(0, "Ice")
   var field26 = Field(1, "Snow")
-  var field27 = Field(-1, "Ice")
+  var field27 = Field(0, "Ice")
 
   // Zeile 3 der Matrix
-  var field31 = Field(-1, "Ice")
+  var field31 = Field(0, "Ice")
   var field32 = Field(1, "Snow")
   var field33 = Field(1, "Ice")
   var field34 = Field(1, "Ice")
   var field35 = Field(1, "Snow")
   var field36 = Field(1, "Ice")
-  var field37 = Field(-1, "Ice")
+  var field37 = Field(0, "Ice")
 
   // Zeile 4 der Matrix
-  var field41 = Field(-1, "Ice")
+  var field41 = Field(0, "Ice")
   var field42 = Field(1, "Ice")
   var field43 = Field(1, "Snow")
   var field44 = Field(1, "Snow")
   var field45 = Field(1, "Ice")
   var field46 = Field(1, "Ice")
-  var field47 = Field(-1, "Ice")
+  var field47 = Field(0, "Ice")
 
   // Zeile 5 der Matrix
-  var field51 = Field(-1, "Ice")
+  var field51 = Field(0, "Ice")
   var field52 = Field(1, "Ice")
   var field53 = Field(1, "Ice")
   var field54 = Field(1, "Ice")
   var field55 = Field(1, "Ice")
   var field56 = Field(1, "Ice")
-  var field57 = Field(-1, "Ice")
+  var field57 = Field(0, "Ice")
 
   // Zeile 6 der Matrix
-  var field61 = Field(-1, "Ice")
+  var field61 = Field(0, "Ice")
   var field62 = Field(1, "Ice")
   var field63 = Field(1, "Ice")
   var field64 = Field(2, "Ice")
   var field65 = Field(2, "Ice")
   var field66 = Field(1, "Snow")
-  var field67 = Field(-1, "Ice")
+  var field67 = Field(0, "Ice")
 
   // Zeile 7 der Matrix
   var field72 = Field(1, "Snow")

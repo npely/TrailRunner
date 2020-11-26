@@ -51,10 +51,7 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
   }
 
   def setCellPicture(): Unit = {
-    if (myField.value == -1) {
-      myPicture = ImageIO.read(new File(path + myField.fieldType + "_0.png"))
-    }
-    else if (myField.value >= -20 && myField.value <= 20) {
+    if (myField.value >= -20 && myField.value <= 20) {
       if (myField.fieldType.equals("Door") || !myField.isPlayerOnField) {
         myPicture = ImageIO.read(new File(path + myField.fieldType + "_" + myField.value + ".png"))
       } else {
