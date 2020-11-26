@@ -73,7 +73,7 @@ class FileIO extends FileIOInterface{
     XML.loadString(fieldString)
   }
 
-  override def levelToJson(level: LevelInterface): JsObject = {
+  override def levelToJson(level: LevelInterface) = {
     val levelObj = Json.obj(
       "name" -> level.getName,
       "size" -> JsNumber(level.dungeon.length),
@@ -81,18 +81,19 @@ class FileIO extends FileIOInterface{
       "yPos" -> JsNumber(level.player.yPos),
     )
 
-    var fieldvalues = new JsArray()
+    var fields = new JsArray()
     for (i <- 0 to level.dungeon.length - 1) {
       for (j <- 0 to level.dungeon.length - 1) {
-        fieldvalues = fieldvalues.append(Json.obj(
-          "fieldvalue" -> level.dungeon(i)(j).value
+        fields = fields.append(Json.obj(
+          "fieldvalue" -> level.dungeon(i)(j).value,
+          "fieldtype" -> level.dungeon(i)(j).fieldType
         ))
       }
     }
 
     Json.obj(
       "level" -> levelObj,
-      "fieldvalues" -> fieldvalues
+      "fieldvalues" -> fields
     )
   }
 }
