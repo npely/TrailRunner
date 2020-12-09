@@ -16,4 +16,6 @@ class Field extends FieldInterface{
   override var value: Int = 1
 
   override var fieldType: String = _
+
+  override def earthquake: Unit = {}
 }

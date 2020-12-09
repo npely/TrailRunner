@@ -1,6 +1,6 @@
 package controller.controllerComponent.controllerBaseImpl
 
-import com.google.inject.{Guice, Inject}
+import com.google.inject.{Guice, Inject, Injector}
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import model.levelComponent.levelBaseImpl.{Level, Level1}
@@ -20,15 +20,17 @@ import scala.swing.Publisher
 
 class Controller @Inject()() extends ControllerInterface with Publisher {
 
-  val injector = Guice.createInjector(new TrailRunnerModule)
+  val injector: Injector = Guice.createInjector(new TrailRunnerModule)
 
-  var fileIO = injector.instance[FileIOInterface]
+  var fileIO: FileIOInterface = injector.instance[FileIOInterface]
 
   var level: LevelInterface = new Level1
 
   var field: FieldInterface = Field(0, "Ground")
 
   var player: PlayerInterface = PlayerFactory.createPlayer1()
+
+  var hardcoreMode: Boolean = false
 
   private val undoManager = new UndoManager
 
@@ -163,4 +165,12 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   def getImplementedLevels: List[LevelInterface] = AllLevels.getImplementedList()
 
   def standsPlayerInFrontOfOpenDoor(): Boolean = level.standsPlayerInFrontOfOpenDoor()
+
+  def earthquake(): Unit = {
+    if (hardcoreMode) {
+      for (i <- 0 until level.rows; j <- 0 until level.columns) {
+        level.dungeon(i)(j).earthquake
+      }
+    }
+  }
 }
