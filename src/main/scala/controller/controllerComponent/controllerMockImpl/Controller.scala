@@ -12,6 +12,7 @@ import model.levelComponent.levelBaseImpl.{Level, Level1}
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
 import net.codingwell.scalaguice.InjectorExtensions._
+import play.api.libs.json.JsObject
 
 import scala.swing.Publisher
 
@@ -23,9 +24,11 @@ class Controller() extends ControllerInterface with Publisher {
 
   var level: LevelInterface = new Level1
 
-  var field: FieldInterface = Field(0)
+  var field: FieldInterface = Field(0, "Ground")
 
   var player: PlayerInterface = PlayerFactory.createPlayer1()
+
+  var hardcoreMode: Boolean = false
 
   override def playerToString: String = player.toString
 
@@ -37,13 +40,13 @@ class Controller() extends ControllerInterface with Publisher {
 
   override def changeToMain(): Unit = {}
 
-  override def playerMoveUp(): Unit = {}
+  override def playerMoveUp(): Boolean = true
 
-  override def playerMoveDown(): Unit = {}
+  override def playerMoveDown(): Boolean = true
 
-  override def playerMoveRight(): Unit = {}
+  override def playerMoveRight(): Boolean = true
 
-  override def playerMoveLeft(): Unit = {}
+  override def playerMoveLeft(): Boolean = true
 
   override def fieldIsBroken: Boolean = false
 
@@ -54,6 +57,8 @@ class Controller() extends ControllerInterface with Publisher {
   override def increaseFieldValueByOne(): Unit = {}
 
   override def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {}
+
+  override def getLevelAsJson: JsObject = {null}
 
   override def count: Int = 1
 
@@ -79,9 +84,12 @@ class Controller() extends ControllerInterface with Publisher {
 
   override def win(): Unit = {}
 
-  override def openDoor(): Unit = {}
-
   override def save: Unit = {}
 
   override def load: Unit = {}
+
+  override def standsPlayerInFrontOfOpenDoor(): Boolean = false
+
+  override def earthquake(): Unit = {}
+
 }

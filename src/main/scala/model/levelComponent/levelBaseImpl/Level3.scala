@@ -14,6 +14,8 @@ class Level3 @Inject() extends Level {
   override var startY: Int = 2
   override var winX: Int = 2
   override var winY: Int = 2
+  override var doorX: Int = 2
+  override var doorY: Int = 3
 
   override val player: PlayerInterface = PlayerFactory.createPlayer3()
 
@@ -23,18 +25,18 @@ class Level3 @Inject() extends Level {
   player.yPos = startY
 
   // Zeile 1 der Matrix
-  var field11 = Field(1)
-  var field12 = Field(2)
-  var field13 = Field(1)
-  var field14 = Field(3)
-  var field15 = Field(2)
+  var field11 = Field(1, "Ground")
+  var field12 = Field(2, "Ground")
+  var field13 = Field(1, "Ground")
+  var field14 = Field(3, "Ground")
+  var field15 = Field(2, "Ground")
 
   // Zeile 2 der Matrix
-  var field21 = Field(1)
-  var field22 = Field(3)
-  var field23 = Field(2)
-  var field24 = Field(3)
-  var field25 = Field(2)
+  var field21 = Field(1, "Ground")
+  var field22 = Field(3, "Ground")
+  var field23 = Field(2, "Ground")
+  var field24 = Field(3, "Ground")
+  var field25 = Field(2, "Ground")
 
   dungeon(1)(1) = field11
   dungeon(1)(2) = field12
@@ -44,7 +46,7 @@ class Level3 @Inject() extends Level {
 
   dungeon(startY)(startX) = field21
   dungeon(winY)(winX) = field22
-  dungeon(winY + 1)(winX) = fieldDoorReversed
+  dungeon(doorY)(doorX) = fieldDoorReversed
   dungeon(2)(3) = field23
   dungeon(2)(4) = field24
   dungeon(2)(5) = field25

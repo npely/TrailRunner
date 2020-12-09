@@ -1,7 +1,7 @@
 package controller.controllerComponent.controllerBaseImpl
 
-import com.google.inject.{Guice, Inject}
-import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, OpenDoor, Win}
+import com.google.inject.{Guice, Inject, Injector}
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import main.TrailRunnerModule
 import model.levelComponent.levelBaseImpl.{Level, Level1}
@@ -14,20 +14,23 @@ import model.playerComponent.PlayerInterface
 import util.UndoManager
 import model.fileIOComponent.FileIOInterface
 import net.codingwell.scalaguice.InjectorExtensions._
+import play.api.libs.json.JsObject
 
 import scala.swing.Publisher
 
-class Controller @Inject() () extends ControllerInterface with Publisher {
+class Controller @Inject()() extends ControllerInterface with Publisher {
 
   val injector = Guice.createInjector(new TrailRunnerModule)
 
-  var fileIO = injector.instance[FileIOInterface]
+  var fileIO: FileIOInterface = injector.instance[FileIOInterface]
 
   var level: LevelInterface = new Level1
 
-  var field: FieldInterface = Field(0)
+  var field: FieldInterface = Field(0, "Ground")
 
   var player: PlayerInterface = PlayerFactory.createPlayer1()
+
+  var hardcoreMode: Boolean = false
 
   private val undoManager = new UndoManager
 
@@ -57,37 +60,53 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
     publish(new Win)
   }
 
-  def playerMoveUp(): Unit = {
-    undoManager.doStep(new MoveUpCommand(this))
-    publish(new DungeonChanged)
+  def playerMoveUp(): Boolean = {
+    if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
+      undoManager.doStep(new MoveUpCommand(this))
+      publish(new DungeonChanged)
+      return true
+    }
+    false
   }
 
-  def playerMoveDown(): Unit = {
-    undoManager.doStep(new MoveDownCommand(this))
-    publish(new DungeonChanged)
+  def playerMoveDown(): Boolean = {
+    if (level.dungeon(player.yPos + 1)(player.xPos).value >= -1) {
+      undoManager.doStep(new MoveDownCommand(this))
+      publish(new DungeonChanged)
+      return true
+    }
+    false
   }
 
-  def playerMoveRight(): Unit = {
-    undoManager.doStep(new MoveRightCommand(this))
-    publish(new DungeonChanged)
+  def playerMoveRight(): Boolean = {
+    if (level.dungeon(player.yPos)(player.xPos + 1).value >= -1) {
+      undoManager.doStep(new MoveRightCommand(this))
+      publish(new DungeonChanged)
+      return true
+    }
+    false
   }
 
-  def playerMoveLeft(): Unit = {
-    undoManager.doStep(new MoveLeftCommand(this))
-    publish(new DungeonChanged)
+  def playerMoveLeft(): Boolean = {
+    if (level.dungeon(player.yPos)(player.xPos - 1).value >= -1) {
+      undoManager.doStep(new MoveLeftCommand(this))
+      publish(new DungeonChanged)
+      return true
+    }
+    false
   }
 
-  def fieldIsBroken:Boolean = field.isBroken
+  def fieldIsBroken: Boolean = field.isBroken
 
-  def fieldIsSet:Boolean = field.isSet
+  def fieldIsSet: Boolean = field.isSet
 
-  def playerStandsOnField():Unit = {
+  def playerStandsOnField(): Unit = {
     field = level.dungeon(player.yPos)(player.xPos)
     field.PlayerStandsOnField()
     field.isPlayerOnField = true
   }
 
-  def increaseFieldValueByOne():Unit = {
+  def increaseFieldValueByOne(): Unit = {
     field = level.dungeon(player.yPos)(player.xPos)
     field.setValue(field.value + 1)
   }
@@ -108,6 +127,10 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
     publish(new DungeonChanged)
   }
 
+  override def getLevelAsJson: JsObject = {
+    fileIO.levelToJson(level)
+  }
+
   override def save: Unit = {
     fileIO.save(level)
   }
@@ -115,10 +138,6 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
   override def load: Unit = {
     level = fileIO.load
     initializeGame(level, true)
-  }
-
-  def openDoor: Unit = {
-    publish(new OpenDoor)
   }
 
   def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {
@@ -135,13 +154,23 @@ class Controller @Inject() () extends ControllerInterface with Publisher {
 
   def levelToString: String = level.toString
 
-  def levelWin():Boolean = level.win()
+  def levelWin(): Boolean = level.win()
 
-  def levelLose():Boolean = level.lose()
+  def levelLose(): Boolean = level.lose()
 
   def levelGetName(): String = level.getName
 
   def showLevel(level: LevelInterface): String = AllLevels.showLevel(level)
 
   def getImplementedLevels: List[LevelInterface] = AllLevels.getImplementedList()
+
+  def standsPlayerInFrontOfOpenDoor(): Boolean = level.standsPlayerInFrontOfOpenDoor()
+
+  def earthquake(): Unit = {
+    if (hardcoreMode) {
+      for (i <- 0 until level.rows; j <- 0 until level.columns) {
+        level.dungeon(i)(j).earthquake
+      }
+    }
+  }
 }

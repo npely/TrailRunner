@@ -6,7 +6,7 @@ import org.scalatest.{Matchers, WordSpec}
 class FieldSpec extends WordSpec with Matchers {
   "A Field" when {
     "set to any value" should {
-      var field = new model.fieldComponent.fieldBaseImpl.Field(1)
+      var field = new model.fieldComponent.fieldBaseImpl.Field(1, "Ground")
       "have value 1" in {
         field.value should be(1)
       }
@@ -28,7 +28,7 @@ class FieldSpec extends WordSpec with Matchers {
       }
     }
     "not set to any value" should {
-      val brokenField = Field(0)
+      val brokenField = Field(0, "Ground")
       "have value 0" in {
         brokenField.value should be(0)
       }
@@ -40,7 +40,7 @@ class FieldSpec extends WordSpec with Matchers {
       }
     }
     "not existing" should {
-      val nonExistingField = Field(-1)
+      val nonExistingField = Field(-1, "Ground")
       "have value -1" in {
         nonExistingField.value should be(-1)
       }

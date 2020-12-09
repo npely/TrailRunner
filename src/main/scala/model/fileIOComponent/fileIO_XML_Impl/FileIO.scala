@@ -8,6 +8,8 @@ import main.TrailRunnerModule
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import net.codingwell.scalaguice.InjectorExtensions._
+import play.api.libs.json.{JsArray, JsNumber, JsObject, Json}
+import src.main.TrailRunnerModule.TrailRunnerModule
 
 import scala.io.Source
 import scala.xml.{Elem, PrettyPrinter, XML}
@@ -70,5 +72,29 @@ class FileIO extends FileIOInterface{
     }
     fieldString += "</Fields>"
     XML.loadString(fieldString)
+  }
+
+  override def levelToJson(level: LevelInterface) = {
+    val levelObj = Json.obj(
+      "name" -> level.getName,
+      "size" -> JsNumber(level.dungeon.length),
+      "xPos" -> JsNumber(level.player.xPos),
+      "yPos" -> JsNumber(level.player.yPos),
+    )
+
+    var fields = new JsArray()
+    for (i <- 0 to level.dungeon.length - 1) {
+      for (j <- 0 to level.dungeon.length - 1) {
+        fields = fields.append(Json.obj(
+          "fieldvalue" -> level.dungeon(i)(j).value,
+          "fieldtype" -> level.dungeon(i)(j).fieldType
+        ))
+      }
+    }
+
+    Json.obj(
+      "level" -> levelObj,
+      "fieldvalues" -> fields
+    )
   }
 }

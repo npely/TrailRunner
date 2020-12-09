@@ -15,14 +15,24 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
     background = java.awt.Color.DARK_GRAY
 
     contents += new Menu("File") {
-      contents += new MenuItem(Action("Main menu") {controller.changeToMain()})
-      contents += new MenuItem(Action("Quit") { System.exit(0) })
-      contents += new MenuItem(Action("Save") { controller.save })
+      contents += new MenuItem(Action("Main menu") {
+        controller.changeToMain()
+      })
+      contents += new MenuItem(Action("Quit") {
+        System.exit(0)
+      })
+      contents += new MenuItem(Action("Save") {
+        controller.save
+      })
     }
 
     contents += new Menu("Edit") {
-      contents += new MenuItem(Action("Undo") {controller.undo })
-      contents += new MenuItem(Action("Redo") {controller.redo })
+      contents += new MenuItem(Action("Undo") {
+        controller.undo
+      })
+      contents += new MenuItem(Action("Redo") {
+        controller.redo
+      })
     }
   }
 
@@ -33,35 +43,55 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
     override val size = new Dimension(550, 550)
     background = java.awt.Color.BLACK
     for (i <- 0 until controller.level.rows; j <- 0 until controller.level.columns) {
-      contents += CellBuilder(i, j , controller)
+      contents += CellBuilder(i, j, controller)
     }
   }
 
   var upBtn = new Button("Up") {
     mnemonic = Key.W
     reactions += {
-      case e: ButtonClicked => controller.playerMoveUp()
+      case e: ButtonClicked => {
+        while ("Ice".equals(controller.level.dungeon(controller.player.yPos - 1)(controller.player.xPos).fieldType)) {
+          controller.playerMoveUp()
+        }
+        controller.playerMoveUp()
+      }
     }
   }
 
   var downBtn = new Button("Down") {
     mnemonic = Key.S
     reactions += {
-      case e: ButtonClicked => controller.playerMoveDown()
+      case e: ButtonClicked => {
+        while ("Ice".equals(controller.level.dungeon(controller.player.yPos + 1)(controller.player.xPos).fieldType)) {
+          controller.playerMoveDown()
+        }
+        controller.playerMoveDown()
+      }
     }
   }
 
   var leftBtn = new Button("Left") {
     mnemonic = Key.A
     reactions += {
-      case e: ButtonClicked => controller.playerMoveLeft()
+      case e: ButtonClicked => {
+        while ("Ice".equals(controller.level.dungeon(controller.player.yPos)(controller.player.xPos - 1).fieldType)) {
+          controller.playerMoveLeft()
+        }
+        controller.playerMoveLeft()
+      }
     }
   }
 
   var rightBtn = new Button("Right") {
     mnemonic = Key.D
     reactions += {
-      case e: ButtonClicked => controller.playerMoveRight()
+      case e: ButtonClicked => {
+        while ("Ice".equals(controller.level.dungeon(controller.player.yPos)(controller.player.xPos + 1).fieldType)) {
+          controller.playerMoveRight()
+        }
+        controller.playerMoveRight()
+      }
     }
   }
 
@@ -80,7 +110,7 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
   }
 
   def controlPanel(): FlowPanel = new FlowPanel() {
-    preferredSize = new Dimension(800,50)
+    preferredSize = new Dimension(800, 50)
     background = java.awt.Color.DARK_GRAY
     contents ++= List(upBtn, downBtn, leftBtn, rightBtn, undoBtn, redoBtn)
   }
@@ -92,4 +122,5 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
       add(controlPanel(), BorderPanel.Position.South)
     }
   }
+
 }

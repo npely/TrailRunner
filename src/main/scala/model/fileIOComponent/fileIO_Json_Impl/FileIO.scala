@@ -5,7 +5,8 @@ import com.google.inject.name.Names
 import main.TrailRunnerModule
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
-import play.api.libs.json.{JsArray, JsNumber, JsValue, Json}
+import play.api.libs.json.{JsArray, JsNumber, JsObject, JsValue, Json}
+import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.io.Source
@@ -35,13 +36,13 @@ class FileIO extends FileIOInterface {
     var zeile = 0
     var spalte = 0
     for (fieldvalue <- fieldvalues.value) {
-          val value = (fieldvalue \ "fieldvalue").get.toString().toInt
-          level.dungeon(zeile)(spalte).setValue(value)
-          spalte += 1
-          if(spalte % 10 == 0){
-            zeile += 1
-            spalte = 0
-          }
+      val value = (fieldvalue \ "fieldvalue").get.toString().toInt
+      level.dungeon(zeile)(spalte).setValue(value)
+      spalte += 1
+      if (spalte % 10 == 0) {
+        zeile += 1
+        spalte = 0
+      }
     }
 
     val playerX = (json \ "level" \ "xPos").as[Int]
@@ -58,7 +59,7 @@ class FileIO extends FileIOInterface {
     pw.close()
   }
 
-  def levelToJson(level: LevelInterface) = {
+  override def levelToJson(level: LevelInterface) = {
     val levelObj = Json.obj(
       "name" -> level.getName,
       "size" -> JsNumber(level.dungeon.length),
@@ -66,18 +67,19 @@ class FileIO extends FileIOInterface {
       "yPos" -> JsNumber(level.player.yPos),
     )
 
-    var fieldvalues = new JsArray()
+    var fields = new JsArray()
     for (i <- 0 to level.dungeon.length - 1) {
       for (j <- 0 to level.dungeon.length - 1) {
-        fieldvalues = fieldvalues.append(Json.obj(
-          "fieldvalue" -> level.dungeon(i)(j).value
+        fields = fields.append(Json.obj(
+          "fieldvalue" -> level.dungeon(i)(j).value,
+          "fieldtype" -> level.dungeon(i)(j).fieldType
         ))
       }
     }
 
     Json.obj(
       "level" -> levelObj,
-      "fieldvalues" -> fieldvalues
+      "fieldvalues" -> fields
     )
   }
 }

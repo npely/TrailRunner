@@ -13,6 +13,10 @@ class Level extends LevelInterface{
 
   override def win(): Boolean = false
 
+  override def standsPlayerInFrontOfOpenDoor(): Boolean = false
+
+  override def playerStandsOnDoor(): Boolean = false
+
   override def fillNullValues(): Unit = {}
 
   override def getName: String = "Mock"
@@ -28,4 +32,11 @@ class Level extends LevelInterface{
   override var winX: Int = 1
 
   override var winY: Int = 1
+
+  override var doorX: Int = 1
+
+  override var doorY: Int = 1
+
+  override var isDoorOpen: Boolean = false
+
 }
