@@ -1,4 +1,4 @@
-package src.main.TrailRunnerModule
+package main
 
 import com.google.inject.AbstractModule
 import com.google.inject.name.Names
@@ -7,9 +7,7 @@ import model.fieldComponent.FieldInterface
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl._
-import model.playerComponent.PlayerInterface
 import net.codingwell.scalaguice.ScalaModule
-import model.fileIOComponent.fileIO_Json_Impl.FileIO
 
 class TrailRunnerModule extends AbstractModule with ScalaModule {
 

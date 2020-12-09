@@ -2,6 +2,7 @@ package model.fileIOComponent.fileIO_Json_Impl
 
 import com.google.inject.Guice
 import com.google.inject.name.Names
+import main.TrailRunnerModule
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import play.api.libs.json.{JsArray, JsNumber, JsObject, JsValue, Json}

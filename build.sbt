@@ -1,8 +1,8 @@
 name := "TrailRunner"
 
-version := "0.6"
-
 organization := "de.htwg.se"
+
+version := "0.1"
 
 scalaVersion := "2.13.3"
 
