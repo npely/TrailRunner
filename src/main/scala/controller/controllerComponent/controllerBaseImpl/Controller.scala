@@ -65,6 +65,11 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     var count = 0
   }
 
+  def resetMoveCounter: Unit = {
+    moveCounter.typeOfMove = ""
+    moveCounter.count = 0
+  }
+
   def changeMoveCounter(direction: String): Unit = {
     if (moveCounter.typeOfMove == direction) {
       moveCounter.count += 1
