@@ -14,10 +14,10 @@ trait ControllerInterface extends Publisher {
   def changeToSelection(): Unit
   def changeToGame(): Unit
   def changeToMain(): Unit
-  def playerMoveUp(): Unit
-  def playerMoveDown(): Unit
-  def playerMoveRight(): Unit
-  def playerMoveLeft(): Unit
+  def playerMoveUp(): Boolean
+  def playerMoveDown(): Boolean
+  def playerMoveRight(): Boolean
+  def playerMoveLeft(): Boolean
   def fieldIsBroken: Boolean
   def fieldIsSet: Boolean
   def playerStandsOnField(): Unit

@@ -38,13 +38,13 @@ class Controller() extends ControllerInterface with Publisher {
 
   override def changeToMain(): Unit = {}
 
-  override def playerMoveUp(): Unit = {}
+  override def playerMoveUp(): Boolean = true
 
-  override def playerMoveDown(): Unit = {}
+  override def playerMoveDown(): Boolean = true
 
-  override def playerMoveRight(): Unit = {}
+  override def playerMoveRight(): Boolean = true
 
-  override def playerMoveLeft(): Unit = {}
+  override def playerMoveLeft(): Boolean = true
 
   override def fieldIsBroken: Boolean = false
 

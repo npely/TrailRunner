@@ -58,32 +58,40 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     publish(new Win)
   }
 
-  def playerMoveUp(): Unit = {
+  def playerMoveUp(): Boolean = {
     if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveUpCommand(this))
       publish(new DungeonChanged)
+      return true
     }
+    false
   }
 
-  def playerMoveDown(): Unit = {
+  def playerMoveDown(): Boolean = {
     if (level.dungeon(player.yPos + 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveDownCommand(this))
       publish(new DungeonChanged)
+      return true
     }
+    false
   }
 
-  def playerMoveRight(): Unit = {
+  def playerMoveRight(): Boolean = {
     if (level.dungeon(player.yPos)(player.xPos + 1).value >= -1) {
       undoManager.doStep(new MoveRightCommand(this))
       publish(new DungeonChanged)
+      return true
     }
+    false
   }
 
-  def playerMoveLeft(): Unit = {
+  def playerMoveLeft(): Boolean = {
     if (level.dungeon(player.yPos)(player.xPos - 1).value >= -1) {
       undoManager.doStep(new MoveLeftCommand(this))
       publish(new DungeonChanged)
+      return true
     }
+    false
   }
 
   def fieldIsBroken: Boolean = field.isBroken
