@@ -10,60 +10,63 @@ import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.io.Source
 
+
 class FileIO extends FileIOInterface {
 
-  override def load: LevelInterface = {
-    var level: LevelInterface = null
-    val source: String = Source.fromFile("level.json").getLines().mkString
-    val json: JsValue = Json.parse(source)
-    val name = (json \ "level" \ "name").as[String]
-    val injector = Guice.createInjector(new TrailRunnerModule)
-    name match {
-      case "Level1" => level = injector.instance[LevelInterface](Names.named("Level1"))
-      case "Level2" => level = injector.instance[LevelInterface](Names.named("Level2"))
-      case "Level3" => level = injector.instance[LevelInterface](Names.named("Level3"))
+  override def load(source: String): LevelInterface = {
+    var jsonString: String = ""
+    if ("".equals(source)) {
+      jsonString = Source.fromFile("level.json").getLines().mkString
+    } else {
+      jsonString = source
     }
-    /*for {
-      row <- 0 until level.dungeon.length;
-      col <- 0 until level.dungeon.length
-    } yield {
-      val fieldvalue = (json \ "level" \ "fields" \ "fieldvalue").as[Int]
-      level.dungeon(row)(col).setValue(fieldvalue)
-    }*/
-    val fieldvalues: JsArray = (json \ "fieldvalues").as[JsArray]
+    val json: JsValue = Json.parse(jsonString)
+    val name = (json \ "level" \ "name").as[String]
+    val size = (json \ "level" \ "size").as[Int]
+    val injector = Guice.createInjector(new TrailRunnerModule)
+    val level: LevelInterface = injector.instance[LevelInterface](Names.named(name))
+    val fields: JsArray = (json \ "fields").as[JsArray]
 
-    var zeile = 0
-    var spalte = 0
-    for (fieldvalue <- fieldvalues.value) {
-      val value = (fieldvalue \ "fieldvalue").get.toString().toInt
-      level.dungeon(zeile)(spalte).setValue(value)
-      spalte += 1
-      if (spalte % 10 == 0) {
-        zeile += 1
-        spalte = 0
+    var row = 0
+    var col = 0
+
+    for (field <- fields.value) {
+      level.dungeon(row)(col).value = (field \ "fieldvalue").as[Int]
+      level.dungeon(row)(col).fieldType = (field \ "fieldtype").as[String]
+      col += 1
+      if (col % size == 0) {
+        row += 1
+        col = 0
       }
     }
-
-    val playerX = (json \ "level" \ "xPos").as[Int]
-    val playerY = (json \ "level" \ "yPos").as[Int]
-    level.player.xPos = playerX
-    level.player.yPos = playerY
+    level.player.xPos = (json \ "level" \ "PxPos").as[Int]
+    level.player.yPos = (json \ "level" \ "PyPos").as[Int]
+    level.doorX = (json \ "level" \ "DxPos").as[Int]
+    level.doorY = (json \ "level" \ "DyPos").as[Int]
+    level.winX = (json \ "level" \ "WxPos").as[Int]
+    level.winY = (json \ "level" \ "WyPos").as[Int]
     level
   }
 
-  override def save(level: LevelInterface): Unit = {
+  override def save(level: LevelInterface): String = {
     import java.io._
+    val levelAsJson = Json.prettyPrint(levelToJson(level))
     val pw = new PrintWriter(new File("level.json"))
-    pw.write(Json.prettyPrint(levelToJson(level)))
+    pw.write(levelAsJson)
     pw.close()
+    levelAsJson
   }
 
   override def levelToJson(level: LevelInterface) = {
     val levelObj = Json.obj(
       "name" -> level.getName,
       "size" -> JsNumber(level.dungeon.length),
-      "xPos" -> JsNumber(level.player.xPos),
-      "yPos" -> JsNumber(level.player.yPos),
+      "PxPos" -> JsNumber(level.player.xPos),
+      "PyPos" -> JsNumber(level.player.yPos),
+      "DxPos" -> JsNumber(level.doorX),
+      "DyPos" -> JsNumber(level.doorY),
+      "WxPos" -> JsNumber(level.winX),
+      "WyPos" -> JsNumber(level.winY),
     )
 
     var fields = new JsArray()
@@ -78,7 +81,7 @@ class FileIO extends FileIOInterface {
 
     Json.obj(
       "level" -> levelObj,
-      "fieldvalues" -> fields
+      "fields" -> fields
     )
   }
 }

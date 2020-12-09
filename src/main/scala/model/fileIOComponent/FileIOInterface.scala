@@ -5,7 +5,7 @@ import play.api.libs.json.JsObject
 
 trait FileIOInterface {
 
-  def load: LevelInterface
-  def save(level: LevelInterface): Unit
+  def load(json: String): LevelInterface
+  def save(level: LevelInterface): String
   def levelToJson(level: LevelInterface): JsObject
 }

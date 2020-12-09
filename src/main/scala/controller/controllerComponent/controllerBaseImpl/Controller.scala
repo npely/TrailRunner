@@ -131,13 +131,13 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     fileIO.levelToJson(level)
   }
 
-  override def save: Unit = {
+  override def save: String = {
     fileIO.save(level)
   }
 
-  override def load: Unit = {
-    level = fileIO.load
-    initializeGame(level, true)
+  override def load(json: String, isOldGame: Boolean): Unit = {
+    level = fileIO.load(json)
+    initializeGame(level, isOldGame)
   }
 
   def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {

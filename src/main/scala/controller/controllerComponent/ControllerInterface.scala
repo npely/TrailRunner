@@ -33,8 +33,8 @@ trait ControllerInterface extends Publisher {
   def getLevelAsJson: JsObject
   def undo: Unit
   def redo: Unit
-  def save: Unit
-  def load: Unit
+  def save: String
+  def load(json: String, isOldGame: Boolean): Unit
   def fieldToString: String
   def levelToString: String
   def levelWin(): Boolean

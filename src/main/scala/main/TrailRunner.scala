@@ -8,6 +8,7 @@ import com.google.inject.Guice
 import controller.controllerComponent.{ControllerInterface, DungeonChanged}
 import javax.sound.sampled.AudioSystem
 
+import scala.io.Source
 import scala.io.StdIn.readLine
 
 object TrailRunner {
