@@ -8,8 +8,7 @@ import main.TrailRunnerModule
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import net.codingwell.scalaguice.InjectorExtensions._
-import play.api.libs.json.{JsArray, JsNumber, JsObject, Json}
-import src.main.TrailRunnerModule.TrailRunnerModule
+import play.api.libs.json.{JsArray, JsNumber, Json}
 
 import scala.io.Source
 import scala.xml.{Elem, PrettyPrinter, XML}
