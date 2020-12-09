@@ -20,7 +20,7 @@ import scala.swing.Publisher
 
 class Controller @Inject()() extends ControllerInterface with Publisher {
 
-  val injector: Injector = Guice.createInjector(new TrailRunnerModule)
+  val injector = Guice.createInjector(new TrailRunnerModule)
 
   var fileIO: FileIOInterface = injector.instance[FileIOInterface]
 

@@ -10,7 +10,6 @@ import scala.swing.Publisher
 
 trait ControllerInterface extends Publisher {
 
-  var injector: Injector
   var fileIO: FileIOInterface
   var player: PlayerInterface
   var field: FieldInterface
