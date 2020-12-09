@@ -58,3 +58,4 @@ class ChangeToGame extends Event
 class ChangeToMain extends Event
 class Lose extends Event
 class Win extends Event
+class Earthquake extends Event
