@@ -8,6 +8,7 @@ trait FieldInterface {
   var isPlayerOnField: Boolean
   def PlayerStandsOnField(): Unit
   def setValue(value : Int): Unit
+  def earthquake: Unit
   var value: Int
   var fieldType: String
 }

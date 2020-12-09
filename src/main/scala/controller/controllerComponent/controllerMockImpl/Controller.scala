@@ -28,6 +28,8 @@ class Controller() extends ControllerInterface with Publisher {
 
   var player: PlayerInterface = PlayerFactory.createPlayer1()
 
+  var hardcoreMode: Boolean = false
+
   override def playerToString: String = player.toString
 
   override def playerToGameString: String = player.toGameString
@@ -87,4 +89,7 @@ class Controller() extends ControllerInterface with Publisher {
   override def load: Unit = {}
 
   override def standsPlayerInFrontOfOpenDoor(): Boolean = false
+
+  override def earthquake(): Unit = {}
+
 }

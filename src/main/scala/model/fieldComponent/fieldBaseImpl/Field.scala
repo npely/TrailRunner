@@ -21,6 +21,12 @@ case class Field @Inject() (@Named("Zero") valu: Int, typ: String) extends Field
 
   def setValue(value : Int): Unit = this.value = value
 
+  def earthquake: Unit = {
+    if (isSet) {
+      this.value -= 1
+    }
+  }
+
   override def toString: String = {
     if (value == -99){
       return " |X| "

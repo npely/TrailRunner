@@ -1,4 +1,7 @@
 package controller.controllerComponent
+import com.google.inject.Injector
+import model.fieldComponent.FieldInterface
+import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import play.api.libs.json.JsObject
@@ -7,8 +10,12 @@ import scala.swing.Publisher
 
 trait ControllerInterface extends Publisher {
 
+  var injector: Injector
+  var fileIO: FileIOInterface
   var player: PlayerInterface
+  var field: FieldInterface
   var level: LevelInterface
+  var hardcoreMode: Boolean
   def playerToString: String
   def playerToGameString: String
   def changeToSelection(): Unit
@@ -39,6 +46,7 @@ trait ControllerInterface extends Publisher {
   def win(): Unit
   def lose(): Unit
   def standsPlayerInFrontOfOpenDoor(): Boolean
+  def earthquake(): Unit
 }
 
 
