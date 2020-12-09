@@ -5,8 +5,7 @@ import com.google.inject.name.Names
 import main.TrailRunnerModule
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
-import play.api.libs.json.{JsArray, JsNumber, JsObject, JsValue, Json}
-import src.main.TrailRunnerModule.TrailRunnerModule
+import play.api.libs.json.{JsArray, JsNumber, JsValue, Json}
 import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.io.Source
