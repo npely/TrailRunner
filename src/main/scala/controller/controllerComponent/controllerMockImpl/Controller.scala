@@ -2,6 +2,7 @@ package controller.controllerComponent.controllerMockImpl
 
 import com.google.inject.Guice
 import controller.controllerComponent.ControllerInterface
+import main.TrailRunnerModule
 import model.AllLevels
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
@@ -10,7 +11,6 @@ import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl.{Level, Level1}
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
-import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
 import play.api.libs.json.JsObject
 
@@ -40,13 +40,13 @@ class Controller() extends ControllerInterface with Publisher {
 
   override def changeToMain(): Unit = {}
 
-  override def playerMoveUp(): Unit = {}
+  override def playerMoveUp(): Boolean = true
 
-  override def playerMoveDown(): Unit = {}
+  override def playerMoveDown(): Boolean = true
 
-  override def playerMoveRight(): Unit = {}
+  override def playerMoveRight(): Boolean = true
 
-  override def playerMoveLeft(): Unit = {}
+  override def playerMoveLeft(): Boolean = true
 
   override def fieldIsBroken: Boolean = false
 

@@ -4,6 +4,7 @@ import java.io.{File, PrintWriter}
 
 import com.google.inject.Guice
 import com.google.inject.name.Names
+import main.TrailRunnerModule
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import net.codingwell.scalaguice.InjectorExtensions._

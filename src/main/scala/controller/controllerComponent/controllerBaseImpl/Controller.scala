@@ -3,6 +3,7 @@ package controller.controllerComponent.controllerBaseImpl
 import com.google.inject.{Guice, Inject, Injector}
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
+import main.TrailRunnerModule
 import model.levelComponent.levelBaseImpl.{Level, Level1}
 import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
 import model.AllLevels
@@ -12,7 +13,6 @@ import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import util.UndoManager
 import model.fileIOComponent.FileIOInterface
-import src.main.TrailRunnerModule.TrailRunnerModule
 import net.codingwell.scalaguice.InjectorExtensions._
 import play.api.libs.json.JsObject
 
@@ -60,32 +60,40 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     publish(new Win)
   }
 
-  def playerMoveUp(): Unit = {
+  def playerMoveUp(): Boolean = {
     if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveUpCommand(this))
       publish(new DungeonChanged)
+      return true
     }
+    false
   }
 
-  def playerMoveDown(): Unit = {
+  def playerMoveDown(): Boolean = {
     if (level.dungeon(player.yPos + 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveDownCommand(this))
       publish(new DungeonChanged)
+      return true
     }
+    false
   }
 
-  def playerMoveRight(): Unit = {
+  def playerMoveRight(): Boolean = {
     if (level.dungeon(player.yPos)(player.xPos + 1).value >= -1) {
       undoManager.doStep(new MoveRightCommand(this))
       publish(new DungeonChanged)
+      return true
     }
+    false
   }
 
-  def playerMoveLeft(): Unit = {
+  def playerMoveLeft(): Boolean = {
     if (level.dungeon(player.yPos)(player.xPos - 1).value >= -1) {
       undoManager.doStep(new MoveLeftCommand(this))
       publish(new DungeonChanged)
+      return true
     }
+    false
   }
 
   def fieldIsBroken: Boolean = field.isBroken
