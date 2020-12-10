@@ -65,20 +65,23 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     var count = 0
   }
 
-  def resetMoveCounter: Unit = {
+  def resetMoveCounter(): Unit = {
     moveCounter.typeOfMove = ""
     moveCounter.count = 0
   }
 
   def changeMoveCounter(direction: String): Unit = {
-    if (moveCounter.typeOfMove == direction) {
-      moveCounter.count += 1
-      if (moveCounter.count == 3 && hardcoreMode) {
-        publish(new Earthquake)
+    if (hardcoreMode) {
+      if (moveCounter.typeOfMove == direction) {
+        moveCounter.count += 1
+        if (moveCounter.count == 3) {
+          publish(new Earthquake)
+          resetMoveCounter()
+        }
+      } else {
+        moveCounter.typeOfMove = direction
+        moveCounter.count = 1
       }
-    } else {
-      moveCounter.typeOfMove = direction
-      moveCounter.count = 1
     }
   }
 
@@ -167,6 +170,8 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   }
 
   def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {
+    resetMoveCounter()
+    hardcoreMode = false
     this.level = level
     player = level.player
     playerStandsOnField()
@@ -198,5 +203,13 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
         level.dungeon(i)(j).earthquake
       }
     }
+  }
+
+  override def getHardcoreMode(): Boolean = {
+    hardcoreMode
+  }
+
+  override def setHardcoreMode(isHardcoreModeOn: Boolean): Unit = {
+    hardcoreMode = isHardcoreModeOn
   }
 }

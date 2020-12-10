@@ -15,7 +15,6 @@ trait ControllerInterface extends Publisher {
   var field: FieldInterface
   var level: LevelInterface
   var hardcoreMode: Boolean
-  def resetMoveCounter: Unit
   def playerToString: String
   def playerToGameString: String
   def changeToSelection(): Unit
@@ -47,6 +46,9 @@ trait ControllerInterface extends Publisher {
   def lose(): Unit
   def standsPlayerInFrontOfOpenDoor(): Boolean
   def earthquake(): Unit
+  def resetMoveCounter(): Unit
+  def getHardcoreMode(): Boolean
+  def setHardcoreMode(isHardcoreModeOn: Boolean): Unit
 }
 
 
