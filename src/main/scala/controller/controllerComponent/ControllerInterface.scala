@@ -4,7 +4,7 @@ import model.fieldComponent.FieldInterface
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
-import play.api.libs.json.JsObject
+import play.api.libs.json.{JsObject, JsValue}
 
 import scala.swing.Publisher
 
@@ -34,7 +34,7 @@ trait ControllerInterface extends Publisher {
   def undo: Unit
   def redo: Unit
   def save: String
-  def load(json: String, isOldGame: Boolean): Unit
+  def load(json: JsValue, isOldGame: Boolean): Unit
   def fieldToString: String
   def levelToString: String
   def levelWin(): Boolean

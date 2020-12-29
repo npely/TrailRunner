@@ -14,7 +14,7 @@ import model.playerComponent.PlayerInterface
 import util.UndoManager
 import model.fileIOComponent.FileIOInterface
 import net.codingwell.scalaguice.InjectorExtensions._
-import play.api.libs.json.JsObject
+import play.api.libs.json.{JsObject, JsValue}
 
 import scala.swing.Publisher
 
@@ -164,7 +164,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     fileIO.save(level)
   }
 
-  override def load(json: String, isOldGame: Boolean): Unit = {
+  override def load(json: JsValue, isOldGame: Boolean): Unit = {
     level = fileIO.load(json)
     initializeGame(level, isOldGame)
   }

@@ -1,6 +1,6 @@
 package model.fileIOComponent.fileIO_Json_Impl
 
-import com.google.inject.Guice
+import com.google.inject.{ConfigurationException, Guice}
 import com.google.inject.name.Names
 import main.TrailRunnerModule
 import model.fileIOComponent.FileIOInterface
@@ -13,18 +13,22 @@ import scala.io.Source
 
 class FileIO extends FileIOInterface {
 
-  override def load(source: String): LevelInterface = {
-    var jsonString: String = ""
-    if ("".equals(source)) {
-      jsonString = Source.fromFile("level.json").getLines().mkString
+  override def load(source: JsValue): LevelInterface = {
+    var json: JsValue = null
+    if (source == null) {
+      json = Json.parse(Source.fromFile("level.json").getLines().mkString)
     } else {
-      jsonString = source
+      json = source
     }
-    val json: JsValue = Json.parse(jsonString)
     val name = (json \ "level" \ "name").as[String]
     val size = (json \ "level" \ "size").as[Int]
     val injector = Guice.createInjector(new TrailRunnerModule)
-    val level: LevelInterface = injector.instance[LevelInterface](Names.named(name))
+    var level: LevelInterface = null
+    try {
+      level = injector.instance[LevelInterface](Names.named(name))
+    } catch {
+      case e: ConfigurationException => level = injector.instance[LevelInterface](Names.named("CustomLevel"))
+    }
     val fields: JsArray = (json \ "fields").as[JsArray]
 
     var row = 0
@@ -39,6 +43,7 @@ class FileIO extends FileIOInterface {
         col = 0
       }
     }
+    level.name = name
     level.player.xPos = (json \ "level" \ "PxPos").as[Int]
     level.player.yPos = (json \ "level" \ "PyPos").as[Int]
     level.doorX = (json \ "level" \ "DxPos").as[Int]
