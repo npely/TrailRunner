@@ -37,6 +37,7 @@ class FileIO extends FileIOInterface {
     for (field <- fields.value) {
       level.dungeon(row)(col).value = (field \ "fieldvalue").as[Int]
       level.dungeon(row)(col).fieldType = (field \ "fieldtype").as[String]
+      level.dungeon(row)(col).fog = (field \ "fog").as[Boolean]
       col += 1
       if (col % size == 0) {
         row += 1
@@ -79,7 +80,8 @@ class FileIO extends FileIOInterface {
       for (j <- 0 to level.dungeon.length - 1) {
         fields = fields.append(Json.obj(
           "fieldvalue" -> level.dungeon(i)(j).value,
-          "fieldtype" -> level.dungeon(i)(j).fieldType
+          "fieldtype" -> level.dungeon(i)(j).fieldType,
+          "fog" -> level.dungeon(i)(j).fog
         ))
       }
     }

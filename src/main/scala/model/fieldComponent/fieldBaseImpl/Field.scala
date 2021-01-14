@@ -9,6 +9,8 @@ case class Field @Inject() (@Named("Zero") valu: Int, typ: String) extends Field
 
   var fieldType = typ
 
+  var fog: Boolean = false
+
   def isBroken:Boolean = value == 0
 
   def isSet:Boolean = value >= 0

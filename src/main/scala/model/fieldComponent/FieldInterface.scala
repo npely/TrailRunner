@@ -11,4 +11,5 @@ trait FieldInterface {
   def earthquake: Unit
   var value: Int
   var fieldType: String
+  var fog: Boolean
 }
