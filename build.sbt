@@ -32,5 +32,5 @@ lazy val trailRunnerBase = (project in file(".")).settings(
     case x => MergeStrategy.first
   },
   assemblyJarName in assembly := "TrailRunner.jar",
-  mainClass in assembly := Some("de.htwg.se.TrailRunner")
+  mainClass in assembly := Some("main.TrailRunner")
 )
