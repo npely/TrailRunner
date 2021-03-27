@@ -4,7 +4,6 @@ import javax.inject.Inject
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.playerComponent.PlayerInterface
-import model.playerComponent.playerBaseImpl.PlayerFactory
 
 class Level6 @Inject() extends Level {
 

@@ -5,7 +5,7 @@ import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelec
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import main.TrailRunnerModule
 import model.levelComponent.levelBaseImpl.{Level, Level1}
-import model.playerComponent.playerBaseImpl.{Player, PlayerFactory}
+import model.playerComponent.playerBaseImpl.Player
 import model.AllLevels
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
@@ -130,9 +130,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
   def fieldIsSet: Boolean = field.isSet
 
   def playerStandsOnField(): Unit = {
-    field = level.dungeon(player.yPos)(player.xPos)
-    field.PlayerStandsOnField()
-    field.isPlayerOnField = true
+    this.field = level.dungeon(player.yPos)(player.xPos).PlayerWalksOnField()
   }
 
   def increaseFieldValueByOne(): Unit = {

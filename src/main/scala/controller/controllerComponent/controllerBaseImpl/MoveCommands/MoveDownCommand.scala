@@ -1,13 +1,14 @@
 package controller.controllerComponent.controllerBaseImpl.MoveCommands
 
 import controller.controllerComponent.controllerBaseImpl.Controller
+import model.fieldComponent.fieldBaseImpl.Field
 import util.Command
 
 class MoveDownCommand(controller: Controller) extends Command {
 
   override def doStep: Unit = {
     val level = controller.level
-    controller.field.isPlayerOnField = false
+    controller.field = controller.field.PlayerLeavesField()
     controller.player.moveDown()
     controller.playerStandsOnField()
     if (controller.standsPlayerInFrontOfOpenDoor) {
@@ -17,11 +18,11 @@ class MoveDownCommand(controller: Controller) extends Command {
 
   override def undoStep: Unit = {
     val level = controller.level
-    controller.field.isPlayerOnField = false
+    controller.field = controller.field.PlayerLeavesField()
     controller.increaseFieldValueByOne
     controller.player.moveUp()
     controller.field = controller.level.dungeon(controller.player.yPos)(controller.player.xPos)
-    controller.field.isPlayerOnField = true
+    controller.field = Field(controller.field.value, controller.field.fieldType, controller.field.fog, true)
     if (level.isDoorOpen) {
       level.dungeon(level.doorY)(level.doorX).value *= -1
       level.isDoorOpen = false
@@ -30,7 +31,7 @@ class MoveDownCommand(controller: Controller) extends Command {
 
   override def redoStep: Unit = {
     val level = controller.level
-    controller.field.isPlayerOnField = false
+    controller.field = controller.field.PlayerLeavesField()
     controller.player.moveDown()
     controller.playerStandsOnField()
     if (controller.standsPlayerInFrontOfOpenDoor) {

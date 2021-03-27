@@ -4,43 +4,33 @@ import javax.inject.Inject
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.playerComponent.PlayerInterface
-import model.playerComponent.playerBaseImpl.PlayerFactory
+import model.playerComponent.playerBaseImpl.Player
 
-class Level1 @Inject() extends Level {
+case class Level1 @Inject() (isDoorOpen: Boolean) extends Level {
 
-  override var name: String = "Level1"
-  override var playerName: String = "Pete"
-  override var startX: Int = 4
-  override var startY: Int = 5
-  override var winX: Int = 5
-  override var winY: Int = 4
-  override var doorX: Int = 5
-  override var doorY: Int = 3
+  val name: String = "Level1"
+  val winX: Int = 5
+  val winY: Int = 4
+  val doorX: Int = 5
+  val doorY: Int = 3
+  val player: PlayerInterface = Player(4, 5)
 
-  override val player: PlayerInterface = PlayerFactory.createPlayer1()
+  // Zeile 5 der Matrix
+  dungeon(4)(4) = Field(1, "Ground", false, false)
+  dungeon(winY)(winX) = Field(1, "Ground", false, false)
 
-  override val dungeon: Array[Array[FieldInterface]] = Array.ofDim[FieldInterface](rows, columns)
-
-  player.xPos = startX
-  player.yPos = startY
-
-  // Zeile 1 der Matrix
-  var field11 = Field(1, "Ground")
-  var field12 = Field(1, "Ground")
-
-
-  // Zeile 2 der Matrix
-  var field21 = Field(2, "Ground")
-  var field22 = Field(1, "Ground")
-
-
-  dungeon(4)(4) = field11
-  dungeon(winY)(winX) = field12
+  // Zeile 6 der Matrix
+  dungeon(4)(5) = Field(2, "Ground", false, false) //Start
+  dungeon(5)(5) = Field(1, "Ground", false, false)
 
   dungeon(doorY)(doorX) = fieldDoor
 
-  dungeon(startY)(startX) = field21
-  dungeon(5)(5) = field22
+  def standsPlayerInFrontOfOpenDoor(): Level1 = {
+    if (player.xPos == winX && player.yPos == winY && this.sum() == 0) {
+      Level1(true)
+    }
+    this
+  }
 
   fillNullValues()
 }

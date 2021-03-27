@@ -2,29 +2,24 @@ package model.playerComponent.playerBaseImpl
 
 import model.playerComponent.PlayerInterface
 
-trait Player extends PlayerInterface {
-
-  val id: Int
+case class Player(xPos: Int, yPos: Int) extends PlayerInterface {
 
   def toGameString: String = "P"
 
-  var xPos: Int = 0
-  var yPos: Int = 0
-
-  def moveRight(): Unit = {
-    xPos += 1
+  def moveRight(): Player = {
+    Player(this.xPos + 1, this.yPos)
   }
 
-  def moveLeft(): Unit = {
-    xPos -= 1
+  def moveLeft(): Player = {
+    Player(this.xPos - 1, this.yPos)
   }
 
-  def moveUp(): Unit = {
-    yPos -= 1
+  def moveUp(): Player = {
+    Player(this.xPos, this.yPos -1)
   }
 
-  def moveDown(): Unit = {
-    yPos += 1
+  def moveDown(): Player = {
+    Player(this.xPos, this.yPos +1)
   }
 }
 

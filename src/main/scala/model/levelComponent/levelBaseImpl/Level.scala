@@ -4,26 +4,15 @@ import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
-import model.playerComponent.playerBaseImpl.PlayerFactory
+import model.playerComponent.playerBaseImpl.Player
 
 abstract class Level extends LevelInterface {
 
-  var name: String
-  var playerName: String
-  var rows: Int = 10
-  var columns: Int = 10
-  var startX: Int
-  var startY: Int
-  var winX: Int
-  var winY: Int
-  var doorX: Int
-  var doorY: Int
-  var isDoorOpen: Boolean = false
-  val fieldDoor: FieldInterface = Field(-10, "Door")
-  val fieldDoorReversed: FieldInterface = Field(-20, "Door")
-
+  val rows: Int = 10
+  val columns: Int = 10
+  val fieldDoor: FieldInterface = Field(-10, "Door", false, false)
+  val fieldDoorReversed: FieldInterface = Field(-20, "Door", false, false)
   val dungeon: Array[Array[FieldInterface]] = Array.ofDim[FieldInterface](rows, columns)
-  val player: PlayerInterface = PlayerFactory.createPlayer1()
 
   def sum() : Int = {
     var sum = 0
@@ -56,18 +45,10 @@ abstract class Level extends LevelInterface {
     false
   }
 
-  def standsPlayerInFrontOfOpenDoor(): Boolean = {
-    if (player.xPos == winX && player.yPos == winY && this.sum() == 0) {
-      isDoorOpen = true
-      return true
-    }
-    false
-  }
-
   def fillNullValues() : Unit = {
     for (i <- 0 until rows; j <- 0 until columns) {
       if (dungeon(i)(j) == null) {
-        dungeon(i)(j) = Field(-99, "Wall")
+        dungeon(i)(j) = Field(-99, "Wall", false, false)
       }
     }
   }

@@ -1,17 +1,13 @@
 package model.playerComponent
 
-trait PlayerInterface {
-  def toGameString: String
-  def moveRight(): Unit
-  def moveLeft(): Unit
-  def moveUp(): Unit
-  def moveDown(): Unit
-  var xPos: Int
-  var yPos: Int
-}
+import model.playerComponent.playerBaseImpl.Player
 
-trait PlayerFactoryInterface {
-  def createPlayer1(): PlayerInterface
-  def createPlayer2(): PlayerInterface
-  def createPlayer3(): PlayerInterface
+trait PlayerInterface {
+  val xPos: Int
+  val yPos: Int
+  def toGameString: String
+  def moveRight(): PlayerInterface
+  def moveLeft(): PlayerInterface
+  def moveUp(): PlayerInterface
+  def moveDown(): PlayerInterface
 }

@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.playerComponent.PlayerInterface
-import model.playerComponent.playerBaseImpl.PlayerFactory
 
 class Level5 @Inject() extends Level {
 
