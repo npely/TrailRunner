@@ -21,8 +21,6 @@ object TrailRunner {
   def main(args: Array[String]): Unit = {
     var input: String = ""
 
-    //playSound("src/main/scala/aview/gui/audio/8-bit_Dungeon.wav")
-
     do {
       input = readLine()
     } while (tui.evaluateInput(input) != -1)

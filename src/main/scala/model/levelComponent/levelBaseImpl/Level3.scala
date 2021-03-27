@@ -4,51 +4,40 @@ import com.google.inject.Inject
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.playerComponent.PlayerInterface
+import model.playerComponent.playerBaseImpl.Player
 
-class Level3 @Inject() extends Level {
+case class Level3 @Inject() (isDoorOpen: Boolean) extends Level {
 
-  override var name: String = "Level3"
-  override var playerName: String = "Roland"
-  override var startX: Int = 1
-  override var startY: Int = 2
-  override var winX: Int = 2
-  override var winY: Int = 2
-  override var doorX: Int = 2
-  override var doorY: Int = 3
+  val name: String = "Level3"
+  val winX: Int = 2
+  val winY: Int = 2
+  val doorX: Int = 2
+  val doorY: Int = 3
 
-  override val player: PlayerInterface = PlayerFactory.createPlayer3()
-
-  override val dungeon: Array[Array[FieldInterface]] = Array.ofDim[FieldInterface](rows, columns)
-
-  player.xPos = startX
-  player.yPos = startY
+  override val player: PlayerInterface = Player(1,2)
 
   // Zeile 1 der Matrix
-  var field11 = Field(1, "Ground")
-  var field12 = Field(2, "Ground")
-  var field13 = Field(1, "Ground")
-  var field14 = Field(3, "Ground")
-  var field15 = Field(2, "Ground")
+  dungeon(1)(1) = Field(1, "Ground", false, false)
+  dungeon(1)(2) = Field(2, "Ground", false, false)
+  dungeon(1)(3) = Field(1, "Ground", false, false)
+  dungeon(1)(4) = Field(3, "Ground", false, false)
+  dungeon(1)(5) = Field(2, "Ground", false, false)
 
   // Zeile 2 der Matrix
-  var field21 = Field(1, "Ground")
-  var field22 = Field(3, "Ground")
-  var field23 = Field(2, "Ground")
-  var field24 = Field(3, "Ground")
-  var field25 = Field(2, "Ground")
+  dungeon(2)(1) = Field(1, "Ground", false, false) // Start
+  dungeon(winY)(winX) = Field(3, "Ground", false, false)
+  dungeon(2)(3) = Field(2, "Ground", false, false)
+  dungeon(2)(4) = Field(3, "Ground", false, false)
+  dungeon(2)(5) = Field(2, "Ground", false, false)
 
-  dungeon(1)(1) = field11
-  dungeon(1)(2) = field12
-  dungeon(1)(3) = field13
-  dungeon(1)(4) = field14
-  dungeon(1)(5) = field15
-
-  dungeon(startY)(startX) = field21
-  dungeon(winY)(winX) = field22
   dungeon(doorY)(doorX) = fieldDoorReversed
-  dungeon(2)(3) = field23
-  dungeon(2)(4) = field24
-  dungeon(2)(5) = field25
+
+  def standsPlayerInFrontOfOpenDoor(): Level3 = {
+    if (player.xPos == winX && player.yPos == winY && this.sum() == 0) {
+      Level3(true)
+    }
+    this
+  }
 
   fillNullValues()
 }

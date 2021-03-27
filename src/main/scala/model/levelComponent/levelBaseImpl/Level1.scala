@@ -20,7 +20,7 @@ case class Level1 @Inject() (isDoorOpen: Boolean) extends Level {
   dungeon(winY)(winX) = Field(1, "Ground", false, false)
 
   // Zeile 6 der Matrix
-  dungeon(4)(5) = Field(2, "Ground", false, false) //Start
+  dungeon(5)(4) = Field(2, "Ground", false, false) //Start
   dungeon(5)(5) = Field(1, "Ground", false, false)
 
   dungeon(doorY)(doorX) = fieldDoor

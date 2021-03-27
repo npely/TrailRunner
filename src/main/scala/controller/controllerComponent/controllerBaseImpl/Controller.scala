@@ -24,11 +24,11 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
 
   var fileIO: FileIOInterface = injector.instance[FileIOInterface]
 
-  var level: LevelInterface = new Level1
+  var level: LevelInterface = new Level1(false)
 
-  var field: FieldInterface = Field(0, "Ground")
+  var field: FieldInterface = Field(0, "Ground", false, false)
 
-  var player: PlayerInterface = PlayerFactory.createPlayer1()
+  var player: PlayerInterface = Player(0, 0)
 
   var hardcoreMode: Boolean = false
 

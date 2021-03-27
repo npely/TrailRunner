@@ -12,7 +12,7 @@ import net.codingwell.scalaguice.InjectorExtensions._
 import scala.io.Source
 
 
-case class FileIO extends FileIOInterface {
+case class FileIO() extends FileIOInterface {
 
   override def load(source: JsValue): LevelInterface = {
     var json: JsValue = null
