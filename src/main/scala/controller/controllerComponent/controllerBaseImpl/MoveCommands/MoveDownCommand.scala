@@ -12,7 +12,7 @@ class MoveDownCommand(controller: Controller) extends Command {
     controller.player.moveDown()
     controller.playerStandsOnField()
     if (controller.standsPlayerInFrontOfOpenDoor) {
-      level.dungeon(level.doorY)(level.doorX).value *= -1
+      switchDoor
     }
   }
 
@@ -24,8 +24,8 @@ class MoveDownCommand(controller: Controller) extends Command {
     controller.field = controller.level.dungeon(controller.player.yPos)(controller.player.xPos)
     controller.field = Field(controller.field.value, controller.field.fieldType, controller.field.fog, true)
     if (level.isDoorOpen) {
-      level.dungeon(level.doorY)(level.doorX).value *= -1
-      level.isDoorOpen = false
+      switchDoor
+      controller.level = level.closeDoor()
     }
   }
 
@@ -35,7 +35,13 @@ class MoveDownCommand(controller: Controller) extends Command {
     controller.player.moveDown()
     controller.playerStandsOnField()
     if (controller.standsPlayerInFrontOfOpenDoor) {
-      level.dungeon(level.doorY)(level.doorX).value *= -1
+      switchDoor
     }
+  }
+
+  def switchDoor: Unit = {
+    val level = controller.level
+    val old = level.dungeon(level.doorY)(level.doorX)
+    level.dungeon(level.doorY)(level.doorX) = old.setValue(old.value * -1)
   }
 }

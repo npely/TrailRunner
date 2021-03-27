@@ -11,6 +11,6 @@ trait FieldInterface {
   def isSet: Boolean
   def PlayerWalksOnField(): FieldInterface
   def PlayerLeavesField(): FieldInterface
-  def setValue(value : Int): FieldInterface
+  def setValue(newValue : Int): FieldInterface
   def earthquake: FieldInterface
 }

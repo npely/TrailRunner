@@ -10,20 +10,20 @@ case class Field @Inject() (@Named("Zero") value: Int, fieldType: String, fog: B
   def isSet:Boolean = value >= 0
 
   def PlayerWalksOnField(): Field = {
-    Field(this.value - 1, this.fieldType, this.fog, true)
+    this.copy(value = this.value - 1, isPlayerOnField = true)
   }
 
   def PlayerLeavesField(): Field = {
-    Field(this.value, this.fieldType, this.fog, false)
+    this.copy(isPlayerOnField = false)
   }
 
-  def setValue(value : Int): Field = {
-    Field(value, this.fieldType, this.fog, this.isPlayerOnField)
+  def setValue(newValue : Int): Field = {
+    this.copy(value = newValue)
   }
 
   def earthquake: Field = {
     if (value > 0 && value < 9) {
-      Field(0, this.fieldType, this.fog, this.isPlayerOnField)
+      this.copy(value = 0)
     }
     this
   }

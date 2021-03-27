@@ -1,9 +1,11 @@
 package aview
 
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
-import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3, Level4, Level5, Level6, Level7}
+import model.levelComponent.levelBaseImpl.Level
 
 import scala.io.{BufferedSource, Source}
+import scala.reflect.io
+import scala.reflect.io.File
 import scala.swing.Reactor
 import scala.util.{Failure, Success, Try}
 
@@ -74,31 +76,12 @@ class TUI(controller: ControllerInterface) extends Reactor {
 
   /**
    * Evaluates the input if user selects a level
-   * @param inputStr string read from console
+   * @param input string read from console
    * @return tuiMode
    */
-  def evaluateSelection(inputStr: String): Int = {
-    val input = inputStr
-    if(input.equals("1")) {
-      controller.initializeGame(new Level1, false)
-    }
-    else if(input.equals("2")) {
-      controller.initializeGame(new Level2, false)
-    }
-    else if(input.equals("3")) {
-      controller.initializeGame(new Level3, false)
-    }
-    else if(input.equals("4")) {
-      controller.initializeGame(new Level4, false)
-    }
-    else if(input.equals("5")) {
-      controller.initializeGame(new Level5, false)
-    }
-    else if(input.equals("6")) {
-      controller.initializeGame(new Level6, false)
-    }
-    else if(input.equals("7")) {
-      controller.initializeGame(new Level7, false)
+  def evaluateSelection(input: String): Int = {
+    if (input matches "[1-7]") {
+      controller.initializeGame(controller.start("Level%s".format(input)), false)
     }
     else {
       tuiMode = TUIMODE_INVALID_ACTION
@@ -227,8 +210,9 @@ class TUI(controller: ControllerInterface) extends Reactor {
   def buildOutputStringForSelectionMenu() : String = {
     output =  banner + "\n" + "Level Selection" + "\n"
     var index = 1
-    for (x <- controller.getImplementedLevels) {
-      output = output + "'" + index.toString + "': " + controller.showLevel(x) + "\n"
+
+    for (x <- 1 to 7) {
+      output += "'%s': Level %d\n".format(index.toString, x)
       index += 1
     }
     output += "\n"

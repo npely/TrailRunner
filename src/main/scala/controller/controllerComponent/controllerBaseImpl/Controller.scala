@@ -4,9 +4,8 @@ import com.google.inject.{Guice, Inject, Injector}
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Earthquake, Lose, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import main.TrailRunnerModule
-import model.levelComponent.levelBaseImpl.{Level, Level1}
+import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
-import model.AllLevels
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
@@ -24,7 +23,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
 
   var fileIO: FileIOInterface = injector.instance[FileIOInterface]
 
-  var level: LevelInterface = new Level1(false)
+  var level: LevelInterface = Level("Level1")
 
   var field: FieldInterface = Field(0, "Ground", false, false)
 
@@ -187,17 +186,13 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
 
   def levelLose(): Boolean = level.lose()
 
-  def levelGetName(): String = level.getName
+  def levelGetName(): String = level.name
 
-  def showLevel(level: LevelInterface): String = AllLevels.showLevel(level)
-
-  def getImplementedLevels: List[LevelInterface] = AllLevels.getImplementedList()
-
-  def standsPlayerInFrontOfOpenDoor(): Boolean = level.standsPlayerInFrontOfOpenDoor()
+  def standsPlayerInFrontOfOpenDoor(): Boolean = level.standsPlayerInFrontOfOpenDoor().isDoorOpen
 
   def earthquake(): Unit = {
     if (hardcoreMode) {
-      for (i <- 0 until level.rows; j <- 0 until level.columns) {
+      for (i <- 0 until level.size; j <- 0 until level.size) {
         level.dungeon(i)(j).earthquake
       }
     }
@@ -209,5 +204,9 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
 
   override def setHardcoreMode(isHardcoreModeOn: Boolean): Unit = {
     hardcoreMode = isHardcoreModeOn
+  }
+
+  override def start(name: String): LevelInterface = {
+    fileIO.start(name)
   }
 }

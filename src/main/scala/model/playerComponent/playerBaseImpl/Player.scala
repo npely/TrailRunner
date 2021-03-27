@@ -7,19 +7,19 @@ case class Player(xPos: Int, yPos: Int) extends PlayerInterface {
   def toGameString: String = "P"
 
   def moveRight(): Player = {
-    Player(this.xPos + 1, this.yPos)
+    this.copy(xPos = this.xPos + 1)
   }
 
   def moveLeft(): Player = {
-    Player(this.xPos - 1, this.yPos)
+    this.copy(xPos = this.xPos - 1)
   }
 
   def moveUp(): Player = {
-    Player(this.xPos, this.yPos -1)
+    this.copy(yPos = this.yPos - 1)
   }
 
   def moveDown(): Player = {
-    Player(this.xPos, this.yPos +1)
+    this.copy(yPos = this.yPos + 1)
   }
 }
 

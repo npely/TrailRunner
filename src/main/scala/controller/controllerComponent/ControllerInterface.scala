@@ -40,8 +40,6 @@ trait ControllerInterface extends Publisher {
   def levelWin(): Boolean
   def levelLose(): Boolean
   def levelGetName(): String
-  def showLevel(level: LevelInterface): String
-  def getImplementedLevels: List[LevelInterface]
   def win(): Unit
   def lose(): Unit
   def standsPlayerInFrontOfOpenDoor(): Boolean
@@ -49,6 +47,7 @@ trait ControllerInterface extends Publisher {
   def resetMoveCounter(): Unit
   def getHardcoreMode(): Boolean
   def setHardcoreMode(isHardcoreModeOn: Boolean): Unit
+  def start(name: String): LevelInterface
 }
 
 

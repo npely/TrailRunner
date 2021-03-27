@@ -3,7 +3,7 @@ package aview.gui
 import controller.controllerComponent.ControllerInterface
 import controller.controllerComponent.controllerBaseImpl.Controller
 import model.levelComponent._
-import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3, Level4, Level5, Level6, Level7}
+import model.levelComponent.levelBaseImpl.Level
 
 import scala.swing.event.{ButtonClicked, Key}
 import scala.swing.{Action, BorderPanel, BoxPanel, Button, Dimension, Menu, MenuBar, MenuItem, Orientation}
@@ -32,53 +32,41 @@ class LevelSelectionBuilder(controller: ControllerInterface, gui: GUI) {
     contents ++= List(
       new Button("Level 1") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level1, false)
+          case e: ButtonClicked => controller.initializeGame(controller.start("Level1"), false)
         }
       },
       new Button("Level 2") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level2, false)
+          case e: ButtonClicked => controller.initializeGame(controller.start("Level2"), false)
         }
       },
       new Button("Level 3") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level3, false)
+          case e: ButtonClicked => controller.initializeGame(controller.start("Level3"), false)
         }
       },
       new Button("Level 4") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level4, false)
+          case e: ButtonClicked => controller.initializeGame(controller.start("Level4"), false)
         }
       },
       new Button("Level 5") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level5, false)
+          case e: ButtonClicked => controller.initializeGame(controller.start("Level5"), false)
         }
       },
       new Button("Level 6") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level6, false)
+          case e: ButtonClicked => controller.initializeGame(controller.start("Level6"), false)
         }
       },
       new Button("Level 7") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(new Level7, false)
+          case e: ButtonClicked => controller.initializeGame(controller.start("Level7"), false)
         }
       }
     )
   }
-
-  /*var btnList: List[Button]
-
-  def getLevelList: List[Button] = {
-    for (e <- controller.getImplementedLevels) {
-      val level = new Button(controller.levelGetName()) {
-        reactions += {
-          case e: ButtonClicked => //TODO
-        }
-        btnList.appended(level)
-    }
-  }*/
 
   def getPanel(): BorderPanel = {
     new BorderPanel {

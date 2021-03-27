@@ -36,13 +36,13 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
     }
   }
 
-  var cells: Array[Array[CellBuilder]] = Array.ofDim[CellBuilder](controller.level.rows, controller.level.columns)
+  var cells: Array[Array[CellBuilder]] = Array.ofDim[CellBuilder](controller.level.size, controller.level.size)
 
 
-  def dungeonGrid: GridPanel = new GridPanel(controller.level.rows, controller.level.columns) {
+  def dungeonGrid: GridPanel = new GridPanel(controller.level.size, controller.level.size) {
     override val size = new Dimension(550, 550)
     background = java.awt.Color.BLACK
-    for (i <- 0 until controller.level.rows; j <- 0 until controller.level.columns) {
+    for (i <- 0 until controller.level.size; j <- 0 until controller.level.size) {
       contents += CellBuilder(i, j, controller)
     }
   }

@@ -1,35 +1,38 @@
 package model.fileIOComponent.fileIO_Json_Impl
 
-import com.google.inject.{ConfigurationException, Guice}
-import com.google.inject.name.Names
-import main.TrailRunnerModule
+import com.google.inject.Inject
 import model.fieldComponent.fieldBaseImpl.Field
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
-import play.api.libs.json.{JsArray, JsNumber, JsValue, Json}
-import net.codingwell.scalaguice.InjectorExtensions._
-
+import model.levelComponent.levelBaseImpl.Level
+import model.playerComponent.playerBaseImpl.Player
+import play.api.libs.json.{JsArray, JsBoolean, JsNumber, JsValue, Json}
 import scala.io.Source
 
+case class FileIO @Inject()() extends FileIOInterface {
 
-case class FileIO() extends FileIOInterface {
+  override def start(name: String): LevelInterface = {
+    val json: JsValue = Json.parse(Source.fromFile("src/main/resources/levels/%s.json".format(name)).getLines().mkString)
+    load(json)
+  }
 
   override def load(source: JsValue): LevelInterface = {
     var json: JsValue = null
     if (source == null) {
-      json = Json.parse(Source.fromFile("level.json").getLines().mkString)
+      json = Json.parse(Source.fromFile("src/main/resources/scores/last-score.json").getLines().mkString)
     } else {
       json = source
     }
     val name = (json \ "level" \ "name").as[String]
     val size = (json \ "level" \ "size").as[Int]
-    val injector = Guice.createInjector(new TrailRunnerModule)
-    var level: LevelInterface = null
-    try {
-      level = injector.instance[LevelInterface](Names.named(name))
-    } catch {
-      case e: ConfigurationException => level = injector.instance[LevelInterface](Names.named("CustomLevel"))
-    }
+    val xPos = (json \ "level" \ "PxPos").as[Int]
+    val yPos = (json \ "level" \ "PyPos").as[Int]
+    val doorX = (json \ "level" \ "DxPos").as[Int]
+    val doorY = (json \ "level" \ "DyPos").as[Int]
+    val winX = (json \ "level" \ "WxPos").as[Int]
+    val winY = (json \ "level" \ "WyPos").as[Int]
+    val isDoorOpen = (json \ "level" \ "Open").as[Boolean]
+    val level = Level(name, Player (xPos, yPos), winX, winY, doorX, doorY, isDoorOpen)
     val fields: JsArray = (json \ "fields").as[JsArray]
 
     var row = 0
@@ -43,20 +46,13 @@ case class FileIO() extends FileIOInterface {
         col = 0
       }
     }
-    level.name = name
-    level.player.xPos = (json \ "level" \ "PxPos").as[Int]
-    level.player.yPos = (json \ "level" \ "PyPos").as[Int]
-    level.doorX = (json \ "level" \ "DxPos").as[Int]
-    level.doorY = (json \ "level" \ "DyPos").as[Int]
-    level.winX = (json \ "level" \ "WxPos").as[Int]
-    level.winY = (json \ "level" \ "WyPos").as[Int]
     level
   }
 
   override def save(level: LevelInterface): String = {
     import java.io._
     val levelAsJson = Json.prettyPrint(levelToJson(level))
-    val pw = new PrintWriter(new File("level.json"))
+    val pw = new PrintWriter(new File("src/main/resources/scores/last-score.json"))
     pw.write(levelAsJson)
     pw.close()
     levelAsJson
@@ -64,7 +60,7 @@ case class FileIO() extends FileIOInterface {
 
   override def levelToJson(level: LevelInterface) = {
     val levelObj = Json.obj(
-      "name" -> level.getName,
+      "name" -> level.name,
       "size" -> JsNumber(level.dungeon.length),
       "PxPos" -> JsNumber(level.player.xPos),
       "PyPos" -> JsNumber(level.player.yPos),
@@ -72,6 +68,7 @@ case class FileIO() extends FileIOInterface {
       "DyPos" -> JsNumber(level.doorY),
       "WxPos" -> JsNumber(level.winX),
       "WyPos" -> JsNumber(level.winY),
+      "Open" -> JsBoolean(level.isDoorOpen)
     )
 
     var fields = new JsArray()
