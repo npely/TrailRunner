@@ -22,6 +22,8 @@ class TrailRunnerModule extends AbstractModule with ScalaModule {
     bind[LevelInterface].annotatedWithName("Level2").toInstance(new Level2)
     bind[LevelInterface].annotatedWithName("Level3").toInstance(new Level3)
     bind[LevelInterface].annotatedWithName("Level4").toInstance(new Level4)
+    bind[LevelInterface].annotatedWithName("Level5").toInstance(new Level5)
+    bind[LevelInterface].annotatedWithName("CustomLevel").toInstance(new CustomLevel)
 
     //Use XML:
     //bind[FileIOInterface].to[model.fileIOComponent.fileIO_XML_Impl.FileIO]

@@ -24,7 +24,7 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
   var isDoor: Boolean = x == controller.level.doorX && y == controller.level.doorY
 
   var label: Label = new Label {
-    override val size = new Dimension(55,55)
+    override val size = new Dimension(55, 55)
     background = java.awt.Color.BLACK
   }
 
@@ -37,7 +37,7 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
 
     reactions += {
       case _: DungeonChanged =>
-        if (isDoor || myField.value != actualValue || actualPlayerStatus != myField.isPlayerOnField){
+        if (isDoor || myField.value != actualValue || actualPlayerStatus != myField.isPlayerOnField) {
           redrawCell()
         }
     }
@@ -53,7 +53,11 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
   def setCellPicture(): Unit = {
     if (myField.value >= -20 && myField.value <= 20) {
       if (myField.fieldType.equals("Door") || !myField.isPlayerOnField) {
-        myPicture = ImageIO.read(new File(path + myField.fieldType + "_" + myField.value + ".png"))
+        if (myField.fog) {
+          myPicture = ImageIO.read(new File(path + myField.fieldType + "_" + "Fog" + ".png"))
+        } else {
+          myPicture = ImageIO.read(new File(path + myField.fieldType + "_" + myField.value + ".png"))
+        }
       } else {
         myPicture = ImageIO.read(new File(path + myField.fieldType + "_" + myField.value + "_P.png"))
       }

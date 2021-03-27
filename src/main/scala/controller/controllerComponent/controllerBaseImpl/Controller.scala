@@ -1,7 +1,7 @@
 package controller.controllerComponent.controllerBaseImpl
 
 import com.google.inject.{Guice, Inject, Injector}
-import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
+import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Earthquake, Lose, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
 import main.TrailRunnerModule
 import model.levelComponent.levelBaseImpl.{Level, Level1}
@@ -14,7 +14,7 @@ import model.playerComponent.PlayerInterface
 import util.UndoManager
 import model.fileIOComponent.FileIOInterface
 import net.codingwell.scalaguice.InjectorExtensions._
-import play.api.libs.json.JsObject
+import play.api.libs.json.{JsObject, JsValue}
 
 import scala.swing.Publisher
 
@@ -60,10 +60,36 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     publish(new Win)
   }
 
+  object moveCounter {
+    var typeOfMove = ""
+    var count = 0
+  }
+
+  def resetMoveCounter(): Unit = {
+    moveCounter.typeOfMove = ""
+    moveCounter.count = 0
+  }
+
+  def changeMoveCounter(direction: String): Unit = {
+    if (hardcoreMode) {
+      if (moveCounter.typeOfMove == direction) {
+        moveCounter.count += 1
+        if (moveCounter.count == 3) {
+          publish(new Earthquake)
+          resetMoveCounter()
+        }
+      } else {
+        moveCounter.typeOfMove = direction
+        moveCounter.count = 1
+      }
+    }
+  }
+
   def playerMoveUp(): Boolean = {
     if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveUpCommand(this))
       publish(new DungeonChanged)
+      changeMoveCounter("up")
       return true
     }
     false
@@ -73,6 +99,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     if (level.dungeon(player.yPos + 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveDownCommand(this))
       publish(new DungeonChanged)
+      changeMoveCounter("down")
       return true
     }
     false
@@ -82,6 +109,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     if (level.dungeon(player.yPos)(player.xPos + 1).value >= -1) {
       undoManager.doStep(new MoveRightCommand(this))
       publish(new DungeonChanged)
+      changeMoveCounter("right")
       return true
     }
     false
@@ -91,6 +119,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     if (level.dungeon(player.yPos)(player.xPos - 1).value >= -1) {
       undoManager.doStep(new MoveLeftCommand(this))
       publish(new DungeonChanged)
+      changeMoveCounter("left")
       return true
     }
     false
@@ -131,16 +160,18 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     fileIO.levelToJson(level)
   }
 
-  override def save: Unit = {
+  override def save: String = {
     fileIO.save(level)
   }
 
-  override def load: Unit = {
-    level = fileIO.load
-    initializeGame(level, true)
+  override def load(json: JsValue, isOldGame: Boolean): Unit = {
+    level = fileIO.load(json)
+    initializeGame(level, isOldGame)
   }
 
   def initializeGame(level: LevelInterface, loaded: Boolean): Unit = {
+    resetMoveCounter()
+    hardcoreMode = false
     this.level = level
     player = level.player
     playerStandsOnField()
@@ -172,5 +203,13 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
         level.dungeon(i)(j).earthquake
       }
     }
+  }
+
+  override def getHardcoreMode(): Boolean = {
+    hardcoreMode
+  }
+
+  override def setHardcoreMode(isHardcoreModeOn: Boolean): Unit = {
+    hardcoreMode = isHardcoreModeOn
   }
 }

@@ -8,6 +8,7 @@ import com.google.inject.Guice
 import controller.controllerComponent.{ControllerInterface, DungeonChanged}
 import javax.sound.sampled.AudioSystem
 
+import scala.io.Source
 import scala.io.StdIn.readLine
 
 object TrailRunner {
@@ -20,7 +21,7 @@ object TrailRunner {
   def main(args: Array[String]): Unit = {
     var input: String = ""
 
-    playSound("src/main/scala/aview/gui/audio/8-bit_Dungeon.wav")
+    //playSound("src/main/scala/aview/gui/audio/8-bit_Dungeon.wav")
 
     do {
       input = readLine()

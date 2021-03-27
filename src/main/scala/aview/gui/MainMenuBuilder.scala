@@ -22,7 +22,7 @@ class MainMenuBuilder(controller: ControllerInterface, gui: GUI) {
   var loadGameBtn = new Button("Load Game") {
     reactions += {
       case e: ButtonClicked => {
-        controller.load
+        controller.load(null, true)
       }
     }
   }

@@ -9,21 +9,23 @@ case class Field @Inject() (@Named("Zero") valu: Int, typ: String) extends Field
 
   var fieldType = typ
 
+  var fog: Boolean = false
+
   def isBroken:Boolean = value == 0
 
   def isSet:Boolean = value >= 0
 
   var isPlayerOnField: Boolean = false
 
-  def PlayerStandsOnField():Unit = {
+  def PlayerStandsOnField(): Unit = {
     value -= 1
   }
 
   def setValue(value : Int): Unit = this.value = value
 
   def earthquake: Unit = {
-    if (isSet) {
-      this.value -= 1
+    if (value > 0 && value < 9) {
+      value = 0
     }
   }
 

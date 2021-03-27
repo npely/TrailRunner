@@ -16,6 +16,7 @@ trait LevelInterface {
   def getName: String
   def toString: String
   val dungeon: Array[Array[FieldInterface]]
+  var name: String
   val player: PlayerInterface
   var rows: Int
   var columns: Int

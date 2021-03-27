@@ -1,7 +1,7 @@
 package aview
 
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
-import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3, Level4, Level5}
+import model.levelComponent.levelBaseImpl.{Level, Level1, Level2, Level3, Level4, Level5, Level6, Level7}
 
 import scala.io.{BufferedSource, Source}
 import scala.swing.Reactor
@@ -93,6 +93,12 @@ class TUI(controller: ControllerInterface) extends Reactor {
     }
     else if(input.equals("5")) {
       controller.initializeGame(new Level5, false)
+    }
+    else if(input.equals("6")) {
+      controller.initializeGame(new Level6, false)
+    }
+    else if(input.equals("7")) {
+      controller.initializeGame(new Level7, false)
     }
     else {
       tuiMode = TUIMODE_INVALID_ACTION

@@ -4,7 +4,7 @@ import model.fieldComponent.FieldInterface
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
-import play.api.libs.json.JsObject
+import play.api.libs.json.{JsObject, JsValue}
 
 import scala.swing.Publisher
 
@@ -33,8 +33,8 @@ trait ControllerInterface extends Publisher {
   def getLevelAsJson: JsObject
   def undo: Unit
   def redo: Unit
-  def save: Unit
-  def load: Unit
+  def save: String
+  def load(json: JsValue, isOldGame: Boolean): Unit
   def fieldToString: String
   def levelToString: String
   def levelWin(): Boolean
@@ -46,6 +46,9 @@ trait ControllerInterface extends Publisher {
   def lose(): Unit
   def standsPlayerInFrontOfOpenDoor(): Boolean
   def earthquake(): Unit
+  def resetMoveCounter(): Unit
+  def getHardcoreMode(): Boolean
+  def setHardcoreMode(isHardcoreModeOn: Boolean): Unit
 }
 
 
