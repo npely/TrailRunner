@@ -1,6 +1,5 @@
 package model.fileIOComponent.fileIO_Json_Impl
 
-import com.google.inject.Inject
 import model.fieldComponent.fieldBaseImpl.Field
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
@@ -9,7 +8,7 @@ import model.playerComponent.playerBaseImpl.Player
 import play.api.libs.json.{JsArray, JsBoolean, JsNumber, JsValue, Json}
 import scala.io.Source
 
-case class FileIO @Inject()() extends FileIOInterface {
+class FileIO extends FileIOInterface {
 
   override def start(name: String): LevelInterface = {
     val json: JsValue = Json.parse(Source.fromFile("src/main/resources/levels/%s.json".format(name)).getLines().mkString)

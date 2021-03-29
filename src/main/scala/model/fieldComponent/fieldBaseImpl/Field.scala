@@ -3,7 +3,7 @@ import com.google.inject.Inject
 import com.google.inject.name.Named
 import model.fieldComponent.FieldInterface
 
-case class Field @Inject() (@Named("Zero") value: Int, fieldType: String, fog: Boolean, isPlayerOnField: Boolean) extends FieldInterface {
+case class Field @Inject() (value: Int, fieldType: String, fog: Boolean, isPlayerOnField: Boolean) extends FieldInterface {
 
   def isBroken:Boolean = value == 0
 

@@ -12,12 +12,13 @@ import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import util.UndoManager
 import model.fileIOComponent.FileIOInterface
+import model.fileIOComponent.fileIO_Json_Impl.FileIO
 import net.codingwell.scalaguice.InjectorExtensions._
 import play.api.libs.json.{JsObject, JsValue}
 
 import scala.swing.Publisher
 
-class Controller @Inject()() extends ControllerInterface with Publisher {
+class Controller @Inject() extends ControllerInterface with Publisher {
 
   val injector = Guice.createInjector(new TrailRunnerModule)
 

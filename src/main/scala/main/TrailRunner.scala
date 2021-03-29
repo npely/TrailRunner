@@ -12,7 +12,9 @@ import scala.io.Source
 import scala.io.StdIn.readLine
 
 object TrailRunner {
+  print("Vor dem Injector")
   val injector = Guice.createInjector(new TrailRunnerModule)
+  print("Nach dem Injector")
   val controller = injector.getInstance(classOf[ControllerInterface])
   val gui = new GUI(controller)
   val tui = new TUI(controller)

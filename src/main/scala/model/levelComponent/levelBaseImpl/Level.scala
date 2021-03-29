@@ -41,13 +41,13 @@ case class Level @Inject() (name: String = "Level", player: PlayerInterface = Pl
 
   def standsPlayerInFrontOfOpenDoor(): Level = {
     if (player.xPos == winX && player.yPos == winY && this.sum() == 0) {
-      this.copy(isDoorOpen =  true)
+      this.copy(isDoorOpen = true)
     }
     this
   }
 
   def closeDoor() : Level = {
-    this.copy(isDoorOpen =  false)
+    this.copy(isDoorOpen = false)
   }
 
   override def toString: String = dungeon.map(_.mkString).mkString("\n")

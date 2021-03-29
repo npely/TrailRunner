@@ -12,7 +12,7 @@ import net.codingwell.scalaguice.ScalaModule
 class TrailRunnerModule extends AbstractModule with ScalaModule {
 
   override def configure() = {
-    bindConstant().annotatedWith(Names.named("Zero")).to(0)
+    //bindConstant().annotatedWith(Names.named("Zero")).to(0)
     bind[ControllerInterface].to[controller.controllerComponent.controllerBaseImpl.Controller]
     bind[FieldInterface].to[model.fieldComponent.fieldBaseImpl.Field]
     bind[LevelInterface].to[model.levelComponent.levelBaseImpl.Level]
