@@ -24,7 +24,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   var fileIO: FileIOInterface = injector.instance[FileIOInterface]
 
-  var level: LevelInterface = Level("Level1")
+  var level: LevelInterface = null
 
   var field: FieldInterface = Field(0, "Ground", false, false)
 

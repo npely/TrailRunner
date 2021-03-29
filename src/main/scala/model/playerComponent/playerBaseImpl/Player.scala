@@ -1,8 +1,10 @@
 package model.playerComponent.playerBaseImpl
 
+import com.google.inject.Inject
+import com.google.inject.name.Named
 import model.playerComponent.PlayerInterface
 
-case class Player(xPos: Int, yPos: Int) extends PlayerInterface {
+case class Player @Inject() (@Named("Zero") xPos: Int, @Named("Zero") yPos: Int) extends PlayerInterface {
 
   def toGameString: String = "P"
 

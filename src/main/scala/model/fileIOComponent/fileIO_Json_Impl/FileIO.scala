@@ -29,7 +29,7 @@ class FileIO extends FileIOInterface {
     val winX = (json \ "level" \ "WxPos").as[Int]
     val winY = (json \ "level" \ "WyPos").as[Int]
     val isDoorOpen = (json \ "level" \ "Open").as[Boolean]
-    val level = Level(name, Player (xPos, yPos), winX, winY, doorX, doorY, isDoorOpen)
+    val level = Level(name, Player (xPos, yPos), winX, winY, doorX, doorY, isDoorOpen, 10)
     val fields: JsArray = (json \ "fields").as[JsArray]
 
     var row = 0

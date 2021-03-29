@@ -1,13 +1,14 @@
 package model.levelComponent.levelBaseImpl
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.Player
 
-case class Level @Inject() (name: String = "Level", player: PlayerInterface = Player(0, 0), winX: Int = 0, winY: Int = 0, doorX: Int = 0, doorY: Int = 0, isDoorOpen: Boolean = false, size: Int = 10) extends LevelInterface {
+case class Level @Inject() (@Named("Level") name: String, player: PlayerInterface, @Named("Zero") winX: Int, @Named("Zero") winY: Int, @Named("Zero") doorX: Int, @Named("Zero") doorY: Int, @Named("False") isDoorOpen: Boolean, @Named("Ten") size: Int) extends LevelInterface {
 
   val dungeon: Array[Array[FieldInterface]] = Array.ofDim[FieldInterface](size, size)
 
