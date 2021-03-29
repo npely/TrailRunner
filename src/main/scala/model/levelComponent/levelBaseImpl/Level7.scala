@@ -24,7 +24,7 @@ class Level7 @Inject() extends Level {
   player.xPos = startX
   player.yPos = startY
 
-  // Zeile 1 der Matrix
+  /*// Zeile 1 der Matrix
   var field11 = Field(3, "Snow")
   var field12 = Field(4, "Ice")
   var field18 = Field(1, "Snow")
@@ -159,7 +159,7 @@ class Level7 @Inject() extends Level {
   dungeon(8)(5) = field85
   dungeon(8)(6) = field86
   dungeon(8)(7) = field87
-  dungeon(8)(8) = field88
+  dungeon(8)(8) = field88*/
 
   fillNullValues()
 }

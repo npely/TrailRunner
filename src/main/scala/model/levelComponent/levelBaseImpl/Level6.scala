@@ -24,7 +24,7 @@ class Level6 @Inject() extends Level {
   player.xPos = startX
   player.yPos = startY
 
-  // Zeile 1 der Matrix
+  /*// Zeile 1 der Matrix
   var field11 = Field(1, "Ground")
   field11.fog = true
   var field12 = Field(1, "Ground")
@@ -44,7 +44,7 @@ class Level6 @Inject() extends Level {
   dungeon(doorY)(doorX) = fieldDoor
 
   dungeon(startY)(startX) = field21
-  dungeon(5)(5) = field22
+  dungeon(5)(5) = field22*/
 
   fillNullValues()
 }

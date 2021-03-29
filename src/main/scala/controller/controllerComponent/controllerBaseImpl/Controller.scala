@@ -26,7 +26,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
 
   var level: LevelInterface = new Level1
 
-  var field: FieldInterface = Field(0, "Ground")
+  var field: FieldInterface = Field(0, "Ground", false, false)
 
   var player: PlayerInterface = PlayerFactory.createPlayer1()
 
@@ -129,10 +129,8 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
 
   def fieldIsSet: Boolean = field.isSet
 
-  def playerStandsOnField(): Unit = {
-    field = level.dungeon(player.yPos)(player.xPos)
-    field.PlayerStandsOnField()
-    field.isPlayerOnField = true
+  def playerWalksOnField(): Unit = {
+    field = level.dungeon(player.yPos)(player.xPos).PlayerWalksOnField()
   }
 
   def increaseFieldValueByOne(): Unit = {
@@ -174,7 +172,7 @@ class Controller @Inject()() extends ControllerInterface with Publisher {
     hardcoreMode = false
     this.level = level
     player = level.player
-    playerStandsOnField()
+    playerWalksOnField()
     if (loaded) {
       increaseFieldValueByOne()
     }

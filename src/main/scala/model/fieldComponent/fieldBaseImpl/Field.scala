@@ -3,30 +3,34 @@ import com.google.inject.Inject
 import com.google.inject.name.Named
 import model.fieldComponent.FieldInterface
 
-case class Field @Inject() (@Named("Zero") valu: Int, typ: String) extends FieldInterface {
-
-  var value = valu
-
-  var fieldType = typ
-
-  var fog: Boolean = false
+case class Field @Inject() (@Named("Zero") value: Int, fieldType: String = "", fog: Boolean = false, isPlayerOnField: Boolean = false) extends FieldInterface {
 
   def isBroken:Boolean = value == 0
 
   def isSet:Boolean = value >= 0
 
-  var isPlayerOnField: Boolean = false
-
-  def PlayerStandsOnField(): Unit = {
-    value -= 1
+  override def PlayerWalksOnField(): FieldInterface = {
+    this.copy(value = this.value - 1, isPlayerOnField = true)
   }
 
-  def setValue(value : Int): Unit = this.value = value
+  override def PlayerLeavesField(): FieldInterface = {
+    this.copy(isPlayerOnField = false)
+  }
 
-  def earthquake: Unit = {
+  def setValue(newValue : Int): Field = this.copy(value = newValue)
+
+  def earthquake: Field = {
     if (value > 0 && value < 9) {
-      value = 0
+      this.copy(value = 0)
     }
+    this
+  }
+
+  override def switchIfDoor: FieldInterface = {
+    if (value > 8 || value < -8) {
+      this.copy(value = this.value * -1)
+    }
+    this
   }
 
   override def toString: String = {

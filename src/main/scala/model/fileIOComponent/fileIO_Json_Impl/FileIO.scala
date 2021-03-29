@@ -3,6 +3,7 @@ package model.fileIOComponent.fileIO_Json_Impl
 import com.google.inject.{ConfigurationException, Guice}
 import com.google.inject.name.Names
 import main.TrailRunnerModule
+import model.fieldComponent.fieldBaseImpl.Field
 import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import play.api.libs.json.{JsArray, JsNumber, JsValue, Json}
@@ -35,9 +36,7 @@ class FileIO extends FileIOInterface {
     var col = 0
 
     for (field <- fields.value) {
-      level.dungeon(row)(col).value = (field \ "fieldvalue").as[Int]
-      level.dungeon(row)(col).fieldType = (field \ "fieldtype").as[String]
-      level.dungeon(row)(col).fog = (field \ "fog").as[Boolean]
+      level.dungeon(row)(col) = Field((field \ "fieldvalue").as[Int], (field \ "fieldtype").as[String], (field \ "fog").as[Boolean], false)
       col += 1
       if (col % size == 0) {
         row += 1

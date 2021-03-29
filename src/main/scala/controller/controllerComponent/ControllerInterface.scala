@@ -26,7 +26,7 @@ trait ControllerInterface extends Publisher {
   def playerMoveLeft(): Boolean
   def fieldIsBroken: Boolean
   def fieldIsSet: Boolean
-  def playerStandsOnField(): Unit
+  def playerWalksOnField(): Unit
   def increaseFieldValueByOne(): Unit
   def initializeGame(level: LevelInterface, loaded: Boolean): Unit
   def count: Int
