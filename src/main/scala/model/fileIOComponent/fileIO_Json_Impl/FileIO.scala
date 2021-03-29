@@ -17,12 +17,10 @@ case class FileIO @Inject()() extends FileIOInterface {
   }
 
   override def load(source: JsValue): LevelInterface = {
-    var json: JsValue = null
-    if (source == null) {
-      json = Json.parse(Source.fromFile("src/main/resources/scores/last-score.json").getLines().mkString)
-    } else {
-      json = source
-    }
+    val sourceOption: Option[JsValue] = Some(source)
+
+    val json = sourceOption.getOrElse(Json.parse(Source.fromFile("src/main/resources/scores/last-score.json").getLines().mkString))
+
     val name = (json \ "level" \ "name").as[String]
     val size = (json \ "level" \ "size").as[Int]
     val xPos = (json \ "level" \ "PxPos").as[Int]
