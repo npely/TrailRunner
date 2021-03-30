@@ -87,7 +87,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def playerMoveUp(): Boolean = {
     if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
-      undoManager.doStep(new MoveUpCommand(this))
+      undoManager.doStep(new MoveCommand(this, () => player.moveUp(), () => player.moveDown()))
       publish(new DungeonChanged)
       changeMoveCounter("up")
       return true
@@ -97,7 +97,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def playerMoveDown(): Boolean = {
     if (level.dungeon(player.yPos + 1)(player.xPos).value >= -1) {
-      undoManager.doStep(new MoveDownCommand(this))
+      undoManager.doStep(new MoveCommand(this, () => player.moveDown(), () => player.moveUp()))
       publish(new DungeonChanged)
       changeMoveCounter("down")
       return true
@@ -107,7 +107,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def playerMoveRight(): Boolean = {
     if (level.dungeon(player.yPos)(player.xPos + 1).value >= -1) {
-      undoManager.doStep(new MoveRightCommand(this))
+      undoManager.doStep(new MoveCommand(this, () => player.moveRight(), () => player.moveLeft()))
       publish(new DungeonChanged)
       changeMoveCounter("right")
       return true
@@ -117,7 +117,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def playerMoveLeft(): Boolean = {
     if (level.dungeon(player.yPos)(player.xPos - 1).value >= -1) {
-      undoManager.doStep(new MoveLeftCommand(this))
+      undoManager.doStep(new MoveCommand(this, () => player.moveLeft(), () => player.moveRight()))
       publish(new DungeonChanged)
       changeMoveCounter("left")
       return true
