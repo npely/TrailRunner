@@ -52,9 +52,9 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
     reactions += {
       case e: ButtonClicked => {
         while ("Ice".equals(controller.level.dungeon(controller.player.yPos - 1)(controller.player.xPos).fieldType)) {
-          controller.playerMoveUp()
+          controller.playerMove("up")(controller.level)(controller.player)(() => controller.player.moveUp(), () => controller.player.moveDown())
         }
-        controller.playerMoveUp()
+        controller.playerMove("up")(controller.level)(controller.player)(() => controller.player.moveUp(), () => controller.player.moveDown())
       }
     }
   }
@@ -64,9 +64,9 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
     reactions += {
       case e: ButtonClicked => {
         while ("Ice".equals(controller.level.dungeon(controller.player.yPos + 1)(controller.player.xPos).fieldType)) {
-          controller.playerMoveDown()
+          controller.playerMove("down")(controller.level)(controller.player)(() => controller.player.moveDown(), () => controller.player.moveUp())
         }
-        controller.playerMoveDown()
+        controller.playerMove("down")(controller.level)(controller.player)(() => controller.player.moveDown(), () => controller.player.moveUp())
       }
     }
   }
@@ -76,9 +76,9 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
     reactions += {
       case e: ButtonClicked => {
         while ("Ice".equals(controller.level.dungeon(controller.player.yPos)(controller.player.xPos - 1).fieldType)) {
-          controller.playerMoveLeft()
+          controller.playerMove("left")(controller.level)(controller.player)(() => controller.player.moveLeft(), () => controller.player.moveRight())
         }
-        controller.playerMoveLeft()
+        controller.playerMove("left")(controller.level)(controller.player)(() => controller.player.moveLeft(), () => controller.player.moveRight())
       }
     }
   }
@@ -88,9 +88,9 @@ class GameBuilder(controller: ControllerInterface, gui: GUI) {
     reactions += {
       case e: ButtonClicked => {
         while ("Ice".equals(controller.level.dungeon(controller.player.yPos)(controller.player.xPos + 1).fieldType)) {
-          controller.playerMoveRight()
+          controller.playerMove("right")(controller.level)(controller.player)(() => controller.player.moveRight(), () => controller.player.moveLeft())
         }
-        controller.playerMoveRight()
+        controller.playerMove("right")(controller.level)(controller.player)(() => controller.player.moveRight(), () => controller.player.moveLeft())
       }
     }
   }

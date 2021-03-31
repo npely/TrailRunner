@@ -85,7 +85,30 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     }
   }
 
-  def playerMoveUp(): Boolean = {
+  def playerMove(direction: String)(level: LevelInterface)(player: PlayerInterface)(forwardStep: () => PlayerInterface, backwardStep: () => PlayerInterface): Boolean = {
+    makePlayerMove(direction)(level)(player)(forwardStep, backwardStep)(undoManager)
+  }
+
+  private def makePlayerMove(direction: String)(level: LevelInterface)(player: PlayerInterface)(forwardStep: () => PlayerInterface, backwardStep: () => PlayerInterface)(undoManager: UndoManager): Boolean = {
+    if (checkIfMoveLegal(level)(player)(direction)) {
+      undoManager.doStep(new MoveCommand(this, forwardStep, backwardStep))
+      publish(new DungeonChanged)
+      changeMoveCounter(direction)
+      return true
+    }
+    false
+  }
+
+  private def checkIfMoveLegal(level: LevelInterface)(player: PlayerInterface)(direction: String): Boolean = {
+    direction match {
+      case "up" => level.dungeon(player.yPos - 1)(player.xPos).value >= -1
+      case "down" => level.dungeon(player.yPos + 1)(player.xPos).value >= -1
+      case "left" => level.dungeon(player.yPos)(player.xPos - 1).value >= -1
+      case "right" => level.dungeon(player.yPos)(player.xPos + 1).value >= -1
+    }
+  }
+
+  /*def playerMoveUp(): Boolean = {
     if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
       undoManager.doStep(new MoveCommand(this, () => player.moveUp(), () => player.moveDown()))
       publish(new DungeonChanged)
@@ -123,7 +146,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       return true
     }
     false
-  }
+  }*/
 
   def fieldIsBroken: Boolean = field.isBroken
 

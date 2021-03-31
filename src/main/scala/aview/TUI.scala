@@ -98,16 +98,16 @@ class TUI(controller: ControllerInterface) extends Reactor {
   def evaluateRunning(input: String): Int = {
     Try(input match {
       case "d" =>
-        controller.playerMoveRight()
+        controller.playerMove("right")(controller.level)(controller.player)(() => controller.player.moveRight(), () => controller.player.moveLeft())
         evaluateMove()
       case "w" =>
-        controller.playerMoveUp()
+        controller.playerMove("up")(controller.level)(controller.player)(() => controller.player.moveUp(), () => controller.player.moveDown())
         evaluateMove()
       case "s" =>
-        controller.playerMoveDown()
+        controller.playerMove("down")(controller.level)(controller.player)(() => controller.player.moveDown(), () => controller.player.moveUp())
         evaluateMove()
       case "a" =>
-        controller.playerMoveLeft()
+        controller.playerMove("left")(controller.level)(controller.player)(() => controller.player.moveLeft(), () => controller.player.moveRight())
         evaluateMove()
       case "z" =>
         controller.undo
