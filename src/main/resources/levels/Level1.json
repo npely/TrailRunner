@@ -227,7 +227,7 @@
     "fieldtype" : "Wall",
     "fog" : false
   }, {
-    "fieldvalue" : 1,
+    "fieldvalue" : 2,
     "fieldtype" : "Ground",
     "fog" : false
   }, {

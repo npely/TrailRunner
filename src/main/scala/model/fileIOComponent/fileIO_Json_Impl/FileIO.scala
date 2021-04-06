@@ -36,10 +36,11 @@ class FileIO extends FileIOInterface {
     var col = 0
 
     for (field <- fields.value) {
-      if (row == xPos && col == yPos) {
+      if (col == xPos && row == yPos) {
         level.dungeon(row)(col) = Field((field \ "fieldvalue").as[Int], (field \ "fieldtype").as[String], (field \ "fog").as[Boolean], true)
+      } else {
+        level.dungeon(row)(col) = Field((field \ "fieldvalue").as[Int], (field \ "fieldtype").as[String], (field \ "fog").as[Boolean], false)
       }
-      level.dungeon(row)(col) = Field((field \ "fieldvalue").as[Int], (field \ "fieldtype").as[String], (field \ "fog").as[Boolean], false)
       col += 1
       if (col % size == 0) {
         row += 1

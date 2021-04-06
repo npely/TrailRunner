@@ -38,6 +38,7 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
     reactions += {
       case _: DungeonChanged =>
         if (isDoor || myField.value != actualValue || actualPlayerStatus != myField.isPlayerOnField) {
+          System.out.print("\n\nTada it changed!\n\n")
           redrawCell()
         }
     }

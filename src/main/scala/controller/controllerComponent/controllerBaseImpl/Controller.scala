@@ -24,7 +24,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   var fileIO: FileIOInterface = injector.instance[FileIOInterface]
 
-  var level: LevelInterface = null
+  var level: LevelInterface = Level("Level1", Player (4, 5), 5, 4, 5, 3, false, 10)
 
   var field: FieldInterface = Field(0, "Ground", false, false)
 
@@ -108,52 +108,13 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     }
   }
 
-  /*def playerMoveUp(): Boolean = {
-    if (level.dungeon(player.yPos - 1)(player.xPos).value >= -1) {
-      undoManager.doStep(new MoveCommand(this, () => player.moveUp(), () => player.moveDown()))
-      publish(new DungeonChanged)
-      changeMoveCounter("up")
-      return true
-    }
-    false
-  }
-
-  def playerMoveDown(): Boolean = {
-    if (level.dungeon(player.yPos + 1)(player.xPos).value >= -1) {
-      undoManager.doStep(new MoveCommand(this, () => player.moveDown(), () => player.moveUp()))
-      publish(new DungeonChanged)
-      changeMoveCounter("down")
-      return true
-    }
-    false
-  }
-
-  def playerMoveRight(): Boolean = {
-    if (level.dungeon(player.yPos)(player.xPos + 1).value >= -1) {
-      undoManager.doStep(new MoveCommand(this, () => player.moveRight(), () => player.moveLeft()))
-      publish(new DungeonChanged)
-      changeMoveCounter("right")
-      return true
-    }
-    false
-  }
-
-  def playerMoveLeft(): Boolean = {
-    if (level.dungeon(player.yPos)(player.xPos - 1).value >= -1) {
-      undoManager.doStep(new MoveCommand(this, () => player.moveLeft(), () => player.moveRight()))
-      publish(new DungeonChanged)
-      changeMoveCounter("left")
-      return true
-    }
-    false
-  }*/
-
   def fieldIsBroken: Boolean = field.isBroken
 
   def fieldIsSet: Boolean = field.isSet
 
   def playerStandsOnField(): Unit = {
     this.field = level.dungeon(player.yPos)(player.xPos).PlayerWalksOnField()
+    level.dungeon(player.yPos)(player.xPos) = field
   }
 
   def increaseFieldValueByOne(): Unit = {
@@ -231,6 +192,15 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   override def start(name: String): LevelInterface = {
-    fileIO.start(name)
+    level = fileIO.start(name)
+    player = level.player
+    field = level.dungeon(player.yPos)(player.xPos)
+    System.out.println("field")
+    System.out.println(field)
+    System.out.println("player")
+    System.out.println(player)
+    System.out.println("level")
+    System.out.println(level)
+    level
   }
 }

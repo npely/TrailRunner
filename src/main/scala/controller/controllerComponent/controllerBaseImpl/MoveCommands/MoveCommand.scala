@@ -9,7 +9,8 @@ class MoveCommand(controller: Controller, forwardStep: () => PlayerInterface, ba
 
   private def stepForward: Unit = {
     controller.field = controller.field.PlayerLeavesField()
-    forwardStep()
+    controller.level.dungeon(controller.player.yPos)(controller.player.xPos) = controller.field
+    controller.player = forwardStep()
     controller.playerStandsOnField()
     if (controller.standsPlayerInFrontOfOpenDoor) {
       switchDoor
@@ -24,7 +25,7 @@ class MoveCommand(controller: Controller, forwardStep: () => PlayerInterface, ba
     val level = controller.level
     controller.field = controller.field.PlayerLeavesField()
     controller.increaseFieldValueByOne
-    backwardStep()
+    controller.player = backwardStep()
     controller.field = controller.level.dungeon(controller.player.yPos)(controller.player.xPos)
     controller.field = Field(controller.field.value, controller.field.fieldType, controller.field.fog, true)
     if (level.isDoorOpen) {

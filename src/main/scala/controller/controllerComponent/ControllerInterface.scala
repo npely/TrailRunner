@@ -21,10 +21,6 @@ trait ControllerInterface extends Publisher {
   def changeToGame(): Unit
   def changeToMain(): Unit
   def playerMove(direction: String)(level: LevelInterface)(player: PlayerInterface)(forwardStep: () => PlayerInterface, backwardStep: () => PlayerInterface): Boolean
-  def playerMoveUp(): Boolean
-  def playerMoveDown(): Boolean
-  def playerMoveRight(): Boolean
-  def playerMoveLeft(): Boolean
   def fieldIsBroken: Boolean
   def fieldIsSet: Boolean
   def playerStandsOnField(): Unit
