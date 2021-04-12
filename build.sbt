@@ -20,10 +20,11 @@ val commonDependencies = Seq(
 
 parallelExecution in Test := false
 coverageExcludedPackages := "<empty>;.*aview.*;.*TrailRunner"
-//coverageExcludedPackages := "<empty>;.*TUI.*;.*TrailRunner"
 coverageEnabled.in(Test, test) := true
 
-lazy val trailRunnerBase = (project in file(".")).settings(
+lazy val model = (project in file("Model"))
+lazy val persistence = (project in file("Persistence")).dependsOn(model).aggregate(model)
+lazy val trailRunnerBase = (project in file(".")).dependsOn(persistence).aggregate(persistence).settings(
   name := "TrailRunner",
   libraryDependencies ++= commonDependencies,
   assemblyMergeStrategy in assembly := {

@@ -3,8 +3,9 @@ package main
 import com.google.inject.AbstractModule
 import com.google.inject.name.Names
 import controller.controllerComponent.ControllerInterface
+import fileIOComponent.FileIOInterface
+import fileIOComponent.fileIO_Json_Impl.FileIO
 import model.fieldComponent.FieldInterface
-import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl._
 import model.playerComponent.PlayerInterface
@@ -23,7 +24,7 @@ class TrailRunnerModule extends AbstractModule with ScalaModule {
     bind[ControllerInterface].to[controller.controllerComponent.controllerBaseImpl.Controller]
     bind[FieldInterface].to[model.fieldComponent.fieldBaseImpl.Field]
     bind[LevelInterface].to[model.levelComponent.levelBaseImpl.Level]
-    bind[FileIOInterface].to[model.fileIOComponent.fileIO_Json_Impl.FileIO]
+    bind[FileIOInterface].to[FileIO]
   }
 
 }

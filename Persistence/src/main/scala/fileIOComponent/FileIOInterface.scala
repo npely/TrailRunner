@@ -1,4 +1,4 @@
-package model.fileIOComponent
+package fileIOComponent
 
 import model.levelComponent.LevelInterface
 import play.api.libs.json.{JsObject, JsValue}

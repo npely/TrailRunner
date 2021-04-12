@@ -1,11 +1,12 @@
-package model.fileIOComponent.fileIO_Json_Impl
+package fileIOComponent.fileIO_Json_Impl
 
+import fileIOComponent.FileIOInterface
 import model.fieldComponent.fieldBaseImpl.Field
-import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
 import play.api.libs.json.{JsArray, JsBoolean, JsNumber, JsValue, Json}
+
 import scala.io.Source
 
 class FileIO extends FileIOInterface {

@@ -1,7 +1,7 @@
 package controller.controllerComponent
 import com.google.inject.Injector
+import fileIOComponent.FileIOInterface
 import model.fieldComponent.FieldInterface
-import model.fileIOComponent.FileIOInterface
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import play.api.libs.json.{JsObject, JsValue}

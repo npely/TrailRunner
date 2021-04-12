@@ -3,6 +3,7 @@ package controller.controllerComponent.controllerBaseImpl
 import com.google.inject.{Guice, Inject, Injector}
 import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Earthquake, Lose, Win}
 import controller.controllerComponent.controllerBaseImpl.MoveCommands._
+import fileIOComponent.FileIOInterface
 import main.TrailRunnerModule
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
@@ -11,8 +12,6 @@ import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import util.UndoManager
-import model.fileIOComponent.FileIOInterface
-import model.fileIOComponent.fileIO_Json_Impl.FileIO
 import net.codingwell.scalaguice.InjectorExtensions._
 import play.api.libs.json.{JsObject, JsValue}
 
