@@ -8,7 +8,7 @@ val commonDependencies = Seq(
   "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
 )
 
-lazy val model = ProjectRef(uri("https://github.com/npely/TrailRunner"), "Model")
+lazy val model = ProjectRef(uri("https://github.com/npely/TrailRunner.git#rest"), "model")
 lazy val persistence = (project in file(".")).dependsOn(model).aggregate(model).settings(
   name          := "TrailRunner-Persistence",
   organization  := "de.htwg.se",
