@@ -1,6 +1,7 @@
 package model.playerComponent
 
 import model.playerComponent.playerBaseImpl.Player
+import spray.json.JsObject
 
 trait PlayerInterface {
   val xPos: Int

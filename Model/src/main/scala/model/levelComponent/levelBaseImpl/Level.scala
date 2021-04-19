@@ -7,6 +7,7 @@ import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.Player
+import spray.json.{JsArray, JsObject}
 
 case class Level @Inject() (@Named("Level") name: String, player: PlayerInterface, @Named("Zero") winX: Int, @Named("Zero") winY: Int, @Named("Zero") doorX: Int, @Named("Zero") doorY: Int, @Named("False") isDoorOpen: Boolean, @Named("Ten") size: Int) extends LevelInterface {
 
@@ -61,6 +62,10 @@ case class Level @Inject() (@Named("Level") name: String, player: PlayerInterfac
       }
     }
     sum
+  }
+
+  def toJson: JsObject = {
+    ???
   }
 }
 
