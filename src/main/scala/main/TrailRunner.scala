@@ -5,7 +5,7 @@ import java.io.File
 import aview.TUI
 import aview.gui.GUI
 import com.google.inject.Guice
-import controller.controllerComponent.{ControllerInterface, DungeonChanged}
+import controllerComponent.{ControllerInterface, DungeonChanged}
 import javax.sound.sampled.AudioSystem
 
 import scala.io.Source

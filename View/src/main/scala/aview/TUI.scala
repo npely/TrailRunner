@@ -1,6 +1,6 @@
 package aview
 
-import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
+import controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
 import model.levelComponent.levelBaseImpl.Level
 
 import scala.io.{BufferedSource, Source}

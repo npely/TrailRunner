@@ -1,8 +1,8 @@
-package controller.controllerComponent.controllerBaseImpl
+package controllerComponent.controllerBaseImpl
 
 import com.google.inject.{Guice, Inject, Injector}
-import controller.controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Earthquake, Lose, Win}
-import controller.controllerComponent.controllerBaseImpl.MoveCommands._
+import controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Earthquake, Lose, Win}
+import controllerComponent.controllerBaseImpl.MoveCommands._
 import fileIOComponent.FileIOInterface
 import main.TrailRunnerModule
 import model.levelComponent.levelBaseImpl.Level

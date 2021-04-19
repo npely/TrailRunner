@@ -1,4 +1,4 @@
-package controller.controllerComponent
+package controllerComponent
 import com.google.inject.Injector
 import fileIOComponent.FileIOInterface
 import model.fieldComponent.FieldInterface

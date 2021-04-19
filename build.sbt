@@ -23,8 +23,10 @@ coverageExcludedPackages := "<empty>;.*aview.*;.*TrailRunner"
 coverageEnabled.in(Test, test) := true
 
 lazy val model = (project in file("Model"))
+lazy val controller = (project in file("Controller")).dependsOn(model, persistence).aggregate(model, persistence)
 lazy val persistence = (project in file("Persistence")).dependsOn(model).aggregate(model)
-lazy val trailRunnerBase = (project in file(".")).dependsOn(persistence).aggregate(persistence).settings(
+lazy val view = (project in file("View")).dependsOn(model, controller).aggregate(model, controller)
+lazy val trailRunnerBase = (project in file(".")).dependsOn(persistence, view, controller).aggregate(persistence, view, controller).settings(
   name := "TrailRunner",
   libraryDependencies ++= commonDependencies,
   assemblyMergeStrategy in assembly := {

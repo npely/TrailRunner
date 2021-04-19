@@ -12,13 +12,13 @@ import scala.io.Source
 class FileIO extends FileIOInterface {
 
   override def start(name: String): LevelInterface = {
-    val json: JsValue = Json.parse(Source.fromFile("src/main/resources/levels/%s.json".format(name)).getLines().mkString)
+    val json: JsValue = Json.parse(Source.fromFile("Persistence/src/main/resources/levels/%s.json".format(name)).getLines().mkString)
     load(json)
   }
 
   override def load(source: JsValue): LevelInterface = {
     val sourceOption: Option[JsValue] = Some(source)
-    val json = Some(source).getOrElse(Json.parse(Source.fromFile("src/main/resources/scores/last-score.json").getLines().mkString))
+    val json = Some(source).getOrElse(Json.parse(Source.fromFile("Persistence/src/main/resources/scores/last-score.json").getLines().mkString))
 
     val name = (json \ "level" \ "name").as[String]
     val size = (json \ "level" \ "size").as[Int]
