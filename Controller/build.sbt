@@ -1,5 +1,5 @@
 val commonDependencies = Seq(
-  "org.scalactic" %% "scalactic" % "3.0.8",
+  "org.scalatest" %% "scalatest" % "3.0.8",
   "org.scalatest" %% "scalatest" % "3.0.8" % "test",
   "org.scala-lang.modules" %% "scala-swing" % "2.1.1",
   "net.codingwell" %% "scala-guice" % "4.2.6",
@@ -8,8 +8,8 @@ val commonDependencies = Seq(
   "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
 )
 
-lazy val model = ProjectRef(uri("https://github.com/npely/TrailRunner#rest"), "model")
-lazy val persistence = ProjectRef(uri("https://github.com/npely/TrailRunner#rest"), "persistence")
+lazy val persistence = ProjectRef(uri("https://github.com/npely/TrailRunner"), "persistence")
+lazy val model = ProjectRef(uri("https://github.com/npely/TrailRunner"), "Model")
 lazy val controller = (project in file(".")).dependsOn(model, persistence).aggregate(model, persistence).settings(
   name          := "TrailRunner-Controller",
   organization  := "de.htwg.se",
