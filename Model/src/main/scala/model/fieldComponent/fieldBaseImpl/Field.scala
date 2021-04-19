@@ -23,7 +23,7 @@ case class Field @Inject() (@Named("Zero") value: Int, @Named("Ground") fieldTyp
 
   def earthquake: Field = {
     if (value > 0 && value < 9) {
-      this.copy(value = 0)
+      return this.copy(value = 0)
     }
     this
   }
