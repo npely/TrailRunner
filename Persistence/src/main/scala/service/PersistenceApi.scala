@@ -36,16 +36,12 @@ object PersistenceApi {
           complete(PersistenceController.loadLastScore())
         },
         (post & path("save")) {
-          parameters("level") { level => {
-            entity(as[Level]) {
-              level =>
-                val success = PersistenceController.saveLastScore(level)
-                if (success) {
-                  complete(StatusCode.int2StatusCode(200))
-                } else {
-                  complete(StatusCode.int2StatusCode(500))
-                }
-              }
+          entity(as[Level]) { level =>
+            val success = PersistenceController.saveLastScore(level)
+            if (success) {
+              complete(StatusCode.int2StatusCode(200))
+            } else {
+              complete(StatusCode.int2StatusCode(500))
             }
           }
         }

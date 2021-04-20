@@ -1,7 +1,7 @@
 package service
 
 import akka.http.scaladsl.server.Directives.{complete, path, get, concat}
-import service.LevelJsonProtocol._
+import service.ModelJsonProtocol._
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http

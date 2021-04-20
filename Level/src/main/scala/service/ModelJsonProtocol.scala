@@ -6,7 +6,7 @@ import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
 import spray.json.{DefaultJsonProtocol, DeserializationException, JsArray, JsBoolean, JsNumber, JsObject, JsString, JsValue, RootJsonFormat}
 
-object LevelJsonProtocol extends DefaultJsonProtocol {
+object ModelJsonProtocol extends DefaultJsonProtocol {
 
   implicit object FieldJsonFormat extends RootJsonFormat[Field] {
     def write(field: Field): JsObject = field.toJson
