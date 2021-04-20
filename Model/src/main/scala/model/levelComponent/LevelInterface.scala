@@ -6,7 +6,7 @@ import model.fieldComponent.fieldBaseImpl.Field
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.Player
 
-trait LevelInterface extends Model{
+trait LevelInterface extends Model {
 
   val dungeon: Array[Array[FieldInterface]]
   val name: String

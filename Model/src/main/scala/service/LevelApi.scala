@@ -1,11 +1,12 @@
 package service
 
+import akka.http.scaladsl.server.Directives.{as, complete, entity, path, post, _}
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives.{as, complete, entity, path}
-import akka.http.scaladsl.server.{Directives, ExceptionHandler, Route}
-import model.fieldComponent.FieldInterface
+import akka.http.scaladsl.server.{ExceptionHandler, Route}
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import service.ModelJsonProtocol._
 
 import scala.io.StdIn
 
@@ -28,20 +29,16 @@ object ModelApiController {
       }
 
     val route = Route.seal(
-      Directives.concat(
-        // GET REQUESTS
-        path("field") {
-          entity(as[FieldInterface]) {
-            fieldModel =>
-              val field = field.getCurrentPlayer(gameModel.players, gameModel.round)
-              complete(field)
-          }
+      concat(
+        (get & path("level" / LongNumber)) { id =>
+          complete(LevelService.createLevel(id))
         }
       )
     )
 
+
     val bindingFuture = Http().newServerAt("localhost", 8080).bind(route)
-    println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
+    println(s"Level server online at http://localhost:8080/\nPress RETURN to stop...")
     StdIn.readLine() // let it run until user presses return
     bindingFuture
       .flatMap(_.unbind()) // trigger unbinding from the port

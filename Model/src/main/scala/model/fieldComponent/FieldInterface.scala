@@ -2,7 +2,7 @@ package model.fieldComponent
 
 import model.Model
 
-trait FieldInterface extends Model{
+trait FieldInterface extends Model {
   val value: Int
   val fieldType: String
   val fog: Boolean
