@@ -47,12 +47,12 @@ object FileIO extends PersistenceInterface {
   override def save(level: Level): Boolean = {
     Try({
       val levelAsJson = Json.prettyPrint(levelToJson(level))
-      val pw = new PrintWriter(new File("src/main/resources/scores/last-score.json"))
+      val pw = new PrintWriter(new File("Persistence/src/main/resources/scores/last-score.json"))
       pw.write(levelAsJson)
       pw.close()
     }) match {
       case Success(v) => true
-      case Failure(e) => false
+      case Failure(e) => { println(e); false }
     }
   }
 

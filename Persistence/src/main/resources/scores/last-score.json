@@ -1,13 +1,13 @@
 {
   "level" : {
-    "name" : "Level1",
+    "name" : "Level4",
     "size" : 10,
-    "PxPos" : 4,
-    "PyPos" : 5,
+    "PxPos" : 1,
+    "PyPos" : 8,
     "DxPos" : 5,
-    "DyPos" : 3,
+    "DyPos" : 1,
     "WxPos" : 5,
-    "WyPos" : 4,
+    "WyPos" : 2,
     "Open" : false
   },
   "fields" : [ {
@@ -55,92 +55,12 @@
     "fieldtype" : "Wall",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 3,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 4,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
     "fieldvalue" : -99,
@@ -163,12 +83,88 @@
     "fieldtype" : "Wall",
     "fog" : false
   }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
     "fieldvalue" : -99,
     "fieldtype" : "Wall",
     "fog" : false
   }, {
     "fieldvalue" : -99,
     "fieldtype" : "Wall",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : -99,
+    "fieldtype" : "Wall",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : -99,
+    "fieldtype" : "Wall",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : -99,
+    "fieldtype" : "Wall",
+    "fog" : false
+  }, {
+    "fieldvalue" : -99,
+    "fieldtype" : "Wall",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
     "fieldvalue" : -99,
@@ -191,7 +187,23 @@
     "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : 1,
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 3,
     "fieldtype" : "Ground",
     "fog" : false
   }, {
@@ -203,12 +215,76 @@
     "fieldtype" : "Wall",
     "fog" : false
   }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : -99,
+    "fieldtype" : "Wall",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : -99,
+    "fieldtype" : "Wall",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
     "fieldvalue" : -99,
     "fieldtype" : "Wall",
     "fog" : false
   }, {
     "fieldvalue" : -99,
     "fieldtype" : "Wall",
+    "fog" : false
+  }, {
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 3,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 5,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 4,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
     "fieldvalue" : -99,
@@ -231,6 +307,22 @@
     "fieldtype" : "Ground",
     "fog" : false
   }, {
+    "fieldvalue" : 3,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 3,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
+    "fog" : false
+  }, {
     "fieldvalue" : 1,
     "fieldtype" : "Ground",
     "fog" : false
@@ -243,128 +335,36 @@
     "fieldtype" : "Wall",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 0,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 2,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
-    "fog" : false
-  }, {
-    "fieldvalue" : -99,
-    "fieldtype" : "Wall",
+    "fieldvalue" : 1,
+    "fieldtype" : "Ground",
     "fog" : false
   }, {
     "fieldvalue" : -99,

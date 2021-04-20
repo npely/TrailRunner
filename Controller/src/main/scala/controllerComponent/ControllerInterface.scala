@@ -1,6 +1,4 @@
 package controllerComponent
-import com.google.inject.Injector
-import fileIOComponent.FileIOInterface
 import model.fieldComponent.FieldInterface
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
@@ -10,7 +8,6 @@ import scala.swing.Publisher
 
 trait ControllerInterface extends Publisher {
 
-  var fileIO: FileIOInterface
   var player: PlayerInterface
   var field: FieldInterface
   var level: LevelInterface
@@ -27,7 +24,6 @@ trait ControllerInterface extends Publisher {
   def increaseFieldValueByOne(): Unit
   def initializeGame(level: LevelInterface, loaded: Boolean): Unit
   def count: Int
-  def getLevelAsJson: JsObject
   def undo: Unit
   def redo: Unit
   def save: String

@@ -1,9 +1,8 @@
 package controllerComponent.controllerBaseImpl
 
-import com.google.inject.{Guice, Inject, Injector}
+import com.google.inject.{Guice, Inject}
 import controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Earthquake, Lose, Win}
 import controllerComponent.controllerBaseImpl.MoveCommands._
-import fileIOComponent.FileIOInterface
 import main.TrailRunnerModule
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
@@ -20,8 +19,6 @@ import scala.swing.Publisher
 class Controller @Inject() extends ControllerInterface with Publisher {
 
   val injector = Guice.createInjector(new TrailRunnerModule)
-
-  var fileIO: FileIOInterface = injector.instance[FileIOInterface]
 
   var level: LevelInterface = Level("Level1", Player (4, 5), 5, 4, 5, 3, false, 10)
 
@@ -137,16 +134,13 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     publish(new DungeonChanged)
   }
 
-  override def getLevelAsJson: JsObject = {
-    fileIO.levelToJson(level)
-  }
-
   override def save: String = {
-    fileIO.save(level)
+    //fileIO.save(level)
+    ???
   }
 
   override def load(json: JsValue, isOldGame: Boolean): Unit = {
-    level = fileIO.load(json)
+    //level = fileIO.load()
     initializeGame(level, isOldGame)
   }
 
@@ -191,7 +185,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   override def start(name: String): LevelInterface = {
-    level = fileIO.start(name)
+    //level = fileIO.start(name)
     player = level.player
     field = level.dungeon(player.yPos)(player.xPos)
     System.out.println("field")
