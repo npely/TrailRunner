@@ -1,7 +1,7 @@
 package service
 
 import akka.http.scaladsl.server.Directives.{complete, concat, get, path}
-import service.LevelJsonProtocol._
+import config.LevelJsonProtocol._
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
@@ -47,7 +47,6 @@ object PersistenceApi {
         }
       )
     )
-
 
     val bindingFuture = Http().newServerAt("localhost", 8080).bind(route)
     println(s"Persistence server online at http://localhost:8080/\nPress RETURN to stop...")

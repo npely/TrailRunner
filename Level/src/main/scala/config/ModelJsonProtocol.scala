@@ -1,6 +1,5 @@
-package service
+package config
 
-import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
