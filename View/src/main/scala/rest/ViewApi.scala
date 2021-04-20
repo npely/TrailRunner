@@ -1,13 +1,15 @@
 package rest
 
-import akka.http.scaladsl.model.StatusCode
+import akka.http.scaladsl.server.Directives.{complete, concat, get, path}
+import config.ModelJsonProtocol._
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import akka.http.scaladsl.model.StatusCode
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
-import model.fieldComponent.fieldBaseImpl.Field
-import spray.json.{JsNumber, RootJsonFormat}
+import spray.json.JsNumber
 
 import scala.io.StdIn
 
@@ -29,20 +31,43 @@ object ViewApi {
 
     val route = Route.seal(
       concat(
-        (post & path("level" / LongNumber)) { levelNumber =>
-          val success = ViewController.startGame(levelNumber)
+        (get & path("level" / "id")) {
+          complete(JsNumber(ViewController.getCurrentLevel()).toString())
+        },
+        (post & path("level" / "start" / LongNumber)) { levelNumber =>
+            complete(ViewController.startGame(levelNumber))
+        },
+        (post & path("level" / "save")) {
+          val success = ViewController.save()
           if (success) {
             complete(StatusCode.int2StatusCode(200))
           } else {
             complete(StatusCode.int2StatusCode(400))
           }
         },
-        (get & path("level")) {
-            complete(JsNumber(ViewController.getCurrentLevel()).toString())
-        }
+        (get & path("level" / "load")) {
+          complete(ViewController.load())
+        },
+        (post & path("player" / "up")) {
+          complete(ViewController.move("up"))
+        },
+        (post & path("player" / "down")) {
+          complete(ViewController.move("down"))
+        },
+        (post & path("player" / "right")) {
+          complete(ViewController.move("right"))
+        },
+        (post & path("player" / "left")) {
+          complete(ViewController.move("left"))
+        },
+        (post & path("player" / "undo")) {
+          complete(ViewController.move("undo"))
+        },
+        (post & path("player" / "redo")) {
+          complete(ViewController.move("redo"))
+        },
       )
     )
-
 
     val bindingFuture = Http().newServerAt("localhost", 8082).bind(route)
     println(s"View server online at http://localhost:8082/\nPress RETURN to stop...")
