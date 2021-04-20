@@ -1,4 +1,4 @@
-package service
+package rest
 
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface

@@ -1,4 +1,4 @@
-package service
+package rest
 
 import fileIOComponent.fileIO_Json_Impl.FileIO
 import model.levelComponent.levelBaseImpl.Level

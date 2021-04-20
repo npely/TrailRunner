@@ -1,4 +1,4 @@
-package service
+package rest
 
 import akka.http.scaladsl.server.Directives.{complete, path, get, concat}
 import config.ModelJsonProtocol._
@@ -36,7 +36,7 @@ object LevelApi {
 
 
     val bindingFuture = Http().newServerAt("localhost", 8080).bind(route)
-    println(s"Level server online at http://localhost:8080/\nPress RETURN to stop...")
+    println(s"Level server online at http://localhost:8081/\nPress RETURN to stop...")
     StdIn.readLine() // let it run until user presses return
     bindingFuture
       .flatMap(_.unbind()) // trigger unbinding from the port
