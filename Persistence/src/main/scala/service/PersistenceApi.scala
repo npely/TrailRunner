@@ -1,16 +1,20 @@
 package service
 
-import akka.http.scaladsl.server.Directives.{complete, path, get, concat}
+import akka.http.scaladsl.server.Directives.{complete, concat, get, path}
 import service.LevelJsonProtocol._
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import akka.http.scaladsl.model.StatusCode
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
+import model.levelComponent.levelBaseImpl.Level
+
 import scala.io.StdIn
 
-object LevelApi {
+object PersistenceApi {
+
   def main(args: Array[String]): Unit = {
     // needed to run the route
     implicit val system = ActorSystem(Behaviors.empty, "my-system")
@@ -28,15 +32,29 @@ object LevelApi {
 
     val route = Route.seal(
       concat(
-        (get & path("level" / LongNumber)) { id =>
-          complete(LevelController.createLevel(id))
+        (get & path("load")) {
+          complete(PersistenceController.loadLastScore())
+        },
+        (post & path("save")) {
+          parameters("level") { level => {
+            entity(as[Level]) {
+              level =>
+                val success = PersistenceController.saveLastScore(level)
+                if (success) {
+                  complete(StatusCode.int2StatusCode(200))
+                } else {
+                  complete(StatusCode.int2StatusCode(500))
+                }
+              }
+            }
+          }
         }
       )
     )
 
 
     val bindingFuture = Http().newServerAt("localhost", 8080).bind(route)
-    println(s"Level server online at http://localhost:8080/\nPress RETURN to stop...")
+    println(s"Persistence server online at http://localhost:8080/\nPress RETURN to stop...")
     StdIn.readLine() // let it run until user presses return
     bindingFuture
       .flatMap(_.unbind()) // trigger unbinding from the port

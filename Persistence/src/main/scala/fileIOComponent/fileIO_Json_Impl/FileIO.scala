@@ -1,25 +1,20 @@
 package fileIOComponent.fileIO_Json_Impl
 
-import fileIOComponent.FileIOInterface
+import fileIOComponent.PersistenceInterface
 import model.fieldComponent.fieldBaseImpl.Field
-import model.levelComponent.LevelInterface
+import java.io._
+
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
-import play.api.libs.json.{JsArray, JsBoolean, JsNumber, JsValue, Json}
+import play.api.libs.json.{JsArray, JsBoolean, JsNumber, Json}
 
-import scala.io.Source
+import scala.io.{BufferedSource, Source}
+import scala.util.{Failure, Success, Try}
 
-class FileIO extends FileIOInterface {
+object FileIO extends PersistenceInterface {
 
-  override def start(name: String): LevelInterface = {
-    val json: JsValue = Json.parse(Source.fromFile("Persistence/src/main/resources/levels/%s.json".format(name)).getLines().mkString)
-    load(json)
-  }
-
-  override def load(source: JsValue): LevelInterface = {
-    val sourceOption: Option[JsValue] = Some(source)
-    val json = Some(source).getOrElse(Json.parse(Source.fromFile("Persistence/src/main/resources/scores/last-score.json").getLines().mkString))
-
+  override def load(): Level = {
+    val json = Json.parse(Source.fromFile("Persistence/src/main/resources/scores/last-score.json").getLines().mkString)
     val name = (json \ "level" \ "name").as[String]
     val size = (json \ "level" \ "size").as[Int]
     val xPos = (json \ "level" \ "PxPos").as[Int]
@@ -34,7 +29,6 @@ class FileIO extends FileIOInterface {
 
     var row = 0
     var col = 0
-
     for (field <- fields.value) {
       if (col == xPos && row == yPos) {
         level.dungeon(row)(col) = Field((field \ "fieldvalue").as[Int], (field \ "fieldtype").as[String], (field \ "fog").as[Boolean], true)
@@ -50,16 +44,19 @@ class FileIO extends FileIOInterface {
     level
   }
 
-  override def save(level: LevelInterface): String = {
-    import java.io._
-    val levelAsJson = Json.prettyPrint(levelToJson(level))
-    val pw = new PrintWriter(new File("src/main/resources/scores/last-score.json"))
-    pw.write(levelAsJson)
-    pw.close()
-    levelAsJson
+  override def save(level: Level): Boolean = {
+    Try({
+      val levelAsJson = Json.prettyPrint(levelToJson(level))
+      val pw = new PrintWriter(new File("src/main/resources/scores/last-score.json"))
+      pw.write(levelAsJson)
+      pw.close()
+    }) match {
+      case Success(v) => true
+      case Failure(e) => false
+    }
   }
 
-  override def levelToJson(level: LevelInterface) = {
+  def levelToJson(level: Level) = {
     val levelObj = Json.obj(
       "name" -> level.name,
       "size" -> JsNumber(level.dungeon.length),
