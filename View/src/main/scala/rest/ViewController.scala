@@ -8,5 +8,5 @@ object ViewController {
     ???
   }
 
-  def getCurrentLevel(): Long = ???
+  def getCurrentLevel(): Long = 1
 }
