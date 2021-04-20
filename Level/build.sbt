@@ -1,4 +1,4 @@
-name          := "TrailRunner-Model"
+name          := "TrailRunner-Level"
 organization  := "de.htwg.se"
 version       := "0.1"
 scalaVersion  := "2.13.3"

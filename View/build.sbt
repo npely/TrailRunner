@@ -8,9 +8,9 @@ val commonDependencies = Seq(
   "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
 )
 
-lazy val model = ProjectRef(uri("https://github.com/npely/TrailRunner.git#rest"), "model")
+lazy val level = ProjectRef(uri("https://github.com/npely/TrailRunner.git#rest"), "level")
 lazy val controller = ProjectRef(uri("https://github.com/npely/TrailRunner.git#rest"), "controller")
-lazy val view = (project in file(".")).dependsOn(model, controller).aggregate(model, controller).settings(
+lazy val view = (project in file(".")).dependsOn(level, controller).aggregate(level, controller).settings(
   name          := "TrailRunner-View",
   organization  := "de.htwg.se",
   version       := "0.1",

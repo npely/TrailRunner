@@ -9,7 +9,7 @@ import spray.json.JsObject
 
 import scala.io.Source
 
-object LevelService {
+object LevelController {
 
   def createLevel(number: Long): Level = {
     val json = Json.parse(Source.fromFile("Model/src/main/resources/levels/Level%s.json".format(number)).getLines().mkString)

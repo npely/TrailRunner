@@ -6,7 +6,7 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-import service.ModelJsonProtocol._
+import service.LevelJsonProtocol._
 
 import scala.io.StdIn
 
@@ -31,7 +31,7 @@ object ModelApiController {
     val route = Route.seal(
       concat(
         (get & path("level" / LongNumber)) { id =>
-          complete(LevelService.createLevel(id))
+          complete(LevelController.createLevel(id))
         }
       )
     )
