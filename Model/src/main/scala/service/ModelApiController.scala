@@ -8,7 +8,6 @@ import akka.http.scaladsl.server.{Directives, ExceptionHandler, Route}
 import model.fieldComponent.FieldInterface
 
 import scala.io.StdIn
-;
 
 object ModelApiController {
 

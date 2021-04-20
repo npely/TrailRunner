@@ -7,7 +7,9 @@ import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.Player
-import spray.json.{JsArray, JsObject}
+import spray.json.{JsArray, JsBoolean, JsNumber, JsObject, JsString}
+
+import scala.collection.mutable.ListBuffer
 
 case class Level @Inject() (@Named("Level") name: String, player: PlayerInterface, @Named("Zero") winX: Int, @Named("Zero") winY: Int, @Named("Zero") doorX: Int, @Named("Zero") doorY: Int, @Named("False") isDoorOpen: Boolean, @Named("Ten") size: Int) extends LevelInterface {
 
@@ -65,7 +67,21 @@ case class Level @Inject() (@Named("Level") name: String, player: PlayerInterfac
   }
 
   def toJson: JsObject = {
-    ???
+    val arrayFlattened = this.dungeon.flatMap(_.toList)
+    val listBuffer = ListBuffer[JsObject]()
+    arrayFlattened.foreach(f => listBuffer += f.toJson)
+    val vector = listBuffer.toVector
+    JsObject(
+      "name" -> JsString(this.name),
+      "player" -> this.player.toJson,
+      "winX" -> JsNumber(this.winX),
+      "winY" -> JsNumber(this.winY),
+      "doorX" -> JsNumber(this.doorX),
+      "doorY" -> JsNumber(this.doorY),
+      "isDoorOpen" -> JsBoolean(this.isDoorOpen),
+      "size" -> JsNumber(this.size),
+      "dungeon" -> JsArray(vector)
+    )
   }
 }
 

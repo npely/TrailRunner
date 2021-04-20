@@ -1,9 +1,8 @@
 package model.fieldComponent
 
-import model.fieldComponent.fieldBaseImpl.Field
-import spray.json.JsObject
+import model.Model
 
-trait FieldInterface {
+trait FieldInterface extends Model{
   val value: Int
   val fieldType: String
   val fog: Boolean
@@ -14,5 +13,4 @@ trait FieldInterface {
   def PlayerLeavesField(): FieldInterface
   def setValue(newValue : Int): FieldInterface
   def earthquake: FieldInterface
-  def toJson: JsObject
 }
