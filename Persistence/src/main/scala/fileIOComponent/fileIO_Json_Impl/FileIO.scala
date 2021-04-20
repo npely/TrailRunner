@@ -3,12 +3,10 @@ package fileIOComponent.fileIO_Json_Impl
 import fileIOComponent.PersistenceInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import java.io._
-
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
 import play.api.libs.json.{JsArray, JsBoolean, JsNumber, Json}
-
-import scala.io.{BufferedSource, Source}
+import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
 object FileIO extends PersistenceInterface {
