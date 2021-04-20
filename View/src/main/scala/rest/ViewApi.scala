@@ -5,15 +5,21 @@ import config.ModelJsonProtocol._
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
+import akka.http.scaladsl.client.RequestBuilding.Get
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-import akka.http.scaladsl.model.StatusCode
+import akka.http.scaladsl.model.{HttpResponse, StatusCode}
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
+import akka.http.scaladsl.unmarshalling.Unmarshal
+import model.levelComponent.levelBaseImpl.Level
 import spray.json.JsNumber
 
+import scala.concurrent.{Await, Future}
 import scala.io.StdIn
+import scala.util.{Failure, Success}
 
 object ViewApi {
+
   def main(args: Array[String]): Unit = {
     // needed to run the route
     implicit val system = ActorSystem(Behaviors.empty, "my-system")
@@ -46,7 +52,26 @@ object ViewApi {
           }
         },
         (get & path("level" / "load")) {
-          complete(ViewController.load())
+          val req = Get("http://localhost:8080/load")
+          val responseFuture: Future[HttpResponse] = Http().singleRequest(req)
+          var lev: Level = null
+          responseFuture.onComplete {
+            case Success(res) => Unmarshal(res).to[Level].onComplete({
+              case Success(level) => {
+                println("hello im a level")
+                lev = level
+                println(lev.toString)
+              }
+              case Failure(exception) => {
+                println(exception.getMessage)
+              }
+            })
+            case Failure(_)  => println("load request failed")
+          }
+          while (lev == null) {
+            println("hello im a level")
+          }
+          complete(lev)
         },
         (post & path("player" / "up")) {
           complete(ViewController.move("up"))
