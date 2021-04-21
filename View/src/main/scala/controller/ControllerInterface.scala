@@ -1,8 +1,9 @@
 package controllerComponent
+
 import model.fieldComponent.FieldInterface
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
-import play.api.libs.json.{JsObject, JsValue}
+import play.api.libs.json.JsValue
 
 import scala.swing.Publisher
 

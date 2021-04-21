@@ -52,26 +52,12 @@ object ViewApi {
           }
         },
         (get & path("level" / "load")) {
-          val req = Get("http://localhost:8080/load")
-          val responseFuture: Future[HttpResponse] = Http().singleRequest(req)
-          var lev: Level = null
-          responseFuture.onComplete {
-            case Success(res) => Unmarshal(res).to[Level].onComplete({
-              case Success(level) => {
-                println("hello im a level")
-                lev = level
-                println(lev.toString)
-              }
-              case Failure(exception) => {
-                println(exception.getMessage)
-              }
-            })
-            case Failure(_)  => println("load request failed")
+          val level = ViewController.load()
+          if (level.isDefined) {
+            complete(level.get)
+          } else {
+            complete(StatusCode.int2StatusCode(500))
           }
-          while (lev == null) {
-            println("hello im a level")
-          }
-          complete(lev)
         },
         (post & path("player" / "up")) {
           complete(ViewController.move("up"))

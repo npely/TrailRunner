@@ -17,8 +17,9 @@ import akka.http.scaladsl.server.Directives.complete
 import akka.http.scaladsl.server.ExceptionHandler
 
 import scala.concurrent.duration.{Duration, DurationInt}
-import scala.util.{Failure, Success}
+import scala.util.{Failure, Success, Try}
 import scala.concurrent.{Await, Future}
+import scala.io.{BufferedSource, Source}
 
 object ViewController {
 
@@ -32,34 +33,18 @@ object ViewController {
 
   def load(): Option[Level] = {
     implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
-    // needed for the future flatMap/onComplete in the end
     implicit val executionContext = system.executionContext
 
-    val req = Get("http://localhost:8080/load")
-    val responseFuture: Future[HttpResponse] = Http().singleRequest(req)
-
-    var optLevel: Option[Level] = None
-    var futureLevel: Future[Level] = null
-
-    responseFuture
-      .onComplete {
-        case Success(res) => {
-          futureLevel = Unmarshal(res).to[Level]
-          futureLevel.onComplete({
-            case Success(level) => {
-              println("hello im a level")
-              optLevel = Some(level)
-              println(optLevel.isEmpty)
-            }
-            case Failure(exception) => {
-              println(exception.getMessage)
-            }
-          })
-        }
-        case Failure(_)  => println("load request failed")
+    Try (Unmarshal(Await.result(Http().singleRequest(HttpRequest(
+        uri = "http://localhost:8080/load")),
+        5.seconds)).to[Level].value.get.get) match {
+      case Success(level) => {
+        Some(level)
       }
-    Await.result(responseFuture, Duration.Inf)
-    Await.result(futureLevel, Duration.Inf)
-    optLevel
+      case Failure(e) => {
+        println("load request failed: " + e.getMessage)
+        None
+      }
+    }
   }
 }

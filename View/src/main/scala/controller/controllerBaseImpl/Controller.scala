@@ -1,18 +1,17 @@
 package controllerComponent.controllerBaseImpl
 
 import com.google.inject.{Guice, Inject}
-import controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Earthquake, Lose, Win}
 import controllerComponent.controllerBaseImpl.MoveCommands._
+import controllerComponent._
 import main.TrailRunnerModule
-import model.levelComponent.levelBaseImpl.Level
-import model.playerComponent.playerBaseImpl.Player
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface
+import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.PlayerInterface
+import model.playerComponent.playerBaseImpl.Player
+import play.api.libs.json.JsValue
 import util.UndoManager
-import net.codingwell.scalaguice.InjectorExtensions._
-import play.api.libs.json.{JsObject, JsValue}
 
 import scala.swing.Publisher
 
