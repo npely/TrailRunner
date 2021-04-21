@@ -1,11 +1,12 @@
-package fileIOComponent.fileIO_Json_Impl
+package persistence
 
-import fileIOComponent.PersistenceInterface
+import java.io.{File, PrintWriter}
+
 import model.fieldComponent.fieldBaseImpl.Field
-import java.io._
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
 import play.api.libs.json.{JsArray, JsBoolean, JsNumber, Json}
+
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
@@ -22,7 +23,7 @@ object FileIO extends PersistenceInterface {
     val winX = (json \ "level" \ "WxPos").as[Int]
     val winY = (json \ "level" \ "WyPos").as[Int]
     val isDoorOpen = (json \ "level" \ "Open").as[Boolean]
-    val level = Level(name, Player (xPos, yPos), winX, winY, doorX, doorY, isDoorOpen, 10)
+    val level = Level(name, Player(xPos, yPos), winX, winY, doorX, doorY, isDoorOpen, 10)
     val fields: JsArray = (json \ "fields").as[JsArray]
 
     var row = 0
@@ -50,7 +51,9 @@ object FileIO extends PersistenceInterface {
       pw.close()
     }) match {
       case Success(v) => true
-      case Failure(e) => { println(e); false }
+      case Failure(e) => {
+        println(e); false
+      }
     }
   }
 
