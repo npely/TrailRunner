@@ -1,4 +1,4 @@
-package main.scala.config
+package config
 
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.levelBaseImpl.Level
