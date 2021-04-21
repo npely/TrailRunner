@@ -1,4 +1,4 @@
-package main.scala.model.playerComponent
+package model.playerComponent
 
 import model.Model
 

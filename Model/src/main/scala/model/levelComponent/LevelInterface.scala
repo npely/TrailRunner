@@ -1,4 +1,4 @@
-package main.scala.model.levelComponent
+package model.levelComponent
 
 import model.Model
 import model.fieldComponent.FieldInterface

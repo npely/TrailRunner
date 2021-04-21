@@ -1,4 +1,4 @@
-package main.scala.model
+package model
 
 import spray.json.JsObject
 

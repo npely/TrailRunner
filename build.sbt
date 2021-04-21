@@ -25,11 +25,11 @@ parallelExecution in Test := false
 coverageExcludedPackages := "<empty>;.*aview.*;.*TrailRunner"
 coverageEnabled.in(Test, test) := true
 
-lazy val level = (project in file("Level"))
-lazy val controller = (project in file("Controller"))
-lazy val persistence = (project in file("Persistence"))
+lazy val model = (project in file("Model"))
 lazy val view = (project in file("View"))
-lazy val trailRunnerBase = (project in file(".")).dependsOn(level, view, controller).aggregate(level, view, controller).settings(
+lazy val level = (project in file("Level"))
+lazy val persistence = (project in file("Persistence"))
+lazy val trailRunnerBase = (project in file(".")).dependsOn(view, model).aggregate(level, view).settings(
   name := "TrailRunner",
   libraryDependencies ++= commonDependencies,
   assemblyMergeStrategy in assembly := {

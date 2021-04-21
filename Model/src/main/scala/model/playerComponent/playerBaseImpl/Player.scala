@@ -1,4 +1,4 @@
-package main.scala.model.playerComponent.playerBaseImpl
+package model.playerComponent.playerBaseImpl
 
 import com.google.inject.Inject
 import com.google.inject.name.Named
