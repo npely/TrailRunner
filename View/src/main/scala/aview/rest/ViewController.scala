@@ -1,4 +1,4 @@
-package rest
+package aview.rest
 
 import akka.http.scaladsl.model.HttpRequest
 import model.levelComponent.levelBaseImpl.Level

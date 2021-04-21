@@ -1,8 +1,8 @@
-package controllerComponent.controllerBaseImpl
+package controller.controllerBaseImpl
 
 import com.google.inject.{Guice, Inject}
-import controllerComponent.controllerBaseImpl.MoveCommands._
-import controllerComponent._
+import controller.controllerBaseImpl.MoveCommands._
+import controller._
 import main.TrailRunnerModule
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field

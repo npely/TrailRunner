@@ -2,13 +2,11 @@ package main
 
 import java.io.File
 
-import aview.TUI
 import aview.gui.GUI
+import aview.tui.TUI
 import com.google.inject.Guice
-import controllerComponent.{ControllerInterface, DungeonChanged}
+import controller.{ControllerInterface, DungeonChanged}
 import javax.sound.sampled.AudioSystem
-
-import scala.io.Source
 import scala.io.StdIn.readLine
 import scala.util.{Failure, Success, Try}
 

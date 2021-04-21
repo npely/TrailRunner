@@ -2,7 +2,7 @@ package main
 
 import com.google.inject.AbstractModule
 import com.google.inject.name.Names
-import controllerComponent.ControllerInterface
+import controller.ControllerInterface
 import model.fieldComponent.FieldInterface
 import model.levelComponent.LevelInterface
 import model.playerComponent.PlayerInterface
@@ -17,7 +17,7 @@ class TrailRunnerModule extends AbstractModule with ScalaModule {
     bindConstant().annotatedWith(Names.named("False")).to(false)
     bindConstant().annotatedWith(Names.named("Level")).to("Level")
     bind[PlayerInterface].to[model.playerComponent.playerBaseImpl.Player]
-    bind[ControllerInterface].to[controllerComponent.controllerBaseImpl.Controller]
+    bind[ControllerInterface].to[controller.controllerBaseImpl.Controller]
     bind[FieldInterface].to[model.fieldComponent.fieldBaseImpl.Field]
     bind[LevelInterface].to[model.levelComponent.levelBaseImpl.Level]
   }

@@ -1,4 +1,4 @@
-package rest
+package aview.rest
 
 import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.LevelInterface

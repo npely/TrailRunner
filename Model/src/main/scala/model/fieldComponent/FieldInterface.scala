@@ -1,4 +1,4 @@
-package model.fieldComponent
+package main.scala.model.fieldComponent
 
 import model.Model
 

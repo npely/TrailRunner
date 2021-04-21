@@ -1,4 +1,4 @@
-package model
+package test.scala.model
 
 class PlayerSpec {
 

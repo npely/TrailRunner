@@ -1,4 +1,4 @@
-package aview
+package aview.tui
 
 import scala.util.Try
 

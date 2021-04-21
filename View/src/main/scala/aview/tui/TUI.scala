@@ -1,6 +1,6 @@
-package aview
+package aview.tui
 
-import controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
+import controller.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, DungeonChanged, Lose, Win}
 import model.levelComponent.levelBaseImpl.Level
 
 import scala.io.{BufferedSource, Source}

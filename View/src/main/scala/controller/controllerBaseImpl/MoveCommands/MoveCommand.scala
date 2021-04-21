@@ -1,6 +1,6 @@
-package controllerComponent.controllerBaseImpl.MoveCommands
+package controller.controllerBaseImpl.MoveCommands
 
-import controllerComponent.controllerBaseImpl.Controller
+import controller.controllerBaseImpl.Controller
 import model.fieldComponent.fieldBaseImpl.Field
 import model.playerComponent.PlayerInterface
 import util.Command

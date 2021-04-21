@@ -1,4 +1,4 @@
-package controllerComponent
+package controller
 
 import model.fieldComponent.FieldInterface
 import model.levelComponent.LevelInterface

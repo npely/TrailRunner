@@ -1,4 +1,4 @@
-package model.levelComponent.levelBaseImpl
+package main.scala.model.levelComponent.levelBaseImpl
 
 import com.google.inject.Inject
 import com.google.inject.name.Named

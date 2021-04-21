@@ -1,4 +1,4 @@
-package rest
+package aview.rest
 
 import akka.http.scaladsl.server.Directives.{complete, concat, get, path}
 import config.ModelJsonProtocol._

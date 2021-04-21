@@ -1,4 +1,5 @@
-package model.fieldComponent.fieldBaseImpl
+package main.scala.model.fieldComponent.fieldBaseImpl
+
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import model.fieldComponent.FieldInterface
