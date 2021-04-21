@@ -11,7 +11,16 @@ import akka.http.scaladsl.server.{ExceptionHandler, Route}
 import scala.io.StdIn
 
 object LevelApi {
+
+  val routes: String =
+    """
+        Welcome to the level-service! Available routes:
+
+          GET   /level/{id}
+        """.stripMargin
+
   def main(args: Array[String]): Unit = {
+
     // needed to run the route
     implicit val system = ActorSystem(Behaviors.empty, "my-system")
     // needed for the future flatMap/onComplete in the end
@@ -28,12 +37,14 @@ object LevelApi {
 
     val route = Route.seal(
       concat(
+        (get & path("")) {
+          complete(routes)
+        },
         (get & path("level" / LongNumber)) { id =>
           complete(LevelController.createLevel(id))
         }
       )
     )
-
 
     val bindingFuture = Http().newServerAt("localhost", 8081).bind(route)
     println(s"Level server online at http://localhost:8081/\nPress RETURN to stop...")

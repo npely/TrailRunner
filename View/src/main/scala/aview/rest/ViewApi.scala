@@ -5,13 +5,10 @@ import config.ModelJsonProtocol._
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.client.RequestBuilding.Get
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.model.{HttpResponse, StatusCode}
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
-import akka.http.scaladsl.unmarshalling.Unmarshal
-import model.levelComponent.levelBaseImpl.Level
 import spray.json.JsNumber
 
 import scala.concurrent.{Await, Future}
@@ -19,6 +16,23 @@ import scala.io.StdIn
 import scala.util.{Failure, Success}
 
 object ViewApi {
+
+  val routes: String =
+    """
+        Welcome to the view-service! Available routes:
+
+          GET   /level/{id}
+          GET   /level/load
+          POST  /level/save
+          POST  /level/start/{id}
+          POST  /player/up
+          POST  /player/down
+          POST  /player/right
+          POST  /player/left
+          POST  /player/undo
+          POST  /player/redo
+
+        """.stripMargin
 
   def main(args: Array[String]): Unit = {
     // needed to run the route
@@ -37,11 +51,19 @@ object ViewApi {
 
     val route = Route.seal(
       concat(
+        (get & path("")) {
+          complete(routes)
+        },
         (get & path("level" / "id")) {
           complete(JsNumber(ViewController.getCurrentLevel()).toString())
         },
         (post & path("level" / "start" / LongNumber)) { levelNumber =>
-            complete(ViewController.startGame(levelNumber))
+          val level = ViewController.startGame(levelNumber)
+          if (level.isDefined) {
+            complete(level.get)
+          } else {
+            complete(StatusCode.int2StatusCode(500))
+          }
         },
         (post & path("level" / "save")) {
           val success = ViewController.save()

@@ -15,6 +15,14 @@ import scala.io.StdIn
 
 object PersistenceApi {
 
+  val routes: String =
+    """
+        Welcome to the persistence-service! Available routes:
+
+          GET   /load
+          POST  /save
+        """.stripMargin
+
   def main(args: Array[String]): Unit = {
     // needed to run the route
     implicit val system = ActorSystem(Behaviors.empty, "my-system")
@@ -32,6 +40,9 @@ object PersistenceApi {
 
     val route = Route.seal(
       concat(
+        (get & path("")) {
+          complete(routes)
+        },
         (get & path("load")) {
           complete(PersistenceController.loadLastScore())
         },
