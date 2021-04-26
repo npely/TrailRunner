@@ -13,7 +13,7 @@ import scala.util.{Failure, Success, Try}
 object FileIO extends PersistenceInterface {
 
   override def load(): Level = {
-    val json = Json.parse(Source.fromFile("Persistence/src/main/resources/scores/last-score.json").getLines().mkString)
+    val json = Json.parse(Source.fromFile("/Persistence/src/main/resources/scores/last-score.json").getLines().mkString)
     val name = (json \ "level" \ "name").as[String]
     val size = (json \ "level" \ "size").as[Int]
     val xPos = (json \ "level" \ "PxPos").as[Int]
@@ -46,7 +46,7 @@ object FileIO extends PersistenceInterface {
   override def save(level: Level): Boolean = {
     Try({
       val levelAsJson = Json.prettyPrint(levelToJson(level))
-      val pw = new PrintWriter(new File("Persistence/src/main/resources/scores/last-score.json"))
+      val pw = new PrintWriter(new File("/Persistence/src/main/resources/scores/last-score.json"))
       pw.write(levelAsJson)
       pw.close()
     }) match {

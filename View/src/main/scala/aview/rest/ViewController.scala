@@ -15,8 +15,8 @@ import scala.concurrent.{Await, Future}
 
 object ViewController {
 
-  val persistenceApiBaseUrl: String = "http://localhost:8080/"
-  val levelApiBaseUrl: String = "http://localhost:8081/"
+  val persistenceApiBaseUrl: String = "http://0.0.0.0:8080/"
+  val levelApiBaseUrl: String = "http://0.0.0.0:8081/"
 
   implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
   implicit val executionContext = system.executionContext

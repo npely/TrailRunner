@@ -34,7 +34,7 @@ object ViewApi {
 
         """.stripMargin
 
-  def main(args: Array[String]): Unit = {
+  def start(): Unit = {
     // needed to run the route
     implicit val system = ActorSystem(Behaviors.empty, "my-system")
     // needed for the future flatMap/onComplete in the end
@@ -102,11 +102,7 @@ object ViewApi {
       )
     )
 
-    val bindingFuture = Http().newServerAt("localhost", 8082).bind(route)
+    Http().newServerAt("0.0.0.0", 8082).bind(route)
     println(s"View server online at http://localhost:8082/\nPress RETURN to stop...")
-    StdIn.readLine() // let it run until user presses return
-    bindingFuture
-      .flatMap(_.unbind()) // trigger unbinding from the port
-      .onComplete(_ => system.terminate()) // and shutdown when done
   }
 }

@@ -46,11 +46,7 @@ object LevelApi {
       )
     )
 
-    val bindingFuture = Http().newServerAt("localhost", 8081).bind(route)
+    Http().newServerAt("0.0.0.0", 8081).bind(route)
     println(s"Level server online at http://localhost:8081/\nPress RETURN to stop...")
-    StdIn.readLine() // let it run until user presses return
-    bindingFuture
-      .flatMap(_.unbind()) // trigger unbinding from the port
-      .onComplete(_ => system.terminate()) // and shutdown when done
   }
 }

@@ -12,7 +12,7 @@ import scala.io.Source
 object LevelController {
 
   def createLevel(number: Long): Level = {
-    val json = Json.parse(Source.fromFile("Level/src/main/resources/levels/Level%s.json".format(number)).getLines().mkString)
+    val json = Json.parse(Source.fromFile("/Level/src/main/resources/levels/Level%s.json".format(number)).getLines().mkString)
 
     val name = (json \ "level" \ "name").as[String]
     val size = (json \ "level" \ "size").as[Int]

@@ -3,6 +3,7 @@ package main
 import java.io.File
 
 import aview.gui.GUI
+import aview.rest.ViewApi
 import aview.tui.TUI
 import com.google.inject.Guice
 import controller.{ControllerInterface, DungeonChanged}
@@ -14,16 +15,17 @@ import scala.util.{Failure, Success, Try}
 object TrailRunner {
   val injector = Guice.createInjector(new TrailRunnerModule)
   val controller = injector.getInstance(classOf[ControllerInterface])
-  val gui = new GUI(controller)
-  val tui = new TUI(controller)
+  //val gui = new GUI(controller)
+  //val tui = new TUI(controller)
   controller.publish(new DungeonChanged)
 
   def main(args: Array[String]): Unit = {
+    ViewApi.start()
     var input: String = ""
     //playSound("View/src/main/resources/audio/8-bit_Dungeon.wav");
-    do {
+    /*do {
       input = readLine()
-    } while (tui.evaluateInput(input) != -1)
+    } while (tui.evaluateInput(input) != -1)*/
 
     println("Bis zum nächsten Mal!")
   }
