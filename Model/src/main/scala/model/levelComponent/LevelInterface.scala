@@ -1,11 +1,12 @@
 package model.levelComponent
 
+import model.Model
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
 import model.playerComponent.PlayerInterface
 import model.playerComponent.playerBaseImpl.Player
 
-trait LevelInterface {
+trait LevelInterface extends Model {
 
   val dungeon: Array[Array[FieldInterface]]
   val name: String

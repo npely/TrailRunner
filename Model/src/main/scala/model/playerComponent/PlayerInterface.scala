@@ -1,8 +1,8 @@
 package model.playerComponent
 
-import model.playerComponent.playerBaseImpl.Player
+import model.Model
 
-trait PlayerInterface {
+trait PlayerInterface extends Model {
   val xPos: Int
   val yPos: Int
   def toGameString: String

@@ -3,6 +3,7 @@ package model.playerComponent.playerBaseImpl
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import model.playerComponent.PlayerInterface
+import spray.json.{JsNumber, JsObject}
 
 case class Player @Inject() (@Named("Zero") xPos: Int, @Named("Zero") yPos: Int) extends PlayerInterface {
 
@@ -23,6 +24,11 @@ case class Player @Inject() (@Named("Zero") xPos: Int, @Named("Zero") yPos: Int)
   def moveDown(): Player = {
     this.copy(yPos = this.yPos + 1)
   }
+
+  override def toJson(): JsObject = JsObject(
+    "xPos" -> JsNumber(this.xPos),
+    "yPos" -> JsNumber(this.yPos)
+  )
 }
 
 

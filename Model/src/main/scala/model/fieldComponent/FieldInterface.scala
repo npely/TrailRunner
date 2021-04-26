@@ -1,8 +1,8 @@
 package model.fieldComponent
 
-import model.fieldComponent.fieldBaseImpl.Field
+import model.Model
 
-trait FieldInterface {
+trait FieldInterface extends Model {
   val value: Int
   val fieldType: String
   val fog: Boolean

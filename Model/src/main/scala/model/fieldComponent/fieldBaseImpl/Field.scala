@@ -1,7 +1,9 @@
 package model.fieldComponent.fieldBaseImpl
+
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import model.fieldComponent.FieldInterface
+import spray.json.{JsBoolean, JsNumber, JsObject, JsString}
 
 case class Field @Inject() (@Named("Zero") value: Int, @Named("Ground") fieldType: String, @Named("False") fog: Boolean, @Named("False") isPlayerOnField: Boolean) extends FieldInterface {
 
@@ -40,4 +42,11 @@ case class Field @Inject() (@Named("Zero") value: Int, @Named("Ground") fieldTyp
     }
     " |" + value.toString + "| "
   }
+
+  override def toJson: JsObject = JsObject(
+    "value" -> JsNumber(this.value),
+    "fieldType" -> JsString(this.fieldType),
+    "fog" -> JsBoolean(this.fog),
+    "isPlayerOnField" -> JsBoolean(this.isPlayerOnField)
+  )
 }

@@ -17,6 +17,7 @@ val commonDependencies = Seq(
 "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
 "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
 "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
+"com.typesafe.akka" %% "akka-http-core" % AkkaHttpVersion,
 "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpVersion
 )
 
@@ -25,10 +26,10 @@ coverageExcludedPackages := "<empty>;.*aview.*;.*TrailRunner"
 coverageEnabled.in(Test, test) := true
 
 lazy val model = (project in file("Model"))
-lazy val controller = (project in file("Controller"))
-lazy val persistence = (project in file("Persistence"))
 lazy val view = (project in file("View"))
-lazy val trailRunnerBase = (project in file(".")).dependsOn(model, view, controller).aggregate(model, view, controller).settings(
+lazy val level = (project in file("Level"))
+lazy val persistence = (project in file("Persistence"))
+lazy val trailRunnerBase = (project in file(".")).settings(
   name := "TrailRunner",
   libraryDependencies ++= commonDependencies,
   assemblyMergeStrategy in assembly := {

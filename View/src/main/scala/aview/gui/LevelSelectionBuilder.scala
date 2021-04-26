@@ -1,6 +1,6 @@
 package aview.gui
 
-import controllerComponent.ControllerInterface
+import controller.ControllerInterface
 import model.levelComponent._
 import model.levelComponent.levelBaseImpl.Level
 

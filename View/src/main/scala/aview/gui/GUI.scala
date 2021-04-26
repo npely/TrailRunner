@@ -2,7 +2,7 @@ package aview.gui
 
 import java.io.File
 
-import controllerComponent.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, Lose, Win}
+import controller.{ChangeToGame, ChangeToMain, ChangeToSelection, ControllerInterface, Lose, Win}
 import javax.imageio.ImageIO
 
 import scala.swing._

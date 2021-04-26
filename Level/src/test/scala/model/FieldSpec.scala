@@ -1,4 +1,4 @@
-package test.scala.model
+package model
 
 import model.fieldComponent.fieldBaseImpl.Field
 import org.scalatest.{Matchers, WordSpec}

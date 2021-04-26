@@ -4,7 +4,7 @@ import java.awt.Image
 import java.awt.image.BufferedImage
 import java.io.File
 
-import controllerComponent.{ControllerInterface, DungeonChanged}
+import controller.{ControllerInterface, DungeonChanged}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 import model.fieldComponent.FieldInterface

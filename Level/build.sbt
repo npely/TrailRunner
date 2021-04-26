@@ -15,8 +15,8 @@ val commonDependencies = Seq(
 )
 
 lazy val model = ProjectRef(uri("https://github.com/npely/TrailRunner.git#rest"), "model")
-lazy val persistence = (project in file(".")).dependsOn(model).aggregate(model).settings(
-  name          := "TrailRunner-Persistence",
+lazy val level = (project in file(".")).dependsOn(model).aggregate(model).settings(
+  name          := "TrailRunner-Level",
   organization  := "de.htwg.se",
   version       := "0.1",
   scalaVersion  := "2.13.3",
