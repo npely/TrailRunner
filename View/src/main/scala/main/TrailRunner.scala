@@ -15,7 +15,7 @@ import scala.util.{Failure, Success, Try}
 object TrailRunner {
   val injector = Guice.createInjector(new TrailRunnerModule)
   val controller = injector.getInstance(classOf[ControllerInterface])
-  //val gui = new GUI(controller)
+  val gui = new GUI(controller)
   //val tui = new TUI(controller)
   controller.publish(new DungeonChanged)
 

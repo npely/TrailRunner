@@ -46,7 +46,7 @@ object LevelApi {
       )
     )
 
-    Http().newServerAt("0.0.0.0", 8081).bind(route)
-    println(s"Level server online at http://localhost:8081/\nPress RETURN to stop...")
+    Http().newServerAt("0.0.0.0", 8080).bind(route)
+    println(s"Level server online at http://level:8080/\nPress RETURN to stop...")
   }
 }

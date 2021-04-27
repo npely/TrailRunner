@@ -60,6 +60,6 @@ object PersistenceApi {
     )
 
     Http().newServerAt("0.0.0.0", 8080).bind(route)
-    println(s"Persistence server online at http://0.0.0.0:8080/\nPress RETURN to stop...")
+    println(s"Persistence server online at http://persistence:8080/\nPress RETURN to stop...")
   }
 }

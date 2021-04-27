@@ -8,7 +8,8 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.model.{HttpResponse, StatusCode}
-import akka.http.scaladsl.server.{ExceptionHandler, Route}
+import akka.http.scaladsl.server.{ExceptionHandler, Route, StandardRoute}
+import model.levelComponent.levelBaseImpl.Level
 import spray.json.JsNumber
 
 import scala.concurrent.{Await, Future}
@@ -21,7 +22,7 @@ object ViewApi {
     """
         Welcome to the view-service! Available routes:
 
-          GET   /level/{id}
+          GET   /level/id
           GET   /level/load
           POST  /level/save
           POST  /level/start/{id}
@@ -33,6 +34,15 @@ object ViewApi {
           POST  /player/redo
 
         """.stripMargin
+
+  private def getMoveResponse(direction: String): StandardRoute = {
+    val option = ViewController.move(direction)
+    if(option.isDefined) {
+      complete(option.get)
+    } else {
+      complete(direction + " is not a valid move command")
+    }
+  }
 
   def start(): Unit = {
     // needed to run the route
@@ -81,28 +91,13 @@ object ViewApi {
             complete(StatusCode.int2StatusCode(500))
           }
         },
-        (post & path("player" / "up")) {
-          complete(ViewController.move("up"))
-        },
-        (post & path("player" / "down")) {
-          complete(ViewController.move("down"))
-        },
-        (post & path("player" / "right")) {
-          complete(ViewController.move("right"))
-        },
-        (post & path("player" / "left")) {
-          complete(ViewController.move("left"))
-        },
-        (post & path("player" / "undo")) {
-          complete(ViewController.move("undo"))
-        },
-        (post & path("player" / "redo")) {
-          complete(ViewController.move("redo"))
-        },
+        (post & path("player" / Segment)) { direction: String =>
+          getMoveResponse(direction)
+        }
       )
     )
 
-    Http().newServerAt("0.0.0.0", 8082).bind(route)
-    println(s"View server online at http://localhost:8082/\nPress RETURN to stop...")
+    Http().newServerAt("0.0.0.0", 8080).bind(route)
+    println(s"View server online at http://localhost:8080/\nPress RETURN to stop...")
   }
 }

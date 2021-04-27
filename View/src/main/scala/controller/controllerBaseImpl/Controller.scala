@@ -187,12 +187,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     //level = fileIO.start(name)
     player = level.player
     field = level.dungeon(player.yPos)(player.xPos)
-    System.out.println("field")
-    System.out.println(field)
-    System.out.println("player")
-    System.out.println(player)
-    System.out.println("level")
-    System.out.println(level)
     level
   }
 }
