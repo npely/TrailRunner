@@ -20,7 +20,7 @@ case class CellBuilder(x: Int, y: Int, controller: ControllerInterface) extends 
   var myPicture: BufferedImage = _
   var actualValue: Int = _
   var actualPlayerStatus: Boolean = _
-  val path = "View/src/main/scala/aview/gui/images/"
+  val path = "/View/src/main/scala/aview/gui/images/"
   var isDoor: Boolean = x == controller.level.doorX && y == controller.level.doorY
 
   var label: Label = new Label {

@@ -2,7 +2,7 @@ package persistence.service
 
 
 import model.levelComponent.levelBaseImpl.Level
-import persistence.FileIO
+import persistence.{FileIO, Slick}
 
 object PersistenceController {
 

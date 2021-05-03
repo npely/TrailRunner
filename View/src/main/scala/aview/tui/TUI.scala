@@ -83,7 +83,7 @@ class TUI(controller: ControllerInterface) extends Reactor {
    */
   def evaluateSelection(input: String): Int = {
     if (input matches "[1-7]") {
-      controller.initializeGame(controller.start("Level%s".format(input)), false)
+      controller.start(input.toLong)
     }
     else {
       tuiMode = TUIMODE_INVALID_ACTION

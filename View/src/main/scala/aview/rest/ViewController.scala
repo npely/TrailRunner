@@ -25,18 +25,7 @@ object ViewController {
   val controller = new Controller
 
   def startGame(levelId: Long): Option[Level] = {
-    Try (Unmarshal(Await.result(Http().singleRequest(HttpRequest(
-      uri = "%slevel/%d".format(levelApiBaseUrl, levelId))),
-      5.seconds)).to[Level].value.get.get) match {
-      case Success(level) => {
-        controller.initializeGame(level, false)
-        Some(level)
-      }
-      case Failure(e) => {
-        sys.error("level request failed: " + e.getMessage)
-        None
-      }
-    }
+    Some(controller.start(levelId).asInstanceOf[Level])
   }
 
   def move(direction: String): Option[Level] = {

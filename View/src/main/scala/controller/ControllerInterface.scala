@@ -41,7 +41,7 @@ trait ControllerInterface extends Publisher {
   def resetMoveCounter(): Unit
   def getHardcoreMode(): Boolean
   def setHardcoreMode(isHardcoreModeOn: Boolean): Unit
-  def start(name: String): LevelInterface
+  def start(levelId: Long): LevelInterface
 }
 
 

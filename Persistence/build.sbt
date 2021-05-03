@@ -11,7 +11,11 @@ val commonDependencies = Seq(
   "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
   "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
   "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
-  "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpVersion
+  "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpVersion,
+  "com.typesafe.slick" %% "slick" % "3.3.2",
+  "ch.qos.logback" % "logback-classic" % "1.1.2",
+  "org.slf4j" % "slf4j-nop" % "1.7.30",
+  "org.postgresql" % "postgresql" % "9.4-1200-jdbc41"
 )
 
 lazy val model = ProjectRef(uri("https://github.com/npely/TrailRunner.git#rest"), "model")

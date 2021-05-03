@@ -1,5 +1,6 @@
 package main
 
+import java.awt.GraphicsEnvironment
 import java.io.File
 
 import aview.gui.GUI
@@ -25,9 +26,9 @@ object TrailRunner {
     //playSound("View/src/main/resources/audio/8-bit_Dungeon.wav");
     /*do {
       input = readLine()
-    } while (tui.evaluateInput(input) != -1)*/
+    } while (tui.evaluateInput(input) != -1)
 
-    println("Bis zum nächsten Mal!")
+    println("Bis zum nächsten Mal!")*/
   }
 
   def playSound(url: String): Unit = {

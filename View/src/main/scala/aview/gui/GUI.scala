@@ -13,7 +13,7 @@ class GUI(controller: ControllerInterface) extends MainFrame{
   listenTo(controller)
 
   title = "TrailRunner"
-  iconImage = ImageIO.read(new File("View/src/main/scala/aview/gui/images/TR.png"))
+  iconImage = ImageIO.read(new File("/View/src/main/scala/aview/gui/images/TR.png"))
   minimumSize = new Dimension(550,630)
   preferredSize = new Dimension(550,630)
   maximumSize = new Dimension(550,630)
@@ -58,6 +58,7 @@ class GUI(controller: ControllerInterface) extends MainFrame{
   }
 
   def changeToRunningGame(): Unit = {
+    println("change to Running Game")
     contents = gamePanel()
   }
 

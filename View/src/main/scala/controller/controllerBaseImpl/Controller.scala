@@ -1,8 +1,14 @@
 package controller.controllerBaseImpl
 
+import akka.actor.typed.ActorSystem
+import akka.actor.typed.scaladsl.Behaviors
+import akka.http.scaladsl.Http
+import akka.http.scaladsl.model.HttpRequest
+import akka.http.scaladsl.unmarshalling.Unmarshal
 import com.google.inject.{Guice, Inject}
 import controller.controllerBaseImpl.MoveCommands._
 import controller._
+import aview.rest.ViewController.{controller, levelApiBaseUrl}
 import main.TrailRunnerModule
 import model.fieldComponent.FieldInterface
 import model.fieldComponent.fieldBaseImpl.Field
@@ -13,9 +19,18 @@ import model.playerComponent.playerBaseImpl.Player
 import play.api.libs.json.JsValue
 import util.UndoManager
 
+import config.ModelJsonProtocol._
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+
+import scala.concurrent.duration.{Duration, DurationInt}
+import scala.concurrent.Await
 import scala.swing.Publisher
+import scala.util.{Failure, Success, Try}
 
 class Controller @Inject() extends ControllerInterface with Publisher {
+
+  implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+  implicit val executionContext = system.executionContext
 
   val injector = Guice.createInjector(new TrailRunnerModule)
 
@@ -40,6 +55,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   def changeToGame(): Unit = {
+    println("publish ChangeToGame")
     publish(new ChangeToGame)
   }
 
@@ -108,6 +124,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def fieldIsSet: Boolean = field.isSet
 
   def playerStandsOnField(): Unit = {
+    println("Hello")
     this.field = level.dungeon(player.yPos)(player.xPos).PlayerWalksOnField()
     level.dungeon(player.yPos)(player.xPos) = field
   }
@@ -183,10 +200,19 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     hardcoreMode = isHardcoreModeOn
   }
 
-  override def start(name: String): LevelInterface = {
-    //level = fileIO.start(name)
-    player = level.player
-    field = level.dungeon(player.yPos)(player.xPos)
+  override def start(levelId: Long): LevelInterface = {
+    Try (Unmarshal(Await.result(Http().singleRequest(HttpRequest(
+      uri = "%slevel/%d".format(levelApiBaseUrl, levelId))),
+      5.seconds)).to[Level].value.get.get) match {
+      case Success(level) => {
+        player = level.player
+        field = level.dungeon(player.yPos)(player.xPos)
+        controller.initializeGame(level, false)
+      }
+      case Failure(e) => {
+        sys.error("level request failed: " + e.getMessage)
+      }
+    }
     level
   }
 }

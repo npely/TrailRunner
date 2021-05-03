@@ -31,37 +31,37 @@ class LevelSelectionBuilder(controller: ControllerInterface, gui: GUI) {
     contents ++= List(
       new Button("Level 1") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(controller.start("Level1"), false)
+          case e: ButtonClicked => controller.start(1)
         }
       },
       new Button("Level 2") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(controller.start("Level2"), false)
+          case e: ButtonClicked => controller.start(2)
         }
       },
       new Button("Level 3") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(controller.start("Level3"), false)
+          case e: ButtonClicked => controller.start(3)
         }
       },
       new Button("Level 4") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(controller.start("Level4"), false)
+          case e: ButtonClicked => controller.start(4)
         }
       },
       new Button("Level 5") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(controller.start("Level5"), false)
+          case e: ButtonClicked => controller.start(5)
         }
       },
       new Button("Level 6") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(controller.start("Level6"), false)
+          case e: ButtonClicked => controller.start(6)
         }
       },
       new Button("Level 7") {
         reactions += {
-          case e: ButtonClicked => controller.initializeGame(controller.start("Level7"), false)
+          case e: ButtonClicked => controller.start(7)
         }
       }
     )
