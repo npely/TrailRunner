@@ -19,7 +19,7 @@ object Slick extends PersistenceInterface {
   val levelTable = TableQuery[LevelTable]
   val tables = List(playerTable, fieldTable, levelTable)
 
-  tables.foreach(e => db.run(e.schema.createIfNotExists))
+  tables.foreach(e => Await.result(db.run(e.schema.createIfNotExists), Duration.Inf))
 
   override def load(): Level = {
    ???

@@ -7,11 +7,11 @@ import persistence.{FileIO, Slick}
 object PersistenceController {
 
   def loadLastScore(): Level = {
-    FileIO.load()
+    Slick.load()
   }
 
   def saveLastScore(level: Level): Boolean = {
-    FileIO.save(level)
+    Slick.save(level)
   }
 
 }

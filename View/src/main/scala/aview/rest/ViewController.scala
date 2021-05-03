@@ -1,6 +1,6 @@
 package aview.rest
 
-import akka.http.scaladsl.model.{HttpRequest, StatusCode}
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpMethods, HttpRequest, StatusCode}
 import model.levelComponent.levelBaseImpl.Level
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
@@ -8,6 +8,7 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import config.ModelJsonProtocol._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import akka.http.scaladsl.marshalling.Marshal
 import controller.controllerBaseImpl.Controller
 
 import scala.concurrent.duration.{Duration, DurationInt}
@@ -45,7 +46,9 @@ object ViewController {
 
   def save(): Boolean = {
     Try (Await.result(Http().singleRequest(HttpRequest(
-      uri = persistenceApiBaseUrl + "save")),
+      uri = persistenceApiBaseUrl + "save",
+      method = HttpMethods.POST,
+      entity = HttpEntity(ContentTypes.`application/json`, controller.level.asInstanceOf[Level].toJson.toString()))),
       5.seconds).status) match {
       case Success(status) => {
         if (status.equals(StatusCode.int2StatusCode(200))) {
