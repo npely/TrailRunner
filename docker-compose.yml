@@ -1,6 +1,17 @@
 version: "3.9"
 
 services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - type: bind
+        source: ./database-data
+        target: /database-data
   persistence:
     build:
       context: ./Persistence

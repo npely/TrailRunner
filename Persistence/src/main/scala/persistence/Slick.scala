@@ -1,5 +1,8 @@
 package persistence
+import model.fieldComponent.FieldInterface
+import model.fieldComponent.fieldBaseImpl.Field
 import model.levelComponent.levelBaseImpl.Level
+import model.playerComponent.playerBaseImpl.Player
 import persistence.sqlTables.{FieldTable, LevelTable, PlayerTable}
 import slick.jdbc.JdbcBackend.Database
 import slick.driver.PostgresDriver.api._
@@ -12,7 +15,7 @@ import scala.util.{Failure, Success, Try}
 
 object Slick extends PersistenceInterface {
 
-  val db = Database.forURL("jdbc:postgresql://localhost/5432/TrailRunner", "postgres", "impactDB", driver = "org.postgresql.Driver")
+  val db = Database.forURL("jdbc:postgresql://db:5432/postgres", "postgres", "postgres", driver = "org.postgresql.Driver")
 
   val playerTable = TableQuery[PlayerTable]
   val fieldTable = TableQuery[FieldTable]
@@ -22,7 +25,10 @@ object Slick extends PersistenceInterface {
   tables.foreach(e => Await.result(db.run(e.schema.createIfNotExists), Duration.Inf))
 
   override def load(): Level = {
-   ???
+    val player = Await.result(db.run(playerTable.result.map(_.headOption.map(v => Player(v._2, v._3)))), Duration.Inf)
+    val level = Await.result(db.run(levelTable.result.map(_.headOption.map(v => Level(v._2, player.get, v._3, v._4, v._5, v._6, v._7, v._8)))), Duration.Inf).get
+    Await.result(db.run(fieldTable.result.map(_.foreach(f => level.dungeon(f._2)(f._3) = Field(f._4, f._5, f._6, f._7)))), Duration.Inf)
+    level
   }
 
   override def save(level: Level): Boolean = {

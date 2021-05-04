@@ -49,3 +49,6 @@ yourgame.log
 # Serialization
 level.json
 level.xml
+
+# Database
+database-data/
