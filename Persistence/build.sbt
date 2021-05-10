@@ -15,7 +15,8 @@ val commonDependencies = Seq(
   "com.typesafe.slick" %% "slick" % "3.3.2",
   "ch.qos.logback" % "logback-classic" % "1.1.2",
   "org.slf4j" % "slf4j-nop" % "1.7.30",
-  "org.postgresql" % "postgresql" % "9.4-1200-jdbc41"
+  "org.postgresql" % "postgresql" % "9.4-1200-jdbc41",
+  "org.mongodb.scala" %% "mongo-scala-driver" % "4.2.3"
 )
 
 lazy val model = ProjectRef(uri("https://github.com/npely/TrailRunner.git#rest"), "model")
