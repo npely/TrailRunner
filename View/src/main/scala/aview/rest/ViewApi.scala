@@ -91,6 +91,14 @@ object ViewApi {
             complete(StatusCode.int2StatusCode(500))
           }
         },
+        (post & path("level" / "delete")) {
+          val success = ViewController.delete()
+          if (success) {
+            complete(StatusCode.int2StatusCode(200))
+          } else {
+            complete(StatusCode.int2StatusCode(400))
+          }
+        },
         (post & path("player" / Segment)) { direction: String =>
           getMoveResponse(direction)
         }

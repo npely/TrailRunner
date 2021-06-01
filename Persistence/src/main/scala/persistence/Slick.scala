@@ -8,7 +8,7 @@ import slick.jdbc.JdbcBackend.Database
 import slick.driver.PostgresDriver.api._
 import slick.lifted.TableQuery
 
-import scala.concurrent.Await
+import scala.concurrent.{Await, Future}
 import scala.concurrent.duration.Duration
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success, Try}
@@ -49,5 +49,9 @@ object Slick extends PersistenceInterface {
       case Success(value) => true
       case Failure(exception) => println(exception); false
     }
+  }
+
+  override def delete(): Future[String] = {
+    Future { "Finished deleting" }
   }
 }

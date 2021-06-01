@@ -47,45 +47,50 @@ object MongoDB extends PersistenceInterface {
   }
 
   override def save(level: Level): Boolean = {
-    Await.result(delete(), Duration.Inf)
-    val playerDocument: Document = Document("_id" -> "playerDocument", "playerX" -> level.player.xPos, "playerY" -> level.player.yPos)
-    for (x <- 0 to level.dungeon.length - 1) {
-      for (y <- 0 to level.dungeon.length - 1) {
-        if (level.player.xPos == x && level.player.yPos == y) {
-          observerInsertion(fieldCollection.insertOne(Document("_id" -> x.toString.concat(y.toString), "name" -> "fieldDocument", "value" -> level.dungeon(x)(y).value,
-            "fieldType" -> level.dungeon(x)(y).fieldType, "fog" -> level.dungeon(x)(y).fog, "isPlayerOnField" -> true)))
-        } else {
-          observerInsertion(fieldCollection.insertOne(Document("_id" -> x.toString.concat(y.toString), "name" -> "fieldDocument", "value" -> level.dungeon(x)(y).value,
-            "fieldType" -> level.dungeon(x)(y).fieldType, "fog" -> level.dungeon(x)(y).fog, "isPlayerOnField" -> false)))
+    this.delete().onComplete {
+      case Success(v) => {
+        val playerDocument: Document = Document("_id" -> "playerDocument", "playerX" -> level.player.xPos, "playerY" -> level.player.yPos)
+        for (x <- 0 to level.dungeon.length - 1) {
+          for (y <- 0 to level.dungeon.length - 1) {
+            if (level.player.xPos == x && level.player.yPos == y) {
+              observerInsertion(fieldCollection.insertOne(Document("_id" -> x.toString.concat(y.toString), "name" -> "fieldDocument", "value" -> level.dungeon(x)(y).value,
+                "fieldType" -> level.dungeon(x)(y).fieldType, "fog" -> level.dungeon(x)(y).fog, "isPlayerOnField" -> true)))
+            } else {
+              observerInsertion(fieldCollection.insertOne(Document("_id" -> x.toString.concat(y.toString), "name" -> "fieldDocument", "value" -> level.dungeon(x)(y).value,
+                "fieldType" -> level.dungeon(x)(y).fieldType, "fog" -> level.dungeon(x)(y).fog, "isPlayerOnField" -> false)))
+            }
+          }
+        }
+        val levelDocument: Document = Document("_id" -> "levelDocument", "name" -> level.name, "winX" -> level.winX,
+          "winY" -> level.winY, "doorX" -> level.doorX, "doorY" -> level.doorY,
+          "isDoorOpen" -> level.isDoorOpen, "size" -> level.size)
+        Try({
+          observerInsertion(levelCollection.insertOne(levelDocument))
+          observerInsertion(levelCollection.insertOne(playerDocument))
+        }) match {
+          case Success(value) => true
+          case Failure(exception) => println(exception); false
         }
       }
+      case Failure(e) => println("Delete failed"); false
     }
-    val levelDocument: Document = Document("_id" -> "levelDocument", "name" -> level.name, "winX" -> level.winX,
-      "winY" -> level.winY, "doorX" -> level.doorX, "doorY" -> level.doorY,
-      "isDoorOpen" -> level.isDoorOpen, "size" -> level.size)
-    Try({
-      observerInsertion(levelCollection.insertOne(levelDocument))
-      observerInsertion(levelCollection.insertOne(playerDocument))
-    }) match {
-      case Success(value) => true
-      case Failure(exception) => println(exception); false
-    }
+    true
   }
 
-  private def delete(): Future[String] = {
+  override def delete(): Future[String] = {
     levelCollection.deleteMany(equal("_id", "levelDocument")).subscribe(
       (dr: DeleteResult) => println(s"Deleted levelDocument"),
-      (e: Throwable) => println(s"Error while trying to delete levelDocument: $e")
+      (e: Throwable) => { println(s"Error while trying to delete levelDocument: $e"); return Future.failed(new Exception(e)) }
     )
     levelCollection.deleteMany(equal("_id", "playerDocument")).subscribe(
       (dr: DeleteResult) => println(s"Deleted playerDocument"),
-      (e: Throwable) => println(s"Error while trying to delete playerDocument: $e")
+      (e: Throwable) => { println(s"Error while trying to delete playerDocument: $e"); return Future.failed(new Exception(e)) }
     )
     fieldCollection.deleteMany(equal("name", "fieldDocument")).subscribe(
       (dr: DeleteResult) => println(s"Deleted fieldDocument"),
-      (e: Throwable) => println(s"Error while trying to delete fieldDocument: $e")
+      (e: Throwable) => { println(s"Error while trying to delete fieldDocument: $e"); return Future.failed(new Exception(e)) }
     )
-    Future { "Finished deleting" }
+    Future.successful("Delete complete")
   }
 
   private def observerInsertion(insertObservable: SingleObservable[InsertOneResult]): Unit = {

@@ -1,0 +1,14 @@
+RUN	computerdatabase.TrailRunnerSimulationLevel3	trailrunnersimulationlevel3	1621355144715	 	3.5.1
+USER	User starts game, makes some moves and saves (loads)	START	1621355145915
+REQUEST		retrieve level id	1621355145932	1621355146131	OK	 
+REQUEST		start level 3	1621355148144	1621355148483	OK	 
+REQUEST		player deletes the game save	1621355150493	1621355150916	OK	 
+REQUEST		player saves the game	1621355152917	1621355153164	OK	 
+REQUEST		player load the game	1621355158178	1621355158414	OK	 
+REQUEST		player moves right	1621355163416	1621355163423	OK	 
+REQUEST		player moves right	1621355165434	1621355165440	OK	 
+REQUEST		player moves right	1621355167452	1621355167457	OK	 
+REQUEST		player moves up	1621355169471	1621355169476	OK	 
+REQUEST		player moves left	1621355171489	1621355171495	OK	 
+REQUEST		player moves right	1621355173509	1621355173513	OK	 
+USER	User starts game, makes some moves and saves (loads)	END	1621355173515

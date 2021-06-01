@@ -35,6 +35,8 @@ object LevelApi {
           complete("server made a boo boo")
       }
 
+    LevelController.initializeBuffer()
+
     val route = Route.seal(
       concat(
         (get & path("")) {

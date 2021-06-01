@@ -7,8 +7,10 @@ import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
 import play.api.libs.json.{JsArray, JsBoolean, JsNumber, Json}
 
+import scala.concurrent.Future
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object FileIO extends PersistenceInterface {
 
@@ -55,6 +57,11 @@ object FileIO extends PersistenceInterface {
         println(e); false
       }
     }
+  }
+
+  override def delete(): Future[String] = {
+    print("delete")
+    Future { "Finished deleting" }
   }
 
   def levelToJson(level: Level) = {

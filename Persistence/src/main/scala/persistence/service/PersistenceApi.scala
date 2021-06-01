@@ -46,6 +46,9 @@ object PersistenceApi {
         (get & path("load")) {
           complete(PersistenceController.loadLastScore())
         },
+        (post & path("delete")) {
+          complete(PersistenceController.delete())
+        },
         (post & path("save")) {
           entity(as[Level]) { level =>
             val success = PersistenceController.saveLastScore(level)

@@ -2,7 +2,9 @@ package persistence.service
 
 
 import model.levelComponent.levelBaseImpl.Level
-import persistence.{FileIO, Slick, MongoDB}
+import persistence.{FileIO, MongoDB, Slick}
+
+import scala.concurrent.Future
 
 object PersistenceController {
 
@@ -19,6 +21,14 @@ object PersistenceController {
       case "mongodb" => println("Saving to MongoDB"); MongoDB.save(level);
       case "postgresql" => println("Saving to Slick"); Slick.save(level);
       case _ => println("Saving to FileIO"); FileIO.save(level);
+    }
+  }
+
+  def delete(): Future[String] = {
+    sys.env("DB_TYPE") match {
+      case "mongodb" => println("Saving to MongoDB"); MongoDB.delete();
+      case "postgresql" => println("Saving to Slick"); Slick.delete();
+      case _ => println("Saving to FileIO"); FileIO.delete();
     }
   }
 

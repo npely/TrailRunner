@@ -1,0 +1,10 @@
+{
+  "simulation": "computerdatabase.TrailRunnerSimulationLevel4",
+  "simulationId": "trailrunnersimulationlevel4",
+  "start": 1622574496556,
+  "description": "",
+  "scenarios": ["User starts game, makes some moves and saves (loads)"],
+  "assertions": [
+
+  ]
+}

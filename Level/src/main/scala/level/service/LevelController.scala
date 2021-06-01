@@ -1,17 +1,30 @@
 package level.service
 
 import model.fieldComponent.fieldBaseImpl.Field
-import model.levelComponent.LevelInterface
 import model.levelComponent.levelBaseImpl.Level
 import model.playerComponent.playerBaseImpl.Player
-import play.api.libs.json.{JsArray, JsValue, Json}
-import spray.json.JsObject
+import play.api.libs.json.{JsArray, Json}
 
 import scala.io.Source
 
 object LevelController {
 
+  var levelBuffer = scala.collection.mutable.Map[String, Level]()
+
+  def initializeBuffer(): Boolean = {
+    println("initializing Buffer")
+    for (i <- 1 to 7) {
+      levelBuffer += ("Level" + i -> getLevelFromFile(i))
+    }
+    true
+  }
+
   def createLevel(number: Long): Level = {
+    levelBuffer.get("Level" + number).getOrElse(getLevelFromFile(number))
+  }
+
+  private def getLevelFromFile(number: Long): Level = {
+    println("Fetching level from file " + number)
     val json = Json.parse(Source.fromFile("/Level/src/main/resources/levels/Level%s.json".format(number)).getLines().mkString)
 
     val name = (json \ "level" \ "name").as[String]
