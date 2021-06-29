@@ -36,7 +36,7 @@ case class Level @Inject() (@Named("Level") name: String, player: PlayerInterfac
   def fillNullValues() : Unit = {
     for (i <- 0 until 10; j <- 0 until 10) {
       val dungeonField = Option(dungeon(i)(j))
-      dungeonField.getOrElse(dungeon(i)(j) = Field(-99, "Wall", false, false))
+      dungeonField.getOrElse(Field(-99, "Wall", false, false))
     }
   }
 
